@@ -1,8 +1,7 @@
 name: Panel diario (auditoría + publicación)
 on:
-  # DESACTIVADO hasta decidir el traspaso y recrear secretos (ver docs/TRASPASO_CUENTA.md)
-  # schedule:
-    # - cron: "45 11 * * *"   # todos los días 11:45 UTC (07:45–08:45 hora de Chile)
+  schedule:
+    - cron: "45 11 * * *"   # todos los días 11:45 UTC (07:45–08:45 hora de Chile)
   workflow_dispatch:
 permissions:
   contents: write

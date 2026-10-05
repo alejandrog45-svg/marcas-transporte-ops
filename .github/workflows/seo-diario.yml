@@ -1,8 +1,7 @@
 name: SEO y conversiones diario
 on:
-  # DESACTIVADO hasta decidir el traspaso y recrear secretos (ver docs/TRASPASO_CUENTA.md)
-  # schedule:
-    # - cron: "30 11 * * *"   # todos los días 11:30 UTC
+  schedule:
+    - cron: "30 11 * * *"   # todos los días 11:30 UTC
   workflow_dispatch:
 permissions:
   contents: write

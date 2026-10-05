@@ -1,0 +1,33 @@
+# Secretos: NUNCA se commitean
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*service-account*.json
+*credentials*.json
+client_secret*.json
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Firebase
+.firebase/
+firebase-debug.log*
+
+# Panel: archivos generados por tools/panel/build.py (no se guardan en el repo)
+site/index.html
+site/version.json
+docs/panel_keywords.html
+site/aereostar/index.html
+site/aereostar/version.json
+docs/panel_aereostar.html

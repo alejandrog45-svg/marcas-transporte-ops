@@ -1,0 +1,477 @@
+{
+ "fuente": "Planificador de palabras clave de Google Ads (Descubre nuevas palabras clave), cuenta 926-538-5719, consulta de solo lectura",
+ "capturado": "2026-09-30T15:55:00-03:00",
+ "metodo": "Lectura de la tabla en pantalla (54 ideas, 1-54 de 54). NO es una exportación del Planificador; los rangos son los que muestra Google.",
+ "ubicacion": "Chile",
+ "idioma": "Español",
+ "periodo": "sept 2025 – ago 2026",
+ "semillas": [
+  "transfer eventos privados",
+  "transfer matrimonios",
+  "transporte corporativo",
+  "transporte ejecutivo",
+  "traslado privado santiago",
+  "transfer turismo santiago",
+  "transporte para grupos",
+  "transfer compartido santiago"
+ ],
+ "semillas_dueno": [
+  "transfer eventos privados",
+  "transfer matrimonios",
+  "transporte corporativo"
+ ],
+ "convencion_volumen": "Igual que el archivo del Planificador: 10-100 -> 50; 100-1 mil -> 500 (punto medio de la escala de Google). 0-10 -> sin dato (0).",
+ "hallazgos": [
+  "Las semillas del dueño 'transfer eventos privados', 'traslado privado santiago' y 'transfer turismo santiago' salen con 0-10 búsquedas/mes y sin puja.",
+  "Corporativo/ejecutivo y bodas existen pero con 10-100 búsquedas/mes cada frase (el aeropuerto mueve 1.000-10.000).",
+  "Varias ideas de Google son de otros países (Quito, Guayaquil, Santo Domingo, México), marcas (Lipu) o empleo: no sirven."
+ ],
+ "panel": [
+  "transfer matrimonios",
+  "transporte corporativo",
+  "transporte ejecutivo",
+  "transfer compartido aeropuerto santiago",
+  "empresas de transporte ejecutivo",
+  "servicios de traslados ejecutivos",
+  "transfer privado aeropuerto santiago",
+  "taxi compartido aeropuerto santiago",
+  "transfer para matrimonio",
+  "transfer para matrimonios",
+  "traslado de ejecutivos",
+  "transfer eventos privados"
+ ],
+ "filas": [
+  {
+   "k": "transfer matrimonios",
+   "rango": "10-100",
+   "competencia": "Alta",
+   "puja_baja_clp": 274,
+   "puja_alta_clp": 1007,
+   "relevante": true
+  },
+  {
+   "k": "transporte corporativo",
+   "rango": "10-100",
+   "competencia": "Media",
+   "puja_baja_clp": 601,
+   "puja_alta_clp": 2093,
+   "relevante": true
+  },
+  {
+   "k": "transporte ejecutivo",
+   "rango": "10-100",
+   "competencia": "Media",
+   "puja_baja_clp": 373,
+   "puja_alta_clp": 1694,
+   "relevante": true
+  },
+  {
+   "k": "transporte para grupos",
+   "rango": "10-100",
+   "competencia": "Alta",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": true
+  },
+  {
+   "k": "transfer compartido santiago",
+   "rango": "10-100",
+   "competencia": "Alta",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": true
+  },
+  {
+   "k": "transfer compartido aeropuerto santiago",
+   "rango": "100-1 mil",
+   "competencia": "Alta",
+   "puja_baja_clp": 261,
+   "puja_alta_clp": 785,
+   "relevante": true
+  },
+  {
+   "k": "traslados ejecutivos",
+   "rango": "10-100",
+   "competencia": "Baja",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": true
+  },
+  {
+   "k": "transporte ejecutivo com mx",
+   "rango": "0-10",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": false
+  },
+  {
+   "k": "servicio ejecutivo de transporte",
+   "rango": "10-100",
+   "competencia": "Alta",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": true
+  },
+  {
+   "k": "servicio de transporte corporativo",
+   "rango": "10-100",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": true
+  },
+  {
+   "k": "empresas de transporte ejecutivo",
+   "rango": "10-100",
+   "competencia": "Alta",
+   "puja_baja_clp": 302,
+   "puja_alta_clp": 769,
+   "relevante": true
+  },
+  {
+   "k": "servicios de traslados ejecutivos",
+   "rango": "10-100",
+   "competencia": "Alta",
+   "puja_baja_clp": 604,
+   "puja_alta_clp": 2637,
+   "relevante": true
+  },
+  {
+   "k": "transfer privado aeropuerto santiago",
+   "rango": "10-100",
+   "competencia": "Media",
+   "puja_baja_clp": 359,
+   "puja_alta_clp": 1258,
+   "relevante": true
+  },
+  {
+   "k": "transporte para ejecutivos",
+   "rango": "10-100",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": true
+  },
+  {
+   "k": "bolsa de trabajo para operador de autobus grupo ado",
+   "rango": "0-10",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": false
+  },
+  {
+   "k": "conductor de transporte ejecutivo",
+   "rango": "10-100",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": true
+  },
+  {
+   "k": "corporativo lipu",
+   "rango": "0-10",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": false
+  },
+  {
+   "k": "ejecutivo transportes",
+   "rango": "10-100",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": true
+  },
+  {
+   "k": "empresa de traslados ejecutivos",
+   "rango": "10-100",
+   "competencia": "Alta",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": true
+  },
+  {
+   "k": "empresas de transporte corporativo",
+   "rango": "10-100",
+   "competencia": "Alta",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": true
+  },
+  {
+   "k": "lipu corporativo",
+   "rango": "0-10",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": false
+  },
+  {
+   "k": "servicio transporte ejecutivo",
+   "rango": "10-100",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": true
+  },
+  {
+   "k": "taxi compartido aeropuerto santiago",
+   "rango": "10-100",
+   "competencia": "Alta",
+   "puja_baja_clp": 193,
+   "puja_alta_clp": 892,
+   "relevante": true
+  },
+  {
+   "k": "transfer compartido santiago aeropuerto",
+   "rango": "10-100",
+   "competencia": "Media",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": true
+  },
+  {
+   "k": "transfer para matrimonio",
+   "rango": "10-100",
+   "competencia": "Alta",
+   "puja_baja_clp": 434,
+   "puja_alta_clp": 698,
+   "relevante": true
+  },
+  {
+   "k": "transfer para matrimonios",
+   "rango": "10-100",
+   "competencia": "Alta",
+   "puja_baja_clp": 402,
+   "puja_alta_clp": 1043,
+   "relevante": true
+  },
+  {
+   "k": "transportacion ejecutiva",
+   "rango": "0-10",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": true
+  },
+  {
+   "k": "transporte compartido aeropuerto santiago",
+   "rango": "10-100",
+   "competencia": "Alta",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": true
+  },
+  {
+   "k": "transporte de ejecutivos",
+   "rango": "10-100",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": true
+  },
+  {
+   "k": "transporte de personal ejecutivo",
+   "rango": "10-100",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": true
+  },
+  {
+   "k": "transporte ejecutivo a santa fe",
+   "rango": "0-10",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": false
+  },
+  {
+   "k": "transporte ejecutivo aeropuerto",
+   "rango": "10-100",
+   "competencia": "Alta",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": true
+  },
+  {
+   "k": "transporte ejecutivo com",
+   "rango": "10-100",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": false
+  },
+  {
+   "k": "transporte ejecutivo empresarial",
+   "rango": "0-10",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": true
+  },
+  {
+   "k": "transporte ejecutivo guayaquil quito",
+   "rango": "10-100",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": false
+  },
+  {
+   "k": "transporte ejecutivo quito",
+   "rango": "0-10",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": false
+  },
+  {
+   "k": "transporte ejecutivo quito esmeraldas",
+   "rango": "0-10",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": false
+  },
+  {
+   "k": "transporte ejecutivo quito guayaquil",
+   "rango": "10-100",
+   "competencia": "Media",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": false
+  },
+  {
+   "k": "transporte ejecutivo quito manta",
+   "rango": "0-10",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": false
+  },
+  {
+   "k": "transporte ejecutivo quito tena",
+   "rango": "0-10",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": false
+  },
+  {
+   "k": "transporte ejecutivo quito tonsupa",
+   "rango": "0-10",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": false
+  },
+  {
+   "k": "transporte ejecutivo santo domingo",
+   "rango": "0-10",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": false
+  },
+  {
+   "k": "transporte ejecutivo terrestre aeroportuario",
+   "rango": "0-10",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": true
+  },
+  {
+   "k": "transporte ejecutivo vans",
+   "rango": "10-100",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": true
+  },
+  {
+   "k": "transporte ejecutivo vip",
+   "rango": "10-100",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": true
+  },
+  {
+   "k": "transporte ejecutivo visa infinite",
+   "rango": "0-10",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": false
+  },
+  {
+   "k": "transporte privado ejecutivo",
+   "rango": "10-100",
+   "competencia": "Alta",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": true
+  },
+  {
+   "k": "transportes ejecutivos del norte",
+   "rango": "0-10",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": false
+  },
+  {
+   "k": "transportes ejecutivos sas",
+   "rango": "0-10",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": false
+  },
+  {
+   "k": "traslado de ejecutivos",
+   "rango": "10-100",
+   "competencia": "Alta",
+   "puja_baja_clp": 697,
+   "puja_alta_clp": 2214,
+   "relevante": true
+  },
+  {
+   "k": "traslados turisticos ejecutivos",
+   "rango": "10-100",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": true
+  },
+  {
+   "k": "transfer eventos privados",
+   "rango": "0-10",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": true
+  },
+  {
+   "k": "traslado privado santiago",
+   "rango": "0-10",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": true
+  },
+  {
+   "k": "transfer turismo santiago",
+   "rango": "0-10",
+   "competencia": "",
+   "puja_baja_clp": 0,
+   "puja_alta_clp": 0,
+   "relevante": true
+  }
+ ]
+}

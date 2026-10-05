@@ -1,0 +1,53 @@
+rules_version = '2';
+// Panel privado UberTransfer: solo las cuentas de Google autorizadas leen/escriben el estado compartido.
+// Todo lo demás queda denegado. Para cambiar quién entra, editar esta lista y desplegar:
+//   firebase deploy --only firestore:rules --project ubertransfer-ops --account alejandrog45@gmail.com
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function autorizado() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email in [
+          'alejandrog45@gmail.com',
+          'alimentosaltoque76@gmail.com'
+        ];
+    }
+
+    // Mapa «frase -> marca dueña», compartido por los dos paneles (una frase, un dueño).
+    match /panel/marcas {
+      allow read: if autorizado();
+      allow write: if autorizado()
+        && request.resource.data.keys().hasOnly(['map', 'by', 'updatedAt'])
+        && request.resource.data.by == request.auth.token.email;
+    }
+
+    match /panel/estado_aereostar {
+      allow read: if autorizado();
+      allow write: if autorizado()
+        && request.resource.data.keys().hasOnly(['neg', 'custom', 'sel', 'hist', 'by', 'updatedAt'])
+        && request.resource.data.by == request.auth.token.email;
+    }
+
+    match /panel/estado {
+      allow read: if autorizado();
+      allow write: if autorizado()
+        && request.resource.data.keys().hasOnly(['neg', 'custom', 'sel', 'hist', 'by', 'updatedAt'])
+        && request.resource.data.by == request.auth.token.email;
+    }
+
+    // Clave AES que descifra los datos del panel: la leen solo los autorizados; se crea UNA vez
+    // (base64 de 32 bytes = 44 caracteres) y nadie puede modificarla ni borrarla desde el panel.
+    match /panel/clave {
+      allow read: if autorizado();
+      allow create: if autorizado()
+        && request.resource.data.keys().hasOnly(['k'])
+        && request.resource.data.k is string
+        && request.resource.data.k.size() == 44;
+      allow update, delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

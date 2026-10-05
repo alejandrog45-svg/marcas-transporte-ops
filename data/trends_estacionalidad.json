@@ -1,0 +1,21 @@
+{
+  "fuente": "Google Trends (trends.google.com), Chile, búsqueda web, término 'transfer aeropuerto santiago'",
+  "consultado": "2026-09-30T04:52:24Z",
+  "periodo_semanal": "2021-09-26 a 2026-09-27 (262 semanas, parámetro 'today 5-y')",
+  "metodo": "Serie semanal del índice relativo de Trends (0–100). Para cada año completo 2022–2025 se promedió por mes, se dividió por el promedio de ese año (así se quita la tendencia de crecimiento) y se promedió entre los 4 años. 100 = un mes típico del año.",
+  "limites": "Es un índice relativo, NO cantidad de búsquedas. Solo el término 'transfer aeropuerto santiago' (el término 'taxi aeropuerto santiago' tiene 174 de 262 semanas sin datos y no se usa). Solo 4 años de muestra. No incluye demanda que no se busca en Google (WhatsApp, recomendados).",
+  "indice_mensual": [
+    {"mes": 1, "indice": 142, "min": 133, "max": 162},
+    {"mes": 2, "indice": 134, "min": 111, "max": 158},
+    {"mes": 3, "indice": 91, "min": 84, "max": 98},
+    {"mes": 4, "indice": 86, "min": 78, "max": 93},
+    {"mes": 5, "indice": 84, "min": 74, "max": 93},
+    {"mes": 6, "indice": 92, "min": 72, "max": 118},
+    {"mes": 7, "indice": 91, "min": 74, "max": 110},
+    {"mes": 8, "indice": 88, "min": 77, "max": 98},
+    {"mes": 9, "indice": 97, "min": 87, "max": 105},
+    {"mes": 10, "indice": 92, "min": 83, "max": 99},
+    {"mes": 11, "indice": 93, "min": 76, "max": 104},
+    {"mes": 12, "indice": 112, "min": 100, "max": 126}
+  ]
+}

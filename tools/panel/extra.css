@@ -1,0 +1,58 @@
+.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 20;font-size:20px;display:inline-block;vertical-align:middle;line-height:1;user-select:none}
+::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-track{background:#090e1c}::-webkit-scrollbar-thumb{background:#1e293b;border-radius:3px}::-webkit-scrollbar-thumb:hover{background:#334155}
+section{display:none}
+td.n{text-align:right}
+.sub{color:#8d90a0;font-size:13px}
+.card{background:#161b2a;border:1px solid rgba(67,70,85,.6);border-radius:.5rem;padding:16px;margin-bottom:14px;box-shadow:0 1px 2px rgba(0,0,0,.3)}
+.card h2{font-family:'Plus Jakarta Sans',Inter,sans-serif;font-size:18px;font-weight:600;margin:0 0 10px;color:#dee2f6}
+.card h3{font-size:15px;font-weight:600;margin:16px 0 6px;color:#dee2f6}
+.card p,.card li{color:#c3c6d7}
+.card ul,.card ol{padding-left:22px}
+.warn{border-left:4px solid #ffb95f}.good{border-left:4px solid #4cd7f6}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:8px}
+.card input:not([type=checkbox]),.card select,.card textarea{background:#0D1527;border:1px solid #434655;border-radius:.5rem;color:#dee2f6;padding:8px 10px}
+.card textarea{width:100%;min-height:110px}
+.card input:focus,.card select:focus,.card textarea:focus{outline:none;border-color:#2563eb;box-shadow:0 0 0 1px #2563eb}
+.btn{background:#2563eb;color:#fff;border:0;padding:8px 14px;border-radius:.5rem;cursor:pointer;font-weight:600}
+.btn:hover{background:#3b82f6}
+.btn.g{background:#1a1f2e;color:#dee2f6;border:1px solid #434655}
+label.ck{display:flex;gap:10px;align-items:flex-start;padding:6px 0;border-bottom:1px solid rgba(67,70,85,.4)}
+.cnt{font-size:12px;color:#8d90a0}.cnt.over{color:#ffb4ab;font-weight:700}
+pre{white-space:pre-wrap;background:#0D1527;padding:12px;border-radius:.5rem;border:1px solid #434655;color:#c3c6d7}
+code{background:#0D1527;padding:1px 6px;border-radius:4px}
+.tag{font-size:11px;padding:1px 7px;border-radius:99px;border:1px solid #434655;color:#c3c6d7}
+
+/* Celular y tablet: botones cómodos para el dedo */
+@media(max-width:1023px){
+#mnav a{display:inline-flex;align-items:center;min-height:44px;padding:0 14px}
+#livebtn,#gs,#q,#fg,#ft,#mv,#ps,#sortm,#bud,#dias,#cr,#simcopy,#probebtn,#btn_ok,#btn_csv,#btn_add{min-height:44px}
+.card input:not([type=checkbox]),.card select,.card textarea{min-height:44px}
+input[type=checkbox]{width:22px;height:22px}
+#pprev,#pnext{min-width:44px;min-height:44px}
+}
+/* Celular: la tabla pasa a tarjetas (guía de diseño: 'hidden complex data grids in favor of operational cards') */
+@media(max-width:767px){
+#kw table,#kw tbody{display:block;width:100%}
+#kw thead{display:none}
+#tb tr{display:grid;grid-template-columns:34px 1fr 1fr;gap:6px 12px;padding:12px;border-bottom:1px solid rgba(67,70,85,.3)}
+#tb td{display:block;padding:0!important;text-align:left!important;border:0}
+#tb td:nth-child(1){grid-row:1/4;align-self:start;padding-top:2px!important}
+#tb td:nth-child(2){grid-column:2/4;font-weight:600;font-size:14px;line-height:1.35;word-break:break-word}
+#tb td[data-l]{font-size:13px}
+#tb td[data-l]::before{content:attr(data-l);display:block;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#8d90a0}
+#tb td:nth-child(7){grid-column:2/4}
+.overflow-x-auto.max-h-\[560px\]{max-height:none}
+}
+
+/* C21: filas alternas y teclas de atajo */
+#tb tr:nth-child(even):not(:hover){background:rgba(255,255,255,.025)}
+kbd{font:inherit;font-size:10px;padding:0 4px;border:1px solid rgba(255,255,255,.2);border-radius:4px}
+.tipi{opacity:.55;font-size:11px;cursor:help;text-transform:none}
+/* Encabezado fluido (sin altura fija) y, en celular, solo lo esencial */
+@media(max-width:639px){#who{display:none!important}}
+#livebtn{white-space:nowrap}
+@media(max-width:1023px){#fo,#btn_csv_all,#brandsw,#logout,#audrun,#audcopy,#gatebtn,#aud [data-ap]{min-height:44px}}
+/* La tabla de frases tiene una columna más (Marca dueña): también en las tarjetas del celular */
+@media(max-width:767px){#tb td:nth-child(8){grid-column:2/4}}
+/* Rutas y textos largos dentro de las tarjetas: que se partan en vez de desbordar */
+#ias code,#mej code,#ver code,#rec code,#guia code{overflow-wrap:anywhere;word-break:break-word}

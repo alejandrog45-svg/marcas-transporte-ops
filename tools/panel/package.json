@@ -1,0 +1,9 @@
+{
+  "name": "marcas-transporte-panel-build",
+  "private": true,
+  "description": "Solo para compilar el CSS del panel (Tailwind). No se publica.",
+  "devDependencies": {
+    "@tailwindcss/forms": "0.5.10",
+    "tailwindcss": "3.4.17"
+  }
+}

@@ -1,0 +1,63 @@
+name: Panel diario (auditoría + publicación)
+on:
+  # DESACTIVADO hasta decidir el traspaso y recrear secretos (ver docs/TRASPASO_CUENTA.md)
+  # schedule:
+    # - cron: "45 11 * * *"   # todos los días 11:45 UTC (07:45–08:45 hora de Chile)
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: ops-data
+  cancel-in-progress: false
+jobs:
+  panel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: "3.11"
+          cache: pip
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "20"
+      - run: pip install -r requirements.txt
+
+      - name: Auditar sitio (datos reales de hoy)
+        id: audit
+        continue-on-error: true   # si falla, el panel se publica igual con la última auditoría buena y el job termina en rojo al final
+        env:
+          SITE_URL: ${{ vars.SITE_URL || 'https://ubertransfer.cl' }}
+        run: PYTHONPATH=src python -m marcas_transporte_ops audit
+
+      - name: Armar panel
+        run: python tools/panel/build.py
+
+      - name: Guardar histórico de la auditoría
+        run: |
+          git config user.name "ops-bot"
+          git config user.email "ops-bot@users.noreply.github.com"
+          git add data reports/audit_latest.md
+          git diff --cached --quiet || git commit -m "data: auditoría diaria"
+          git pull --rebase origin "${GITHUB_REF_NAME}" && git push
+
+      - name: Publicar en Firebase Hosting
+        env:
+          FIREBASE_SA: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: |
+          if [ -z "$FIREBASE_SA" ]; then
+            echo "::warning::Falta el secreto FIREBASE_SERVICE_ACCOUNT: el panel se armó pero NO se publicó."
+            exit 0
+          fi
+          umask 077
+          printf '%s' "$FIREBASE_SA" > "$RUNNER_TEMP/firebase-sa.json"
+          export GOOGLE_APPLICATION_CREDENTIALS="$RUNNER_TEMP/firebase-sa.json"
+          npx --yes firebase-tools@15.19.0 deploy --only hosting --project ubertransfer-ops --non-interactive
+          rm -f "$RUNNER_TEMP/firebase-sa.json"
+
+      - name: Fallar si la auditoría no se ejecutó
+        if: steps.audit.outcome == 'failure'
+        run: |
+          echo "::error title=Auditoría no ejecutada::el panel se publicó con la última auditoría buena; revisar robots.txt/sitemap del sitio"
+          exit 1

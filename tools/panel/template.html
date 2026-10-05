@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UberTransfer — Panel de investigación</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231a73e8'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-size='20' font-weight='700' text-anchor='middle' fill='white'%3EU%3C/text%3E%3C/svg%3E"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<style>__CSS__</style>
+</head>
+<body class="bg-background text-on-surface antialiased overflow-x-hidden min-h-screen flex">
+<div id="gate" role="dialog" aria-modal="true" aria-label="Acceso al panel" style="position:fixed;inset:0;z-index:1000;background:#0b1220;display:flex;align-items:center;justify-content:center;padding:16px">
+<div style="max-width:380px;width:100%;text-align:center;color:#e5e7eb;font-family:Inter,system-ui,sans-serif">
+<div style="font-size:22px;font-weight:700;margin-bottom:6px">UberTransfer · Panel privado</div>
+<p id="gatemsg" style="font-size:14px;color:#9ca3af;margin:0 0 18px">Comprobando sesión…</p>
+<button id="gatebtn" type="button" style="display:none;min-height:44px;padding:10px 18px;border-radius:10px;border:0;background:#1a73e8;color:#fff;font-weight:600;font-size:14px;cursor:pointer">Iniciar sesión con Google</button>
+<p style="font-size:11px;color:#6b7280;margin:18px 0 0">Acceso solo para cuentas autorizadas. Tus cambios (frases propias, marcadas, palabras negativas e historial) se guardan en la nube.</p>
+</div></div>
+
+<aside class="hidden lg:block fixed top-0 left-0 h-screen w-64 z-40 bg-surface-container-lowest border-r border-outline-variant">
+<div class="flex flex-col justify-between h-full p-4">
+<div class="space-y-6">
+<div class="flex items-center justify-between px-2 pt-1 pb-2">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center text-on-primary font-headline-md font-bold shadow-sm shadow-primary-container/30">
+<span class="material-symbols-outlined text-white">flight_takeoff</span>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="text-headline-md font-headline-md text-on-surface font-bold tracking-tight">UberTransfer</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-surface-container-high text-secondary border border-outline-variant/60">SCL</span>
+</div>
+<p class="text-label-sm font-label-sm text-outline">Panel de investigación</p>
+</div>
+</div>
+</div>
+<nav class="space-y-1" id="nav" aria-label="Secciones"></nav>
+</div>
+<div class="pt-4 border-t border-outline-variant/40">
+<p class="text-[11px] leading-relaxed text-outline">Datos: Planificador de palabras clave de Google Ads, Chile, sept 2025 – ago 2026 (exportado 29-09-2026).</p>
+</div>
+</div>
+</aside>
+
+<div class="flex-1 lg:ml-64 flex flex-col min-w-0">
+<header class="relative lg:sticky top-0 right-0 z-30 w-full bg-surface-container-low border-b border-outline-variant">
+<div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 lg:px-6 py-2 w-full">
+<div class="flex flex-wrap items-center gap-3">
+<div class="flex items-center gap-2 text-label-sm font-label-sm text-outline">
+<span class="hidden sm:inline">Investigación de mercado</span>
+<span class="material-symbols-outlined text-xs hidden sm:inline">chevron_right</span>
+<span class="text-primary font-semibold" id="crumb">Palabras clave</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-label-sm font-label-sm tracking-wide">
+<span class="material-symbols-outlined text-amber-300" style="font-size: 14px;">science</span>
+<span>SIMULACIÓN — sin gasto</span>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-2 w-full lg:w-auto"><a id="brandsw" href="/aereostar/" class="inline-flex items-center px-2.5 py-1.5 rounded-lg border border-outline-variant text-[12px] font-semibold text-on-surface-variant hover:bg-surface-container-high transition-colors whitespace-nowrap">Panel Aereostar →</a><span id="who" class="hidden text-[11px] text-outline truncate max-w-[140px] sm:max-w-[200px]" title=""></span><span id="cloudst" class="hidden text-[11px] text-outline whitespace-nowrap" role="status"></span><button id="logout" type="button" class="hidden px-2.5 py-1.5 rounded-lg bg-surface-container border border-outline-variant text-on-surface text-label-md font-label-md hover:bg-surface-container-high transition-colors">Salir</button><button id="livebtn" title="Mide ubertransfer.cl desde tu conexión, comprueba que ves la versión publicada y recalcula las verificaciones. No consulta Google Ads, Search Console ni GA4." class="flex items-center justify-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-primary-container text-white text-label-md font-label-md font-semibold hover:bg-blue-600 transition-colors shadow-sm shadow-primary-container/20 grow sm:grow-0"><span class="material-symbols-outlined text-sm" id="liveic">sync</span><span id="livet">Consultar en vivo</span></button></div>
+<div class="relative w-full lg:w-56 xl:w-64">
+<span class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-sm">search</span>
+</span>
+<input id="gs" aria-label="Buscar frase" class="w-full bg-[#0D1527] border border-outline-variant rounded-lg pl-8 pr-3 py-1.5 text-body-sm font-body-sm text-on-surface placeholder-outline focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all" placeholder="Buscar una frase..." type="text"/>
+</div>
+</div>
+<div id="stamp" class="px-4 lg:px-6 pb-2 text-[11px] text-outline flex flex-nowrap lg:flex-wrap overflow-x-auto lg:overflow-visible whitespace-nowrap lg:whitespace-normal gap-x-5 gap-y-1"></div>
+</header>
+<nav class="lg:hidden sticky top-0 z-30 flex gap-1 overflow-x-auto px-3 py-2 bg-surface-container-low border-b border-outline-variant" id="mnav" aria-label="Secciones (móvil)"></nav>
+
+<main class="flex-1 p-4 lg:p-6 space-y-6">
+<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+<div>
+<h1 class="text-headline-lg font-headline-lg text-on-surface tracking-tight" id="ptitle"></h1>
+<p class="text-body-md font-body-md text-outline mt-1" id="psub"></p>
+</div>
+<div class="flex items-center gap-2">
+<div class="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant text-label-sm font-label-sm text-outline">
+<span class="material-symbols-outlined text-secondary" style="font-size: 16px;">location_on</span>
+<span>Chile</span>
+</div>
+</div>
+</div>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4" id="topk"></div>
+
+<section id="guia">
+<div class="card good"><h2>Cómo funciona esto, en simple</h2>
+<p>Cuando alguien busca <i>"transfer aeropuerto santiago"</i> en Google, Google muestra anuncios arriba. Tú <b>pagas solo si la persona hace clic</b>, no por mostrar el anuncio. Una <b>campaña de Búsqueda</b> decide en qué búsquedas aparecer y cuánto pagar como máximo por clic.</p></div>
+<div class="card good"><h2>Empieza aquí: 7 pasos</h2><ol><li><b>Inicia sesión</b> con Google (solo cuentas autorizadas). Lo que hagas se guarda en la nube.</li><li><b>Entiende</b> cómo funciona una campaña (esta Guía).</li><li><b>Selecciona</b> pocas frases con intención de compra (pestaña Palabras clave). No hace falta usar las 170. Mira la columna <b>Marca dueña</b>: una frase, un dueño.</li><li><b>Simula</b> el gasto con tus propios supuestos (pestaña Simulador). Nada se paga.</li><li><b>Prepara</b> el borrador y repasa el Recorrido de 11 pasos.</li><li><b>Audita</b>: en la pestaña Auditoría ejecuta las comprobaciones en vivo y mira qué está confirmado y qué falta.</li><li><b>Mide</b> cuando exista una campaña real: primero contactos y reservas, no solo clics.</li></ol></div>
+<div class="card warn"><h2>Búsquedas no son clientes</h2><p>Que una frase tenga miles de búsquedas no significa que tendrás esa cantidad de clientes. Solo una parte ve tu anuncio, una parte hace clic y una parte cotiza o reserva. Esos porcentajes recién se conocen con una campaña real: por eso el simulador te pide que <b>tú</b> escribas tus supuestos y no trae ninguno inventado.</p></div>
+<div class="card"><h2>Las 4 piezas</h2>
+<ol>
+<li><b>Campaña</b>: contenedor con el <b>presupuesto diario</b> (el tope de gasto por día).</li>
+<li><b>Grupo de anuncios</b>: un tema (ej. "Aeropuerto", "Eventos", "Corporativo").</li>
+<li><b>Palabras clave</b>: las frases que activan el anuncio. Pestaña "Palabras clave".</li>
+<li><b>Anuncio</b>: títulos y descripción que ve la persona. Pestaña "Borrador".</li>
+</ol>
+<p>Además van las <b>palabras clave negativas</b>: frases donde <u>no</u> quieres aparecer (ej. "gratis", "empleo"). Evitan pagar clics inútiles.</p></div>
+<div class="card warn"><h2>Reglas de este proyecto</h2>
+<ul><li>Tiene que ser campaña de <b>Búsqueda</b>. No "inteligente", no "Máximo rendimiento" (Performance Max).</li>
+<li>Nada se crea ni se activa en Google Ads sin que el dueño lo apruebe: presupuesto diario, método de pago y verificación de identidad.</li>
+<li>Las tarifas por horario (ALTA/BAJA) ya están confirmadas en el sitio; siguen <b>PENDIENTES</b>: la tarifa de los tramos sin cubrir, la capacidad real de la flota y las rutas y comunas atendidas. No se inventan.</li></ul></div>
+<div class="card"><h2>El botón "Descargar aplicación"</h2><p>Es solo la app de celular de Google Ads. No hace falta. Puedes cerrarlo con la X.</p></div>
+</section>
+
+<section id="kw">
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-6 items-start">
+<div class="xl:col-span-8 2xl:col-span-9 space-y-4 min-w-0">
+<div class="bg-surface-container-low border border-outline-variant/60 rounded-xl p-3 flex flex-wrap items-center justify-between gap-3">
+<div class="flex flex-wrap items-center gap-2.5 flex-1 min-w-[280px]">
+<div class="relative flex-1 min-w-[200px]">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline"><span class="material-symbols-outlined text-sm">search</span></span>
+<input id="q" aria-label="Buscar frase" class="w-full bg-[#0D1527] border border-outline-variant rounded-lg pl-9 pr-3 py-1.5 text-body-sm font-body-sm text-on-surface placeholder-outline focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container" placeholder="Buscar frase o término..." type="text"/>
+</div>
+<div class="relative">
+<select id="fg" aria-label="Grupo" class="appearance-none bg-[#0D1527] border border-outline-variant rounded-lg pl-3 pr-8 py-1.5 text-body-sm font-body-sm text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container cursor-pointer"><option value="">Todos los grupos</option></select>
+<select id="fd" aria-label="Dirección" class="appearance-none bg-[#0D1527] border border-outline-variant rounded-lg pl-3 pr-8 py-1.5 text-body-sm font-body-sm text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container cursor-pointer"><option value="">Todas las direcciones</option></select>
+<span class="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-outline"><span class="material-symbols-outlined text-sm">expand_more</span></span>
+</div>
+<div class="relative">
+<select id="ft" aria-label="Etiqueta" class="appearance-none bg-[#0D1527] border border-outline-variant rounded-lg pl-3 pr-8 py-1.5 text-body-sm font-body-sm text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container cursor-pointer">
+<option value="">Todas las etiquetas</option><option value="ok">Utilizables</option><option value="comp">Marcas competidoras</option><option value="fuera">Fuera de tema</option><option value="compra">Intención de compra (auto)</option></select>
+<span class="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-outline"><span class="material-symbols-outlined text-sm">expand_more</span></span>
+</div>
+<div class="relative"><select id="fo" aria-label="Marca dueña" class="appearance-none bg-[#0D1527] border border-outline-variant rounded-lg pl-3 pr-8 py-1.5 text-body-sm font-body-sm text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container cursor-pointer"><option value="">Todas las marcas</option><option value="aereostar">Aereo&#115;tar</option><option value="ubertransfer">Uber&#84;ransfer</option><option value="none">Sin asignar</option></select><span class="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-outline"><span class="material-symbols-outlined text-sm">expand_more</span></span></div>
+<div class="relative md:hidden"><select id="sortm" aria-label="Ordenar" class="appearance-none bg-[#0D1527] border border-outline-variant rounded-lg pl-3 pr-8 py-1.5 text-body-sm font-body-sm text-on-surface focus:outline-none focus:border-primary-container cursor-pointer"><option value="v|-1">Ordenar: más búsquedas</option><option value="hi|-1">Ordenar: puja alta (mayor)</option><option value="lo|1">Ordenar: puja baja (menor)</option><option value="k|1">Ordenar: A → Z</option></select><span class="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-outline"><span class="material-symbols-outlined text-sm">expand_more</span></span></div>
+<label class="flex items-center gap-1.5 text-body-sm font-body-sm text-outline">Mín. búsquedas
+<input id="mv" type="number" value="0" min="0" step="50" class="w-20 bg-[#0D1527] border border-outline-variant rounded-lg px-2 py-1.5 text-body-sm text-on-surface focus:outline-none focus:border-primary-container"/></label>
+</div>
+<div class="flex flex-wrap items-center gap-2">
+<button id="btn_ok" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant text-on-surface text-label-md font-label-md hover:bg-surface-container-high hover:border-outline transition-colors"><span class="material-symbols-outlined text-sm">done_all</span><span>Marcar utilizables ≥500</span></button>
+<button id="btn_csv" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant text-on-surface text-label-md font-label-md hover:bg-surface-container-high hover:border-outline transition-colors"><span class="material-symbols-outlined text-sm">download</span><span id="csvn">Exportar marcadas</span></button>
+<button id="btn_csv_all" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant text-on-surface text-label-md font-label-md hover:bg-surface-container-high hover:border-outline transition-colors"><span class="material-symbols-outlined text-sm">download</span><span id="csvall">Exportar todas</span></button>
+<button id="btn_add" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-primary-container text-white text-label-md font-label-md font-semibold hover:bg-blue-600 transition-colors shadow-sm shadow-primary-container/20"><span class="material-symbols-outlined text-sm">add</span><span>Agregar palabra clave</span></button>
+</div>
+</div>
+<div class="bg-surface-container-low border border-outline-variant/60 rounded-xl overflow-hidden shadow-sm">
+<div class="overflow-x-auto max-h-[560px]">
+<table class="w-full text-left border-collapse">
+<thead class="sticky top-0 z-10">
+<tr class="bg-surface-container border-b border-outline-variant text-outline text-label-sm font-label-sm uppercase tracking-wider h-10">
+<th class="w-10 px-4 text-center"><input id="selall" aria-label="Marcar visibles" class="rounded border-outline-variant text-primary-container focus:ring-primary-container bg-surface-container-lowest" type="checkbox"/></th>
+<th class="px-4 py-2 font-semibold cursor-pointer" data-s="k" title="Búsqueda tal como la escribe la gente en Google. Es la palabra clave que se podría contratar.">Frase <span class="tipi" aria-hidden="true">ⓘ</span></th>
+<th class="px-4 py-2 font-semibold text-right cursor-pointer" data-s="v" title="Redondeado por Google (50 / 500 / 5.000). No sumar.">Búsquedas/mes <span class="tipi" aria-hidden="true">ⓘ</span></th>
+<th class="px-4 py-2 font-semibold text-center cursor-pointer" data-s="c" title="Competencia en Google Ads (no es dificultad SEO)">Competencia (Ads) <span class="tipi" aria-hidden="true">ⓘ</span></th>
+<th class="px-4 py-2 font-semibold text-right cursor-pointer" data-s="lo" title="Puja estimada por Google para aparecer en la parte superior de la página. No es lo que pagas por clic. (rango bajo)">Puja baja (CLP) <span class="tipi" aria-hidden="true">ⓘ</span></th>
+<th class="px-4 py-2 font-semibold text-right cursor-pointer" data-s="hi" title="Puja estimada por Google para aparecer en la parte superior de la página. No es lo que pagas por clic. (rango alto)">Puja alta (CLP) <span class="tipi" aria-hidden="true">ⓘ</span></th>
+<th class="px-4 py-2 font-semibold cursor-pointer" data-s="g" title="Grupo de anuncios sugerido por este panel según las palabras de la frase. No viene de Google: es una propuesta para ordenar la campaña.">Grupo <span class="tipi" aria-hidden="true">ⓘ</span></th><th class="px-4 py-2 font-semibold" title="Qué marca anuncia esta frase (una frase, un dueño). Provisional: aeropuerto = Aereostar; eventos y corporativo = UberTransfer. Toca la etiqueta de una fila para cambiarla; se comparte entre los dos paneles.">Marca dueña <span class="tipi" aria-hidden="true">ⓘ</span></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/30 text-body-sm font-body-sm text-on-surface" id="tb"></tbody>
+</table>
+</div>
+<div class="p-3 bg-surface-container border-t border-outline-variant flex flex-col sm:flex-row items-center justify-between gap-3 text-body-sm font-body-sm text-outline">
+<div class="flex items-center gap-2 flex-wrap">
+<span id="shown"></span>
+<span class="text-outline-variant">|</span>
+<div class="flex items-center gap-1"><span>Filas por página:</span>
+<select id="ps" aria-label="Filas por página" class="bg-[#0D1527] border border-outline-variant rounded px-2 py-0.5 text-on-surface text-xs focus:outline-none"><option>10</option><option selected>25</option><option>50</option><option>100</option><option value="9999">Todas</option></select></div>
+</div>
+<div class="flex items-center gap-1">
+<button id="pprev" aria-label="Página anterior" class="p-1.5 rounded hover:bg-surface-container-high text-outline disabled:opacity-40"><span class="material-symbols-outlined text-sm">chevron_left</span></button>
+<span class="hidden md:inline text-[11px] text-outline mr-2" title="Atajos de teclado (con la tabla visible)">Atajos: <kbd>/</kbd> buscar · <kbd>←</kbd> <kbd>→</kbd> páginas</span><span id="pnum" class="px-2.5 py-1 rounded bg-surface-container-highest text-xs text-primary font-semibold">1</span>
+<button id="pnext" aria-label="Página siguiente" class="p-1.5 rounded hover:bg-surface-container-high text-outline disabled:opacity-40"><span class="material-symbols-outlined text-sm">chevron_right</span></button>
+</div>
+</div>
+</div>
+<p class="text-[11px] text-outline"><span class="ml-1 px-1.5 py-0.5 rounded text-[9px] font-semibold tracking-wide bg-cyan-500/10 text-cyan-300 border border-cyan-500/30">DATO HISTÓRICO · Google, 29-09-2026</span> Los volúmenes vienen redondeados por Google (50 / 500 / 5.000): no los sumes. La competencia es la de Google Ads (no la dificultad SEO). Los volúmenes históricos no equivalen a la previsión, que sí considera los tipos de concordancia. Las etiquetas "competidor" y "fuera de tema", y el filtro "intención de compra" (frases con valor, precio, barato, tarifa, cotizar, reservar, privado o vip) son automáticos: revísalos tú.</p>
+</div>
+<div class="xl:col-span-4 2xl:col-span-3" id="kwside">
+<div id="simpanel" class="bg-surface-container-low border border-outline-variant rounded-xl p-5 shadow-lg space-y-6">
+<div class="flex items-center justify-between pb-3 border-b border-outline-variant/40">
+<div class="flex items-center gap-2.5">
+<div class="w-7 h-7 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary border border-outline-variant/60"><span class="material-symbols-outlined text-sm">calculate</span></div>
+<div><h2 class="text-headline-sm font-headline-sm text-on-surface font-semibold">Simulador de presupuesto</h2>
+<p class="text-label-sm font-label-sm text-outline">Con las frases que marcaste <span class="ml-1 px-1.5 py-0.5 rounded text-[9px] font-semibold tracking-wide bg-blue-500/10 text-blue-300 border border-blue-500/30">SIMULACIÓN</span></p></div>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<label class="text-label-md font-label-md text-on-surface font-medium" for="bud">Presupuesto diario (CLP)</label>
+<span class="text-numeric-table font-semibold text-secondary bg-surface-container px-2 py-0.5 rounded border border-outline-variant/60" id="budv"></span>
+</div>
+<input class="w-full h-1.5 bg-surface-container-high rounded-lg appearance-none cursor-pointer accent-primary-container" id="bud" max="100000" min="1000" step="500" type="range" value="5000" aria-label="Presupuesto diario (deslizador)"/>
+<label class="flex items-center gap-2 text-[11px] text-outline">o escribe el monto exacto (CLP por día)<input id="budn" type="number" min="1" step="500" value="5000" class="w-28 bg-[#0D1527] border border-outline-variant rounded-lg px-2 py-1.5 text-body-sm text-on-surface focus:outline-none focus:border-primary-container"/></label>
+<p id="simwarn" role="status" class="hidden text-[11px] text-amber-300"></p>
+<div class="flex justify-between text-[11px] text-outline font-numeric-table"><span>$1.000</span><span>$100.000</span></div>
+<label class="block text-[11px] text-outline">Costo por clic a usar <span class="ml-1 px-1.5 py-0.5 rounded text-[9px] font-semibold tracking-wide bg-amber-500/10 text-amber-300 border border-amber-500/30">SUPUESTO</span>
+<select id="esc" class="mt-1 w-full bg-[#0D1527] border border-outline-variant rounded-lg px-2 py-1.5 text-body-sm text-on-surface focus:outline-none focus:border-primary-container"><option value="google">Referencia: CPC medio de la previsión de Google</option><option value="top">Prudente: puja de parte superior (cota alta de costo)</option></select></label>
+<div class="grid grid-cols-3 gap-2">
+<label class="text-[11px] text-outline">Días del mes<input id="dias" type="number" value="30" min="1" max="31" class="mt-1 w-full bg-[#0D1527] border border-outline-variant rounded-lg px-2 py-1.5 text-body-sm text-on-surface focus:outline-none focus:border-primary-container"/></label>
+<label class="text-[11px] text-outline">Contactos por 100 clics <span class="ml-1 px-1.5 py-0.5 rounded text-[9px] font-semibold tracking-wide bg-amber-500/10 text-amber-300 border border-amber-500/30">SUPUESTO</span><input id="cr" type="number" step="0.1" min="0" placeholder="tu supuesto" class="mt-1 w-full bg-[#0D1527] border border-outline-variant rounded-lg px-2 py-1.5 text-body-sm text-on-surface focus:outline-none focus:border-primary-container"/></label>
+<label class="text-[11px] text-outline">Reservas por 100 contactos <span class="ml-1 px-1.5 py-0.5 rounded text-[9px] font-semibold tracking-wide bg-amber-500/10 text-amber-300 border border-amber-500/30">SUPUESTO</span><input id="cr2" type="number" step="0.1" min="0" placeholder="tu supuesto" class="mt-1 w-full bg-[#0D1527] border border-outline-variant rounded-lg px-2 py-1.5 text-body-sm text-on-surface focus:outline-none focus:border-primary-container"/></label>
+</div>
+<button id="simreset" type="button" class="self-start px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant text-on-surface text-label-md font-label-md hover:bg-surface-container-high transition-colors">Restaurar escenario inicial</button>
+<div id="scen" class="rounded-lg border border-outline-variant/60 overflow-x-auto"></div>
+<div id="seas" class="rounded-lg border border-outline-variant/60 p-3"></div>
+<p class="text-[11px] text-outline">Los porcentajes son supuestos tuyos: no son datos de UberTransfer. Se reemplazan por conversiones medidas cuando exista campaña.</p>
+</div>
+<div class="space-y-3" id="simres"></div>
+<button id="simcopy" class="w-full py-2.5 px-4 rounded-lg bg-primary-container hover:bg-blue-600 active:scale-[0.99] text-white font-headline-sm text-sm font-semibold transition-all duration-150 flex items-center justify-center gap-2 shadow-lg shadow-primary-container/20">
+<span class="material-symbols-outlined text-sm">content_copy</span><span id="simcopyt">Copiar resumen</span></button>
+<div class="pt-3 border-t border-outline-variant/40"><p class="text-[11px] leading-relaxed text-outline" id="simnote">Cálculos proyectados con fines de investigación de mercado. No representa cobros reales.</p></div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="sim"><div class="grid grid-cols-1 xl:grid-cols-2 gap-6 items-start"><div id="simhost" class="min-w-0"></div><div id="gfc" class="min-w-0"></div></div></section>
+<section id="borr">
+<div class="card"><h2>Estructura de campaña (borrador, no creada)</h2>
+<pre id="estr"></pre>
+<div class="row"><button class="btn" id="cp">Copiar estructura</button><span class="sub" id="cpm"></span></div></div>
+<div class="card"><h2>Palabras clave negativas (editable, se guarda en este navegador)</h2>
+<p class="sub">Sugerencias de ChatGPT y Gemini, no verificadas. Revisa con criterio del negocio: 30-09: se cambiaron "trabajo" y "bus" (demasiado amplias: habrían excluido transporte corporativo o de grupos) por frases más específicas ("bolsa de trabajo", "busco trabajo", "pasaje de bus"). Las listas que ya tenías guardadas con la versión anterior se actualizan solas; si la editaste, se respeta tu versión.</p>
+<textarea id="neg" aria-label="Palabras clave negativas, una por línea">gratis
+gratuito
+empleo
+bolsa de trabajo
+oferta de trabajo
+busco trabajo
+sueldo
+curso
+licencia
+arriendo auto
+rent a car
+pasaje de bus
+metro
+transantiago
+turbus
+recorrido
+mapa
+cómo llegar
+teléfono aeropuerto
+app
+aplicación
+conductor uber</textarea></div>
+<div class="card"><h2>Anuncio: revisor de largo</h2>
+<p class="sub">Google permite hasta 30 caracteres por título y 90 por descripción. Los textos con precios, horario o promesas quedan PENDIENTES hasta confirmarlos.</p>
+<div id="ads"></div></div>
+</section>
+<section id="rec">
+<div class="card warn"><h2>Recorrido: crear la campaña como si fuera real (SIMULACIÓN)</h2>
+<p>Este recorrido sigue las pantallas de Google Ads en el orden real, con tus datos ya rellenados. <b>No se ejecuta nada:</b> el paso final (pago, verificación de identidad y publicar) queda solo descrito. Los nombres exactos de los botones pueden variar un poco según Google.</p>
+<div class="row"><span class="sub" id="recprog"></span></div></div>
+<div id="recsteps"></div>
+</section>
+<section id="mej">
+<div class="card"><h2>Mejoras para el sitio (de la auditoría)</h2><p class="sub">Marca lo que ya esté resuelto. Se guarda solo en este navegador (no se sincroniza con la nube).</p><div id="chk"></div></div>
+</section>
+<section id="aud"></section>
+<section id="ias">
+<div class="card warn"><h2>Ideas de ChatGPT y Gemini</h2>
+<p class="sub">Textos de IAs externas: son <b>ideas sin verificar</b>. Se contrastan con datos reales antes de usarlas.</p>
+<div id="iaout"><!--IAS--></div></div>
+</section>
+<section id="ver">
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6 items-start">
+<div class="space-y-4 min-w-0">
+<div class="bg-surface-container-low border border-outline-variant/60 rounded-xl p-5"><h2 class="text-headline-sm font-headline-sm text-on-surface font-semibold mb-3">Esta consulta</h2><div id="vnow" class="space-y-2 text-body-md"></div></div>
+<div class="bg-surface-container-low border border-outline-variant/60 rounded-xl p-5"><h2 class="text-headline-sm font-headline-sm text-on-surface font-semibold mb-3">Frescura de las fuentes</h2><div id="vsrc" class="space-y-3 text-body-md"></div></div>
+<div class="bg-surface-container-low border border-outline-variant/60 rounded-xl p-5"><div class="flex items-center justify-between mb-3"><h2 class="text-headline-sm font-headline-sm text-on-surface font-semibold">Estado de ubertransfer.cl</h2><button id="probebtn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary-container text-white text-label-md font-label-md font-semibold hover:bg-blue-600 transition-colors"><span class="material-symbols-outlined text-sm">speed</span><span>Medir ahora</span></button></div><div id="vsite" class="space-y-2 text-body-md"></div></div>
+<div class="bg-surface-container-low border border-outline-variant/60 rounded-xl p-5"><h2 class="text-headline-sm font-headline-sm text-on-surface font-semibold mb-3">Historial de consultas en vivo</h2><div id="vhist" class="text-body-md"></div><p class="text-[11px] text-outline mt-3">Se guarda en este navegador y en la nube (últimas 10). Cada consulta registra hora, resultado de las verificaciones y tiempos del sitio. <b>Qué mide:</b> la respuesta de ubertransfer.cl desde tu conexión (3 solicitudes), si estás viendo la versión publicada, tu reloj frente al servidor y las verificaciones de este panel. <b>Qué NO consulta:</b> Google Ads, Search Console ni GA4 (sin conectar).</p></div>
+<div class="bg-surface-container-low border border-outline-variant/60 rounded-xl p-5"><h2 class="text-headline-sm font-headline-sm text-on-surface font-semibold mb-3">Privacidad de este panel</h2><ul class="list-disc pl-5 text-body-md text-on-surface-variant space-y-1"><li>El acceso es <b>solo con inicio de sesión de Google</b> y únicamente para las cuentas autorizadas (el dueño y Rafael). Sin sesión no se ve ningún dato.</li><li>Las frases de Google, la previsión y las tendencias viajan <b>cifradas</b> (AES-256) y se descifran al entrar; la clave solo la pueden leer las cuentas autorizadas.</li><li>Siguen siendo públicos el texto de la Guía y la auditoría técnica del sitio (no hay datos de clientes) y Google no indexa la página (noindex).</li><li>Tus marcadas, negativas, frases propias, marcas dueñas e historial se guardan en la nube y solo se ven con sesión. No hay claves ni datos de clientes.</li></ul></div>
+</div>
+<div class="bg-surface-container-low border border-outline-variant/60 rounded-xl p-5 min-w-0"><div class="flex items-center justify-between mb-3"><h2 class="text-headline-sm font-headline-sm text-on-surface font-semibold">Verificaciones de consistencia</h2><span id="vsum"></span></div><ul id="vchecks" class="divide-y divide-outline-variant/30"></ul><p class="text-[11px] text-outline mt-3">Se recalculan cada vez que abres o cambias algo. Si alguna falla, no confíes en las cifras hasta revisarla. Comprueban que los datos son coherentes entre sí; <b>no garantizan resultados</b> de una campaña.</p></div>
+</div>
+</section>
+</main>
+</div>
+
+<script>
+const DATA=__DATA__;
+const META=__META__;
+const RAW=JSON.stringify(DATA);
+const ORIG=JSON.parse(RAW);
+const $=id=>document.getElementById(id);
+const KP="";
+const MYB="ubertransfer";
+const NEG_OLD="gratis\ngratuito\nempleo\ntrabajo\nsueldo\ncurso\nlicencia\narriendo auto\nrent a car\nbus\nmetro\ntransantiago\nturbus\nrecorrido\nmapa\ncómo llegar\nteléfono aeropuerto\napp\naplicación\nconductor uber";
+const NEG_NEW="gratis\ngratuito\nempleo\nbolsa de trabajo\noferta de trabajo\nbusco trabajo\nsueldo\ncurso\nlicencia\narriendo auto\nrent a car\npasaje de bus\nmetro\ntransantiago\nturbus\nrecorrido\nmapa\ncómo llegar\nteléfono aeropuerto\napp\naplicación\nconductor uber";
+const store={get(k,d){try{const v=localStorage.getItem(KP+k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(KP+k,JSON.stringify(v))}catch(e){}if(typeof cloudTouch==="function")cloudTouch(k)}};
+const SEC=[
+["guia","Guía","menu_book","Guía para empezar","Cómo funciona una campaña de Búsqueda, explicado en simple."],
+["kw","Palabras clave","key","Palabras clave para traslados SCL","Análisis de intención de búsqueda y oportunidades para transfers Aeropuerto de Santiago (Pudahuel)."],
+["sim","Simulador","calculate","Simulador de presupuesto","Tu cálculo con las frases marcadas y, al lado, la previsión oficial de Google. Ninguna crea campañas ni cobra."],
+["borr","Borrador de campaña","edit_document","Borrador de campaña","Estructura, negativas y anuncio, sin crear nada en Google Ads."],
+["rec","Recorrido","route","Recorrido de creación","Cómo se crea una campaña de Búsqueda, paso a paso (simulación)."],
+["mej","Mejoras del sitio","web","Mejoras del sitio","Pendientes técnicos y de contenido según la auditoría."],
+["aud","Auditoría","fact_check","Auditoría en línea","Comprobaciones hechas ahora mismo en tu navegador y resultados del servidor, cada uno con su evidencia."],
+["ias","Ideas de IAs","psychology","Ideas de ChatGPT y Gemini","Ideas sin verificar, contrastadas con los datos reales."],
+["ver","Datos y verificación","verified","Datos y verificación","Qué tan frescos y consistentes son los datos que ves, comprobado ahora mismo."]];
+const NAVA="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors duration-150 ease-in-out";
+const NAVB="flex items-center gap-3 px-3 py-2 rounded-lg bg-surface-container-high text-primary font-semibold border-l-2 border-primary-container transition-colors duration-150 ease-in-out";
+const MNA="shrink-0 px-3 py-1.5 rounded-lg text-label-md font-label-md text-on-surface-variant bg-surface-container border border-outline-variant";
+const MNB="shrink-0 px-3 py-1.5 rounded-lg text-label-md font-label-md text-primary bg-surface-container-high border border-primary-container";
+let custom=store.get("custom",[]);
+const nG=()=>DATA.filter(d=>!d.custom).length;
+const RC=/transvip|turbus|tur bus|airtaxi|cabify|uber\b|easy taxi|pullman|bus\b/i;
+const OUT=/nueva york|disney|roma|paris|par[ií]s|madrid|miami|lima|buenos aires|argentina|per[uú]/i;
+function grp(k){k=k.toLowerCase();
+ if(/evento|matrimonio|boda|fiesta|cumplea/.test(k))return"Eventos";
+ if(/corporativ|empresa|ejecutiv/.test(k))return"Corporativo";
+ if(/compartid|shuttle/.test(k))return"Compartido";
+ if(/aeropuerto/.test(k))return"Aeropuerto";return"Otros"}
+custom.forEach(k=>{if(!DATA.some(d=>d.k===k))DATA.push({k:k,v:0,c:"",lo:0,hi:0,yoy:"",custom:1})});
+(META.ampliacion||[]).forEach(a=>{if(!DATA.some(d=>d.k===a.k))DATA.push({k:a.k,v:a.v,c:a.c,lo:a.lo,hi:a.hi,yoy:"",custom:1,seed:1,rango:a.rango,dueno:a.dueno})});
+DATA.forEach(d=>{d.g=grp(d.k);d.t=RC.test(d.k)?"comp":OUT.test(d.k)?"fuera":"ok"});
+let sel=new Set(store.get("sel",[]));
+if(store.get("sel",null)===null&&META.forecast){META.forecast.keywords.forEach(k=>sel.add(k));store.set("sel",[...sel])}let sk="v",sd=-1,page=0,cur="guia";
+function fmt(n){return n?(Number.isInteger(n)?String(n).replace(/\B(?=(\d{3})+(?!\d))/g,"."):n.toLocaleString("es-CL")):"—"}
+function money(n){return n?"$"+fmt(n):"—"}
+function chosen(){return DATA.filter(d=>sel.has(d.k))}
+const OWN_LBL={aereostar:"Aereo"+"star",ubertransfer:"Uber"+"Transfer",none:"Sin asignar"};
+const OWN_CLS={aereostar:"bg-orange-500/10 text-orange-300 border-orange-500/30",ubertransfer:"bg-blue-500/10 text-blue-300 border-blue-500/30",none:"bg-surface-container-high text-outline border-outline-variant"};
+let MARCAS={};try{MARCAS=JSON.parse(localStorage.getItem("marcas_compartido")||"{}")||{}}catch(e){MARCAS={}}
+function ownerOf(d){const v=MARCAS[d.k];if(v==="aereostar"||v==="ubertransfer"||v==="none")return v;if(d.custom&&!d.seed)return"none";return d.g==="Aeropuerto"?"aereostar":(d.g==="Eventos"||d.g==="Corporativo")?"ubertransfer":"none"}
+function ownSave(){try{localStorage.setItem("marcas_compartido",JSON.stringify(MARCAS))}catch(e){}if(typeof cloudMarcasSave==="function")cloudMarcasSave()}
+function ownBadge(d){const o=ownerOf(d);return '<button type="button" data-own="'+esc(d.k)+'" title="Toca para cambiar la marca dueña" class="px-2 py-0.5 rounded text-[11px] font-semibold border '+OWN_CLS[o]+'">'+OWN_LBL[o]+'</button>'}
+function ownCounts(){const c={aereostar:0,ubertransfer:0,none:0};DATA.forEach(d=>c[ownerOf(d)]++);const o=$("fo").options;o[0].textContent="Todas las marcas ("+DATA.length+")";o[1].textContent=OWN_LBL.aereostar+" ("+c.aereostar+")";o[2].textContent=OWN_LBL.ubertransfer+" ("+c.ubertransfer+")";o[3].textContent="Sin asignar ("+c.none+")"}
+const nav=$("nav"),mnav=$("mnav");
+SEC.forEach(([id,t,ic])=>{
+ const a=document.createElement("a");a.href="#"+id;a.id="n_"+id;a.innerHTML=`<span class="material-symbols-outlined text-outline">${ic}</span><span class="text-label-md font-label-md">${t}</span>`;a.onclick=e=>{e.preventDefault();show(id)};nav.appendChild(a);
+ const m=document.createElement("a");m.href="#"+id;m.id="m_"+id;m.textContent=t;m.onclick=e=>{e.preventDefault();show(id)};mnav.appendChild(m)});
+function show(id){cur=id;
+ SEC.forEach(([s,t,ic,ti,su])=>{const on=s===id;$(s).style.display=on?"block":"none";
+  $("n_"+s).className=on?NAVB:NAVA;$("n_"+s).querySelector(".material-symbols-outlined").className="material-symbols-outlined "+(on?"text-secondary":"text-outline");
+  $("m_"+s).className=on?MNB:MNA;if(on){$("crumb").textContent=t;$("ptitle").textContent=ti;$("psub").textContent=su}});
+ const panel=$("simpanel");if(id==="sim")$("simhost").appendChild(panel);else $("kwside").appendChild(panel);
+ store.set("tab",id);if(id==="borr")borr();if(id==="ver"&&!AS.probe)probe();if(id==="aud")audOpen();window.scrollTo(0,0)}
+[...new Set(DATA.map(d=>d.g))].sort().forEach(g=>{const o=document.createElement("option");o.value=g;o.textContent=g;$("fg").appendChild(o)});
+const GC={Aeropuerto:"bg-secondary",Eventos:"bg-primary-container",Corporativo:"bg-cyan-400",Compartido:"bg-tertiary",Otros:"bg-outline"};
+function pill(c){if(c==="Alta")return'<span class="inline-block px-2.5 py-0.5 rounded text-[11px] font-medium bg-red-500/10 text-red-300 border border-red-500/20">Alta</span>';
+ if(c==="Media")return'<span class="inline-block px-2.5 py-0.5 rounded text-[11px] font-medium bg-amber-500/10 text-amber-300 border border-amber-500/20">Media</span>';
+ if(c==="Baja")return'<span class="inline-block px-2.5 py-0.5 rounded text-[11px] font-medium bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">Baja</span>';
+ return'<span class="text-outline">—</span>'}
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;")}
+const ICOMPRA=/valor|precio|barato|tarifa|cotiz|reserv|privad|vip|contrat/i;
+const DIRS={hacia:"Hacia el aeropuerto",desde:"Desde el aeropuerto",sin:"Sin dirección indicada"};
+const RH=/\b(al|a|hacia|para el)\s+(el\s+)?aeropuerto/i,RD=/\b(desde|del)\s+(el\s+)?aeropuerto/i;
+function dirOf(k){const h=RH.test(k),d=RD.test(k);return h&&!d?"hacia":d&&!h?"desde":"sin"}
+DATA.forEach(d=>d.dir=dirOf(d.k));
+Object.keys(DIRS).forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=DIRS[v]+" ("+DATA.filter(d=>d.dir===v).length+")";$("fd").appendChild(o)});
+function filtered(){const q=$("q").value.toLowerCase(),g=$("fg").value,t=$("ft").value,mv=+$("mv").value||0;
+ const r=DATA.filter(d=>d.k.toLowerCase().includes(q)&&(!g||d.g===g)&&(!$("fd").value||d.dir===$("fd").value)&&(!t||(t==="compra"?ICOMPRA.test(d.k):d.t===t))&&(!$("fo").value||ownerOf(d)===$("fo").value)&&d.v>=mv);
+ const num=sk==="lo"||sk==="hi"||sk==="v";r.sort((a,b)=>{if(num){const ea=!a[sk],eb=!b[sk];if(ea!==eb)return ea?1:-1}return(a[sk]>b[sk]?1:a[sk]<b[sk]?-1:0)*sd});return r}
+function render(){ownCounts();const r=filtered(),ps=+$("ps").value||25,pages=Math.max(1,Math.ceil(r.length/ps));if(page>=pages)page=pages-1;
+ const rows=r.slice(page*ps,page*ps+ps);
+ $("tb").innerHTML=rows.map(d=>`<tr class="hover:bg-surface-container/60 transition-colors"><td class="px-4 py-3 text-center"><input type="checkbox" aria-label="Marcar ${esc(d.k)}" class="rounded border-outline-variant text-primary-container focus:ring-primary-container bg-surface-container-lowest" data-k="${esc(d.k)}" ${sel.has(d.k)?"checked":""}></td><td class="px-4 py-3 font-medium text-on-surface"><span>${esc(d.k)}</span>${d.t==="comp"?' <span class="ml-1 px-1.5 py-0.5 rounded text-[10px] font-medium bg-red-500/10 text-red-300 border border-red-500/20">competidor</span>':d.t==="fuera"?' <span class="ml-1 px-1.5 py-0.5 rounded text-[10px] font-medium bg-amber-500/10 text-amber-300 border border-amber-500/20">fuera de tema</span>':""}${d.seed?' <span class="ml-1 px-1.5 py-0.5 rounded text-[10px] font-medium bg-cyan-500/10 text-cyan-300 border border-cyan-500/30" title="Dato del Planificador de Google capturado el 30-09-2026 (lectura de pantalla, no exportación)">ampliación 30-09</span>'+(d.dueno?' <span class="ml-1 px-1.5 py-0.5 rounded text-[10px] font-medium bg-amber-500/10 text-amber-300 border border-amber-500/30" title="Semilla sugerida por el dueño (Rafael)">idea del dueño</span>':""):d.custom?' <span class="ml-1 px-1.5 py-0.5 rounded text-[10px] font-medium bg-surface-container-high text-secondary border border-outline-variant">propia</span> <button type="button" data-del="'+esc(d.k)+'" aria-label="Eliminar la frase propia '+esc(d.k)+'" title="Eliminar frase propia" class="ml-1 px-1.5 text-xs text-secondary hover:text-red-300">✕</button>':""}</td><td data-l="Búsquedas/mes" class="px-4 py-3 text-right font-numeric-table text-on-surface">${d.rango||fmt(d.v)}</td><td data-l="Competencia" class="px-4 py-3 text-center">${pill(d.c)}</td><td data-l="Puja baja (CLP)" class="px-4 py-3 text-right font-numeric-table text-on-surface">${money(d.lo)}</td><td data-l="Puja alta (CLP)" class="px-4 py-3 text-right font-numeric-table text-on-surface">${money(d.hi)}</td><td data-l="Grupo" class="px-4 py-3"><span class="inline-flex items-center gap-1.5 text-xs text-on-surface-variant font-medium"><span class="w-1.5 h-1.5 rounded-full ${GC[d.g]||"bg-outline"}"></span>${d.g}</span></td><td data-l="Marca dueña" class="px-4 py-3">${ownBadge(d)}</td></tr>`).join("");
+ $("shown").textContent=`Mostrando ${rows.length} de ${r.length} frases (${DATA.length} en total, ${DATA.length-nG()} adicionales)`;$("pnum").textContent="Página "+(page+1)+" de "+pages;
+ $("pprev").disabled=page<=0;$("pnext").disabled=page>=pages-1;
+ $("selall").checked=rows.length>0&&rows.every(d=>sel.has(d.k));updK()}
+$("tb").onclick=e=>{const ow=e.target.closest("[data-own]");if(ow){const k=ow.dataset.own,d=DATA.find(x=>x.k===k);if(d){const ord=["aereostar","ubertransfer","none"];MARCAS[k]=ord[(ord.indexOf(ownerOf(d))+1)%3];ownSave();render()}return}const b=e.target.closest("[data-del]");if(!b)return;const k=b.dataset.del;if(!confirm('¿Eliminar la frase propia "'+k+'"?'))return;custom=custom.filter(x=>x!==k);store.set("custom",custom);const i=DATA.findIndex(d=>d.custom&&d.k===k);if(i>-1)DATA.splice(i,1);sel.delete(k);store.set("sel",[...sel]);render()};
+$("tb").onchange=e=>{const k=e.target.dataset.k;if(!k)return;e.target.checked?sel.add(k):sel.delete(k);store.set("sel",[...sel]);updK()};
+$("selall").onchange=e=>{const ps=+$("ps").value||25;filtered().slice(page*ps,page*ps+ps).forEach(d=>e.target.checked?sel.add(d.k):sel.delete(d.k));store.set("sel",[...sel]);render()};
+document.querySelectorAll("th[data-s]").forEach(h=>h.onclick=()=>{const s=h.dataset.s;sd=(sk===s)?-sd:-1;sk=s;page=0;render()});
+["q","fg","fd","ft","fo","mv","ps"].forEach(i=>$(i).oninput=()=>{page=0;render()});
+$("sortm").oninput=e=>{const [k,d]=e.target.value.split("|");sk=k;sd=+d;page=0;render()};
+$("pprev").onclick=()=>{page--;render()};$("pnext").onclick=()=>{page++;render()};
+$("gs").oninput=()=>{$("q").value=$("gs").value;if(cur!=="kw")show("kw");page=0;render()};
+$("btn_ok").onclick=()=>{DATA.filter(d=>d.t==="ok"&&d.v>=500).forEach(d=>sel.add(d.k));store.set("sel",[...sel]);render()};
+$("btn_add").onclick=()=>{const k=(prompt("Nueva frase (sin volumen ni puja: no vienen de Google):")||"").trim().toLowerCase();if(!k)return;
+ if(DATA.some(d=>d.k===k)){alert("Esa frase ya está en la lista.");return}
+ custom.push(k);store.set("custom",custom);const d={k:k,v:0,c:"",lo:0,hi:0,yoy:"",custom:1,g:grp(k),t:RC.test(k)?"comp":OUT.test(k)?"fuera":"ok"};DATA.push(d);sel.add(k);store.set("sel",[...sel]);render()};
+function csvOut(rows,fname){const cq=nowStr();const sf=v=>{v=String(v);return /^[=+\-@\t\r]/.test(v)?"'"+v:v};const csv="Frase;Busquedas_mes;Competencia;Puja_baja_CLP;Puja_alta_CLP;Grupo;Fuente;Marca_duena;Datos_exportados;Consultado_el\n"+rows.map(d=>[sf(d.k),d.v,d.c,d.lo,d.hi,d.g,d.seed?"Planificador de Google Ads (captura de pantalla 30-09-2026, rango "+(d.rango||"s/d")+")":d.custom?"propia (sin dato de Google)":"Planificador de Google Ads",OWN_LBL[ownerOf(d)],fmtDT(new Date(META.exportedAt)),cq].join(";")).join("\n");
+ const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["﻿"+csv],{type:"text/csv;charset=utf-8"}));a.download=fname;document.body.appendChild(a);a.click();a.remove()}
+$("btn_csv").onclick=()=>{const r=chosen();if(!r.length){alert("No hay frases marcadas. Marca algunas o usa «Exportar todas».");return}csvOut(r,"palabras_clave_marcadas.csv")};
+$("btn_csv_all").onclick=()=>csvOut(DATA,"palabras_clave_todas.csv");
+function simWarn(){const n=parseFloat($("budn").value),d=parseFloat($("dias").value),m=[];if(!(n>0))m.push("El monto debe ser mayor que 0: se usa el deslizador ("+money(+$("bud").value||0)+" por día).");if(!(d>=1&&d<=31))m.push("Los días deben estar entre 1 y 31: se usan 30.");const e=$("simwarn");e.textContent=m.join(" ");e.classList.toggle("hidden",!m.length)}
+function csvLbl(){$("csvn").textContent="Exportar marcadas ("+sel.size+")";$("csvall").textContent="Exportar todas ("+DATA.length+")"}
+function budget(){const n=parseFloat($("budn").value);return n>0?n:(+$("bud").value||0)}
+function simCalc(){const c=chosen(),w=c.filter(d=>d.hi>0),b=budget(),dias=+$("dias").value||30,cr=parseFloat($("cr").value),cr2=parseFloat($("cr2").value),esc=$("esc").value,F=META.forecast;
+ if(esc==="google"&&F&&F.cpc>0){const q=Math.floor(b/F.cpc);return{b,dias,cr,cr2,esc,n:c.length,w:1,lo:F.cpc,hi:F.cpc,cmin:q,cmax:q}}
+ if(!w.length)return{b,dias,cr,cr2,esc,n:c.length,w:0};
+ const lo=w.reduce((s,d)=>s+d.lo,0)/w.length,hi=w.reduce((s,d)=>s+d.hi,0)/w.length;
+ return{b,dias,cr,cr2,esc,n:c.length,w:w.length,lo,hi,cmin:Math.floor(b/hi),cmax:Math.floor(b/lo)}}
+function rg(a,b){const f=n=>Number.isInteger(n)?String(n).replace(/\B(?=(\d{3})+(?!\d))/g,"."):String(n);return a===b?f(a):f(a)+" – "+f(b)}
+function altScenario(s){const F=META.forecast,c=chosen(),w=c.filter(d=>d.hi>0);if(s.esc==="google"){if(!w.length)return null;const lo=w.reduce((a,d)=>a+d.lo,0)/w.length,hi=w.reduce((a,d)=>a+d.hi,0)/w.length;return{l:"Prudente (puja superior), clics/día",v:rg(Math.floor(s.b/hi),Math.floor(s.b/lo))}}if(F&&F.cpc>0)return{l:"Con CPC medio de Google, clics/día",v:String(Math.floor(s.b/F.cpc))};return null}
+function costRange(g,a,b){if(b<=0)return"—";const lowC=Math.round(g/b);if(a<=0)return"desde "+money(lowC);return a===b?money(lowC):fmt(lowC)+" – "+money(Math.round(g/a))}
+function seasRender(){const el=$("seas"),T=META.trends;if(!el||!T)return;const MN=["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],cur=new Date().getMonth(),mx=Math.max(...T.indice_mensual.map(x=>x.max));
+ el.innerHTML='<div class="text-[12px] font-semibold text-on-surface mb-1">Estacionalidad de la demanda <span class="ml-1 px-1.5 py-0.5 rounded text-[9px] font-semibold bg-cyan-500/10 text-cyan-300 border border-cyan-500/30">GOOGLE TRENDS</span></div>'
+ +'<div class="flex items-end gap-1 h-24" role="img" aria-label="Índice mensual de búsquedas, 100 es un mes típico">'+T.indice_mensual.map(x=>'<div class="flex-1 flex flex-col items-center justify-end h-full" title="'+MN[x.mes-1]+': índice '+x.indice+' (rango entre años '+x.min+'–'+x.max+')"><span class="text-[9px] text-outline">'+x.indice+'</span><div class="w-full rounded-t '+(x.indice>=110?"bg-primary-container":"bg-outline-variant")+(x.mes-1===cur?" ring-1 ring-secondary":"")+'" style="height:'+Math.round(x.indice/mx*70)+'%"></div></div>').join("")+'</div>'
+ +'<div class="flex gap-1 text-[9px] text-outline">'+MN.map((m,i)=>'<span class="flex-1 text-center'+(i===cur?" text-secondary font-semibold":"")+'">'+m+'</span>').join("")+'</div>'
+ +'<p class="text-[11px] text-outline mt-2">100 = un mes típico. Enero y febrero (y en menor medida diciembre) concentran más búsquedas de «transfer aeropuerto santiago»; de marzo a noviembre el nivel es parejo. Consultado '+fmtDT(new Date(T.consultado))+'. '+esc(T.limites)+'</p>'
+ +'<div class="mt-2 text-[11px] text-outline"><b class="text-on-surface">Presupuesto por temporada (propuesta de ChatGPT, SIN verificar)</b>: como múltiplo de tu presupuesto diario normal B. Ene–Feb 1,15–1,25 × B · Dic 1,05–1,15 × B · Mar–Jun 0,85–0,95 × B · Jul–Ago 0,90–1,00 × B · Sep–Nov 0,95–1,00 × B. Es una regla prudencial suya, no una cifra de Google; con campaña real deben mandar tus conversiones y el costo por reserva. Límites que señaló: mide interés y no reservas; un solo término deja fuera variantes; 2022 pudo estar distorsionado por la pospandemia.</div>'}
+function scenRender(s){const el=$("scen");if(!el)return;const F=META.forecast,w=chosen().filter(d=>d.hi>0);
+ const base=F&&F.cpc>0?F.cpc:null,lo=w.length?w.reduce((a,d)=>a+d.lo,0)/w.length:null,hi=w.length?w.reduce((a,d)=>a+d.hi,0)/w.length:null;
+ const rows=[];const cands=[base,lo,hi].filter(v=>v>0);
+ if(!cands.length){el.innerHTML='<div class="p-3 text-[12px] text-outline">Marca frases con puja de Google para ver los escenarios.</div>';return}
+ const org=(v)=>v===base?"CPC medio de la previsión de Google":v===hi?"puja alta (parte superior), promedio de las frases marcadas":"puja baja (parte superior), promedio de las frases marcadas";
+ const r2=x=>Math.round(x*100)/100,u=[...new Set(cands.map(r2))].sort((a,b)=>b-a);
+ const lab=v=>base&&v===r2(base)?"CPC de la previsión de Google":hi&&v===r2(hi)?"Puja alta (conservador)":"Puja baja";
+ u.forEach(v=>rows.push([lab(v),v,org(v)]));
+ const cr=parseFloat($("cr").value),cr2=parseFloat($("cr2").value);
+ el.innerHTML='<table class="w-full text-[12px]"><thead><tr class="text-outline text-left"><th class="p-2">Escenario</th><th class="p-2 text-right">CPC (CLP)</th><th class="p-2">Origen del CPC</th><th class="p-2 text-right">Clics/mes</th><th class="p-2 text-right">Contactos/mes</th><th class="p-2 text-right">Reservas/mes</th></tr></thead><tbody>'
+ +rows.map(r=>{const cl=Math.floor(s.b/r[1])*s.dias,ct=cr>=0?Math.round(cl*cr/100*10)/10:null,rs=ct!=null&&cr2>=0?Math.round(ct*cr2/100*10)/10:null;
+  return '<tr class="border-t border-outline-variant/40" title="'+esc(r[2])+'"><td class="p-2 font-semibold">'+r[0]+'</td><td class="p-2 text-right font-numeric-table">≈ '+money(Math.round(r[1]))+'</td><td class="p-2 text-outline">'+esc(r[2])+'</td><td class="p-2 text-right font-numeric-table">≈ '+fmt(cl)+'</td><td class="p-2 text-right font-numeric-table">'+(ct==null?"—":String(ct).replace(".",","))+'</td><td class="p-2 text-right font-numeric-table">'+(rs==null?"—":String(rs).replace(".",","))+'</td></tr>'}).join("")
+ +'</tbody></table><div class="p-2 text-[11px] text-outline">Costo por clic tomado de referencias de Google (ver columna Origen). Contactos y reservas salen solo de tus supuestos; con los campos vacíos se muestra "—". Es una simulación, no una promesa.</div>'}
+var updK=function(){const s=simCalc();scenRender(s);seasRender();
+ const card=(l,ic,v,sub)=>`<div class="bg-surface-container-low border border-outline-variant/60 rounded-xl p-4 flex flex-col justify-between hover:border-outline transition-all duration-150"><div class="flex items-center justify-between text-outline mb-3"><span class="text-label-sm font-label-sm uppercase tracking-wider text-outline font-semibold">${l}</span><span class="material-symbols-outlined text-outline">${ic}</span></div><div><div class="text-headline-lg font-headline-lg text-on-surface tracking-tight font-numeric-table">${v}</div><p class="text-body-sm font-body-sm text-outline mt-1">${sub}</p></div></div>`;
+ $("topk").innerHTML=card("Frases analizadas","manage_search",nG(),"Planificador de Google, Chile"+(DATA.length>nG()?" · sin contar "+(DATA.length-nG())+" adicionales (propias o de la ampliación)":""))+card("Frases marcadas","bookmark_border",sel.size,(DATA.length>nG()?"de "+nG()+" de Google + "+(DATA.length-nG())+" adicionales":"de "+nG()+" analizadas"))+card("Presupuesto diario (simulación)","payments",money(s.b),"Editable en el simulador")+card("Clics por cálculo al mes","ads_click",s.w?rg(s.cmin*s.dias,s.cmax*s.dias):"—",s.w?"presupuesto ÷ "+(s.esc==="google"?"CPC medio de Google":"puja de parte superior")+" · no es previsión":"marca frases con puja de Google");
+ $("budv").textContent=money(s.b);
+ const row=(ic,l,v)=>`<div class="p-3 rounded-lg bg-surface-container/70 border border-outline-variant/50 flex items-center justify-between"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-outline text-sm">${ic}</span><span class="text-body-sm font-body-sm text-on-surface-variant">${l}</span></div><span class="text-headline-sm font-headline-sm font-semibold text-on-surface tracking-tight font-numeric-table">${v}</span></div>`;
+ let res="";const F=META.forecast;
+ if(!s.w){res=row("touch_app","Clics por día","—")+row("calendar_month","Gasto mensual máximo",money(s.b*s.dias))+row("ads_click","Clics al mes","—")+row("car_rental","Reservas al mes","—");
+  $("simnote").textContent=s.n?"Las frases marcadas no tienen puja estimada de Google.":"Marca frases en la tabla de Palabras clave para simular."}
+ else{const cm=s.cmin*s.dias,cM=s.cmax*s.dias,gasto=s.b*s.dias,f1=x=>x.toFixed(1);
+  const lim=F&&F.clicks>0?F.clicks*(s.dias/31):0,over=lim>0&&cM>lim*1.15&&s.b>F.dailyBudget;
+  if(over)res+='<div role="alert" class="p-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-200 text-[12px] leading-snug"><b>Extrapolación no validada.</b> Este cálculo (presupuesto ÷ costo por clic) llega a '+fmt(cM)+' clics al mes, por encima de lo que Google prevé para estas frases (≈ '+fmt(F.clicks)+' con ~'+money(F.dailyBudget)+' diarios). No tomes esa cifra como previsión: el tráfico disponible es limitado.</div>';
+  res+=row("touch_app","Clics por día",rg(s.cmin,s.cmax))+row("calendar_month","Gasto mensual máximo",money(gasto))+row("ads_click","Clics al mes (cálculo, no previsión)",rg(cm,cM));
+  if(F&&F.clicks>0)res+=row("verified","Previsión oficial de Google ("+F.keywords.length+" frases)","≈ "+fmt(F.clicks)+" clics · ~"+money(F.dailyBudget)+"/día");
+  const alt=altScenario(s);if(alt)res+=row("compare_arrows",alt.l,alt.v);
+  if(s.cr>0){const k1=cm*s.cr/100,k2=cM*s.cr/100;res+=row("chat","Contactos al mes",rg(f1(k1),f1(k2)))+row("payments","Costo por contacto",costRange(gasto,k1,k2));
+   if(s.cr2>0){const r1=k1*s.cr2/100,r2=k2*s.cr2/100;res+=row("car_rental","Reservas al mes",rg(f1(r1),f1(r2)))+row("sell","Costo por reserva",costRange(gasto,r1,r2))}
+   else res+=row("car_rental","Reservas al mes","ingresa tu supuesto")}
+  else res+=row("chat","Contactos y reservas","ingresa tus supuestos");
+  $("simnote").textContent=(s.esc==="google"?`Usa el CPC medio de la previsión de Google (${money(F.cpc)}, redondeado, del ${fmtDT(new Date(F.generatedAt)).slice(0,10)}). Es una referencia, no una promesa. `:`Puja media de las ${s.w} frases con dato: ${fmt(Math.round(s.lo))} – ${money(Math.round(s.hi))} por clic. Es la puja de parte superior de la página: una cota alta de costo, no el CPC que se paga. `)+`Contactos y reservas salen de tus supuestos, no de datos de UberTransfer. Proyección de investigación: no representa cobros reales. Se asume que se gasta todo el presupuesto.`+(F&&s.b>F.dailyBudget*1.5?` Ojo: la previsión de Google para sus ${F.keywords.length} frases llega a ~${fmt(F.clicks)} clics al mes con ~${money(F.dailyBudget)} diarios; con un presupuesto mucho mayor y solo esas frases, probablemente no habría más clics (el tráfico disponible es limitado).`:"")}
+ $("simres").innerHTML=res};
+["dias","cr","cr2","esc"].forEach(i=>$(i).oninput=()=>updK());
+$("bud").oninput=()=>{$("budn").value=$("bud").value;updK()};
+$("simreset").onclick=()=>{$("bud").value="5000";$("budn").value="5000";$("dias").value="30";$("cr").value="";$("cr2").value="";$("esc").value="google";updK()};
+$("budn").oninput=()=>{const v=parseFloat($("budn").value);if(v>0)$("bud").value=Math.min(v,+$("bud").max);updK()};
+$("simcopy").onclick=()=>{const s=simCalc();if(!s.w){$("simcopyt").textContent="Marca frases o usa el CPC de Google";setTimeout(()=>$("simcopyt").textContent="Copiar resumen",1800);return}const t=`Simulación UberTransfer (sin gasto real)\nConsultado: ${nowStr()} · Datos de Google exportados: ${fmtDT(new Date(META.exportedAt))}\nCosto por clic: ${s.esc==="google"?"CPC medio de la previsión de Google":"prudente (puja de parte superior)"}\nFrases marcadas: ${s.n}\nPresupuesto diario: ${money(s.b)} (${s.dias} días = ${money(s.b*s.dias)})`+(s.w?`\nClics por día: ${rg(s.cmin,s.cmax)}\nClics al mes: ${rg(s.cmin*s.dias,s.cmax*s.dias)}`:"");
+ navigator.clipboard.writeText(t).then(()=>{$("simcopyt").textContent="Copiado";setTimeout(()=>$("simcopyt").textContent="Copiar resumen",1500)},()=>{$("simcopyt").textContent="Selecciona y copia a mano"})};
+
+const TZ=(()=>{try{return Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(e){return ""}})();
+const DTF=new Intl.DateTimeFormat("es-CL",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit",second:"2-digit",hour12:false});
+function fmtDT(d){return DTF.format(d).replace(",","")}
+function nowStr(){return fmtDT(new Date())+(TZ?" ("+TZ+")":"")}
+function ago(d){const s=Math.max(0,Math.round((Date.now()-d.getTime())/1000));if(s<90)return"hace "+s+" s";const m=Math.round(s/60);if(m<90)return"hace "+m+" min";const h=Math.round(m/60);if(h<48)return"hace "+h+" h";return"hace "+Math.round(h/24)+" días"}
+const EXP=new Date(META.exportedAt),AUD=META.audit&&META.audit.generated?new Date(META.audit.generated):null,BLT=new Date(META.builtAt);
+const HP=((META.audit&&META.audit.pages)||[]).find(x=>x.url.split("/").filter(Boolean).length===2)||null;
+const AS={hash:null,srv:null,probe:null};
+async function sha(s){if(!(window.crypto&&crypto.subtle))throw new Error("crypto no disponible");const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
+sha(RAW).then(h=>{AS.hash={ok:h===META.dataSha,h:h}}).catch(e=>{AS.hash={ok:null,err:e.message}}).finally(()=>{verRender();stampTick()});
+(async()=>{try{const r=await fetch(location.href,{method:"HEAD",cache:"no-store"});const d=r.headers.get("date");if(!d)throw new Error("sin cabecera Date");AS.srv={diff:Math.round((Date.now()-new Date(d).getTime())/1000)}}catch(e){AS.srv={err:"no disponible"}}verRender()})();
+(async()=>{try{const r=await fetch("version.json?_="+Date.now(),{cache:"no-store"});if(!r.ok)throw new Error("HTTP "+r.status);const v=await r.json();AS.ver={ok:v.dataSha===META.dataSha&&v.builtAt===META.builtAt,latest:v}}catch(e){AS.ver={err:"no disponible"}}verRender();stampTick()})();
+const BUCKETS=[0,10,50,100,500,1000,5000,10000,50000,100000,500000,1000000];
+
+function gfcRender(){const f=META.forecast;if(!f){$("gfc").innerHTML="";return}const s=simCalc();
+ const row=(l,v)=>'<div class="flex justify-between gap-3 py-2 border-b border-outline-variant/30"><span class="text-on-surface-variant">'+l+'</span><span class="font-numeric-table text-on-surface font-semibold text-right">'+v+'</span></div>';
+ const cmp=s.w?('Tu cálculo (pujas de parte superior de la página, una cota alta de costo): <b class="font-numeric-table">'+rg(s.cmin*31,s.cmax*31)+'</b> clics en 31 días con '+money(s.b)+' diarios. Se usan 31 días porque es el período de la previsión de Google (1–31 oct); no depende del campo «Días del mes».'):'Marca frases con puja para comparar con tu cálculo.';
+ $("gfc").innerHTML='<div class="bg-surface-container-low border border-outline-variant rounded-xl p-5 shadow-lg space-y-4"><div class="flex items-center gap-2.5"><div class="w-7 h-7 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary border border-outline-variant/60"><span class="material-symbols-outlined text-sm">query_stats</span></div><div><h2 class="text-headline-sm font-headline-sm text-on-surface font-semibold">Previsión oficial de Google</h2><p class="text-label-sm font-label-sm text-outline">Planificador de palabras clave · plan '+f.planId+' <span class="ml-1 px-1.5 py-0.5 rounded text-[9px] font-semibold tracking-wide bg-cyan-500/10 text-cyan-300 border border-cyan-500/30">PREVISIÓN GOOGLE</span></p></div></div>'
+ +'<div class="text-body-md text-on-surface-variant">Con '+f.keywords.length+' frases del aeropuerto, '+f.period+', estrategia "'+f.strategy+'":</div>'
+ +'<div>'+row("Clics","≈ "+fmt(f.clicks))+row("Impresiones","≈ "+fmt(f.impressions))+row("Coste estimado","≈ "+money(f.cost))+row("CTR",String(f.ctr).replace(".",",")+" %")+row("CPC medio","≈ "+money(f.cpc))+row("Presupuesto diario medio","≈ "+money(f.dailyBudget))+'</div>'
+ +'<div class="text-[12px] text-outline">Generada '+fmtDT(new Date(f.generatedAt))+' ('+ago(new Date(f.generatedAt))+'). Cifras redondeadas por Google (datos de los últimos 7–10 días). Es una estimación, no una promesa, y <b>no incluye conversiones</b>. No crea campañas ni cobra.</div>'
+ +'<div class="p-3 rounded-lg bg-surface-container/70 border border-outline-variant/50 text-[13px] text-on-surface-variant">'+cmp+'<br><span class="text-outline">Google usa el CPC medio real (mucho menor que la puja de parte superior), por eso su estimación de clics es mayor.</span></div>'
+ +'<button id="gfcmark" class="w-full flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-surface-container border border-outline-variant text-on-surface text-label-md font-label-md hover:bg-surface-container-high hover:border-outline transition-colors"><span class="material-symbols-outlined text-sm">done_all</span><span>Marcar estas '+f.keywords.length+' frases en la tabla</span></button>'
+ +'<details class="text-[12px] text-outline"><summary class="cursor-pointer">Frases usadas en la previsión</summary><ul class="mt-1 list-disc pl-5">'+f.keywords.map(k=>'<li>'+k+'</li>').join("")+'</ul></details></div>';
+ const gm=$("gfcmark");if(gm)gm.onclick=()=>{f.keywords.forEach(k=>sel.add(k));store.set("sel",[...sel]);render()}}
+function simIndep(){const bb=budget();if($("esc").value==="google"&&META.forecast&&META.forecast.cpc>0){const q=Math.floor(bb/META.forecast.cpc);return{cmin:q,cmax:q}}let lo=0,hi=0,n=0;sel.forEach(k=>{const d=ORIG.find(x=>x.k===k);if(d&&d.hi>0){lo+=d.lo;hi+=d.hi;n++}});if(!n)return null;const b=+$("bud").value||0;return{cmin:Math.floor(b/(hi/n)),cmax:Math.floor(b/(lo/n))}}
+function checks(){const c=[];const add=(ok,l,dt)=>c.push({ok,l,dt});
+ const dup=ORIG.length-new Set(ORIG.map(d=>d.k)).size;
+ const bad=ORIG.filter(d=>d.hi>0&&d.lo>d.hi).length;
+ const badv=ORIG.filter(d=>!BUCKETS.includes(d.v)).length;
+ add(ORIG.length===META.srcRows,"Filas del panel = filas del archivo fuente","panel "+ORIG.length+" · archivo "+META.srcRows);
+ add(AS.hash===null?null:AS.hash.ok,"Huella SHA-256 de los datos = la del armado",AS.hash===null?"calculando…":AS.hash.err?AS.hash.err:(AS.hash.ok?"coincide ("+AS.hash.h.slice(0,12)+"…)":"NO coincide: los datos cambiaron desde el armado"));
+ add(dup===0,"Sin frases repetidas",dup+" repetidas");
+ add(bad===0,"Puja baja ≤ puja alta en todas las filas",bad+" filas con error");
+ add(badv===0,"Volúmenes de búsqueda en los valores que entrega Google",badv+" fuera de rango");
+ const dom=[...document.querySelectorAll("#topk .font-numeric-table")].map(x=>x.textContent.trim());
+ const inSel=[...sel].filter(k=>DATA.some(d=>d.k===k)).length;
+ add(dom[0]===String(nG())&&dom[1]===String(inSel),"Las tarjetas superiores coinciden con la tabla","tarjetas "+(dom[0]||"?")+" / "+(dom[1]||"?")+" · datos "+nG()+" / "+inSel);
+ const s=simCalc(),ix=simIndep();
+ add(!s.w&&!ix?true:(s.w&&ix&&s.cmin===ix.cmin&&s.cmax===ix.cmax),"Simulador: un segundo cálculo independiente da lo mismo",ix&&s.w?("clics/día "+s.cmin+"–"+s.cmax+" = "+ix.cmin+"–"+ix.cmax):"sin frases con puja marcadas");
+ const stale=[...sel].filter(k=>!DATA.some(d=>d.k===k)).length;
+ add(stale===0,"Selección sin frases que ya no existen",stale+" huérfanas");
+ const dd=(Date.now()-EXP.getTime())/86400000;
+ add(dd<=30,"Datos de Google con menos de 30 días (referencia)","antigüedad "+ago(EXP));
+ if(AUD){const da=(Date.now()-AUD.getTime())/86400000;add(da<=8,"Auditoría del sitio con menos de 8 días (ciclo semanal)","generada "+ago(AUD))}
+ if(AS.srv)add(AS.srv.err?null:Math.abs(AS.srv.diff)<=120,"Reloj de tu equipo vs. hora del servidor (≤ 2 min)",AS.srv.err?"no medible (abierto desde archivo o sin red)":("diferencia "+AS.srv.diff+" s"));
+ const F=META.forecast;
+ if(F){const near=(a,b,tol)=>Math.abs(a-b)<=tol*Math.max(a,b);
+  add(near(F.clicks*F.cpc,F.cost,0.1),"Previsión de Google: clics × CPC ≈ coste (±10 %)",fmt(F.clicks)+" × "+fmt(F.cpc)+" = "+fmt(F.clicks*F.cpc)+" · Google "+fmt(F.cost));
+  {const T=META.trends,ix=T?T.indice_mensual.map(x=>x.indice):[],av=ix.length?ix.reduce((a,b)=>a+b,0)/ix.length:0;add(ix.length===12&&Math.abs(av-100)<=3&&T.indice_mensual.every(x=>x.min<=x.indice&&x.indice<=x.max),"Estacionalidad (Trends): 12 meses, promedio ≈ 100 y valores dentro de su rango",ix.length+" meses · promedio "+av.toFixed(1))}
+  add(near(F.impressions*F.ctr/100,F.clicks,0.1),"Previsión de Google: impresiones × CTR ≈ clics (±10 %)",fmt(F.impressions)+" × "+F.ctr+" % = "+fmt(Math.round(F.impressions*F.ctr/100))+" · Google "+fmt(F.clicks));
+  add(near(F.dailyBudget*31,F.cost,0.1),"Previsión de Google: presupuesto diario × 31 ≈ coste (±10 %)",fmt(F.dailyBudget)+" × 31 = "+fmt(F.dailyBudget*31)+" · Google "+fmt(F.cost));
+  const known=F.keywords.filter(k=>ORIG.some(d=>d.k===k)).length;
+  add(known===F.keywords.length,"Las frases de la previsión existen en la tabla de datos",known+" de "+F.keywords.length+" encontradas")}
+ if(HP)add(HP.status>=200&&HP.status<400,"Sitio del cliente: la auditoría (servidor) vio la página de inicio con HTTP 2xx/3xx","HTTP "+HP.status+" · "+fmtDT(AUD));
+ {const cd=[...document.querySelectorAll("#topk .font-numeric-table")].map(x=>x.textContent.trim())[3],sx=simCalc();add(!sx.w||cd===rg(sx.cmin*sx.dias,sx.cmax*sx.dias),"Simulador: la tarjeta de clics al mes usa los mismos días que el cálculo","tarjeta "+(cd||"?")+" · días "+sx.dias)}
+ if(AS.ver)add(AS.ver.err?null:AS.ver.ok,"La versión que ves es la publicada (Firebase)",AS.ver.err?"no medible (abierto desde archivo o sin red)":(AS.ver.ok?"al día: mismos datos y misma versión ("+AS.ver.latest.dataSha.slice(0,12)+"…)":"HAY UNA VERSIÓN NUEVA publicada ("+fmtDT(new Date(AS.ver.latest.builtAt))+"): recarga la página"));
+ return c}
+function verRender(){const c=checks(),ok=c.filter(x=>x.ok===true).length,fail=c.filter(x=>x.ok===false).length,na=c.filter(x=>x.ok===null).length;
+ const ic=x=>x.ok===true?'<span class="material-symbols-outlined text-emerald-300">check_circle</span>':x.ok===false?'<span class="material-symbols-outlined text-red-300">error</span>':'<span class="material-symbols-outlined text-outline">pending</span>';
+ const li=x=>'<li class="py-2.5 flex gap-3 items-start">'+ic(x)+'<div class="min-w-0"><div class="text-body-md text-on-surface">'+x.l+'</div><div class="text-[12px] text-outline break-words">'+x.dt+'</div></div></li>';
+ const INT=/^(Filas|Huella|Sin frases|Volúmenes|Selección|Datos de Google|Auditoría|Reloj|La versión)/;
+ const hd=t=>'<li class="pt-3 pb-1 text-[11px] uppercase tracking-wider text-outline font-semibold">'+t+'</li>';
+ const BIZ=window.__BIZ=["Horario: las tarifas por horario están confirmadas (ALTA 07:30–18:00, BAJA 19:30–06:00). Falta corregir el schema (09:00–17:00) a 24/7 y saber qué tarifa rige entre 18:00–19:30 y 06:00–07:30", "Tarifas y precios para anuncios: el sitio muestra «Tarifas por Horario» y una FAQ con rangos; falta decidir qué precio se anuncia por rubro", "Promoción de $5.000 (ida y retorno): visible en el sitio; falta confirmar que sigue vigente y sus condiciones", "Rutas y comunas realmente atendidas (PENDIENTE Rafael)", "Nombre «Uber»: INAPI (30-09-2026) — «UBER» está registrada por Uber Technologies en transporte (clase 39) y «UberTransfer» no está registrada; falta la opinión de un abogado de propiedad industrial", "Coordinación con Aereostar (una frase, un dueño): falta la decisión de Rafael sobre quién lleva el aeropuerto", "Conversiones reales (WhatsApp, teléfono, correo): sin medir", "Search Console y GA4: sin datos reales conectados"];
+ $("vchecks").innerHTML=hd("Integridad y vigencia de los datos")+c.filter(x=>INT.test(x.l)).map(li).join("")+hd("Coherencia matemática interna")+c.filter(x=>!INT.test(x.l)).map(li).join("")
+  +hd("Validación de negocio: PENDIENTE (no la miden estas verificaciones)")+BIZ.map(t=>'<li class="py-2 flex gap-3 items-start"><span class="material-symbols-outlined text-amber-300">help</span><div class="text-body-md text-on-surface-variant">'+t+'</div></li>').join("");
+ $("vsum").innerHTML=fail?'<span class="px-2.5 py-0.5 rounded text-[11px] font-medium bg-red-500/10 text-red-300 border border-red-500/20">'+fail+' con problemas</span>':'<span class="px-2.5 py-0.5 rounded text-[11px] font-medium bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">'+ok+' de '+c.length+' correctas'+(na?' · '+na+' sin medir':'')+'</span>';
+ window.__vsum={ok:ok,fail:fail,na:na,total:c.length};
+ $("vnow").innerHTML='<div><span class="text-outline">Hora de tu consulta:</span> <b class="font-numeric-table">'+nowStr()+'</b></div><div><span class="text-outline">Panel generado:</span> '+fmtDT(BLT)+' <span class="text-outline">('+ago(BLT)+')</span></div>';
+ const sr=['<div><div class="text-on-surface font-medium">Palabras clave — Planificador de Google Ads</div><div class="text-outline text-[13px]">Exportado '+fmtDT(EXP)+' ('+ago(EXP)+') · '+META.srcRows+' filas · archivo <code>'+META.srcName+'</code></div><div class="text-outline text-[12px] break-all">SHA-256 del archivo: '+META.srcSha+'</div></div>'];
+ if(AUD){const P=META.audit.pages||[];sr.push('<div><div class="text-on-surface font-medium">Auditoría técnica del sitio</div><div class="text-outline text-[13px]">Generada '+fmtDT(AUD)+' ('+ago(AUD)+') · '+P.length+' páginas</div><ul class="mt-1 space-y-0.5 text-[13px]">'+P.map(p=>'<li class="flex justify-between gap-3"><span class="truncate text-outline">'+(p.url.replace("https://ubertransfer.cl","")||"/")+'</span><span class="font-numeric-table shrink-0">'+p.status+' · '+p.seconds+' s'+(p.issues.length?' · '+p.issues.length+' avisos':'')+'</span></li>').join("")+'</ul></div>')}
+ {const S=META.seoStatus||{state:"sin_ejecutar",missing:[]};sr.push('<div class="text-[12px] text-outline">Search Console y GA4: '+(S.state==="ok"?'<b>conectados</b>, última extracción real '+esc(S.lastRun||"?"):'<b>sin conectar</b> · el flujo «SEO diario» <b>no está extrayendo datos</b>'+(S.missing&&S.missing.length?' (faltan: '+S.missing.map(esc).join(", ")+')':'')+'. No se muestran cifras de esas fuentes.')+'</div>')}
+ $("vsrc").innerHTML=sr.join("");
+ renderSite()}
+function renderSite(){const p=AS.probe;if(!p){$("vsite").innerHTML='<div class="text-outline text-[13px]">Pulsa "Medir ahora" para hacer una prueba en vivo desde tu navegador.</div>';return}
+ if(p.err){$("vsite").innerHTML='<div class="text-red-300">Sin respuesta a las '+fmtDT(p.at)+': '+p.err+'</div>';return}
+ const s=[...p.ts].sort((a,b)=>a-b),med=s[Math.floor(s.length/2)];
+ $("vsite").innerHTML='<div><span class="text-outline">Prueba a las</span> <b class="font-numeric-table">'+fmtDT(p.at)+'</b></div><div>Respondió <b>'+p.ts.length+' de 3</b> veces · tiempos: <span class="font-numeric-table">'+p.ts.join(" · ")+' ms</span> · mediana <b class="font-numeric-table">'+med+' ms</b></div><div>Estado HTTP: <b>no legible desde el navegador</b> <span class="text-outline text-[12px]">(el sitio no lo permite entre dominios: aquí solo se confirma que el servidor respondió, no que la página sea válida. '+(HP?'La auditoría hecha desde el servidor vio HTTP <b class="font-numeric-table">'+HP.status+'</b> el '+fmtDT(AUD)+'.':"")+')</span></div><div class="text-[12px] text-outline">Mide cuánto tarda en llegar la respuesta del servidor desde tu conexión. No es la carga completa de la página (esa la mide la auditoría).</div>'}
+async function probe(){$("vsite").innerHTML='<div class="text-outline">Midiendo…</div>';const ts=[];let err=null;
+ for(let i=0;i<3;i++){const t0=performance.now();try{await fetch("https://ubertransfer.cl/?_="+Date.now()+i,{mode:"no-cors",cache:"no-store"});ts.push(Math.round(performance.now()-t0))}catch(e){err="la conexión falló ("+(e.message||"error")+")";break}}
+ AS.probe={at:new Date(),ts:ts,err:ts.length?null:err};renderSite()}
+let __lastProbe=0;function cooldown(){const r=30000-(Date.now()-__lastProbe);if(r>0)return Math.ceil(r/1000);__lastProbe=Date.now();return 0}
+$("probebtn").onclick=()=>{const w=cooldown();if(w){$("vsite").innerHTML='<div class="text-amber-300 text-[13px]">Espera '+w+' s antes de volver a medir (así no cargamos el sitio del cliente).</div>';return}probe()};
+function stampTick(){const s=window.__vsum||{ok:0,fail:0,total:0};
+ const st=s.fail?'<span class="text-red-300">⚠ '+s.fail+' verificaciones con problemas</span>':'<span class="text-emerald-300">✓ '+s.ok+'/'+s.total+' verificaciones de datos correctas'+(s.na?' <span class="text-outline">('+s.na+' sin medir)</span>':'')+'</span>';
+ $("stamp").title="Comprobaciones de coherencia entre los datos del panel (filas, huella, pujas, cálculos, versión publicada). No garantizan resultados de una campaña. Detalle en Datos y verificación.";$("stamp").innerHTML='<span>Hora actual: <b class="text-on-surface-variant font-numeric-table">'+nowStr()+'</b></span><span>Datos de Google: '+fmtDT(EXP)+' ('+ago(EXP)+')</span>'+(AUD?'<span>Auditoría del sitio: '+fmtDT(AUD)+' ('+ago(AUD)+')</span>':'')+st+liveStamp()}
+setInterval(stampTick,1000);
+
+const LK="ut_live_hist";let HIST=store.get(LK,[]);
+function liveStamp(){const l=HIST[0];if(!l)return'<span class="text-amber-300">Última consulta en vivo: nunca (pulsa "Consultar en vivo")</span>';
+ const d=new Date(l.at),old=(Date.now()-d.getTime())>86400000;
+ return'<span class="'+(old?"text-amber-300":"text-on-surface-variant")+'">Última consulta en vivo: <b class="font-numeric-table">'+fmtDT(d)+'</b> ('+ago(d)+') · '+(l.fail?"⚠ "+l.fail+" con problemas":"✓ "+l.ok+"/"+l.total)+'</span>'}
+function histRender(){if(!HIST.length){$("vhist").innerHTML='<div class="text-outline text-[13px]">Aún no hay consultas. Pulsa "Consultar en vivo" arriba.</div>';return}
+ $("vhist").innerHTML='<ul class="divide-y divide-outline-variant/30">'+HIST.map(h=>'<li class="py-2 flex flex-wrap justify-between gap-x-4 gap-y-1"><span class="font-numeric-table text-on-surface">'+fmtDT(new Date(h.at))+'</span><span class="text-[13px] '+(h.fail?"text-red-300":"text-emerald-300")+'">'+(h.fail?h.fail+" con problemas":h.ok+"/"+h.total+" correctas")+'</span><span class="text-[12px] text-outline">sitio: '+(h.site==null?"sin respuesta / n/d":h.site+" ms")+' · versión: '+h.ver+' · datos '+h.sha+'…</span></li>').join("")+'</ul>'}
+async function liveRun(){const b=$("livebtn");if(b.disabled)return;const w=cooldown();if(w){$("livet").textContent="Espera "+w+" s";setTimeout(()=>{$("livet").textContent="Consultar en vivo"},2500);return}b.disabled=true;b.classList.add("opacity-70");$("livet").textContent="Consultando…";$("liveic").classList.add("animate-spin");
+ try{
+  await probe();
+  try{const r=await fetch("version.json?_="+Date.now(),{cache:"no-store"});if(!r.ok)throw new Error("HTTP "+r.status);const v=await r.json();AS.ver={ok:v.dataSha===META.dataSha&&v.builtAt===META.builtAt,latest:v}}catch(e){AS.ver={err:"no disponible"}}
+  try{const r=await fetch(location.href,{method:"HEAD",cache:"no-store"});const d=r.headers.get("date");if(!d)throw new Error("x");AS.srv={diff:Math.round((Date.now()-new Date(d).getTime())/1000)}}catch(e){AS.srv={err:"no disponible"}}
+  try{const h=await sha(RAW);AS.hash={ok:h===META.dataSha,h:h}}catch(e){AS.hash={ok:null,err:e.message}}
+  verRender();const s=window.__vsum,p=AS.probe;let site=null;if(p&&!p.err&&p.ts.length){const q=[...p.ts].sort((a,b)=>a-b);site=q[Math.floor(q.length/2)]}
+  HIST.unshift({at:new Date().toISOString(),ok:s.ok,fail:s.fail,total:s.total,site:site,ver:AS.ver.err?"n/d":(AS.ver.ok?"al día":"desactualizada"),sha:(AS.hash&&AS.hash.h?AS.hash.h:META.dataSha).slice(0,12)});
+  HIST=HIST.slice(0,10);store.set(LK,HIST);
+ }catch(e){}
+ histRender();stampTick();b.disabled=false;b.classList.remove("opacity-70");$("livet").textContent="Consultar en vivo";$("liveic").classList.remove("animate-spin")}
+$("livebtn").onclick=liveRun;histRender();
+const _updK=updK;updK=function(){_updK();csvLbl();simWarn();verRender();stampTick();gfcRender()};
+
+function borr(){const c=chosen(),gs={};c.forEach(d=>(gs[d.g]=gs[d.g]||[]).push(d.k));
+ let s="CAMPAÑA (tipo: BÚSQUEDA) — NO CREADA\nPresupuesto diario: PENDIENTE de aprobación del dueño\nRed: solo Búsqueda de Google, sin socios ni Display\n";
+ if(!c.length)s+="\n(Marca frases en la pestaña Palabras clave.)";
+ Object.keys(gs).forEach(g=>{s+=`\nGrupo de anuncios: ${g}\n`+gs[g].map(k=>`  "${k}"   [${k}]`).join("\n")+"\n"});
+ s+="\nNegativas:\n"+$("neg").value.split("\n").filter(Boolean).map(x=>"  -"+x).join("\n");
+ {const otra=MYB==="ubertransfer"?"aereostar":"ubertransfer",conf=c.filter(d=>ownerOf(d)===otra);if(conf.length)s="⚠ AVISO: "+conf.length+" de las frases marcadas pertenecen a "+OWN_LBL[otra]+" (una frase, un dueño). No las uses en esta campaña sin acordarlo con Rafael:\n"+conf.slice(0,8).map(d=>"  · "+d.k).join("\n")+(conf.length>8?"\n  · … y "+(conf.length-8)+" más":"")+"\n\n"+s}
+ $("estr").textContent=s}
+{let sv=store.get("neg",null);if(typeof sv==="string"&&sv.replace(/\r/g,"").trim()===NEG_OLD){sv=NEG_NEW;store.set("neg",sv)}if(typeof sv==="string")$("neg").value=sv}
+$("neg").oninput=()=>{store.set("neg",$("neg").value);borr()};
+$("cp").onclick=()=>{navigator.clipboard.writeText($("estr").textContent).then(()=>$("cpm").textContent="Copiado",()=>$("cpm").textContent="Selecciona y copia a mano")};
+const AD=[["Título 1","Transfer aeropuerto Santiago",30],["Título 2","Reserva por WhatsApp",30],["Título 3","",30],["Descripción 1","Traslados desde y hacia el aeropuerto de Santiago. Cotiza por WhatsApp.",90],["Descripción 2","",90]];
+$("ads").innerHTML=AD.map((a,i)=>`<div class="row"><label style="width:110px">${a[0]}</label><input data-i="${i}" value="${a[1]}" aria-label="${a[0]}" style="flex:1;min-width:200px"><span class="cnt" id="cn${i}"></span></div>`).join("");
+function cnt(){document.querySelectorAll("#ads input").forEach(el=>{const i=+el.dataset.i,n=el.value.length,m=AD[i][2];const c=$("cn"+i);c.textContent=n+"/"+m;c.className="cnt"+(n>m?" over":"")})}
+$("ads").oninput=cnt;cnt();
+const CH=["La home es lenta: la auditoría diaria la mide entre 3 y 4 s (ver «Datos y verificación»)","Sin lazy-load en imágenes (39 en la home)","Titles largos (74–92 car.) en nosotros, servicio y contacto; ideal ≤ ~60","Description de 181 car. en /servicio; ideal ≤ ~155","/tarifas/ daba 404 el 29-09-2026 y el menú apuntaba a /#tarifas: volver a comprobar (PENDIENTE tarifas reales)","Horario: el schema dice 09:00–17:00 y el texto «24 horas, los 7 días». Las franjas ALTA/BAJA son de tarifa y NO explican el schema: corregirlo a 24/7 (PENDIENTE confirmación del dueño)","GTM (GTM-WLPJJD4J) y gtag (G-26K0MDTFY1) juntos: verificar que no cuenten doble","Confirmar que se emiten click_whatsapp, click_phone y lead_submit","Páginas de ruta (aeropuerto → comuna) y versión EN con hreflang","Schema LocalBusiness con teléfono y areaServed","Nombre «Uber»: la política de marcas de Google (verificada) no restringe usarla como palabra clave, pero sí en el texto del anuncio si el titular reclama; INAPI (30-09-2026): «UBER» está registrada por Uber Technologies en transporte (clase 39) y «UberTransfer» no está registrada. Consultar a un abogado de propiedad industrial antes de anunciar el nombre (decisión del dueño)","Textos alternativos: el 100 % de las imágenes de las 4 páginas viene sin alt útil (medido el 30-09)","Imágenes de la portada: 30 de 39 son PNG y no usan srcset; convertir a WebP","El sitio no tiene ningún formulario: el contacto es solo WhatsApp, teléfono y correo. Medir esos clics como conversión","Etiqueta de Meta/Facebook (píxel) detectada en las 4 páginas: confirmar si está en uso y si hay aviso de cookies","Schema sin teléfono, sin dirección y sin zona de servicio (areaServed)","El sitio ya ofrece Corporativo, Bodas/eventos, Turismo, Compartidos, Privados y Fuera de Santiago, pero solo como tarjetas dentro de una página: crear una página propia por rubro (Corporativo, Bodas y eventos) para poder anunciar sin mandar a la página del aeropuerto","Tarifas por horario (confirmado por el dueño): ALTA 07:30–18:00 y BAJA 19:30–06:00, con precios distintos. Quedan sin cubrir 18:00–19:30 y 06:00–07:30: aclarar qué tarifa se cobra en esos tramos","Flota: aereostar.cl/nuestra-flota muestra Sorento, Gran Carnival, Vito y Sonata, los cuatro con «6 pasajeros, Van, 2020» (la Sonata no es van: revisar esos datos); ubertransfer.cl muestra Mercedes, Carnival y Sorento: unificar la ficha de flota entre ambos sitios","Aereostar y UberTransfer son de Rafael: una frase, un dueño (columna «Marca dueña» en Palabras clave). Provisional: Aereostar lleva el aeropuerto y UberTransfer su marca y otros rubros; no publicar frases de aeropuerto desde aquí sin acordarlo con Rafael"];
+let done=new Set(store.get("done",[]));
+$("chk").innerHTML=CH.map((t,i)=>`<label class="ck"><input type="checkbox" data-i="${i}" ${done.has(i)?"checked":""}><span>${t}</span></label>`).join("");
+$("chk").onchange=e=>{const i=+e.target.dataset.i;e.target.checked?done.add(i):done.delete(i);store.set("done",[...done])};
+const REC=[
+["1. Objetivo","Elige el objetivo de la campaña.","<b>Clientes potenciales por teléfono</b> o <b>Envío de formulario</b>. En la pantalla real aparecen: Compras, Envío de formulario para clientes potenciales, Clientes potenciales por teléfono, Vistas de una página y Notoriedad de marca.","Para un transfer, lo que vale es que te consulten: por eso no se elige \"Notoriedad de marca\". La conversión concreta depende de lo que mida el sitio (WhatsApp, llamada, formulario)."],
+["2. Tipo de campaña","Elige <b>Búsqueda</b>.","No elijas Máximo rendimiento (Performance Max) ni campaña inteligente: es la regla del proyecto y lo confirmó el dueño (Rafael). Si Google ofrece el asistente simplificado, busca <b>Cambiar a modo experto</b> (el nombre exacto del botón puede variar; no está verificado en pantalla). Al terminar, en la lista de campañas debe aparecer el tipo <b>BÚSQUEDA</b>.","Búsqueda muestra tu anuncio solo cuando alguien escribe una frase que tú elegiste. Es la más fácil de controlar."],
+["3. Cómo quieres conseguir el objetivo","Marca las vías por las que te contactan.","Llamadas y visitas al sitio web (el sitio tiene WhatsApp y teléfono: <b>+56 9 4996 9267</b>, dato verificado).","Cada vía debe estar medida como conversión, si no Google no sabrá qué clics sirvieron. Pendiente: acceso de Rafael a GA4/GTM."],
+["4. Nombre","Ponle un nombre claro.","Ejemplo: <b>Búsqueda - Aeropuerto - 2026-10</b>","Un nombre ordenado ayuda a distinguirla si luego hay varias."],
+["5. Ofertas y redes","Cómo pujas y dónde aparece.","Estrategia: <b>Maximizar clics</b> con un <b>CPC máximo</b> tope. Redes: <b>solo Búsqueda de Google</b>; <b>desmarcar</b> socios de búsqueda y Red de Display.","Dejar todo marcado por defecto es la forma más común de gastar de más. El tope de CPC evita clics caros."],
+["6. Ubicaciones e idiomas","A quién llegas.","Ubicación: <b>Chile</b> (PENDIENTE: decidir si Región Metropolitana o todo el país). Idiomas: <b>español</b> y <b>inglés</b>.","Se pueden agregar turistas extranjeros con el grupo en inglés. Las comunas atendidas están PENDIENTES del dueño."],
+["7. Presupuesto diario","Cuánto puedes gastar como máximo al día.","<b>PENDIENTE de aprobación del dueño.</b> Ejemplo de la simulación: unos <b>$4.600</b> diarios ≈ $140.000 al mes.","Google puede gastar hasta el doble un día concreto, pero el promedio mensual respeta el tope. Usa la pestaña Simulador para probar montos."],
+["8. Grupos de anuncios y palabras clave","Un grupo por tema, con sus frases.","Mira la pestaña <b>Borrador</b>: los grupos salen de las frases que marcaste (frase y exacta). Agrega también las <b>negativas</b>. Los rubros <b>Corporativo</b> y <b>Eventos</b> (bodas) van en un <b>grupo aparte</b> (o campaña aparte) con presupuesto propio.","Las negativas evitan pagar clics inútiles (gratis, empleo, curso...). Corporativo y bodas tienen poco volumen en Google (10–100 búsquedas al mes por frase, ampliación del 30-09): es un complemento, no el grueso del gasto."],
+["9. Anuncios","Escribe títulos y descripciones.","Hasta 15 títulos de 30 caracteres y 4 descripciones de 90. Usa el revisor de la pestaña Borrador. <b>No incluyas precios ni horario</b> hasta que estén confirmados.","Cuantas más variantes, más aprende Google qué funciona."],
+["10. Extensiones","Datos extra bajo el anuncio.","Llamada (+56 9 4996 9267), enlaces a secciones del sitio, y la oferta vigente solo si el dueño confirma que sigue activa. Ojo: en las extensiones (callouts) no pongas afirmaciones sin confirmar. Hoy el sitio dice atención 24 horas pero el schema dice 09:00–17:00, y frases como «Autorizado en el aeropuerto» o «Pago a bordo» no están confirmadas.","Ocupan más espacio en la pantalla y suelen mejorar la tasa de clic."],
+["11. Revisión final","Google muestra un resumen antes de publicar.","Repasa: tipo Búsqueda, redes sin Display, presupuesto, ubicación, negativas y que el número de teléfono sea el correcto.","<b>AQUÍ SE DETIENE LA SIMULACIÓN.</b> El siguiente botón activa el pago y la verificación de identidad de la cuenta, y publica la campaña. Eso solo lo hace el dueño, con presupuesto aprobado."]
+];
+let recDone=new Set(store.get("recdone",[]));
+function recRender(){$("recsteps").innerHTML=REC.map((r,i)=>`<div class="card ${i===REC.length-1?'warn':''}"><label class="ck" style="border:0"><input type="checkbox" data-r="${i}" ${recDone.has(i)?"checked":""}><span><b>${r[0]}</b> — ${r[1]}</span></label><p style="margin:4px 0 4px 28px">${r[2]}</p><p class="sub" style="margin:0 0 0 28px"><i>Por qué:</i> ${r[3]}</p></div>`).join("");$("recprog").textContent=recDone.size+" de "+REC.length+" pasos entendidos"}
+$("recsteps").onchange=e=>{const i=+e.target.dataset.r;if(isNaN(i))return;e.target.checked?recDone.add(i):recDone.delete(i);store.set("recdone",[...recDone]);$("recprog").textContent=recDone.size+" de "+REC.length+" pasos entendidos"};
+recRender();
+
+const tipBox=document.createElement("div");tipBox.id="tipbox";tipBox.setAttribute("role","status");tipBox.style.cssText="position:fixed;z-index:60;max-width:280px;padding:8px 10px;border-radius:8px;background:#1b2540;border:1px solid #3a4666;color:#e6e9f5;font-size:12px;line-height:1.4;display:none";document.body.appendChild(tipBox);
+document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest(".tipi");if(!t){tipBox.style.display="none";return}e.stopPropagation();e.preventDefault();const th=t.closest("th"),r=t.getBoundingClientRect();tipBox.textContent=th.getAttribute("title")||"";tipBox.style.display="block";tipBox.style.top=(r.bottom+6)+"px";tipBox.style.left=Math.max(8,Math.min(r.left,innerWidth-292))+"px"},true);
+const PSV=store.get("ps",null);if(PSV&&[...$("ps").options].some(o=>o.value===String(PSV)))$("ps").value=String(PSV);else if(innerWidth<768)$("ps").value="10";
+$("ps").addEventListener("change",()=>store.set("ps",$("ps").value));
+document.addEventListener("keydown",e=>{if(e.ctrlKey||e.metaKey||e.altKey)return;const t=e.target,tag=t&&t.tagName;if(tag==="INPUT"||tag==="TEXTAREA"||tag==="SELECT"||(t&&t.isContentEditable))return;if(!$("q").offsetParent)return;if(e.key==="/"){e.preventDefault();$("q").focus()}else if(e.key==="ArrowRight"&&!$("pnext").disabled){$("pnext").click()}else if(e.key==="ArrowLeft"&&!$("pprev").disabled){$("pprev").click()}});
+/* ===== Menú Auditoría: comprobaciones en vivo + resultados del servidor ===== */
+const AUDH_K="aud_hist",SITE="https://ubertransfer.cl";
+let AUDR=null,AUDBUSY=false,AUDPG={},AUDLASTPG=0,AUDMSG="";
+const AUDI={ok:["check_circle","text-green-400"],fail:["error","text-red-300"],warn:["warning","text-amber-300"],na:["remove_circle_outline","text-outline"],wait:["schedule","text-outline"]};
+const AUDK={vivo:["EN VIVO","bg-green-500/10 text-green-300 border-green-500/30"],srv:["SERVIDOR","bg-cyan-500/10 text-cyan-300 border-cyan-500/30"],pend:["PENDIENTE","bg-surface-container-high text-outline border-outline-variant"]};
+function audRow(r){const i=AUDI[r.e]||AUDI.na,k=AUDK[r.k]||AUDK.pend;return '<div class="flex gap-3 py-2.5 border-b border-outline-variant/30"><span class="material-symbols-outlined '+i[1]+' shrink-0 mt-0.5" aria-hidden="true">'+i[0]+'</span><div class="min-w-0 flex-1"><div class="text-on-surface text-[14px] font-medium">'+esc(r.t)+' <span class="ml-1 px-1.5 py-0.5 rounded text-[9px] font-semibold border whitespace-nowrap '+k[1]+'">'+k[0]+'</span></div><div class="text-[12px] text-outline break-words">'+esc(r.ev)+(r.at?' · comprobado a las '+esc(r.at):'')+'</div></div></div>'}
+function audGroups(P){const g={};P.forEach(p=>p.issues.forEach(i=>{const k=i.replace(/\s*\(.*?\)/g,"").replace(/^\d+ /,"").trim();(g[k]=g[k]||{ej:i,p:[]}).p.push(p.url.replace(SITE,"")||"/")}));return Object.entries(g).sort((a,b)=>b[1].p.length-a[1].p.length)}
+function audHora(){return new Date().toLocaleTimeString("es-CL",{hour12:false})}
+async function audPage(url){const w=4000-(Date.now()-AUDLASTPG);if(w>0){AUDMSG="Espera "+Math.ceil(w/1000)+" s antes de medir otra página (así no cargamos el sitio del cliente).";audRender();return}AUDMSG="";AUDLASTPG=Date.now();const t0=performance.now();try{await fetch(url+(url.indexOf("?")<0?"?":"&")+"_="+Date.now(),{mode:"no-cors",cache:"no-store"});AUDPG[url]={ok:true,ms:Math.round(performance.now()-t0),at:audHora()}}catch(e){AUDPG[url]={ok:false,at:audHora()}}audRender()}
+async function audRun(withProbe){
+ if(AUDBUSY)return;AUDBUSY=true;AUDMSG="";audRender();
+ const R=[],add=(g,k,e,t,ev)=>R.push({g:g,k:k,e:e,t:t,ev:ev,at:k==="vivo"?audHora():""}),file=location.protocol==="file:";
+ const dur=(p,ms)=>Promise.race([p,new Promise((_,ko)=>setTimeout(()=>ko(new Error("sin respuesta en "+ms/1000+" s")),ms))]);
+ // --- acceso y seguridad del panel (en vivo) ---
+ if(file){add("acceso","vivo","na","Acceso y nube","copia local en claro: no aplica")}
+ else{
+  try{const ad=firebase.apps[0].options.authDomain;add("acceso","vivo",ad===location.host?"ok":"fail","El dominio del inicio de sesión es el mismo de la página (funciona en celular)","página: "+location.host+" · inicio de sesión: "+ad)}catch(e){add("acceso","vivo","fail","Dominio del inicio de sesión","no se pudo leer: "+e.message)}
+  try{const u=firebase.auth().currentUser;add("acceso","vivo",u&&u.email&&CLOUDU?"ok":"fail","Sesión activa con una cuenta autorizada",u&&u.email?u.email:"sin sesión")}catch(e){add("acceso","vivo","fail","Sesión activa","error: "+e.message)}
+  try{await dur(firebase.firestore().collection("panel").doc("_prueba_reglas").get({source:"server"}),8000);add("acceso","vivo","fail","Las reglas de Firestore bloquean lo no autorizado","se pudo leer un documento que debería estar bloqueado")}catch(e){add("acceso","vivo",e&&e.code==="permission-denied"?"ok":"warn","Las reglas de Firestore bloquean lo no autorizado",e&&e.code==="permission-denied"?"prueba negativa: la lectura de un documento no permitido fue rechazada (permission-denied)":"no concluyente: "+((e&&e.code)||(e&&e.message)))}
+  try{const sn=await dur(CLOUD_REF.get({source:"server"}),8000),d=sn.data()||{},a=JSON.stringify((d.sel||[]).slice().sort()),b=JSON.stringify([...sel].sort()),n1=(d.neg||"").replace(/\r/g,"").trim(),n2=$("neg").value.replace(/\r/g,"").trim();add("acceso","vivo",a===b&&n1===n2?"ok":"warn","Tus cambios están guardados en la nube",a===b&&n1===n2?"la nube y este navegador coinciden ("+sel.size+" frases marcadas, negativas iguales)":"la nube y este navegador difieren: espera un momento y vuelve a ejecutar; si persiste, pulsa «Salir» y entra de nuevo")}catch(e){add("acceso","vivo","fail","Tus cambios están guardados en la nube","no se pudo leer la nube: "+((e&&e.code)||(e&&e.message)))}
+  add("acceso","vivo",(window.__cspN||0)===0?"ok":"fail","Sin bloqueos de la política de seguridad (CSP)",(window.__cspN||0)+" violaciones desde que se abrió la página")
+ }
+ try{const sh=await sha(RAW),v=await dur(fetch("version.json?_="+Date.now(),{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error("HTTP "+r.status);return r.json()}),8000);add("datos","vivo",sh===META.dataSha&&(file||v.dataSha===META.dataSha)?"ok":"fail","Los datos descifrados son los del armado y la versión es la publicada","huella SHA-256 "+sh.slice(0,12)+"… "+(file?"(copia local)":"= version.json "+String(v.dataSha).slice(0,12)+"…"))}catch(e){add("datos","vivo","warn","Datos y versión publicada","no concluyente: "+e.message)}
+ try{verRender();const s=window.__vsum;add("datos","vivo",s.fail?"fail":"ok","Verificaciones de consistencia de los datos",s.ok+" de "+s.total+" correctas"+(s.na?" ("+s.na+" no medibles)":""))}catch(e){add("datos","vivo","warn","Verificaciones de consistencia","error: "+e.message)}
+ add("datos","vivo",(window.crypto&&crypto.subtle&&window.indexedDB&&window.localStorage)?"ok":"fail","El navegador tiene lo necesario (cifrado, almacenamiento)","crypto.subtle, indexedDB y localStorage disponibles: "+!!(window.crypto&&crypto.subtle&&window.indexedDB&&window.localStorage))
+ // --- sitio del cliente ---
+ const P=(META.audit&&META.audit.pages)||[];
+ if(AUD){const dias=(Date.now()-AUD.getTime())/86400000;add("sitio","srv",dias<=8?"ok":"warn","Auditoría técnica hecha por el servidor (GitHub)","generada "+fmtDT(AUD)+" ("+ago(AUD)+") · "+P.length+" páginas"+(dias<=8?"":" · tiene más de 8 días: conviene repetirla"))}
+ else add("sitio","pend","wait","Auditoría técnica hecha por el servidor","todavía no se ha ejecutado para este sitio")
+ if(HP)add("sitio","srv",HP.status>=200&&HP.status<400?"ok":"fail","La página de inicio respondió bien al servidor","HTTP "+HP.status+" · "+HP.seconds+" s · "+fmtDT(AUD))
+ if(!file){
+  if(withProbe){const w=cooldown();if(w){AUDMSG="La medición del sitio se repite cada 30 s: espera "+w+" s."}else{try{await probe()}catch(e){}}}
+  const p=AS.probe;
+  if(p&&!p.err){const s=[...p.ts].sort((a,b)=>a-b),med=s[Math.floor(s.length/2)];add("sitio","vivo","ok","El sitio responde ahora desde tu conexión",p.ts.length+" de 3 respuestas · mediana "+med+" ms (medido a las "+fmtDT(p.at)+")");if(HP&&HP.status>=200&&HP.status<400)add("sitio","vivo","ok","Confirmado por dos vías","el servidor vio HTTP "+HP.status+" y tu navegador recibe respuesta ahora")}
+  else if(p&&p.err)add("sitio","vivo","fail","El sitio responde ahora desde tu conexión",p.err)
+  else add("sitio","pend","wait","El sitio responde ahora desde tu conexión","pulsa «Ejecutar auditoría ahora» (hace 3 solicitudes, una vez cada 30 s)")
+ }
+ // --- pendiente ---
+ (window.__BIZ||[]).forEach(b=>add("pend","pend","wait",b,"falta un dato o una decisión externa"));
+ const vivo=R.filter(r=>r.k==="vivo");AUDR={R:R,at:new Date(),ok:vivo.filter(r=>r.e==="ok").length,fail:vivo.filter(r=>r.e==="fail").length,warn:vivo.filter(r=>r.e==="warn").length,total:vivo.length};
+ const H=store.get(AUDH_K,[]);H.unshift({at:AUDR.at.toISOString(),ok:AUDR.ok,fail:AUDR.fail,warn:AUDR.warn,total:AUDR.total});store.set(AUDH_K,H.slice(0,10));
+ AUDBUSY=false;audRender()}
+function audResumen(){if(!AUDR)return"";const L=["Auditoría en línea — "+fmtDT(AUDR.at),"Comprobaciones en vivo: "+AUDR.ok+" correctas, "+AUDR.warn+" con aviso, "+AUDR.fail+" con falla (de "+AUDR.total+")",""];AUDR.R.forEach(r=>L.push((r.e==="ok"?"[OK] ":r.e==="fail"?"[FALLA] ":r.e==="warn"?"[AVISO] ":"[--] ")+"("+(AUDK[r.k]||AUDK.pend)[0]+") "+r.t+": "+r.ev+(r.at?" · "+r.at:"")));return L.join("\n")}
+function audRender(){
+ const el=$("aud");if(!el)return;const R=AUDR?AUDR.R:[],P=(META.audit&&META.audit.pages)||[],host=SITE.replace("https://","");
+ const grp=(g,t,sub)=>{const rows=R.filter(r=>r.g===g);return '<div class="bg-surface-container-low border border-outline-variant/60 rounded-xl p-5 min-w-0"><h2 class="text-headline-sm font-headline-sm text-on-surface font-semibold">'+t+'</h2><p class="text-[12px] text-outline mb-2">'+sub+'</p>'+(rows.length?rows.map(audRow).join(""):'<div class="text-outline text-[13px] py-2">Aún no ejecutada.</div>')+'</div>'};
+ const sum=AUDR?'<span class="text-green-300 font-semibold">'+AUDR.ok+' correctas</span> · <span class="text-amber-300 font-semibold">'+AUDR.warn+' con aviso</span> · <span class="text-red-300 font-semibold">'+AUDR.fail+' con falla</span> <span class="text-outline">(de '+AUDR.total+' comprobaciones en vivo, a las '+AUDR.at.toLocaleTimeString("es-CL",{hour12:false})+')</span>':'<span class="text-outline">Todavía no se ejecuta.</span>';
+ let h='<div class="bg-surface-container-low border border-outline-variant/60 rounded-xl p-5 mb-4"><div class="flex flex-wrap items-center justify-between gap-3"><div><h2 class="text-headline-sm font-headline-sm text-on-surface font-semibold">Auditoría en línea</h2><p class="text-[12px] text-outline">Cada resultado dice <b>cómo se confirmó</b>: <span class="text-green-300">EN VIVO</span> = lo comprobó tu navegador ahora; <span class="text-cyan-300">SERVIDOR</span> = lo midió GitHub (con fecha); <b>PENDIENTE</b> = falta un dato externo. No se da por bueno nada que no esté comprobado.</p></div><div class="flex flex-wrap gap-2"><button id="audrun" type="button" class="flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-primary-container text-white text-label-md font-label-md font-semibold hover:bg-blue-600 transition-colors min-h-[44px]"'+(AUDBUSY?' disabled':'')+'><span class="material-symbols-outlined text-sm'+(AUDBUSY?' animate-spin':'')+'">fact_check</span><span>'+(AUDBUSY?"Comprobando…":"Ejecutar auditoría ahora")+'</span></button><button id="audcopy" type="button" class="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-surface-container border border-outline-variant text-on-surface text-label-md font-label-md hover:bg-surface-container-high transition-colors min-h-[44px]"><span class="material-symbols-outlined text-sm">content_copy</span><span id="audcopyt">Copiar informe</span></button></div></div><div class="mt-3 text-[13px]" role="status">'+sum+'</div>'+(AUDMSG?'<div class="mt-2 text-[12px] text-amber-300" role="alert">'+esc(AUDMSG)+'</div>':'')+'</div>';
+ h+='<div class="grid grid-cols-1 xl:grid-cols-2 gap-4 items-start"><div class="space-y-4 min-w-0">'+grp("acceso","Acceso y seguridad del panel","Se comprueba ahora mismo desde este navegador.")+grp("datos","Datos del panel","Integridad, versión publicada y consistencia.")+'</div><div class="space-y-4 min-w-0">'+grp("sitio","Sitio del cliente ("+host+")","Medición en vivo + auditoría técnica del servidor.")+grp("pend","Pendiente: necesita datos o decisiones de Rafael / del dueño","Nada de esto lo puede confirmar el panel todavía.")+'</div></div>';
+ // paginas y hallazgos
+ if(P.length){const G=audGroups(P);h+='<div class="bg-surface-container-low border border-outline-variant/60 rounded-xl p-5 mt-4 min-w-0"><h2 class="text-headline-sm font-headline-sm text-on-surface font-semibold">Páginas auditadas ('+P.length+') y hallazgos</h2><p class="text-[12px] text-outline mb-2">HTTP y tiempo: medidos por el servidor el '+(AUD?fmtDT(AUD):"?")+'. «Medir» repite <b>una</b> solicitud desde tu navegador para confirmarlo en vivo (máx. una cada 4 s).</p>'+(G.length?'<ul class="list-disc pl-5 text-[13px] text-on-surface-variant space-y-1 mb-3">'+G.slice(0,12).map(([k,v])=>'<li><b>'+esc(k)+'</b>: '+v.p.length+' de '+P.length+' páginas <span class="text-outline">(p. ej. '+esc(v.ej)+'; '+esc(v.p.slice(0,3).join(", "))+(v.p.length>3?" …":"")+')</span></li>').join("")+'</ul>':'<div class="text-[13px] text-green-300 mb-3">Sin hallazgos en las páginas revisadas.</div>')+'<div class="divide-y divide-outline-variant/30">'+P.map(p=>{const pg=AUDPG[p.url],path=p.url.replace(SITE,"")||"/";return '<div class="flex flex-wrap items-center gap-x-3 gap-y-1 py-2 text-[12px]"><span class="font-numeric-table text-on-surface break-all min-w-0 flex-1">'+esc(path)+'</span><span class="text-outline whitespace-nowrap">servidor: HTTP '+p.status+' · '+p.seconds+' s'+(p.issues.length?' · '+p.issues.length+' avisos':'')+'</span><span class="whitespace-nowrap '+(pg?(pg.ok?"text-green-300":"text-red-300"):"text-outline")+'">'+(pg?(pg.ok?'en vivo: respondió en '+pg.ms+' ms ('+pg.at+')':'en vivo: sin respuesta ('+pg.at+')'):'en vivo: sin medir')+'</span><button type="button" data-ap="'+esc(p.url)+'" class="px-2.5 py-1 rounded-lg bg-surface-container border border-outline-variant text-on-surface hover:bg-surface-container-high min-h-[32px]">Medir</button></div>'}).join("")+'</div></div>'}
+ // historial
+ const H=store.get(AUDH_K,[]);if(H.length)h+='<div class="bg-surface-container-low border border-outline-variant/60 rounded-xl p-5 mt-4"><h2 class="text-headline-sm font-headline-sm text-on-surface font-semibold mb-2">Últimas ejecuciones</h2>'+H.slice(0,6).map(x=>'<div class="flex justify-between gap-3 py-1.5 text-[13px] border-b border-outline-variant/20"><span class="font-numeric-table">'+esc(fmtDT(new Date(x.at)))+'</span><span class="'+(x.fail?"text-red-300":x.warn?"text-amber-300":"text-green-300")+'">'+x.ok+' correctas · '+x.warn+' avisos · '+x.fail+' fallas</span></div>').join("")+'<p class="text-[11px] text-outline mt-2">Se guarda solo en este navegador.</p></div>';
+ el.innerHTML=h}
+function audOpen(){if(!AUDR&&!AUDBUSY)audRun(false);else audRender()}
+$("aud").onclick=e=>{const a=e.target.closest("[data-ap]");if(a){audPage(a.dataset.ap);return}if(e.target.closest("#audrun")){audRun(true);return}if(e.target.closest("#audcopy")){const t=audResumen()||"Todavía no se ejecuta la auditoría.";navigator.clipboard.writeText(t).then(()=>{$("audcopyt").textContent="Copiado";setTimeout(()=>{const x=$("audcopyt");if(x)x.textContent="Copiar informe"},1500)},()=>{$("audcopyt").textContent="Selecciona y copia a mano"})}};
+render();show(SEC.some(s=>s[0]===store.get("tab","guia"))?store.get("tab","guia"):"guia");
+
+/* ===== Acceso privado y nube (Firebase Auth con Google + Firestore) ===== */
+const GB=id=>document.getElementById(id);
+window.__cspN=0;document.addEventListener("securitypolicyviolation",()=>{window.__cspN++});
+var CLOUDU=null,CLOUDAPPLY=false,CLOUDT=null,CLOUDMSG=null;
+function cloudTouch(k){if(!CLOUDU||CLOUDAPPLY)return;if(k!=="neg"&&k!=="custom"&&k!=="sel"&&k!==LK)return;clearTimeout(CLOUDT);CLOUDT=setTimeout(cloudPush,1200)}
+function gateShow(msg,btn,btnText){GB("gate").style.display="flex";GB("gatemsg").textContent=msg;GB("gatebtn").style.display=btn?"inline-block":"none";if(btnText)GB("gatebtn").textContent=btnText}
+function cloudStatus(t,err){const e=GB("cloudst");e.textContent=t;e.classList.remove("hidden");e.style.color=err?"#fca5a5":""}
+function loadScript(src){return new Promise((ok,ko)=>{const x=document.createElement("script");x.src=src;x.onload=ok;x.onerror=()=>ko(new Error("no cargó "+src));document.head.appendChild(x)})}
+function cloudApply(d){CLOUDAPPLY=true;try{
+ if(typeof d.neg==="string"){const nv=d.neg.replace(/\r/g,"").trim()===NEG_OLD?NEG_NEW:d.neg;store.set("neg",nv);GB("neg").value=nv}
+ if(Array.isArray(d.custom)){custom.forEach(k=>{const i=DATA.findIndex(x=>x.custom&&x.k===k);if(i>-1)DATA.splice(i,1)});custom=d.custom.slice();store.set("custom",custom);custom.forEach(k=>{if(!DATA.some(x=>x.k===k))DATA.push({k:k,v:0,c:"",lo:0,hi:0,yoy:"",custom:1,g:grp(k),t:RC.test(k)?"comp":OUT.test(k)?"fuera":"ok"})})}
+ if(Array.isArray(d.sel)){sel.clear();d.sel.forEach(k=>sel.add(k));store.set("sel",[...sel])}
+ if(Array.isArray(d.hist)){HIST=d.hist.slice(0,10);store.set(LK,HIST)}
+ }finally{CLOUDAPPLY=false}
+ render();histRender();updK()}
+async function cloudPush(){if(!CLOUDU||!CLOUD_REF)return;try{
+ const d=JSON.parse(JSON.stringify({neg:GB("neg").value,custom:custom,sel:[...sel],hist:HIST,by:CLOUDU.email}));d.updatedAt=firebase.firestore.FieldValue.serverTimestamp();
+ await CLOUD_REF.set(d);cloudStatus("☁ guardado "+new Date().toLocaleTimeString("es-CL",{hour:"2-digit",minute:"2-digit"}))}catch(e){cloudStatus("☁ sin guardar: "+(e.code||e.message),true)}}
+var CLOUD_REF=null,MARCAS_T=null;
+async function cloudMarcas(db){const r=db.collection("panel").doc("marcas"),sn=await r.get();if(sn.exists&&sn.data().map&&typeof sn.data().map==="object"){MARCAS=sn.data().map;try{localStorage.setItem("marcas_compartido",JSON.stringify(MARCAS))}catch(e){}render()}else if(Object.keys(MARCAS).length){await cloudMarcasPush()}}
+async function cloudMarcasPush(){if(!CLOUDU)return;try{await firebase.firestore().collection("panel").doc("marcas").set({map:JSON.parse(JSON.stringify(MARCAS)),by:CLOUDU.email,updatedAt:firebase.firestore.FieldValue.serverTimestamp()});cloudStatus("☁ marcas guardadas")}catch(e){cloudStatus("☁ marcas sin guardar: "+(e.code||e.message),true)}}
+function cloudMarcasSave(){if(!CLOUDU)return;clearTimeout(MARCAS_T);MARCAS_T=setTimeout(cloudMarcasPush,900)}
+async function cloudUser(u){
+ if(!u){if(window.__APPBOOT){location.reload();return}CLOUDU=null;CLOUD_REF=null;GB("who").classList.add("hidden");GB("cloudst").classList.add("hidden");GB("logout").classList.add("hidden");gateShow(CLOUDMSG||"Inicia sesión con tu cuenta de Google autorizada.",true,"Iniciar sesión con Google");CLOUDMSG=null;return}
+ gateShow("Comprobando acceso…",false);
+ try{
+  const db=firebase.firestore();await cloudBoot(db);const ref=db.collection("panel").doc("estado");const snap=await ref.get();
+  CLOUD_REF=ref;CLOUDU=u;
+  if(snap.exists)cloudApply(snap.data());else await cloudPush();
+  await cloudMarcas(db);
+  GB("who").textContent=u.email;GB("who").title="Sesión iniciada como "+u.email;GB("who").classList.remove("hidden");GB("logout").classList.remove("hidden");
+  if(snap.exists)cloudStatus("☁ sincronizado");
+  GB("gate").style.display="none"
+ }catch(e){
+  CLOUDU=null;CLOUD_REF=null;
+  if(e.code==="permission-denied"){CLOUDMSG="La cuenta "+u.email+" no tiene acceso a este panel. Usa otra cuenta.";firebase.auth().signOut()}
+  else gateShow("No se pudo abrir el panel ("+(e.code||e.message)+"). Reintenta.",true,"Reintentar")}}
+/*BOOT*/async function cloudBoot(db){}/*ENDBOOT*/
+function authFail(e){if(e&&(e.code==="auth/popup-closed-by-user"||e.code==="auth/cancelled-popup-request"))return;const m=String((e&&e.message)||"").replace(/\s+/g," ").replace(/^Firebase: /,"").slice(0,140);gateShow("No se pudo iniciar sesión ("+((e&&e.code)||"error")+")"+(m?": "+m:"")+".",true,"Reintentar")}
+async function cloudInit(){
+ if(location.protocol==="file:"){GB("gate").remove();return}
+ if(location.hostname==="ubertransfer-ops.web.app"){location.replace("https://ubertransfer-ops.firebaseapp.com"+location.pathname+location.search+location.hash);return}
+ try{
+  const B="/__/firebase/12.4.0/";
+  await loadScript(B+"firebase-app-compat.js");await loadScript(B+"firebase-auth-compat.js");await loadScript(B+"firebase-firestore-compat.js");
+  const cfg=await fetch("/__/firebase/init.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error("init.json HTTP "+r.status);return r.json()});
+  firebase.initializeApp(cfg);firebase.auth().getRedirectResult().catch(authFail);
+  GB("gatebtn").onclick=()=>{const p=new firebase.auth.GoogleAuthProvider();p.setCustomParameters({prompt:"select_account"});const mob=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);gateShow("Abriendo Google…",false);if(mob){firebase.auth().signInWithRedirect(p).catch(authFail)}else{firebase.auth().signInWithPopup(p).catch(e=>{if(e&&e.code==="auth/popup-blocked"){firebase.auth().signInWithRedirect(p).catch(authFail)}else authFail(e)})}};
+  GB("logout").onclick=()=>firebase.auth().signOut();
+  firebase.auth().onAuthStateChanged(cloudUser)
+ }catch(e){gateShow("No se pudo cargar el inicio de sesión ("+e.message+"). Recarga la página.",true,"Recargar");GB("gatebtn").onclick=()=>location.reload()}}
+cloudInit();
+</script>
+</body></html>

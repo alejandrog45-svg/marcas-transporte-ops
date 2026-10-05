@@ -1,0 +1,273 @@
+{
+ "site": "https://aereostar.cl",
+ "pages": [
+  {
+   "url": "https://aereostar.cl/",
+   "status": 200,
+   "seconds": 0.3,
+   "issues": [
+    "title largo (105 car.)",
+    "falta meta description",
+    "H1 = 0 (debe ser 1)"
+   ],
+   "info": {
+    "title": "Aereostar - Calidad en Movimiento - Aereostar Servicio de Transporte de Pasajeros - Calidad en Movimiento",
+    "meta_description": null,
+    "h1_count": 0,
+    "canonical": "https://aereostar.cl/",
+    "hreflang": [],
+    "images": 14,
+    "images_no_alt": 0,
+    "images_lazy": 6,
+    "jsonld_blocks": 1,
+    "jsonld_invalid": 0,
+    "html_bytes": 106603
+   }
+  },
+  {
+   "url": "https://aereostar.cl/portfolio/",
+   "status": 200,
+   "seconds": 0.82,
+   "issues": [
+    "title largo (89 car.)",
+    "falta meta description",
+    "H1 = 2 (debe ser 1)"
+   ],
+   "info": {
+    "title": "Portfolio archivo - Aereostar Servicio de Transporte de Pasajeros - Calidad en Movimiento",
+    "meta_description": null,
+    "h1_count": 2,
+    "canonical": "https://aereostar.cl/portfolio/",
+    "hreflang": [],
+    "images": 4,
+    "images_no_alt": 0,
+    "images_lazy": 0,
+    "jsonld_blocks": 1,
+    "jsonld_invalid": 0,
+    "html_bytes": 56295
+   }
+  },
+  {
+   "url": "https://aereostar.cl/compare/",
+   "status": 200,
+   "seconds": 0.76,
+   "issues": [
+    "title largo (79 car.)",
+    "falta meta description"
+   ],
+   "info": {
+    "title": "Compare - Aereostar Servicio de Transporte de Pasajeros - Calidad en Movimiento",
+    "meta_description": null,
+    "h1_count": 1,
+    "canonical": "https://aereostar.cl/compare/",
+    "hreflang": [],
+    "images": 4,
+    "images_no_alt": 0,
+    "images_lazy": 0,
+    "jsonld_blocks": 1,
+    "jsonld_invalid": 0,
+    "html_bytes": 55841
+   }
+  },
+  {
+   "url": "https://aereostar.cl/trabaja-con-nosotros/",
+   "status": 200,
+   "seconds": 0.77,
+   "issues": [
+    "title largo (92 car.)",
+    "falta meta description"
+   ],
+   "info": {
+    "title": "Trabaja con Nosotros - Aereostar Servicio de Transporte de Pasajeros - Calidad en Movimiento",
+    "meta_description": null,
+    "h1_count": 1,
+    "canonical": "https://aereostar.cl/trabaja-con-nosotros/",
+    "hreflang": [],
+    "images": 8,
+    "images_no_alt": 0,
+    "images_lazy": 1,
+    "jsonld_blocks": 1,
+    "jsonld_invalid": 0,
+    "html_bytes": 84785
+   }
+  },
+  {
+   "url": "https://aereostar.cl/nuestra-flota/",
+   "status": 200,
+   "seconds": 0.78,
+   "issues": [
+    "title largo (85 car.)",
+    "falta meta description"
+   ],
+   "info": {
+    "title": "Nuestra Flota - Aereostar Servicio de Transporte de Pasajeros - Calidad en Movimiento",
+    "meta_description": null,
+    "h1_count": 1,
+    "canonical": "https://aereostar.cl/nuestra-flota/",
+    "hreflang": [],
+    "images": 14,
+    "images_no_alt": 0,
+    "images_lazy": 6,
+    "jsonld_blocks": 1,
+    "jsonld_invalid": 0,
+    "html_bytes": 87696
+   }
+  },
+  {
+   "url": "https://aereostar.cl/reservar/",
+   "status": 200,
+   "seconds": 0.71,
+   "issues": [
+    "title largo (80 car.)",
+    "falta meta description"
+   ],
+   "info": {
+    "title": "RESERVAR - Aereostar Servicio de Transporte de Pasajeros - Calidad en Movimiento",
+    "meta_description": null,
+    "h1_count": 1,
+    "canonical": "https://aereostar.cl/reservar/",
+    "hreflang": [],
+    "images": 8,
+    "images_no_alt": 0,
+    "images_lazy": 1,
+    "jsonld_blocks": 1,
+    "jsonld_invalid": 0,
+    "html_bytes": 107035
+   }
+  },
+  {
+   "url": "https://aereostar.cl/nosotros/",
+   "status": 200,
+   "seconds": 0.61,
+   "issues": [
+    "title largo (80 car.)",
+    "falta meta description"
+   ],
+   "info": {
+    "title": "Nosotros - Aereostar Servicio de Transporte de Pasajeros - Calidad en Movimiento",
+    "meta_description": null,
+    "h1_count": 1,
+    "canonical": "https://aereostar.cl/nosotros/",
+    "hreflang": [],
+    "images": 10,
+    "images_no_alt": 0,
+    "images_lazy": 3,
+    "jsonld_blocks": 1,
+    "jsonld_invalid": 0,
+    "html_bytes": 76447
+   }
+  },
+  {
+   "url": "https://aereostar.cl/servicios/",
+   "status": 200,
+   "seconds": 0.82,
+   "issues": [
+    "title largo (81 car.)",
+    "falta meta description"
+   ],
+   "info": {
+    "title": "Servicios - Aereostar Servicio de Transporte de Pasajeros - Calidad en Movimiento",
+    "meta_description": null,
+    "h1_count": 1,
+    "canonical": "https://aereostar.cl/servicios/",
+    "hreflang": [],
+    "images": 13,
+    "images_no_alt": 0,
+    "images_lazy": 6,
+    "jsonld_blocks": 1,
+    "jsonld_invalid": 0,
+    "html_bytes": 82899
+   }
+  },
+  {
+   "url": "https://aereostar.cl/tarifas/",
+   "status": 200,
+   "seconds": 0.62,
+   "issues": [
+    "title largo (87 car.)",
+    "falta meta description"
+   ],
+   "info": {
+    "title": "Tarifas_cerrado - Aereostar Servicio de Transporte de Pasajeros - Calidad en Movimiento",
+    "meta_description": null,
+    "h1_count": 1,
+    "canonical": "https://aereostar.cl/tarifas/",
+    "hreflang": [],
+    "images": 10,
+    "images_no_alt": 0,
+    "images_lazy": 3,
+    "jsonld_blocks": 1,
+    "jsonld_invalid": 0,
+    "html_bytes": 75128
+   }
+  },
+  {
+   "url": "https://aereostar.cl/contacto/",
+   "status": 200,
+   "seconds": 0.62,
+   "issues": [
+    "title largo (80 car.)",
+    "falta meta description"
+   ],
+   "info": {
+    "title": "Contacto - Aereostar Servicio de Transporte de Pasajeros - Calidad en Movimiento",
+    "meta_description": null,
+    "h1_count": 1,
+    "canonical": "https://aereostar.cl/contacto/",
+    "hreflang": [],
+    "images": 13,
+    "images_no_alt": 0,
+    "images_lazy": 6,
+    "jsonld_blocks": 1,
+    "jsonld_invalid": 0,
+    "html_bytes": 85874
+   }
+  },
+  {
+   "url": "https://aereostar.cl/woodmart_slider/layout-parallax-slider/",
+   "status": 200,
+   "seconds": 0.61,
+   "issues": [
+    "title largo (103 car.)",
+    "falta meta description"
+   ],
+   "info": {
+    "title": "Layout parallax slider archivos - Aereostar Servicio de Transporte de Pasajeros - Calidad en Movimiento",
+    "meta_description": null,
+    "h1_count": 1,
+    "canonical": "https://aereostar.cl/woodmart_slider/layout-parallax-slider/",
+    "hreflang": [],
+    "images": 4,
+    "images_no_alt": 0,
+    "images_lazy": 0,
+    "jsonld_blocks": 1,
+    "jsonld_invalid": 0,
+    "html_bytes": 61616
+   }
+  }
+ ],
+ "generated": "2026-09-30T19:51:23Z",
+ "discovery": {
+  "robots": 200,
+  "sitemaps": [
+   {
+    "url": "https://aereostar.cl/sitemap_index.xml",
+    "status": 200,
+    "urls": 0,
+    "children": 2
+   },
+   {
+    "url": "https://aereostar.cl/page-sitemap.xml",
+    "status": 200,
+    "urls": 10,
+    "children": 0
+   },
+   {
+    "url": "https://aereostar.cl/woodmart_slider-sitemap.xml",
+    "status": 200,
+    "urls": 1,
+    "children": 0
+   }
+  ]
+ }
+}

@@ -1,0 +1,678 @@
+{
+ "generado_utc": "2026-09-30T04:17:55Z",
+ "sitio": "https://ubertransfer.cl",
+ "paginas": [
+  {
+   "path": "/",
+   "status": 200,
+   "segundos": 6.07,
+   "bytes_html": 266627,
+   "cabeceras": {
+    "Server": "Apache",
+    "X-Powered-By": "PHP/8.3.23",
+    "Vary": "User-Agent"
+   },
+   "lang": "es",
+   "title": "Traslados desde/hacia el Aeropuerto de Santiago | UberTransfer",
+   "title_len": 62,
+   "meta_description": "Con UberTransfer, obtén traslados confiables desde/hacia el Aeropuerto de Santiago. Servicio oficial y seguro. Reserva ahora tu traslado con tarifas fijas.",
+   "meta_description_len": 155,
+   "robots_meta": "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "viewport": "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0",
+   "canonical": [
+    "https://ubertransfer.cl/"
+   ],
+   "hreflang": [],
+   "og": [
+    "og:description",
+    "og:image",
+    "og:image:alt",
+    "og:image:height",
+    "og:image:secure_url",
+    "og:image:type",
+    "og:image:width",
+    "og:locale",
+    "og:site_name",
+    "og:title",
+    "og:type",
+    "og:updated_time",
+    "og:url"
+   ],
+   "twitter": [
+    "twitter:card",
+    "twitter:data1",
+    "twitter:data2",
+    "twitter:description",
+    "twitter:image",
+    "twitter:label1",
+    "twitter:label2",
+    "twitter:title"
+   ],
+   "h1": [
+    "Traslados Premium: Servicios de Transfer Aeropuerto Santiago"
+   ],
+   "h2": [
+    "Nuestros servicios de transfer en Santiago y para regiones de Chile.",
+    "Servicio Transporte de Aeropuerto",
+    "Servicios Turismo",
+    "Servicios Corporativos",
+    "Servicios Compartidos",
+    "Sobre UberTransfer",
+    "Estamos comprometidos con la excelencia en el transporte",
+    "Explora Nuestros Destinos Favoritos",
+    "Instagram",
+    "Tarifas por Horario",
+    "Testimonios de Nuestros Clientes Satisfechos",
+    "¡Estamos listos para atender su llamada las 24 horas, los 7 días!",
+    "Uber Transfer"
+   ],
+   "h3_cantidad": 5,
+   "encabezados_repetidos": [],
+   "imagenes": {
+    "total": 39,
+    "formatos": {
+     "png": 30,
+     "jpg": 3,
+     "webp": 2,
+     "jpeg": 3,
+     "com/tr": 1
+    },
+    "con_lazy": 0,
+    "sin_alt": 23,
+    "sin_width_height": 16,
+    "con_srcset": 0
+   },
+   "scripts": {
+    "total": 0,
+    "hosts_externos": {},
+    "gtm": [
+     "GTM-WLPJJD4J"
+    ],
+    "ga4": [
+     "G-26K0MDTFY1"
+    ],
+    "gtag_directo": true,
+    "gtm_directo": true
+   },
+   "plugins_en_html": [
+    "instagram-feed",
+    "litespeed-cache",
+    "mystickyelements",
+    "wp-whatsapp"
+   ],
+   "jsonld": {
+    "bloques": 1,
+    "tipos": [
+     "Article",
+     "ImageObject",
+     "Person",
+     "SearchAction",
+     "TravelAgency,Organization",
+     "WebPage",
+     "WebSite"
+    ],
+    "telefono": [],
+    "horario": [
+     [
+      "openingHours",
+      "[\"Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday 09:00-17:00\"]"
+     ]
+    ],
+    "tiene_areaServed": false,
+    "tiene_sameAs": false,
+    "tiene_address": false
+   },
+   "enlaces": {
+    "tel": [
+     "tel:+56949969267"
+    ],
+    "whatsapp": [
+     "https://wa.me/56949969267?text=Hola%2C%20desde%20UBERTRANSFER%20necesito%20una%20cotizaci%C3%B3n%20para%20un%2",
+     "https://wa.me/56949969267?text=Hola,%20vi%20la%20oferta%20en%20la%20web%20y%20quiero%20agendar%20un%20viaje%20",
+     "https://wa.me/56949969267?text=¡Hola!%20Me%20gustaría%20recibir%20una%20cotización%20para%20un%20servicio%20de"
+    ],
+    "mailto": [
+     "mailto:cotizaciones@ubertransfer.cl",
+     "mailto:gerencia@ubertransfer.cl"
+    ],
+    "tarifas": [
+     "/#tarifas"
+    ]
+   },
+   "formularios": 0,
+   "iframes": 1,
+   "texto": {
+    "precios_visibles": [
+     "Cotizar Aquí Agenda tu ida y retorno y obtén $5.000 de descuento ¡Quiero mi descuento! Nuestros "
+    ],
+    "horario": [
+     "mpos. Además, proporcionamos flexibilidad de horarios para adaptarnos a los itinerarios de los gr",
+     "es sin preocupaciones y en tiempos precisos. Horarios ajustados a la ruta de recogida y tarifas b",
+     "uridad! 🚗💨 R Seguir en Instagram Tarifas por Horario HORARIO ALTA 07:30am &#8211; 06:00pm HORARIO",
+     "🚗💨 R Seguir en Instagram Tarifas por Horario HORARIO ALTA 07:30am &#8211; 06:00pm HORARIO BAJA 07",
+     "Horario HORARIO ALTA 07:30am &#8211; 06:00pm HORARIO BAJA 07:30pm &#8211; 06:00am Tarifas transpa",
+     " ¡Estamos listos para atender su llamada las 24 horas, los 7 días! Con UberTransfer, viajar al aer"
+    ],
+    "marca_partida": [
+     "odos los servicios Sobre Uber Tran sfer Estamos comprometidos con la "
+    ],
+    "qr": [
+     "ronteras Protegidas Escanear o hacer clic en QR para Pagar Rápido . Copyright &copy; 2026 · "
+    ],
+    "ejecutiva": [
+     "adigital.cl · Todos los derechos reservados. Ejecutiva de ventas 1 En línea Ejecutiva de ventas 2 E",
+     "s reservados. Ejecutiva de ventas 1 En línea Ejecutiva de ventas 2 En línea "
+    ],
+    "flota": [
+     " pasajeros. Descubre Quiénes Somos Carnival Sorento Rio Mercedes Benz Explora ",
+     "s. Descubre Quiénes Somos Carnival Sorento Rio Mercedes Benz Explora Nuestros",
+     "Quiénes Somos Carnival Sorento Rio Mercedes Benz Explora Nuestros Destinos Fav"
+    ],
+    "pet": [],
+    "descuento": [
+     "uí Agenda tu ida y retorno y obtén $5.000 de descuento ¡Quiero mi descuento! Nuestros servicios de ",
+     "torno y obtén $5.000 de descuento ¡Quiero mi descuento! Nuestros servicios de transfer en Santiago "
+    ],
+    "cotizaciones_correo": [
+     "ora Uber Transfer Información cotizaciones@ubertransfer.cl gerencia@ubert"
+    ],
+    "instagram": [
+     "Metropolitana Cotiza Tu Viaje Instagram ubertransfer.cl Traslados Pre",
+     "erva ahora. ✈️ Publicación de Instagram 18062395951672108 ¡Comienza y"
+    ],
+    "pago": [
+     "hile. Servicio Transporte de Aeropuerto Transferencias desde y hacia el Aeropuerto de Santiag",
+     "egidas Escanear o hacer clic en QR para Pagar Rápido . Copyright &copy; 2026 · Diseña"
+    ]
+   }
+  },
+  {
+   "path": "/nosotros-transfer-aeropuerto-santiago/",
+   "status": 200,
+   "segundos": 2.9,
+   "bytes_html": 139642,
+   "cabeceras": {
+    "Server": "Apache",
+    "X-Powered-By": "PHP/8.3.23",
+    "Vary": "User-Agent"
+   },
+   "lang": "es",
+   "title": "Conoce a UberTransfer: Tu Socio Confiable en Traslados desde/hacia el Aeropuerto de Santiago",
+   "title_len": 92,
+   "meta_description": "Descubre quiénes somos en UberTransfer. Nos enorgullece ofrecer traslados seguros y cómodos desde/hacia el Aeropuerto de Santiago. Conoce nuestro compromiso y experiencia hoy.",
+   "meta_description_len": 175,
+   "robots_meta": "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "viewport": "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0",
+   "canonical": [
+    "https://ubertransfer.cl/nosotros-transfer-aeropuerto-santiago/"
+   ],
+   "hreflang": [],
+   "og": [
+    "og:description",
+    "og:image",
+    "og:image:alt",
+    "og:image:height",
+    "og:image:secure_url",
+    "og:image:type",
+    "og:image:width",
+    "og:locale",
+    "og:site_name",
+    "og:title",
+    "og:type",
+    "og:updated_time",
+    "og:url"
+   ],
+   "twitter": [
+    "twitter:card",
+    "twitter:data1",
+    "twitter:description",
+    "twitter:image",
+    "twitter:label1",
+    "twitter:title"
+   ],
+   "h1": [
+    "Sobre Nosotros"
+   ],
+   "h2": [
+    "Nuestro Compromiso: Experiencia, Puntualidad y Confianza",
+    "Nuestra misión",
+    "¡Estamos listos para atender su llamada las 24 horas, los 7 días!",
+    "Uber Transfer"
+   ],
+   "h3_cantidad": 0,
+   "encabezados_repetidos": [],
+   "imagenes": {
+    "total": 13,
+    "formatos": {
+     "png": 7,
+     "jpeg": 3,
+     "jpg": 1,
+     "webp": 1,
+     "com/tr": 1
+    },
+    "con_lazy": 0,
+    "sin_alt": 13,
+    "sin_width_height": 0,
+    "con_srcset": 1
+   },
+   "scripts": {
+    "total": 0,
+    "hosts_externos": {},
+    "gtm": [
+     "GTM-WLPJJD4J"
+    ],
+    "ga4": [
+     "G-26K0MDTFY1"
+    ],
+    "gtag_directo": true,
+    "gtm_directo": true
+   },
+   "plugins_en_html": [
+    "litespeed-cache",
+    "mystickyelements",
+    "wp-whatsapp"
+   ],
+   "jsonld": {
+    "bloques": 1,
+    "tipos": [
+     "Article",
+     "BreadcrumbList",
+     "ImageObject",
+     "ListItem",
+     "Person",
+     "TravelAgency,Organization",
+     "WebPage",
+     "WebSite"
+    ],
+    "telefono": [],
+    "horario": [
+     [
+      "openingHours",
+      "[\"Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday 09:00-17:00\"]"
+     ]
+    ],
+    "tiene_areaServed": false,
+    "tiene_sameAs": true,
+    "tiene_address": false
+   },
+   "enlaces": {
+    "tel": [
+     "tel:+56949969267"
+    ],
+    "whatsapp": [
+     "https://wa.me/56949969267?text=Hola%2C%20desde%20UBERTRANSFER%20necesito%20una%20cotizaci%C3%B3n%20para%20un%2",
+     "https://wa.me/56949969267?text=Hola,%20vi%20la%20oferta%20en%20la%20web%20y%20quiero%20agendar%20un%20viaje%20"
+    ],
+    "mailto": [
+     "mailto:cotizaciones@ubertransfer.cl",
+     "mailto:gerencia@ubertransfer.cl"
+    ],
+    "tarifas": [
+     "/#tarifas"
+    ]
+   },
+   "formularios": 0,
+   "iframes": 1,
+   "texto": {
+    "precios_visibles": [
+     "ámanos Ahora Agenda tu ida y retorno y obtén $5.000 de descuento ¡Quiero mi descuento! Uber Tran"
+    ],
+    "horario": [
+     " ¡Estamos listos para atender su llamada las 24 horas, los 7 días! Con UberTransfer, viajar al aer"
+    ],
+    "marca_partida": [],
+    "qr": [
+     "ronteras Protegidas Escanear o hacer clic en QR para Pagar Rápido . Copyright &copy; 2026 · "
+    ],
+    "ejecutiva": [
+     "adigital.cl · Todos los derechos reservados. Ejecutiva de ventas 1 En línea Ejecutiva de ventas 2 E",
+     "s reservados. Ejecutiva de ventas 1 En línea Ejecutiva de ventas 2 En línea "
+    ],
+    "flota": [],
+    "pet": [],
+    "descuento": [
+     "ra Agenda tu ida y retorno y obtén $5.000 de descuento ¡Quiero mi descuento! Uber Transfer Informac",
+     "torno y obtén $5.000 de descuento ¡Quiero mi descuento! Uber Transfer Información cotizaciones@uber"
+    ],
+    "cotizaciones_correo": [
+     "to! Uber Transfer Información cotizaciones@ubertransfer.cl gerencia@ubert"
+    ],
+    "instagram": [],
+    "pago": [
+     "sa dedicada a proporcionar servicios de transferencia de primera calidad en Santiago y sus al",
+     "egidas Escanear o hacer clic en QR para Pagar Rápido . Copyright &copy; 2026 · Diseña"
+    ]
+   }
+  },
+  {
+   "path": "/servicio-transfer-aeropuerto-santiago/",
+   "status": 200,
+   "segundos": 3.79,
+   "bytes_html": 164794,
+   "cabeceras": {
+    "Server": "Apache",
+    "X-Powered-By": "PHP/8.3.23",
+    "Vary": "User-Agent"
+   },
+   "lang": "es",
+   "title": "Servicios de Traslado desde/hacia el Aeropuerto de Santiago | UberTransfer",
+   "title_len": 74,
+   "meta_description": "Descubre los servicios de traslado de UberTransfer desde/hacia el Aeropuerto de Santiago. Ofrecemos traslados seguros, cómodos y confiables para satisfacer tus necesidades de viaje.",
+   "meta_description_len": 181,
+   "robots_meta": "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "viewport": "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0",
+   "canonical": [
+    "https://ubertransfer.cl/servicio-transfer-aeropuerto-santiago/"
+   ],
+   "hreflang": [],
+   "og": [
+    "og:description",
+    "og:image",
+    "og:image:alt",
+    "og:image:height",
+    "og:image:secure_url",
+    "og:image:type",
+    "og:image:width",
+    "og:locale",
+    "og:site_name",
+    "og:title",
+    "og:type",
+    "og:updated_time",
+    "og:url"
+   ],
+   "twitter": [
+    "twitter:card",
+    "twitter:data1",
+    "twitter:description",
+    "twitter:image",
+    "twitter:label1",
+    "twitter:title"
+   ],
+   "h1": [
+    "Servicios de UberTransfer"
+   ],
+   "h2": [
+    "Inteligente para tu Trayecto. Inteligente para tu Bolsillo",
+    "Nuestros servicios de transferencia en Santiago y en todo Chile",
+    "Servicio Transporte de Aeropuerto",
+    "Servicios Turismo",
+    "Servicios Corporativos",
+    "Servicios Compartidos",
+    "¡Estamos listos para atender su llamada las 24 horas, los 7 días!",
+    "Uber Transfer"
+   ],
+   "h3_cantidad": 1,
+   "encabezados_repetidos": [],
+   "imagenes": {
+    "total": 10,
+    "formatos": {
+     "png": 6,
+     "jpg": 1,
+     "jpeg": 1,
+     "webp": 1,
+     "com/tr": 1
+    },
+    "con_lazy": 0,
+    "sin_alt": 10,
+    "sin_width_height": 0,
+    "con_srcset": 1
+   },
+   "scripts": {
+    "total": 0,
+    "hosts_externos": {},
+    "gtm": [
+     "GTM-WLPJJD4J"
+    ],
+    "ga4": [
+     "G-26K0MDTFY1"
+    ],
+    "gtag_directo": true,
+    "gtm_directo": true
+   },
+   "plugins_en_html": [
+    "litespeed-cache",
+    "mystickyelements",
+    "wp-whatsapp"
+   ],
+   "jsonld": {
+    "bloques": 1,
+    "tipos": [
+     "Article",
+     "BreadcrumbList",
+     "ImageObject",
+     "ListItem",
+     "Person",
+     "TravelAgency,Organization",
+     "WebPage",
+     "WebSite"
+    ],
+    "telefono": [],
+    "horario": [
+     [
+      "openingHours",
+      "[\"Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday 09:00-17:00\"]"
+     ]
+    ],
+    "tiene_areaServed": false,
+    "tiene_sameAs": true,
+    "tiene_address": false
+   },
+   "enlaces": {
+    "tel": [
+     "tel:+56949969267"
+    ],
+    "whatsapp": [
+     "https://api.whatsapp.com/send?phone=56949969267",
+     "https://wa.me/56949969267?text=Hola%2C%20desde%20UBERTRANSFER%20necesito%20una%20cotizaci%C3%B3n%20para%20un%2",
+     "https://wa.me/56949969267?text=Hola,%20vi%20la%20oferta%20en%20la%20web%20y%20quiero%20agendar%20un%20viaje%20"
+    ],
+    "mailto": [
+     "mailto:cotizaciones@ubertransfer.cl",
+     "mailto:gerencia@ubertransfer.cl"
+    ],
+    "tarifas": [
+     "/#tarifas"
+    ]
+   },
+   "formularios": 0,
+   "iframes": 1,
+   "texto": {
+    "precios_visibles": [
+     "ámanos Ahora Agenda tu ida y retorno y obtén $5.000 de descuento ¡Quiero mi descuento! Uber Tran"
+    ],
+    "horario": [
+     "mpos. Además, proporcionamos flexibilidad de horarios para adaptarnos a los itinerarios de los gr",
+     "es sin preocupaciones y en tiempos precisos. Horarios ajustados a la ruta de recogida y tarifas b",
+     " dentro y fuera de Santiago. Flexibilidad de horarios y rutas personalizadas según las necesidade",
+     " ¡Estamos listos para atender su llamada las 24 horas, los 7 días! Con UberTransfer, viajar al aer"
+    ],
+    "marca_partida": [
+     "RVA RESERVA Servicios de Uber Tran sfer Contacta con nosotros Intelig"
+    ],
+    "qr": [
+     "ronteras Protegidas Escanear o hacer clic en QR para Pagar Rápido . Copyright &copy; 2026 · "
+    ],
+    "ejecutiva": [
+     "adigital.cl · Todos los derechos reservados. Ejecutiva de ventas 1 En línea Ejecutiva de ventas 2 E",
+     "s reservados. Ejecutiva de ventas 1 En línea Ejecutiva de ventas 2 En línea "
+    ],
+    "flota": [],
+    "pet": [
+     "os tarifas transparentes y competitivas que se ajustan a tu pre",
+     "traslados cómodos y seguros  Pet Friendly Aceptamos mascotas e"
+    ],
+    "descuento": [
+     "ra Agenda tu ida y retorno y obtén $5.000 de descuento ¡Quiero mi descuento! Uber Transfer Informac",
+     "torno y obtén $5.000 de descuento ¡Quiero mi descuento! Uber Transfer Información cotizaciones@uber"
+    ],
+    "cotizaciones_correo": [
+     "to! Uber Transfer Información cotizaciones@ubertransfer.cl gerencia@ubert"
+    ],
+    "instagram": [],
+    "pago": [
+     "consulta gratuita Nuestros servicios de transferencia en Santiago y en todo Chile Servicio Tr",
+     "Chile Servicio Transporte de Aeropuerto Transferencias desde y hacia el Aeropuerto de Santiag",
+     "de Soluciones Chatear con una experta  Transferencias desde/hacia el Aeropuerto de Santiago:",
+     " desde/hacia el Aeropuerto de Santiago: Transferencias confiables y cómodas desde y hacia el "
+    ]
+   }
+  },
+  {
+   "path": "/contacto-transfer-aeropuerto-santiago/",
+   "status": 200,
+   "segundos": 3.62,
+   "bytes_html": 150982,
+   "cabeceras": {
+    "Server": "Apache",
+    "X-Powered-By": "PHP/8.3.23",
+    "Vary": "User-Agent"
+   },
+   "lang": "es",
+   "title": "Contacta a UberTransfer: Reserva tu Traslado desde/hacia el Aeropuerto de Santiago",
+   "title_len": 82,
+   "meta_description": "¿Listo para reservar tu traslado desde/hacia el Aeropuerto de Santiago? Contáctanos hoy mismo y deja que nuestro equipo te ayude a planificar tu próximo viaje.",
+   "meta_description_len": 159,
+   "robots_meta": "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+   "viewport": "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0",
+   "canonical": [
+    "https://ubertransfer.cl/contacto-transfer-aeropuerto-santiago/"
+   ],
+   "hreflang": [],
+   "og": [
+    "og:description",
+    "og:image",
+    "og:image:alt",
+    "og:image:height",
+    "og:image:secure_url",
+    "og:image:type",
+    "og:image:width",
+    "og:locale",
+    "og:site_name",
+    "og:title",
+    "og:type",
+    "og:updated_time",
+    "og:url"
+   ],
+   "twitter": [
+    "twitter:card",
+    "twitter:data1",
+    "twitter:description",
+    "twitter:image",
+    "twitter:label1",
+    "twitter:title"
+   ],
+   "h1": [
+    "¡Contáctanos y Haz Que Tu Próximo Viaje Sea Inolvidable!"
+   ],
+   "h2": [
+    "FAQ",
+    "Uber Transfer"
+   ],
+   "h3_cantidad": 1,
+   "encabezados_repetidos": [],
+   "imagenes": {
+    "total": 8,
+    "formatos": {
+     "png": 6,
+     "webp": 1,
+     "com/tr": 1
+    },
+    "con_lazy": 0,
+    "sin_alt": 8,
+    "sin_width_height": 0,
+    "con_srcset": 0
+   },
+   "scripts": {
+    "total": 0,
+    "hosts_externos": {},
+    "gtm": [
+     "GTM-WLPJJD4J"
+    ],
+    "ga4": [
+     "G-26K0MDTFY1"
+    ],
+    "gtag_directo": true,
+    "gtm_directo": true
+   },
+   "plugins_en_html": [
+    "litespeed-cache",
+    "mystickyelements",
+    "wp-whatsapp"
+   ],
+   "jsonld": {
+    "bloques": 1,
+    "tipos": [
+     "Article",
+     "BreadcrumbList",
+     "ImageObject",
+     "ListItem",
+     "Person",
+     "TravelAgency,Organization",
+     "WebPage",
+     "WebSite"
+    ],
+    "telefono": [],
+    "horario": [
+     [
+      "openingHours",
+      "[\"Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday 09:00-17:00\"]"
+     ]
+    ],
+    "tiene_areaServed": false,
+    "tiene_sameAs": true,
+    "tiene_address": false
+   },
+   "enlaces": {
+    "tel": [
+     "tel:+56949969267"
+    ],
+    "whatsapp": [
+     "https://wa.me/56949969267?text=Hola%2C%20desde%20UBERTRANSFER%20necesito%20una%20cotizaci%C3%B3n%20para%20un%2",
+     "https://wa.me/56949969267?text=Hola,%20vi%20la%20oferta%20en%20la%20web%20y%20quiero%20agendar%20un%20viaje%20"
+    ],
+    "mailto": [
+     "mailto:cotizaciones@ubertransfer.cl",
+     "mailto:gerencia@ubertransfer.cl"
+    ],
+    "tarifas": [
+     "/#tarifas"
+    ]
+   },
+   "formularios": 1,
+   "iframes": 1,
+   "texto": {
+    "precios_visibles": [
+     "puerto al centro de Santiago suele variar de $18.000 a $22.000 pesos chilenos ¿ Cuánto cuesta y t",
+     "centro de Santiago suele variar de $18.000 a $22.000 pesos chilenos ¿ Cuánto cuesta y tiempo para",
+     "ses (Terminal Pajaritos &#8211; Maipú) es de $19.000 pesos chilenos aprox. y el tiempo estimado d",
+     "odo el país. Agenda tu ida y retorno y obtén $5.000 de descuento ¡Quiero mi descuento! Uber Tran"
+    ],
+    "horario": [
+     "al cliente está disponible para ayudarle las 24 horas, los 7 días de la semana.  Teléfono +569 49"
+    ],
+    "marca_partida": [],
+    "qr": [
+     "ronteras Protegidas Escanear o hacer clic en QR para Pagar Rápido . Copyright &copy; 2026 · "
+    ],
+    "ejecutiva": [
+     "adigital.cl · Todos los derechos reservados. Ejecutiva de ventas 1 En línea Ejecutiva de ventas 2 E",
+     "s reservados. Ejecutiva de ventas 1 En línea Ejecutiva de ventas 2 En línea "
+    ],
+    "flota": [],
+    "pet": [],
+    "descuento": [
+     "s. Agenda tu ida y retorno y obtén $5.000 de descuento ¡Quiero mi descuento! Uber Transfer Informac",
+     "torno y obtén $5.000 de descuento ¡Quiero mi descuento! Uber Transfer Información cotizaciones@uber"
+    ],
+    "cotizaciones_correo": [
+     "ociales Seguir Seguir  Email cotizaciones@ubertransfer.cl gerencia@ubert",
+     "to! Uber Transfer Información cotizaciones@ubertransfer.cl gerencia@ubert"
+    ],
+    "instagram": [],
+    "pago": [
+     "egidas Escanear o hacer clic en QR para Pagar Rápido . Copyright &copy; 2026 · Diseña"
+    ]
+   }
+  }
+ ]
+}

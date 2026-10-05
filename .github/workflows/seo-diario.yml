@@ -1,0 +1,41 @@
+name: SEO y conversiones diario
+on:
+  # DESACTIVADO hasta decidir el traspaso y recrear secretos (ver docs/TRASPASO_CUENTA.md)
+  # schedule:
+    # - cron: "30 11 * * *"   # todos los días 11:30 UTC
+  workflow_dispatch:
+permissions:
+  contents: write
+  issues: write
+concurrency:
+  group: ops-data
+  cancel-in-progress: false
+jobs:
+  seo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Extraer Search Console + GA4
+        env:
+          GOOGLE_SA_JSON: ${{ secrets.GOOGLE_SA_JSON }}
+          GSC_SITE: ${{ vars.GSC_SITE }}
+          GA4_PROPERTY_ID: ${{ vars.GA4_PROPERTY_ID }}
+        run: PYTHONPATH=src python -m marcas_transporte_ops seo
+      - name: Guardar histórico
+        run: |
+          git config user.name "ops-bot"
+          git config user.email "ops-bot@users.noreply.github.com"
+          git add data
+          if [ -f reports/seo_latest.md ]; then git add reports/seo_latest.md; fi
+          git diff --cached --quiet || git commit -m "data: SEO diario"
+          git pull --rebase origin "${GITHUB_REF_NAME}" && git push
+      - name: Abrir Issue si hay alertas
+        if: hashFiles('reports/alerts.md') != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh issue create --title "Alertas SEO/conversiones $(date +%F)" --body-file reports/alerts.md

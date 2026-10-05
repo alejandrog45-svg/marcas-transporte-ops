@@ -1,0 +1,28 @@
+name: Inspección de contenido del sitio (manual)
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: ops-data
+  cancel-in-progress: false
+jobs:
+  inspeccion:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: "3.11"
+      - name: Leer las 4 páginas (solo lectura, 3 s entre solicitudes)
+        env:
+          SITE_URL: ${{ vars.SITE_URL || 'https://ubertransfer.cl' }}
+        run: python tools/inspect_site.py
+      - name: Guardar resultado
+        run: |
+          git config user.name "ops-bot"
+          git config user.email "ops-bot@users.noreply.github.com"
+          git add data/inspeccion_sitio_latest.json
+          git diff --cached --quiet || git commit -m "data: inspección de contenido del sitio"
+          git pull --rebase origin "${GITHUB_REF_NAME}" && git push

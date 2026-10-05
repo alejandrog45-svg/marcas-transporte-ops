@@ -1,8 +1,7 @@
 name: Auditoría técnica semanal
 on:
-  # DESACTIVADO hasta decidir el traspaso y recrear secretos (ver docs/TRASPASO_CUENTA.md)
-  # schedule:
-    # - cron: "0 12 * * 1"   # lunes 12:00 UTC
+  schedule:
+    - cron: "0 12 * * 1"   # lunes 12:00 UTC
   workflow_dispatch:
 permissions:
   contents: write

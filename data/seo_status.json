@@ -2,6 +2,7 @@
  "state": "sin_conectar",
  "missing": [
   "GOOGLE_SA_JSON",
+  "GSC_SITE",
   "GA4_PROPERTY_ID"
  ]
 }

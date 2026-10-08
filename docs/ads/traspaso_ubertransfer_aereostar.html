@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Traspaso UberTransfer y Aereostar</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#1b2430;--mut:#5b6677;--line:#dfe3ea;--acc:#1a56db;--ok:#117a43;--warn:#a15c00;--bad:#b42318;--chip:#eef2ff}
+@media (prefers-color-scheme:dark){:root{--bg:#10151c;--card:#171e28;--ink:#e8ecf2;--mut:#9aa6b8;--line:#2a3442;--acc:#7aa2ff;--ok:#4cc38a;--warn:#f0b24a;--bad:#ff8b7e;--chip:#1e2a44}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,Segoe UI,Roboto,sans-serif}
+header{padding:20px 16px 0;max-width:1100px;margin:0 auto}
+h1{font-size:22px;margin:0 0 4px}
+.sub{color:var(--mut);margin:0 0 14px}
+nav{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);z-index:5}
+nav .in{max-width:1100px;margin:0 auto;padding:0 16px;display:flex;gap:4px;overflow-x:auto}
+nav button{background:none;border:0;border-bottom:3px solid transparent;color:var(--mut);padding:12px 14px;font:inherit;font-weight:600;cursor:pointer;white-space:nowrap}
+nav button[aria-selected=true]{color:var(--acc);border-bottom-color:var(--acc)}
+main{max-width:1100px;margin:0 auto;padding:16px}
+section.tab{display:none}
+section.tab.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin:0 0 14px}
+h2{font-size:18px;margin:0 0 10px}
+h3{font-size:15px;margin:16px 0 6px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--mut);font-weight:600;width:34%}
+.tbl th{width:auto}
+ul,ol{margin:6px 0 6px 20px;padding:0}
+li{margin:3px 0}
+code{background:var(--chip);padding:1px 6px;border-radius:5px;font-size:13px}
+.tag{display:inline-block;padding:2px 9px;border-radius:99px;font-size:12px;font-weight:700;background:var(--chip);color:var(--acc)}
+.tag.ok{color:var(--ok)}.tag.warn{color:var(--warn)}.tag.bad{color:var(--bad)}
+.note{border-left:4px solid var(--warn);background:var(--chip);padding:10px 12px;border-radius:6px;margin:10px 0}
+.note.bad{border-left-color:var(--bad)}.note.ok{border-left-color:var(--ok)}
+.len{color:var(--mut);font-size:12px;margin-left:6px}
+.kw{display:flex;flex-wrap:wrap;gap:6px}
+.kw span{background:var(--chip);border-radius:6px;padding:3px 8px;font-family:ui-monospace,Consolas,monospace;font-size:13px}
+.small{color:var(--mut);font-size:13px}
+@media print{nav{display:none}section.tab{display:block!important;page-break-after:always}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Traspaso del proyecto: campañas de UberTransfer y Aereostar</h1>
+  <p class="sub">Documento para que otra IA o persona colabore en la siguiente sesión. Estado al 8 de octubre de 2026. Todo lo aquí escrito fue verificado en pantalla o en los archivos del proyecto; lo que no se pudo confirmar está marcado.</p>
+</header>
+<nav><div class="in" role="tablist">
+  <button role="tab" data-t="inicio" aria-selected="true">Inicio y reglas</button>
+  <button role="tab" data-t="uber" aria-selected="false">UberTransfer</button>
+  <button role="tab" data-t="aereo" aria-selected="false">Aereostar</button>
+  <button role="tab" data-t="negocio" aria-selected="false">Datos del negocio</button>
+  <button role="tab" data-t="trampas" aria-selected="false">Trampas y errores</button>
+  <button role="tab" data-t="archivos" aria-selected="false">Archivos</button>
+</div></nav>
+<main>
+
+<!-- ================= INICIO ================= -->
+<section class="tab on" id="inicio">
+  <div class="card">
+    <h2>Qué es esto</h2>
+    <p>Empresa de transfers desde y hacia el aeropuerto de Santiago de Chile, con cuatro marcas o canales según la planilla de viajes: TaxiTransfer, Aereostar, UberTransfer y Compartido. En esta sesión se trabajaron dos campañas de <b>Búsqueda de Google Ads</b>, cada una con su cuenta, su sitio y su teléfono. <b>No se mezclan.</b></p>
+    <table>
+      <tr><th>Marca</th><th>Cuenta Google Ads</th><th>Sitio</th><th>Teléfono y WhatsApp</th><th>Estado de la campaña</th></tr>
+      <tr><td>UberTransfer</td><td>203-550-4421</td><td>ubertransfer.cl</td><td>+56 9 4996 9267</td><td><span class="tag ok">Pagada y habilitada</span></td></tr>
+      <tr><td>Aereostar</td><td>548-530-8262</td><td>aereostar.cl</td><td>+56 9 3779 3527</td><td><span class="tag warn">Creada y detenida a propósito</span> (el sitio está suspendido)</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Cómo colaborar (instrucciones para la IA)</h2>
+    <ol>
+      <li>Lee primero este documento y el menú de la marca sobre la que se trabaje. No uses datos de una marca en la otra.</li>
+      <li>Tu rol es proponer: palabras clave, textos, estructura, revisión de errores. Los textos se proponen y el dueño los aprueba antes de cargarlos.</li>
+      <li>No inventes datos del negocio (tarifas, horarios, flota, promociones, rutas). Si no está escrito aquí, márcalo como pendiente de confirmar.</li>
+      <li>Una tarea a la vez. Español simple y corto.</li>
+      <li>Los textos de los resúmenes automáticos de Google o de buscadores con IA no son fuente.</li>
+    </ol>
+    <div class="note bad"><b>Nunca</b> pagar, enviar el paso de pago, cambiar presupuesto, pujas o anuncios, activar una campaña, ni guardar datos de tarjeta, claves o códigos. El pago lo hace el dueño o Rafael.</div>
+  </div>
+
+  <div class="card">
+    <h2>Reglas de redacción de anuncios (del dueño)</h2>
+    <ul>
+      <li>Títulos de 30 caracteres o menos; descripciones de 90 o menos.</li>
+      <li><b>Sin horarios ni «24 horas» en los textos.</b> El horario va solo en Google Ads, en Programación de anuncios.</li>
+      <li><b>Sin teléfonos en los textos.</b> El número va como extensión de llamada y hay que verificarlo con un código por SMS o llamada.</li>
+      <li>Sin precios ni promociones no confirmados.</li>
+      <li>Nunca «Uber» suelto: la marca se escribe completa (UberTransfer, Aereostar).</li>
+      <li>Campañas siempre de <b>Búsqueda</b>, solo Búsqueda de Google (sin socios de búsqueda ni Display). Nunca Máximo rendimiento ni campaña inteligente (pedido de Rafael).</li>
+      <li>Palabras clave en concordancia de frase y exacta; no amplia.</li>
+      <li>Objetivo de las dos campañas: que la gente llame o escriba por WhatsApp.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Quién es quién</h2>
+    <ul>
+      <li><b>El dueño / usuario:</b> da las instrucciones de este proyecto y aprueba textos.</li>
+      <li><b>Rafael:</b> persona de la operación que pidió la campaña de Búsqueda, las palabras clave y el horario. Ningún archivo confirma que sea el dueño.</li>
+      <li><b>Francisco Arenas:</b> aparece en un correo de renovación del dominio ubertransfer.cl (febrero de 2025). Puede saber quién administra dominios; no está confirmado.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= UBERTRANSFER ================= -->
+<section class="tab" id="uber">
+  <div class="card">
+    <h2>UberTransfer: la campaña publicada</h2>
+    <p>Cuenta <b>203-550-4421</b>. Campaña «Campaign #1», <span class="tag ok">pagada y habilitada</span>. Se armó con el asistente de Google Ads, en una sesión anterior, y se pagó el 8 de octubre de 2026.</p>
+    <table>
+      <tr><th>Tipo</th><td>Búsqueda. Rafael pidió expresamente que no fuera inteligente ni de Máximo rendimiento.</td></tr>
+      <tr><th>Redes</th><td>Solo Búsqueda de Google (sin socios ni Display).</td></tr>
+      <tr><th>URL final</th><td><code>https://ubertransfer.cl/</code> (todo va a la portada; no hay páginas por servicio).</td></tr>
+      <tr><th>Presupuesto</th><td>CLP 15.000 al día, como prueba. Decidido el 8 de octubre de 2026 (opción A). Referencias que se consideraron: previsión de Google ~CLP 4.600 al día, sugerencia del asistente CLP 15.817, gasto histórico de CLP 1,5 M a 2,8 M al mes.</td></tr>
+      <tr><th>Puja</th><td>Clics, según el borrador. Se prefirió a «Maximizar conversiones» por no tener historial. <span class="small">(Valor del borrador; no se volvió a comprobar en la campaña ya publicada.)</span></td></tr>
+      <tr><th>Horario</th><td>Todos los días de <b>08:00 a 22:30</b>, hora de Chile, según Rafael. Se configuró en Públicos, palabras clave y contenido > Programación de anuncios. Reemplazó a «24 horas». <b>Ojo:</b> la demanda real de viajes se concentra de 02:00 a 08:00, tramo que hoy queda sin anuncios.</td></tr>
+      <tr><th>Ubicaciones</th><td>Región Metropolitana (incluye Melipilla), Viña del Mar, Rancagua y Los Andes. Rafael pidió priorizar por el ranking de viajes: Santiago Centro 230, Las Condes 227, Providencia 216, Ñuñoa 182, Quilicura 161, La Florida 82, Maipú 81, Vitacura 70, Colina 68, San Bernardo 64. Viña del Mar, Rancagua, Los Andes y Melipilla no figuran como sectores en el Excel; falta confirmar tarifa y que se atienden.</td></tr>
+      <tr><th>Idiomas</th><td>Español e inglés.</td></tr>
+      <tr><th>Teléfono / WhatsApp</th><td>+56 9 4996 9267, el mismo para ambos. <span class="tag bad">Pendiente de verificar</span>: en la campaña antigua de Amadigital el mismo número quedó «rechazado por no estar verificado».</td></tr>
+      <tr><th>Conversiones</th><td>Dos: llamada y WhatsApp (respuesta de Rafael). <span class="tag bad">Sin configurar</span>: requieren una etiqueta de seguimiento en ubertransfer.cl y hay que confirmar quién administra el sitio.</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Grupo 1: Aeropuerto (único cargado)</h2>
+    <p class="small">El asistente de la primera campaña crea un solo grupo de anuncios. Los otros tres grupos están propuestos pero no cargados.</p>
+    <h3>Palabras clave</h3>
+    <div class="kw"><span>transporte aeropuerto</span><span>transfer</span><span>aeropuerto</span><span>transfer aeropuerto santiago</span></div>
+    <p class="small">En el borrador figuraban 6 palabras clave de aeropuerto en frase y exacta. «transfer» y «aeropuerto» solas son muy amplias: usarlas solo en exacta o dentro de frases.</p>
+    <h3>Títulos aprobados (9)</h3>
+    <ol class="len-list" data-len="30" id="u-t"></ol>
+    <h3>Descripciones aprobadas (4)</h3>
+    <ol class="len-list" data-len="90" id="u-d"></ol>
+    <div class="note ok">Textos aprobados por el dueño el 8 de octubre de 2026. Después de publicar se cambiaron los títulos 3 y 5 y las descripciones 1 y 4 para sacar los horarios; la lista de arriba ya trae la versión final (ver <code>propuesta_textos_anuncios.md</code>).</div>
+  </div>
+
+  <div class="card">
+    <h2>Grupos futuros (solo propuestos, no cargados)</h2>
+    <div class="note">Rafael <b>no ofrece eventos como servicio aparte</b> (aclaración del dueño). Las frases de eventos, matrimonios, corporativo, turismo y viñas son <b>palabras clave</b> para captar búsquedas de transporte. Antes de usar los textos hay que revisarlos y confirmar con Rafael vehículos, tarifa fija o cotización, y si existe una página por servicio.</div>
+    <div class="grid">
+      <div><h3>Grupo 2: Matrimonios y eventos privados</h3>
+        <div class="kw"><span>matrimonios</span><span>eventos privados</span><span>transfer matrimonios</span><span>transfer eventos privados</span></div>
+        <p class="small">7 títulos y 2 descripciones propuestos en <code>propuesta_textos_anuncios.md</code>. Google mide «transfer matrimonios» y «transfer eventos privados» entre 0 y 100 búsquedas al mes; «matrimonio» sí aparece medida y «boda» no.</p></div>
+      <div><h3>Grupo 3: Corporativo</h3>
+        <div class="kw"><span>transporte corporativo</span><span>traslados para empresas</span></div>
+        <p class="small">5 títulos y 2 descripciones propuestos.</p></div>
+      <div><h3>Grupo 4: Turismo y viñas</h3>
+        <div class="kw"><span>turismo</span><span>viña tours</span><span>tours viñas</span></div>
+        <p class="small">5 títulos y 2 descripciones propuestos. «turismo» mide 0 a 10 búsquedas al mes en el Planificador.</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Lo que dijo Rafael (audios y mensajes del 30-09, transcritos automáticamente; pueden tener errores)</h2>
+    <ol>
+      <li>La campaña debe ser de Búsqueda; no inteligente ni de Máximo rendimiento.</li>
+      <li>Hay una forma de pasarla a modo experto (el nombre del botón no está verificado).</li>
+      <li>En la lista de campañas debe verse «BÚSQUEDA».</li>
+      <li>Agregar más palabras clave: «transfer eventos privados», «transfer matrimonios», «transporte corporativo».</li>
+    </ol>
+    <p><b>Respuestas dictadas el 8 de octubre con Rafael presente:</b> palabras clave transporte aeropuerto, transfer, aeropuerto, eventos privados, transporte corporativo, matrimonios, turismo y viña tours; ubicaciones y prioridad por ranking de viajes; idiomas español e inglés; solo Búsqueda de Google; URL ubertransfer.cl; horario 08:00 a 22:30.</p>
+    <p class="small">No existe ninguna instrucción literal de Rafael sobre presupuesto ni textos de anuncios: esos los decidió el dueño del proyecto.</p>
+  </div>
+
+  <div class="card">
+    <h2>Pendientes de UberTransfer</h2>
+    <ol>
+      <li>Verificar el teléfono +56 9 4996 9267 con el código por SMS o llamada (Recursos > Llamadas).</li>
+      <li>Configurar el seguimiento de conversiones (llamada y WhatsApp) con quien administra ubertransfer.cl.</li>
+      <li>Decidir con Rafael si se cubre la madrugada de 02:00 a 08:00, que es el pico de viajes.</li>
+      <li>Confirmar tarifas, flota, promoción de $5.000 y horario real para poder escribir los grupos 2, 3 y 4.</li>
+      <li>Medir viajes reales: agregar a la planilla la fuente de cada reserva (Google, WhatsApp, recomendación).</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= AEREOSTAR ================= -->
+<section class="tab" id="aereo">
+  <div class="card">
+    <h2>Aereostar: la campaña creada</h2>
+    <p>Cuenta <b>548-530-8262</b>, nombre de cuenta «Aereostar». Campaña «Campaign #1», creada y pagada el 8 de octubre de 2026 y <span class="tag warn">DETENIDA a propósito</span> porque el sitio aereostar.cl está suspendido. Mientras esté suspendido, los clics irían a una página de error.</p>
+    <div class="note"><b>Nombre correcto de la marca: «Aereostar»</b> (con una «e» extra), igual que el dominio. Confirmado por el dueño. Las notas antiguas dicen «Aerostar» o «Aereo»; no usarlas.</div>
+    <table>
+      <tr><th>Tipo y redes</th><td>Búsqueda, solo Búsqueda de Google. Se desmarcaron «Red de socios de búsqueda» y «Red de Display» en el asistente.</td></tr>
+      <tr><th>URL final</th><td><code>https://aereostar.cl</code></td></tr>
+      <tr><th>Presupuesto</th><td>CLP 15.000 al día (el mismo de UberTransfer). Google recomendaba 15.038; se fijó en 15.000 con «presupuesto personalizado».</td></tr>
+      <tr><th>Puja</th><td><b>Clics</b>. El asistente proponía «Maximizar las conversiones», que es lo que usó la campaña ganadora de Amadigital, pero esa cuenta tenía historial. El análisis cita como error usarla «sin historial» (campaña Aerostar Rafael, 0 impresiones). Cuando haya conversiones se puede cambiar.</td></tr>
+      <tr><th>Horario</th><td>Todos los días de 08:00 a 22:30, hora de Chile, igual que UberTransfer. Guardado por el dueño en Programación de anuncios.</td></tr>
+      <tr><th>Ubicaciones</th><td>Región Metropolitana, Valparaíso y O'Higgins (las de la campaña ganadora del análisis).</td></tr>
+      <tr><th>Idiomas</th><td>Español e inglés.</td></tr>
+      <tr><th>Teléfono / WhatsApp</th><td>+56 9 3779 3527 (es también WhatsApp). Quedó vinculado en el asistente. <span class="tag bad">Falta verificarlo</span> con el código por SMS o llamada, que solo puede recibir el dueño.</td></tr>
+      <tr><th>Grupos</th><td>Un solo grupo («Grupo de anuncios 1»), igual que UberTransfer. El grupo «Compartido» del análisis de Amadigital se descartó por pedido del dueño.</td></tr>
+      <tr><th>Enlaces a sitios</th><td>No se agregan. Google solo los <i>recomienda</i> («al menos 2»); UberTransfer no los pidió. No pedir páginas del sitio al dueño.</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Palabras clave cargadas (15 líneas, frase y exacta)</h2>
+    <p class="small">Sacadas de las que más rindieron en la campaña ganadora de Amadigital, más dos en inglés agregadas por el pedido de idioma. «transfer aeropuerto» concentró el 52 % de los clics de esa campaña. Se eliminaron las sugerencias automáticas de Google con «precio», «valor» y «taxi oficial».</p>
+    <div class="kw" id="a-kw"></div>
+    <p class="small">Comillas = frase; corchetes = exacta.</p>
+    <h3>Palabras clave negativas (nivel campaña, 8)</h3>
+    <div class="kw"><span>gratis</span><span>empleo</span><span>trabajo</span><span>bus</span><span>metro</span><span>estacionamiento</span><span>"arriendo de auto"</span><span>vuelos</span></div>
+    <p class="small">No se bloquea la marca. Las 7 simples están en amplia; «arriendo de auto» en frase.</p>
+  </div>
+
+  <div class="card">
+    <h2>Anuncio de búsqueda adaptable</h2>
+    <p class="small">Textos tomados del anuncio del Grupo 1 de la campaña ganadora de Amadigital, cambiando «UberTransfer» por «Aereostar», sin precios y corrigiendo un error de ortografía («Stiago»). Calidad del anuncio al cargar: «Promedio». Google revisó el anuncio guardado y no halló problemas de políticas.</p>
+    <h3>Títulos (15)</h3>
+    <ol class="len-list" data-len="30" id="a-t"></ol>
+    <h3>Descripciones (4)</h3>
+    <ol class="len-list" data-len="90" id="a-d"></ol>
+    <div class="note">Frases heredadas de UberTransfer que <b>no están confirmadas para Aereostar</b>: «Tarifa Permanente Clara», «Servicios Calidad-Precio», «La Mejor Van al Aeropuerto», «No fallamos», «Excelencia Sin Excepción», «viajes interurbanos». Se dejaron porque el dueño pidió los textos de la mejor campaña. Revisar con el dueño antes de activar.</div>
+    <div class="note">La descripción que Google generó sola para la empresa dice «24/7» y «taxímetro». No se usó en ningún anuncio.</div>
+  </div>
+
+  <div class="card">
+    <h2>La mejor campaña del análisis de Amadigital (el molde)</h2>
+    <p>Fuente: <code>campana_amadigital_analisis.html</code> (cuenta cancelada 371-706-4621, revisada en solo lectura el 8 de octubre de 2026). La campaña «Tráfico Web + Llamadas» corrió de abril de 2024 a mediados de 2025 y es la única con actividad real.</p>
+    <table class="tbl">
+      <tr><th>Clics</th><th>Impresiones</th><th>CTR</th><th>CPC prom.</th><th>Conversiones</th><th>Costo por conversión</th><th>Costo total</th></tr>
+      <tr><td>30.453</td><td>303.403</td><td>10,04 %</td><td>CLP 387</td><td>5.306 (17,42 %)</td><td>CLP 2.221</td><td>CLP 11,78 M</td></tr>
+    </table>
+    <ul>
+      <li>Mejor etapa: de T3 2024 a T1 2025, entre 1.300 y 1.545 conversiones por trimestre.</li>
+      <li>El celular dio el 89 % de los clics y el 93 % de las conversiones.</li>
+      <li>WhatsApp fue el 58 % de las conversiones y la llamada desde el sitio el 27 %. Ojo: no son viajes cobrados; con el ticket de $39.946 la campaña se paga si 1 de cada 18 conversiones termina en viaje.</li>
+      <li>Presupuesto CLP 50.000 al día (gastó ~27.000), puja Maximizar conversiones con CPA objetivo CLP 2.750, solo Búsqueda de Google, Región Metropolitana, Valparaíso y O'Higgins, horario ~8:00 a 23:30.</li>
+      <li>Dos grupos: Principal y Compartido. El Compartido convirtió mejor (18,71 % frente a 16,51 %).</li>
+    </ul>
+    <div class="note bad"><b>Esa campaña apuntaba a ubertransfer.cl, no a aereostar.cl.</b> La única campaña de aereostar.cl en ese análisis («Aerostar Rafael», 28-09-2025) nunca mostró un anuncio: 0 impresiones, anuncio «Deficiente», puja sin historial y horario solo de domingos. De la ganadora se tomó la estructura, no la marca, los precios ni la cuenta.</div>
+    <h3>Errores de esa cuenta que no se repiten</h3>
+    <ul>
+      <li>Todo en concordancia amplia (entraron búsquedas imprecisas como «transfer»).</li>
+      <li>Madrugada sin cubrir, aunque ahí está la mayor demanda.</li>
+      <li>Negativa exacta contra la propia marca.</li>
+      <li>Teléfono sin verificar (la extensión de llamada fue rechazada).</li>
+      <li>Conversiones en «Requiere atención».</li>
+      <li>Anuncio con precio publicado («desde $10.900»).</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Incidente: aereostar.cl suspendido</h2>
+    <table>
+      <tr><th>Qué pasa</th><td><code>https://aereostar.cl/</code> redirige a <code>/cgi-sys/suspendedpage.cgi</code> («Servicio suspendido»). El dominio resuelve a 186.64.119.186 y sus DNS son <code>ns1/ns2/ns3.miwebdns.net</code>. El proveedor es Rackeo (por el logo de la página de suspensión).</td></tr>
+      <tr><th>Motivo</th><td>La página lista seis motivos posibles y no dice cuál aplica. El más común es no pago, pero <b>no está confirmado</b>.</td></tr>
+      <tr><th>No es hosting.cl</th><td>El chequeo de hosting.cl respondió «no encontramos un servicio con este dominio». Pagar ahí no sirve.</td></tr>
+      <tr><th>Enlaces de pago rotos</th><td>En <code>rackeo.cl</code>, «Pago de cuentas» apunta a <code>/paga-deuda</code> (error 404). El botón «Consultar deuda» arma <code>https://pago.rackeo.cl/?query=aereostar.cl</code>, que tiene el certificado de seguridad inválido (no se forzó). El panel de clientes <code>https://panel.rackeo.host/clientarea.php</code> sí carga, pero pide correo y contraseña.</td></tr>
+      <tr><th>Cuenta de Rackeo</th><td>La recuperación de contraseña con el correo de la cuenta de Google Ads de Aereostar nunca llegó y Gmail no tiene ningún correo de Rackeo. El script de la página de suspensión usa <code>webmaster@aereostar.cl</code> como correo del servicio (casilla inaccesible mientras el hosting esté suspendido; deducción, no confirmada).</td></tr>
+      <tr><th>Salida</th><td>Soporte de Rackeo: +56 2 3384 9654 (la página de suspensión muestra +56 2 2666 55 14), ticket en <code>panel.rackeo.host/submitticket.php</code> (departamento Facturación) o chat en rackeo.cl. Hay que averiguar quién contrató el hosting (agencia, Rafael, Francisco Arenas u otra persona) y con qué correo.</td></tr>
+      <tr><th>Última comprobación</th><td>8 de octubre de 2026: seguía suspendido. El dueño dijo que el pago se hizo pero que «se demora en actualizar»; no se pudo confirmar.</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Pendientes de Aereostar</h2>
+    <ol>
+      <li><b>Reactivar el hosting</b> y comprobar con <code>curl</code> que aereostar.cl ya no redirige a la página de suspensión. Solo entonces activar la campaña (Estado > Habilitada).</li>
+      <li><b>Verificar el teléfono</b> +56 9 3779 3527 con el código de Google (lo recibe el dueño).</li>
+      <li><b>Instalar la etiqueta de Google (gtag)</b> en aereostar.cl para medir llamadas y WhatsApp; lo hace quien administra el sitio. Sin eso Google no mide conversiones.</li>
+      <li>Confirmar con el dueño las frases heredadas de UberTransfer (ver aviso en el anuncio).</li>
+      <li>Decidir si se cubre la madrugada (02:00 a 08:00).</li>
+      <li>Comprobar que el nombre de la empresa y el perfil de pagos queden como «Aereostar» (el perfil figuraba «Aerostar»; lo gestiona quien paga).</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= NEGOCIO ================= -->
+<section class="tab" id="negocio">
+  <div class="card">
+    <h2>Datos reales del negocio</h2>
+    <p class="small">Viajes del 1 de mayo al 5 de octubre de 2026 (<code>DATA TRANSPORTE/data/data.json</code>). Solo agregados; nunca nombres, teléfonos ni direcciones de clientes.</p>
+    <table>
+      <tr><th>Viajes realizados</th><td>2.334</td></tr>
+      <tr><th>Ingresos cobrados</th><td>$85.764.250</td></tr>
+      <tr><th>Ticket promedio</th><td>$39.946</td></tr>
+      <tr><th>Pasajeros</th><td>6.057</td></tr>
+      <tr><th>Hacia / desde el aeropuerto</th><td>1.377 viajes (59 %) / 475 viajes</td></tr>
+      <tr><th>Mes pico</th><td>Septiembre: 502 viajes, $17,6 M</td></tr>
+      <tr><th>Demanda por hora</th><td>Madrugada 02:00 a 08:00; pico los lunes 03:00 a 05:00; fin de semana 04:00 a 06:00; segundo bloque 23:00 a 00:00; valle 10:00 a 15:00</td></tr>
+      <tr><th>Sectores con más viajes</th><td>Santiago Centro 230, Las Condes 227, Providencia 216, Ñuñoa 182</td></tr>
+      <tr><th>Clientes únicos / recurrentes</th><td>1.459 / 424 (los recurrentes hacen el 54 % de los viajes)</td></tr>
+      <tr><th>Gasto en Google Ads ene–ago 2026</th><td>$15.026.850 (entre 6 % y 16 % de la venta, salvo mayo mal cargado). Margen mensual negativo o cercano a cero en los meses con datos.</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h2>Reglas del dueño sobre los datos</h2>
+    <ul>
+      <li>«Nulo» (en tarifa, conductor o pago) = viaje anulado: fuera de ventas.</li>
+      <li>«No cobrar» = convenio (incluye «pagarán fin de mes»): no suma a ingresos cobrados.</li>
+      <li>Fechas posteriores a hoy = reservas futuras, no viajes realizados.</li>
+      <li>No existe ningún dato de 2025 ni viajes de enero a abril de 2026.</li>
+      <li>Para ROAS usar los viajes, no la planilla anual (mayo: $7,6 M frente a $17,1 M).</li>
+      <li>Ofertas reales que aparecen en la planilla (no publicadas): cambio a compartido por $16.000 o $22.000, sobreequipaje $6.000, ida y vuelta, facturas con IVA para empresas, convenios nocturnos semanales.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>Dato sin resolver</h2>
+    <p>La planilla anual registra ~$15 M de gasto en Google Ads entre enero y julio de 2026, pero ninguna de las cuentas revisadas gastó en 2026. Ese dinero salió de otra cuenta que no se ha revisado.</p>
+  </div>
+</section>
+
+<!-- ================= TRAMPAS ================= -->
+<section class="tab" id="trampas">
+  <div class="card">
+    <h2>Errores cometidos y cómo evitarlos</h2>
+    <table class="tbl">
+      <tr><th>Qué pasó</th><th>Cómo evitarlo</th></tr>
+      <tr><td>El asistente llevó la campaña de Aereostar a «Máximo rendimiento» (Búsqueda, YouTube, Display…).</td><td>Usar «consulta otros tipos de campañas» y elegir <b>Buscar</b>. Comprobar la ruta de pasos de la izquierda: palabras clave, anuncios, estrategia de oferta y presupuesto.</td></tr>
+      <tr><td>Se editó el borrador y Google respondió «la campaña se configuró como de solo lectura».</td><td>El id de la URL del asistente (<code>campaignId</code> y <code>draftId</code>) <b>no es el de la campaña real</b>. En Aereostar el borrador era 281499308082897 y la campaña real 24331409273. Abrir la campaña desde la lista de campañas.</td></tr>
+      <tr><td>Las correcciones de «Aereostar» se hicieron en una pestaña del borrador y el pago se envió desde otra; el anuncio salió con «Aerostar».</td><td>Una sola pestaña por borrador. Después de pagar, verificar el anuncio publicado en Anuncios.</td></tr>
+      <tr><td>Una pestaña con el aviso «¿Salir del sitio?» bloqueó la navegación.</td><td>Abrir una pestaña nueva con la dirección del borrador; no forzar.</td></tr>
+      <tr><td>Al terminar el pago, el asistente dejó la campaña <b>habilitada</b>.</td><td>Si el sitio no carga, detenerla enseguida (punto de estado > Detener) y comprobar que figure «Detenido».</td></tr>
+      <tr><td>Se pensó que hosting.cl era el proveedor de aereostar.cl.</td><td>Mirar los DNS: <code>miwebdns.net</code> corresponde a Rackeo, no a hosting.cl.</td></tr>
+      <tr><td>Los clics del usuario y de la IA pueden cruzarse en la misma pestaña, y las capturas llegan con retraso.</td><td>Esperar a que cargue cada paso, tomar una captura nueva antes de repetir un clic y no operar a la vez en la misma pestaña.</td></tr>
+      <tr><td>Un archivo de 1,5 MB (el análisis de Amadigital) casi se lee entero.</td><td>Casi todo son imágenes incrustadas; el texto real es ~18 KB. Extraer el texto con un script antes de leerlo.</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h2>Seguridad y privacidad</h2>
+    <ul>
+      <li>El JSON público del dashboard no lleva nombres, teléfonos ni direcciones (hay un control automático).</li>
+      <li>Nunca subir a git: los Excel, <code>.zip</code>, capturas, claves, URLs con clave, ni <code>data/privado/</code>.</li>
+      <li>Hay una API key de Stitch en texto plano en una carpeta ignorada por git, y la clave del Apps Script apareció en capturas: conviene rotarlas.</li>
+      <li>La planilla de viajes está compartida «con el enlace» y expone nombres y teléfonos.</li>
+      <li>Este documento no incluye datos de tarjeta, perfiles de pago, claves ni códigos de verificación a propósito. No pedirlos ni guardarlos.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= ARCHIVOS ================= -->
+<section class="tab" id="archivos">
+  <div class="card">
+    <h2>Dónde está cada cosa</h2>
+    <p class="small">Las carpetas viven en <code>W:\PROYECTOS CUENTA ALEJANDROG45\</code> (proyectos con la cuenta del dueño). Los proyectos de Ferretería Oviedo están en otro disco y no se mezclan.</p>
+    <table class="tbl">
+      <tr><th>Archivo</th><th>Qué contiene</th></tr>
+      <tr><td><code>marcas-transporte-ops/docs/ads/traspaso_ubertransfer_aereostar.html</code></td><td>Este documento.</td></tr>
+      <tr><td><code>marcas-transporte-ops/docs/ads/tips_rafael_y_preguntas_20261008.md</code></td><td>Lo que dijo Rafael, datos del negocio, contradicciones, 22 preguntas abiertas y el estado de la campaña de UberTransfer.</td></tr>
+      <tr><td><code>marcas-transporte-ops/docs/ads/propuesta_textos_anuncios.md</code></td><td>Textos aprobados de UberTransfer, grupos 1 a 4.</td></tr>
+      <tr><td><code>marcas-transporte-ops/docs/ads/modelo_campana_aerostar_desde_amadigital.md</code></td><td>Modelo y estado de la campaña de Aereostar (el nombre del archivo conserva la grafía vieja).</td></tr>
+      <tr><td><code>marcas-transporte-ops/docs/ads/campana_amadigital_analisis.html</code></td><td>Análisis de la cuenta Amadigital (1,5 MB, casi todo imágenes). No abrir entero.</td></tr>
+      <tr><td><code>marcas-transporte-ops/docs/ads/PROMPT_CAMPANA_AEROSTAR.md</code></td><td>Prompt original para la campaña de Aereostar y las reglas aprendidas en UberTransfer.</td></tr>
+      <tr><td><code>marcas-transporte-ops/docs/INDICE.md</code> y <code>CLAUDE.md</code></td><td>Índice de documentos y estado general del proyecto de marcas.</td></tr>
+      <tr><td><code>DATA TRANSPORTE/CLAUDE.md</code></td><td>Dashboard de análisis: fuentes, flujo ETL, reglas de negocio y privacidad.</td></tr>
+    </table>
+    <h3>Dashboard público</h3>
+    <p>Repositorio <code>alejandrog45-svg/data-transporte</code>, publicado en GitHub Pages: <code>https://alejandrog45-svg.github.io/data-transporte/</code>. Se actualiza todos los días a las 08:00 de Chile.</p>
+  </div>
+  <div class="card">
+    <h2>Cómo se comprueba que aereostar.cl volvió</h2>
+    <p>Que <code>https://aereostar.cl/</code> responda 200 <b>sin</b> terminar en <code>/cgi-sys/suspendedpage.cgi</code>. Solo entonces activar la campaña.</p>
+  </div>
+</section>
+
+</main>
+<script>
+(function(){
+  var U_T=["Transfer Aeropuerto Santiago","UberTransfer Aeropuerto SCL","Traslados al Aeropuerto","Reserva por WhatsApp o Llamada","Reserva Fácil y Rápida","Servicio Puerta a Puerta","Conductores Profesionales","Cotiza y Reserva Hoy","Transporte Privado y Seguro"];
+  var U_D=["Traslados desde y hacia el aeropuerto de Santiago. Reserva por WhatsApp o llamada.","Vehículos cómodos y conductores profesionales. Consulta disponibilidad y reserva ahora.","Viaja cómodo desde o hacia el aeropuerto con UberTransfer. Escríbenos y confirma tu viaje.","Atención personalizada. Llámanos o escríbenos por WhatsApp para reservar."];
+  var A_T=["Aereostar Aeropuerto SCL","Traslado Aeropuerto Santiago","Aereostar al Aeropuerto","La Mejor Van al Aeropuerto","Traslados Ejecutivo Aeropuerto","Viaje Hacia el Aeropuerto SCL","Transporte al Aeropuerto","Compartido Aeropuerto Santiago","Servicios Calidad-Precio","Aereostar Móvil Aeropuerto","Tarifa Permanente Clara","Transporte Interurbano Calidad","Viajes Ejecutivos Privado","Enfocamos en Nuestros Clientes","Excelencia Sin Excepción"];
+  var A_D=["Transporte de pasajeros desde y hacia el aeropuerto en Santiago. ¡No fallamos!","¡No Fallamos! Viajes interurbanos a varios destinos en Santiago y sus alrededores, Cotiza","Nos dedicamos a satisfacer a nuestros clientes, brindando una experiencia en cada viaje.","Comprometidos al 100% en cada trayecto. La puntualidad y seguridad son prioridad."];
+  var A_K=['"transfer aeropuerto"','[transfer aeropuerto]','"transfer aeropuerto santiago"','[transfer aeropuerto santiago]','"transporte aeropuerto"','[transporte aeropuerto]','"transfer aeropuerto santiago valor"','"servicio de transfer"','"taxi aeropuerto santiago"','"van al aeropuerto"','"transporte hacia aeropuerto"','"taxi al aeropuerto de santiago"','"transfer al aeropuerto santiago"','"airport transfer santiago"','"santiago airport transfer"'];
+  function fill(id,arr,max){
+    var ol=document.getElementById(id);
+    arr.forEach(function(t){
+      var li=document.createElement('li');
+      li.appendChild(document.createTextNode(t));
+      var s=document.createElement('span');
+      s.className='len';
+      s.textContent='('+t.length+'/'+max+')'+(t.length>max?' ¡excede!':'');
+      li.appendChild(s);
+      ol.appendChild(li);
+    });
+  }
+  fill('u-t',U_T,30);fill('u-d',U_D,90);fill('a-t',A_T,30);fill('a-d',A_D,90);
+  var kw=document.getElementById('a-kw');
+  A_K.forEach(function(k){var s=document.createElement('span');s.textContent=k;kw.appendChild(s);});
+  var btns=document.querySelectorAll('nav button');
+  function show(id){
+    btns.forEach(function(b){b.setAttribute('aria-selected',b.dataset.t===id?'true':'false');});
+    document.querySelectorAll('section.tab').forEach(function(s){s.classList.toggle('on',s.id===id);});
+    try{history.replaceState(null,'','#'+id);}catch(e){}
+    window.scrollTo(0,0);
+  }
+  btns.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.t);});});
+  var h=(location.hash||'').slice(1);
+  if(h&&document.getElementById(h)&&document.getElementById(h).classList.contains('tab')){show(h);}
+})();
+</script>
+</body>
+</html>

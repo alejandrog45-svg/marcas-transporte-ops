@@ -33,6 +33,41 @@ def read_text(p):
     return Path(p).read_text(encoding="utf-8")
 
 
+def read_google_ads_status(path, brand, default_campaign_ids=()):
+    """Carga solo la configuración no secreta del conector Google Ads de una marca.
+
+    La conexión real queda fuera del armado: aquí solo se valida la identidad de la
+    cuenta/campaña y se deja explícito que el modo permitido es de lectura.
+    """
+    p = Path(path)
+    if not p.exists():
+        return {"brand": brand, "customerId": None, "campaignIds": list(default_campaign_ids),
+                "mode": "read_only", "status": "pending_api", "lastSync": None,
+                "source": "Google Ads API", "metrics": None}
+    obj = json.loads(read_text(p))
+    if obj.get("brand") != brand:
+        raise SystemExit(f"Google Ads: la marca de {p.name} no coincide con {brand}.")
+    customer = str(obj.get("customerId") or "")
+    if customer and (not customer.isdigit() or len(customer) != 10):
+        raise SystemExit(f"Google Ads: customerId inválido en {p.name}.")
+    if obj.get("mode") != "read_only":
+        raise SystemExit(f"Google Ads: el conector de {brand} debe ser read_only.")
+    ids = obj.get("campaignIds", [])
+    if not isinstance(ids, list) or any(not str(x).isdigit() for x in ids):
+        raise SystemExit(f"Google Ads: campaignIds inválidos en {p.name}.")
+    if any(k.lower() in {"token", "clientsecret", "client_secret", "refresh_token", "private_key"}
+           for k in obj):
+        raise SystemExit(f"Google Ads: no se permiten credenciales en {p.name}.")
+    names = obj.get("campaignNames", [])
+    if not isinstance(names, list) or any(not isinstance(x, str) or not x.strip() for x in names):
+        raise SystemExit(f"Google Ads: campaignNames inválidos en {p.name}.")
+    return {"brand": brand, "customerId": customer or None, "campaignIds": [str(x) for x in ids],
+            "campaignNames": names,
+            "mode": "read_only", "status": obj.get("status", "pending_api"),
+            "lastSync": obj.get("lastSync"), "source": "Google Ads API", "metrics": obj.get("metrics"),
+            "observed": obj.get("observed")}
+
+
 def num(s):
     s = s.replace("%", "").replace("+", "").replace(".", "").replace(",", ".").strip()
     try:
@@ -302,12 +337,15 @@ def main():
     tr = json.loads(read_text(DATA / "trends_estacionalidad.json"))
     seo_f = DATA / "seo_status.json"
     seo_status = json.loads(read_text(seo_f)) if seo_f.exists() else {"state": "sin_ejecutar", "missing": []}
+    google_ads = read_google_ads_status(DATA / "google_ads_ubertransfer.json", "UberTransfer")
+    aereostar_ads = read_google_ads_status(DATA / "google_ads_aereostar.json", "Aereostar", ("24331409273",))
     assert len(tr["indice_mensual"]) == 12, "Trends: faltan meses"
     meta = {
         "srcName": src_meta["srcName"], "srcSha": src_sha, "srcRows": src_meta["rows"],
         "dataSha": data_sha, "exportedAt": src_meta["exportedAt"],
         "builtAt": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "audit": audit, "forecast": forecast, "trends": tr, "seoStatus": seo_status,
+        "googleAds": google_ads,
     }
 
     meta["ampliacion"] = read_ampliacion()
@@ -329,13 +367,13 @@ def main():
         (BUILD / f"page_{nm}.html").write_text(src.replace("__DATA__", "[]").replace("__META__", "{}").replace("__CSS__", ""), encoding="utf-8")
     css = tailwind_css(env) + read_text(TOOL / "extra.css")
     assert len(css) > 20000, f"el CSS de Tailwind salió demasiado chico ({len(css)} bytes): faltan clases; no se publica"
-    SECRET_KEYS = ("srcName", "srcSha", "srcRows", "dataSha", "exportedAt", "forecast", "trends", "ampliacion")
+    SECRET_KEYS = ("srcName", "srcSha", "srcRows", "dataSha", "exportedAt", "forecast", "trends", "ampliacion", "googleAds")
     import re as _re
     VARIANTS = [
         {"name": "UberTransfer", "ias": "ias.html", "transform": lambda p: p, "enc": ENC_FILE, "meta": meta,
          "site": ROOT / "site", "docs": ROOT / "docs" / "panel_keywords.html"},
         {"name": "Aereostar", "ias": "ias_aereostar.html", "transform": ae_tf, "enc": DATA / "panel_data_aereostar.enc.json",
-         "meta": dict(meta, ampliacion=[], audit=ae_audit), "site": ROOT / "site" / "aereostar",
+         "meta": dict(meta, ampliacion=[], audit=ae_audit, googleAds=aereostar_ads), "site": ROOT / "site" / "aereostar",
          "docs": ROOT / "docs" / "panel_aereostar.html"},
     ]
     resumen = []

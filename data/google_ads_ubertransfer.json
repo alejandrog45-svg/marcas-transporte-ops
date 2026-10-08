@@ -1,0 +1,22 @@
+{
+  "brand": "UberTransfer",
+  "customerId": "2035504421",
+  "campaignIds": [],
+  "campaignNames": ["Campaign #1"],
+  "mode": "read_only",
+  "status": "pending_api",
+  "lastSync": null,
+  "source": "Google Ads API",
+  "metrics": null,
+  "observed": {
+    "at": "2026-10-08T14:50:00-03:00",
+    "period": "últimos 30 días",
+    "source": "captura proporcionada por el usuario",
+    "impressions": 479,
+    "clicks": 36,
+    "costClp": 11878,
+    "avgCpcClp": 330,
+    "conversions": 0,
+    "conversionRate": 0
+  }
+}

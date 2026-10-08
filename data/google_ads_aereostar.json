@@ -1,0 +1,22 @@
+{
+  "brand": "Aereostar",
+  "customerId": "5485308262",
+  "campaignIds": ["24331409273"],
+  "campaignNames": ["Campaign #1"],
+  "mode": "read_only",
+  "status": "paused",
+  "lastSync": null,
+  "source": "Google Ads API",
+  "metrics": null,
+  "observed": {
+    "at": "2026-10-08T14:51:00-03:00",
+    "period": "vista actual",
+    "source": "captura proporcionada por el usuario",
+    "impressions": 0,
+    "clicks": 0,
+    "costClp": 0,
+    "conversions": 0,
+    "conversionRate": 0,
+    "note": "Campaña detenida; el sitio aún no está operativo y Google muestra aviso para ingresar una nueva forma de pago."
+  }
+}

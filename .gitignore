@@ -19,6 +19,7 @@ venv/
 # Sistema
 .DS_Store
 Thumbs.db
+.codex-remote-attachments/
 
 # Firebase
 .firebase/

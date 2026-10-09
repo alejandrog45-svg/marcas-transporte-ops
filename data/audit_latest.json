@@ -4,10 +4,9 @@
   {
    "url": "https://ubertransfer.cl/",
    "status": 200,
-   "seconds": 3.67,
+   "seconds": 2.74,
    "issues": [
-    "39 imágenes sin lazy-load",
-    "respuesta lenta (3.7s)"
+    "39 imágenes sin lazy-load"
    ],
    "info": {
     "title": "Traslados desde/hacia el Aeropuerto de Santiago | UberTransfer",
@@ -26,11 +25,10 @@
   {
    "url": "https://ubertransfer.cl/nosotros-transfer-aeropuerto-santiago/",
    "status": 200,
-   "seconds": 4.21,
+   "seconds": 1.95,
    "issues": [
     "title largo (92 car.)",
-    "13 imágenes sin lazy-load",
-    "respuesta lenta (4.2s)"
+    "13 imágenes sin lazy-load"
    ],
    "info": {
     "title": "Conoce a UberTransfer: Tu Socio Confiable en Traslados desde/hacia el Aeropuerto de Santiago",
@@ -49,12 +47,11 @@
   {
    "url": "https://ubertransfer.cl/servicio-transfer-aeropuerto-santiago/",
    "status": 200,
-   "seconds": 4.56,
+   "seconds": 2.39,
    "issues": [
     "title largo (74 car.)",
     "description larga (181 car.)",
-    "10 imágenes sin lazy-load",
-    "respuesta lenta (4.6s)"
+    "10 imágenes sin lazy-load"
    ],
    "info": {
     "title": "Servicios de Traslado desde/hacia el Aeropuerto de Santiago | UberTransfer",
@@ -73,10 +70,9 @@
   {
    "url": "https://ubertransfer.cl/contacto-transfer-aeropuerto-santiago/",
    "status": 200,
-   "seconds": 3.6,
+   "seconds": 2.36,
    "issues": [
-    "title largo (82 car.)",
-    "respuesta lenta (3.6s)"
+    "title largo (82 car.)"
    ],
    "info": {
     "title": "Contacta a UberTransfer: Reserva tu Traslado desde/hacia el Aeropuerto de Santiago",
@@ -93,7 +89,7 @@
    }
   }
  ],
- "generated": "2026-10-09T02:32:54Z",
+ "generated": "2026-10-09T02:36:36Z",
  "discovery": {
   "robots": 200,
   "sitemaps": [

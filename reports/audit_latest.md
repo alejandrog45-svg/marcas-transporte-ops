@@ -1,13 +1,10 @@
 # Informe UberTransfer
 
-## Alertas
-- 🟠 https://ubertransfer.cl/ lenta (3.67s)
-- 🟠 https://ubertransfer.cl/nosotros-transfer-aeropuerto-santiago/ lenta (4.21s)
-- 🟠 https://ubertransfer.cl/servicio-transfer-aeropuerto-santiago/ lenta (4.56s)
-- 🟠 https://ubertransfer.cl/contacto-transfer-aeropuerto-santiago/ lenta (3.6s)
+## Sin alertas
+Todo dentro de los umbrales.
 
 ## Auditoría técnica (4 páginas, 4 con observaciones)
-- https://ubertransfer.cl/: 39 imágenes sin lazy-load; respuesta lenta (3.7s)
-- https://ubertransfer.cl/nosotros-transfer-aeropuerto-santiago/: title largo (92 car.); 13 imágenes sin lazy-load; respuesta lenta (4.2s)
-- https://ubertransfer.cl/servicio-transfer-aeropuerto-santiago/: title largo (74 car.); description larga (181 car.); 10 imágenes sin lazy-load; respuesta lenta (4.6s)
-- https://ubertransfer.cl/contacto-transfer-aeropuerto-santiago/: title largo (82 car.); respuesta lenta (3.6s)
+- https://ubertransfer.cl/: 39 imágenes sin lazy-load
+- https://ubertransfer.cl/nosotros-transfer-aeropuerto-santiago/: title largo (92 car.); 13 imágenes sin lazy-load
+- https://ubertransfer.cl/servicio-transfer-aeropuerto-santiago/: title largo (74 car.); description larga (181 car.); 10 imágenes sin lazy-load
+- https://ubertransfer.cl/contacto-transfer-aeropuerto-santiago/: title largo (82 car.)

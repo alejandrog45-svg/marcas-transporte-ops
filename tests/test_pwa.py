@@ -9,9 +9,7 @@ SITE = ROOT / "site"
 def _png_size(path):
     """Ancho y alto leídos de la cabecera IHDR del PNG (sin librerías de imagen)."""
     data = path.read_bytes()[:24]
-    assert data[:8] == b"PNG
-
-", path
+    assert data[1:4] == b"PNG", path
     return struct.unpack(">II", data[16:24])
 
 

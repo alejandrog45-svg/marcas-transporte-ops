@@ -149,3 +149,30 @@ def test_call_gemini_raises_when_every_model_fails(monkeypatch):
     monkeypatch.setattr(ai, "FALLBACK_MODELS", ("b",))
     with pytest.raises(RuntimeError, match="Gemini no respondió"):
         ai.call_gemini("p", "clave", "a")
+
+
+def _build_module():
+    spec = importlib.util.spec_from_file_location("panel_build", Path(__file__).parents[1] / "tools" / "panel" / "build.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def test_build_reads_ai_suggestions_and_ignores_missing_or_corrupt_file(tmp_path):
+    build = _build_module()
+    assert build.read_ai_suggestions(tmp_path / "no_existe.json") is None
+    bad = tmp_path / "bad.json"
+    bad.write_text("{no es json", encoding="utf-8")
+    assert build.read_ai_suggestions(bad) is None
+    good = tmp_path / "ai.json"
+    good.write_text(json.dumps({
+        "source": "IA (m)", "generatedAt": "2026-10-09T19:00:00Z", "adsLastSync": "x", "detailDays": 3,
+        "rejected": ["una"], "extra": "no debe pasar",
+        "suggestions": [
+            {"title": "Revisar", "action": "a", "reason": "r", "confidence": "Alta", "refs": ["dias"], "evidence": {"dias": {"filas": []}}},
+            {"title": "   ", "action": "sin título se descarta"},
+        ]}), encoding="utf-8")
+    out = build.read_ai_suggestions(good)
+    assert out["rejected"] == 1 and out["detailDays"] == 3 and "extra" not in out
+    assert [s["title"] for s in out["suggestions"]] == ["Revisar"]
+    assert out["suggestions"][0]["confidence"] == "Baja"  # una confianza no permitida se baja a "Baja"

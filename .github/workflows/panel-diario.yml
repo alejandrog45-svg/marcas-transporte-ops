@@ -50,6 +50,12 @@ jobs:
             python tools/panel/sync_suggestions_firestore.py
           fi
 
+      - name: Sugerencias con IA (Gemini, solo lectura)
+        continue-on-error: true   # la IA es un extra: si falla, el panel se arma igual con las sugerencias de reglas
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python tools/panel/ai_enrich_suggestions.py
+
       - name: Armar panel
         env:
           PANEL_DATA_KEY: ${{ secrets.PANEL_DATA_KEY }}

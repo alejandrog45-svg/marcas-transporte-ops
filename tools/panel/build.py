@@ -73,6 +73,32 @@ def read_google_ads_status(path, brand, default_campaign_ids=()):
             "reports": reports, "observed": obj.get("observed")}
 
 
+def read_ai_suggestions(path):
+    """Sugerencias redactadas por la IA (Gemini). Es un extra: si falta o viene dañado, el panel se arma sin él."""
+    p = Path(path)
+    if not p.exists():
+        return None
+    try:
+        obj = json.loads(read_text(p))
+    except ValueError:
+        return None
+    items = obj.get("suggestions") if isinstance(obj, dict) else None
+    if not isinstance(items, list):
+        return None
+    clean = []
+    for it in items[:5]:
+        if not isinstance(it, dict) or not str(it.get("title", "")).strip():
+            continue
+        clean.append({"title": str(it["title"])[:200], "action": str(it.get("action", ""))[:500],
+                      "reason": str(it.get("reason", ""))[:500],
+                      "confidence": it.get("confidence") if it.get("confidence") in ("Baja", "Media") else "Baja",
+                      "refs": [str(r) for r in (it.get("refs") or [])][:6],
+                      "evidence": it.get("evidence") if isinstance(it.get("evidence"), dict) else {}})
+    return {"source": str(obj.get("source", ""))[:200], "generatedAt": obj.get("generatedAt"),
+            "adsLastSync": obj.get("adsLastSync"), "detailDays": obj.get("detailDays"),
+            "rejected": len(obj.get("rejected") or []), "suggestions": clean}
+
+
 def num(s):
     s = s.replace("%", "").replace("+", "").replace(".", "").replace(",", ".").strip()
     try:
@@ -343,6 +369,7 @@ def main():
     seo_f = DATA / "seo_status.json"
     seo_status = json.loads(read_text(seo_f)) if seo_f.exists() else {"state": "sin_ejecutar", "missing": []}
     google_ads = read_google_ads_status(DATA / "google_ads_ubertransfer.json", "UberTransfer")
+    google_ads["aiSuggestions"] = read_ai_suggestions(DATA / "ai_suggestions_latest.json")
     aereostar_ads = read_google_ads_status(DATA / "google_ads_aereostar.json", "Aereostar", ("24331409273",))
     assert len(tr["indice_mensual"]) == 12, "Trends: faltan meses"
     meta = {

@@ -30,10 +30,10 @@
   "alerts": [],
   "mode": "read_only",
   "status": "connected",
-  "lastSync": "2026-10-09T22:17:05.809916Z",
+  "lastSync": "2026-10-09T22:26:00.013771Z",
   "source": "Google Ads API",
   "metrics": {
-    "impressions": 800,
+    "impressions": 817,
     "clicks": 44,
     "costClp": 11267,
     "conversions": 0.0,
@@ -82,7 +82,7 @@
       "topImpressionPercentage": null
     },
     {
-      "impressions": 800,
+      "impressions": 817,
       "clicks": 44,
       "costClp": 11267,
       "conversions": 0.0,
@@ -139,11 +139,11 @@
       "name": "Campaign #1",
       "status": "ENABLED",
       "date": "2026-10-09",
-      "impressions": 800,
+      "impressions": 817,
       "clicks": 44,
       "costMicros": 11267000000,
       "costClp": 11267,
-      "ctr": 0.055,
+      "ctr": 0.05385556915544676,
       "conversions": 0.0,
       "averageCpc": 0.0,
       "costPerConversion": 0.0,
@@ -720,7 +720,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 51,
+        "impressions": 56,
         "clicks": 3,
         "costClp": 622,
         "conversions": 0.0,
@@ -740,12 +740,35 @@
         "absoluteTopImpressionPercentage": null,
         "topImpressionPercentage": null,
         "hour": 18
+      },
+      {
+        "date": "2026-10-09",
+        "impressions": 12,
+        "clicks": 0,
+        "costClp": 0,
+        "conversions": 0.0,
+        "averageCpc": null,
+        "costPerConversion": null,
+        "conversionsValue": null,
+        "allConversions": null,
+        "allConversionsValue": null,
+        "phoneCalls": null,
+        "messageChats": null,
+        "interactions": null,
+        "invalidClicks": null,
+        "searchImpressionShare": null,
+        "searchBudgetLostImpressionShare": null,
+        "searchRankLostImpressionShare": null,
+        "searchTopImpressionShare": null,
+        "absoluteTopImpressionPercentage": null,
+        "topImpressionPercentage": null,
+        "hour": 19
       }
     ],
     "devices": [
       {
         "date": null,
-        "impressions": 311,
+        "impressions": 312,
         "clicks": 16,
         "costClp": 3744,
         "conversions": 0.0,
@@ -768,7 +791,7 @@
       },
       {
         "date": null,
-        "impressions": 1274,
+        "impressions": 1290,
         "clicks": 80,
         "costClp": 22591,
         "conversions": 0.0,
@@ -842,7 +865,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 800,
+        "impressions": 817,
         "clicks": 44,
         "costClp": 11267,
         "conversions": 0.0,
@@ -899,7 +922,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 800,
+        "impressions": 817,
         "clicks": 44,
         "costClp": 11267,
         "conversions": 0.0,
@@ -6141,7 +6164,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 43,
+        "impressions": 44,
         "clicks": 4,
         "costClp": 1075,
         "conversions": 0.0,
@@ -6276,7 +6299,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 42,
+        "impressions": 43,
         "clicks": 1,
         "costClp": 274,
         "conversions": 0.0,
@@ -6519,7 +6542,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 1,
+        "impressions": 2,
         "clicks": 1,
         "costClp": 91,
         "conversions": 0.0,
@@ -8185,6 +8208,33 @@
         "searchTopImpressionShare": null,
         "absoluteTopImpressionPercentage": null,
         "topImpressionPercentage": null,
+        "term": "cuanto sale un transfer al aeropuerto",
+        "campaignId": "24325669851",
+        "campaignName": "Campaign #1",
+        "adGroupId": "201907353538",
+        "adGroupName": "Grupo de anuncios 1"
+      },
+      {
+        "date": "2026-10-09",
+        "impressions": 1,
+        "clicks": 0,
+        "costClp": 0,
+        "conversions": 0.0,
+        "averageCpc": null,
+        "costPerConversion": null,
+        "conversionsValue": null,
+        "allConversions": null,
+        "allConversionsValue": null,
+        "phoneCalls": null,
+        "messageChats": null,
+        "interactions": null,
+        "invalidClicks": null,
+        "searchImpressionShare": null,
+        "searchBudgetLostImpressionShare": null,
+        "searchRankLostImpressionShare": null,
+        "searchTopImpressionShare": null,
+        "absoluteTopImpressionPercentage": null,
+        "topImpressionPercentage": null,
         "term": "de dónde salen los buses que van al aeropuerto",
         "campaignId": "24325669851",
         "campaignName": "Campaign #1",
@@ -9813,7 +9863,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 1,
+        "impressions": 2,
         "clicks": 0,
         "costClp": 0,
         "conversions": 0.0,
@@ -9975,7 +10025,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 26,
+        "impressions": 28,
         "clicks": 0,
         "costClp": 0,
         "conversions": 0.0,
@@ -10056,7 +10106,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 2,
+        "impressions": 3,
         "clicks": 0,
         "costClp": 0,
         "conversions": 0.0,
@@ -10353,7 +10403,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 1,
+        "impressions": 2,
         "clicks": 0,
         "costClp": 0,
         "conversions": 0.0,
@@ -11624,7 +11674,7 @@
     "regions": [
       {
         "date": null,
-        "impressions": 1089,
+        "impressions": 1100,
         "clicks": 67,
         "costClp": 17662,
         "conversions": 0.0,
@@ -11644,11 +11694,17 @@
         "absoluteTopImpressionPercentage": null,
         "topImpressionPercentage": null,
         "countryCriterionId": "2152",
-        "locationType": "AREA_OF_INTEREST"
+        "locationType": "AREA_OF_INTEREST",
+        "geoTargetId": "2152",
+        "name": "Chile",
+        "canonicalName": "Chile",
+        "countryCode": "CL",
+        "targetType": "Country",
+        "geoStatus": "ENABLED"
       },
       {
         "date": null,
-        "impressions": 505,
+        "impressions": 511,
         "clicks": 29,
         "costClp": 8673,
         "conversions": 0.0,
@@ -11668,7 +11724,13 @@
         "absoluteTopImpressionPercentage": null,
         "topImpressionPercentage": null,
         "countryCriterionId": "2152",
-        "locationType": "LOCATION_OF_PRESENCE"
+        "locationType": "LOCATION_OF_PRESENCE",
+        "geoTargetId": "2152",
+        "name": "Chile",
+        "canonicalName": "Chile",
+        "countryCode": "CL",
+        "targetType": "Country",
+        "geoStatus": "ENABLED"
       }
     ],
     "dayOfWeek": [
@@ -11697,7 +11759,7 @@
       },
       {
         "date": null,
-        "impressions": 800,
+        "impressions": 817,
         "clicks": 44,
         "costClp": 11267,
         "conversions": 0.0,
@@ -11722,7 +11784,7 @@
     "networks": [
       {
         "date": null,
-        "impressions": 1594,
+        "impressions": 1611,
         "clicks": 96,
         "costClp": 26335,
         "conversions": 0.0,
@@ -11943,7 +12005,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 320,
+        "impressions": 329,
         "clicks": 27,
         "costClp": 6655,
         "conversions": 0.0,
@@ -11971,7 +12033,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 366,
+        "impressions": 371,
         "clicks": 7,
         "costClp": 1901,
         "conversions": 0.0,
@@ -11999,7 +12061,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 48,
+        "impressions": 49,
         "clicks": 5,
         "costClp": 1329,
         "conversions": 0.0,
@@ -12027,7 +12089,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 35,
+        "impressions": 36,
         "clicks": 4,
         "costClp": 1085,
         "conversions": 0.0,
@@ -12055,7 +12117,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 11,
+        "impressions": 12,
         "clicks": 1,
         "costClp": 297,
         "conversions": 0.0,

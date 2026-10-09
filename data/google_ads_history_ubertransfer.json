@@ -1,19 +1,19 @@
-{"brand": "UberTransfer", "keepDays": 90, "days": ["2026-10-08", "2026-10-09"], "updatedAt": "2026-10-09T20:07:41.396511Z","reports":{
+{"brand": "UberTransfer", "keepDays": 90, "days": ["2026-10-08", "2026-10-09"], "updatedAt": "2026-10-09T20:22:45.477948Z","reports":{
 "adGroups":[
 {"date":"2026-10-08","impressions":794,"clicks":52,"costClp":15068,"conversions":0.0,"campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
-{"date":"2026-10-09","impressions":679,"clicks":41,"costClp":10645,"conversions":0.0,"campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"}
+{"date":"2026-10-09","impressions":694,"clicks":41,"costClp":10645,"conversions":0.0,"campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"}
 ],
 "ads":[
 {"date":"2026-10-08","impressions":794,"clicks":52,"costClp":15068,"conversions":0.0,"adId":"827317110463","adName":"","adStatus":"ENABLED","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
-{"date":"2026-10-09","impressions":679,"clicks":41,"costClp":10645,"conversions":0.0,"adId":"827317110463","adName":"","adStatus":"ENABLED","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"}
+{"date":"2026-10-09","impressions":694,"clicks":41,"costClp":10645,"conversions":0.0,"adId":"827317110463","adName":"","adStatus":"ENABLED","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"}
 ],
 "dayOfWeek":[
 {"date":null,"impressions":794,"clicks":52,"costClp":15068,"conversions":0.0,"dayOfWeek":"THURSDAY"},
-{"date":null,"impressions":677,"clicks":41,"costClp":10645,"conversions":0.0,"dayOfWeek":"FRIDAY"}
+{"date":null,"impressions":694,"clicks":41,"costClp":10645,"conversions":0.0,"dayOfWeek":"FRIDAY"}
 ],
 "devices":[
-{"date":null,"impressions":296,"clicks":16,"costClp":3744,"conversions":0.0,"device":"DESKTOP"},
-{"date":null,"impressions":1168,"clicks":77,"costClp":21969,"conversions":0.0,"device":"MOBILE"},
+{"date":null,"impressions":299,"clicks":16,"costClp":3744,"conversions":0.0,"device":"DESKTOP"},
+{"date":null,"impressions":1180,"clicks":77,"costClp":21969,"conversions":0.0,"device":"MOBILE"},
 {"date":null,"impressions":9,"clicks":0,"costClp":0,"conversions":0.0,"device":"TABLET"}
 ],
 "hourly":[
@@ -39,7 +39,8 @@
 {"date":"2026-10-09","impressions":100,"clicks":3,"costClp":662,"conversions":0.0,"hour":13},
 {"date":"2026-10-09","impressions":121,"clicks":8,"costClp":2203,"conversions":0.0,"hour":14},
 {"date":"2026-10-09","impressions":16,"clicks":4,"costClp":803,"conversions":0.0,"hour":15},
-{"date":"2026-10-09","impressions":28,"clicks":2,"costClp":410,"conversions":0.0,"hour":16}
+{"date":"2026-10-09","impressions":38,"clicks":2,"costClp":410,"conversions":0.0,"hour":16},
+{"date":"2026-10-09","impressions":5,"clicks":0,"costClp":0,"conversions":0.0,"hour":17}
 ],
 "keywords":[
 {"date":"2026-10-08","impressions":347,"clicks":25,"costClp":7089,"conversions":0.0,"keyword":"transporte aeropuerto","matchType":"PHRASE","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
@@ -49,20 +50,20 @@
 {"date":"2026-10-08","impressions":45,"clicks":1,"costClp":329,"conversions":0.0,"keyword":"transfer aeropuerto","matchType":"EXACT","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-08","impressions":11,"clicks":0,"costClp":0,"conversions":0.0,"keyword":"transfer","matchType":"EXACT","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-08","impressions":2,"clicks":0,"costClp":0,"conversions":0.0,"keyword":"aeropuerto","matchType":"EXACT","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
-{"date":"2026-10-09","impressions":274,"clicks":25,"costClp":6280,"conversions":0.0,"keyword":"transfer aeropuerto","matchType":"PHRASE","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
-{"date":"2026-10-09","impressions":315,"clicks":7,"costClp":1901,"conversions":0.0,"keyword":"transporte aeropuerto","matchType":"PHRASE","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
-{"date":"2026-10-09","impressions":35,"clicks":5,"costClp":1329,"conversions":0.0,"keyword":"transfer aeropuerto","matchType":"EXACT","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
+{"date":"2026-10-09","impressions":279,"clicks":25,"costClp":6280,"conversions":0.0,"keyword":"transfer aeropuerto","matchType":"PHRASE","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
+{"date":"2026-10-09","impressions":323,"clicks":7,"costClp":1901,"conversions":0.0,"keyword":"transporte aeropuerto","matchType":"PHRASE","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
+{"date":"2026-10-09","impressions":36,"clicks":5,"costClp":1329,"conversions":0.0,"keyword":"transfer aeropuerto","matchType":"EXACT","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":29,"clicks":3,"costClp":838,"conversions":0.0,"keyword":"transfer aeropuerto santiago","matchType":"PHRASE","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":10,"clicks":1,"costClp":297,"conversions":0.0,"keyword":"transporte aeropuerto","matchType":"EXACT","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":13,"clicks":0,"costClp":0,"conversions":0.0,"keyword":"transfer","matchType":"EXACT","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":3,"clicks":0,"costClp":0,"conversions":0.0,"keyword":"aeropuerto","matchType":"EXACT","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"}
 ],
 "networks":[
-{"date":null,"impressions":1473,"clicks":93,"costClp":25713,"conversions":0.0,"network":"SEARCH"}
+{"date":null,"impressions":1488,"clicks":93,"costClp":25713,"conversions":0.0,"network":"SEARCH"}
 ],
 "regions":[
-{"date":null,"impressions":1002,"clicks":64,"costClp":17040,"conversions":0.0,"countryCriterionId":"2152","locationType":"AREA_OF_INTEREST"},
-{"date":null,"impressions":471,"clicks":29,"costClp":8673,"conversions":0.0,"countryCriterionId":"2152","locationType":"LOCATION_OF_PRESENCE"}
+{"date":null,"impressions":1013,"clicks":64,"costClp":17040,"conversions":0.0,"countryCriterionId":"2152","locationType":"AREA_OF_INTEREST"},
+{"date":null,"impressions":474,"clicks":29,"costClp":8673,"conversions":0.0,"countryCriterionId":"2152","locationType":"LOCATION_OF_PRESENCE"}
 ],
 "searchTerms":[
 {"date":"2026-10-08","impressions":53,"clicks":2,"costClp":441,"conversions":0.0,"term":"cabify aeropuerto","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
@@ -258,12 +259,12 @@
 {"date":"2026-10-08","impressions":2,"clicks":0,"costClp":0,"conversions":0.0,"term":"wetransport chile","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-08","impressions":1,"clicks":0,"costClp":0,"conversions":0.0,"term":"www transvip","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-08","impressions":1,"clicks":0,"costClp":0,"conversions":0.0,"term":"www transvip cl tarifas","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
-{"date":"2026-10-09","impressions":31,"clicks":4,"costClp":1075,"conversions":0.0,"term":"transfer aeropuerto","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
+{"date":"2026-10-09","impressions":32,"clicks":4,"costClp":1075,"conversions":0.0,"term":"transfer aeropuerto","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":1,"clicks":2,"costClp":410,"conversions":0.0,"term":"cabify aeropuerto teléfono","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":12,"clicks":2,"costClp":635,"conversions":0.0,"term":"transfer aeropuerto santiago","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":1,"clicks":2,"costClp":430,"conversions":0.0,"term":"transfer de viña al aeropuerto","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":2,"clicks":2,"costClp":482,"conversions":0.0,"term":"uber transfer","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
-{"date":"2026-10-09","impressions":33,"clicks":1,"costClp":274,"conversions":0.0,"term":"cabify aeropuerto","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
+{"date":"2026-10-09","impressions":35,"clicks":1,"costClp":274,"conversions":0.0,"term":"cabify aeropuerto","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":1,"clicks":1,"costClp":366,"conversions":0.0,"term":"número telefónico de transvip","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":3,"clicks":1,"costClp":203,"conversions":0.0,"term":"transfer aeropuerto santiago valor","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":1,"clicks":1,"costClp":265,"conversions":0.0,"term":"transfer del aeropuerto de santiago de chile","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
@@ -314,6 +315,7 @@
 {"date":"2026-10-09","impressions":1,"clicks":0,"costClp":0,"conversions":0.0,"term":"cmr traslado aeropuerto","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":1,"clicks":0,"costClp":0,"conversions":0.0,"term":"como ir de viña del mar al aeropuerto de santiago","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":1,"clicks":0,"costClp":0,"conversions":0.0,"term":"como ir del aeropuerto de santiago de chile a las condes","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
+{"date":"2026-10-09","impressions":1,"clicks":0,"costClp":0,"conversions":0.0,"term":"como ir desde el aeropuerto de santiago de chile al centro","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":2,"clicks":0,"costClp":0,"conversions":0.0,"term":"como llegar aeropuerto santiago","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":1,"clicks":0,"costClp":0,"conversions":0.0,"term":"como llegar al aeropuerto","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":4,"clicks":0,"costClp":0,"conversions":0.0,"term":"como llegar al aeropuerto de santiago","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
@@ -383,13 +385,13 @@
 {"date":"2026-10-09","impressions":1,"clicks":0,"costClp":0,"conversions":0.0,"term":"transporte publico al aeropuerto de santiago","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":1,"clicks":0,"costClp":0,"conversions":0.0,"term":"transvip","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":2,"clicks":0,"costClp":0,"conversions":0.0,"term":"transvip aeroporto santiago","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
-{"date":"2026-10-09","impressions":23,"clicks":0,"costClp":0,"conversions":0.0,"term":"transvip aeropuerto","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
+{"date":"2026-10-09","impressions":24,"clicks":0,"costClp":0,"conversions":0.0,"term":"transvip aeropuerto","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":5,"clicks":0,"costClp":0,"conversions":0.0,"term":"transvip aeropuerto santiago","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":1,"clicks":0,"costClp":0,"conversions":0.0,"term":"transvip aeropuerto santiago de chile","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":2,"clicks":0,"costClp":0,"conversions":0.0,"term":"transvip al aeropuerto","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":1,"clicks":0,"costClp":0,"conversions":0.0,"term":"transvip antofagasta telefono","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":1,"clicks":0,"costClp":0,"conversions":0.0,"term":"transvip chile aeroporto","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
-{"date":"2026-10-09","impressions":4,"clicks":0,"costClp":0,"conversions":0.0,"term":"transvip descuento","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
+{"date":"2026-10-09","impressions":5,"clicks":0,"costClp":0,"conversions":0.0,"term":"transvip descuento","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":2,"clicks":0,"costClp":0,"conversions":0.0,"term":"transvip reserva","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":2,"clicks":0,"costClp":0,"conversions":0.0,"term":"transvip santiago aeropuerto","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":2,"clicks":0,"costClp":0,"conversions":0.0,"term":"transvip telefono","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
@@ -421,6 +423,7 @@
 {"date":"2026-10-09","impressions":1,"clicks":0,"costClp":0,"conversions":0.0,"term":"ultimo bus de pajaritos al aeropuerto","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":1,"clicks":0,"costClp":0,"conversions":0.0,"term":"valor centropuerto santiago","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":1,"clicks":0,"costClp":0,"conversions":0.0,"term":"valor de transfer aeropuerto santiago","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
+{"date":"2026-10-09","impressions":1,"clicks":0,"costClp":0,"conversions":0.0,"term":"valor taxi terminal alameda aeropuerto","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":1,"clicks":0,"costClp":0,"conversions":0.0,"term":"valor transfer aeropuerto valdivia","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":1,"clicks":0,"costClp":0,"conversions":0.0,"term":"valor transfer antofagasta aeropuerto","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":1,"clicks":0,"costClp":0,"conversions":0.0,"term":"valor transfer viña aeropuerto","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},

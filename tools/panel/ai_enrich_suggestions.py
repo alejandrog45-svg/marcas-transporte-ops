@@ -67,6 +67,39 @@ def aggregate(rows: list[dict[str, Any]], key: str) -> list[dict[str, Any]]:
     return sorted(out, key=lambda r: (-r["clicks"], -r["costClp"], r[key]))
 
 
+def pct(value: Any) -> float | None:
+    """Fracción de Google (0,62) -> porcentaje con un decimal (62,3). Sin dato -> None, nunca 0."""
+    return None if value is None else round(num(value) * 100, 1)
+
+
+def quality_rows(data: dict[str, Any], history: dict[str, Any], partial_day: str) -> list[dict[str, Any]]:
+    """Cuota de impresiones y pérdidas por día. Las cuotas solo se informan con una campaña ese día."""
+    # Por cada día manda la fuente más reciente: el historial trae los días viejos y los datos frescos
+    # reemplazan al historial en los días que traen (el historial anterior no guardaba las cuotas).
+    by_day: dict[str, list[dict[str, Any]]] = {}
+    for source in ((history.get("reports") or {}).get("campaignQuality"), (data.get("reports") or {}).get("campaignQuality")):
+        grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
+        for row in source if isinstance(source, list) else []:
+            if row.get("date"):
+                grouped[str(row["date"])].append(row)
+        by_day.update(grouped)
+    out = []
+    for day in sorted(by_day)[-14:]:
+        rs = by_day[day]
+        item: dict[str, Any] = {"fecha": day, "diaParcial": day == partial_day}
+        for key, label in (("interactions", "interacciones"), ("invalidClicks", "clicsInvalidos"), ("phoneCalls", "llamadas")):
+            vals = [num(r.get(key)) for r in rs if r.get(key) is not None]
+            item[label] = int(sum(vals)) if vals else None
+        if len(rs) == 1:
+            r = rs[0]
+            item.update({"cuotaImpresionesPct": pct(r.get("searchImpressionShare")),
+                         "perdidaPorPresupuestoPct": pct(r.get("searchBudgetLostImpressionShare")),
+                         "perdidaPorRankingPct": pct(r.get("searchRankLostImpressionShare")),
+                         "cuotaPrimerasPosicionesPct": pct(r.get("searchTopImpressionShare"))})
+        out.append({k: v for k, v in item.items() if v is not None})
+    return out
+
+
 def build_facts(data: dict[str, Any], history: dict[str, Any]) -> dict[str, dict[str, Any]]:
     """Hechos verificables calculados con reglas fijas. Cada uno lleva un id citable."""
     facts: dict[str, dict[str, Any]] = {}
@@ -94,6 +127,16 @@ def build_facts(data: dict[str, Any], history: dict[str, Any]) -> dict[str, dict
     devices = aggregate(detail_rows("devices", data, history), "device")
     facts["dispositivos"] = {"descripcion": "Clics, impresiones y costo por dispositivo, sumando el historial",
                              "filas": [{"dispositivo": r["device"], "clics": r["clicks"], "impresiones": r["impressions"], "costoClp": r["costClp"]} for r in devices]}
+    settings_rows = (data.get("reports") or {}).get("campaignSettings")
+    settings = settings_rows[0] if isinstance(settings_rows, list) and settings_rows else {}
+    facts["cuota_y_presupuesto"] = {
+        "descripcion": ("Presupuesto diario y, por día, qué porcentaje de las impresiones posibles se obtuvo y cuánto se perdió "
+                        "por presupuesto o por ranking. Un día parcial aún no terminó"),
+        "presupuestoDiarioClp": settings.get("dailyBudgetClp"),
+        "estrategiaDePuja": settings.get("biddingStrategy"),
+        "filas": quality_rows(data, history, partial_day),
+    }
+    facts["cuota_y_presupuesto"] = {k: v for k, v in facts["cuota_y_presupuesto"].items() if v is not None}
     days = sorted({str(r.get("date")) for name in ("searchTerms", "hourly", "devices") for r in detail_rows(name, data, history) if r.get("date")})
     facts["cobertura"] = {"descripcion": "Cuántos días de historial detallado existen (pocos días = conclusiones débiles)",
                           "diasConDetalle": len(days), "desde": days[0] if days else None, "hasta": days[-1] if days else None,
@@ -108,7 +151,9 @@ def build_prompt(facts: dict[str, dict[str, Any]], campaign: str) -> str:
         "REGLAS ESTRICTAS:\n"
         "- Usa solo los hechos entregados. No inventes ni calcules cifras nuevas; si citas un número, debe aparecer tal cual en un hecho que cites.\n"
         "- Cada propuesta debe citar al menos un id de hecho en \"refs\" (ids válidos: " + ", ".join(facts) + ").\n"
-        "- No propongas cambiar presupuesto, pujas ni pausar la campaña: solo revisar, comparar o probar algo con aprobación del dueño.\n"
+        "- Objetivo permanente: conseguir más clics de la campaña con datos reales. Prioriza lo que más clics podría aportar.\n"
+        "- No ejecutes ni des por hecho cambios de presupuesto, pujas ni pausas. Si la pérdida por presupuesto o por ranking es alta, "
+        "puedes proponer que el dueño EVALÚE cambiarlos, citando los porcentajes del hecho \"cuota_y_presupuesto\".\n"
         "- Si hay pocos días de historial (hecho \"cobertura\"), dilo y baja la confianza. El día con diaParcial=true no está completo.\n"
         "- Sin conversiones registradas no hables de rentabilidad ni de ventas: solo de tráfico.\n"
         "- Máximo " + str(MAX_SUGGESTIONS) + " propuestas, en español, claras y breves.\n"

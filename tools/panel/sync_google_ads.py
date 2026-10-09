@@ -471,19 +471,21 @@ def update_report_history(reports: dict, previous_reports: dict | None, path: Pa
     def dated(rows) -> bool:
         return isinstance(rows, list) and bool(rows) and isinstance(rows[0], dict) and "date" in rows[0]
 
-    def compact(row: dict) -> dict:
-        return {k: v for k, v in row.items() if k not in HISTORY_DROP or k in HISTORY_VALUES}
+    def compact(row: dict, name: str = "") -> dict:
+        # campaignQuality es el único informe que conserva las cuotas de impresión y los conteos de calidad
+        keep = HISTORY_VALUES + ((QUALITY_SUMS + QUALITY_SHARES) if name == "campaignQuality" else ())
+        return {k: v for k, v in row.items() if k not in HISTORY_DROP or k in keep}
 
     if not acc:  # primera vez: se siembra con lo que ya tenía el archivo anterior
         for name, rows in (previous_reports or {}).items():
             if dated(rows):
-                acc[name] = [compact(r) for r in rows]
+                acc[name] = [compact(r, name) for r in rows]
     for name, rows in reports.items():
         if not dated(rows):
             continue
         fresh_days = {r.get("date") for r in rows}
         kept = [r for r in acc.get(name, []) if r.get("date") not in fresh_days]
-        acc[name] = kept + [compact(r) for r in rows]
+        acc[name] = kept + [compact(r, name) for r in rows]
     days = sorted({r["date"] for rows in acc.values() for r in rows if r.get("date")})
     if len(days) > HISTORY_KEEP_DAYS:
         cutoff = days[-HISTORY_KEEP_DAYS]

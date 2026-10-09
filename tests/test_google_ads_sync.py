@@ -282,3 +282,18 @@ def test_campaign_quality_report_rows_keep_real_base_numbers_and_campaign():
         "metrics": {"impressions": "800", "clicks": "44", "costMicros": "11267000000", "searchImpressionShare": 0.41}}])
     assert rows[0]["campaignId"] == "7" and rows[0]["clicks"] == 44 and rows[0]["costClp"] == 11267
     assert rows[0]["searchImpressionShare"] == 0.41
+
+
+def test_report_history_keeps_quality_shares_only_for_campaign_quality(tmp_path):
+    path = tmp_path / "history.json"
+    quality = {"date": "2026-10-09", "campaignId": "1", "clicks": 41, "impressions": 649, "costClp": 10708,
+               "conversions": 0.0, "searchBudgetLostImpressionShare": 0.62, "searchImpressionShare": 0.3,
+               "interactions": 44, "averageCpc": 261.0}
+    term = {"date": "2026-10-09", "term": "a", "clicks": 1, "impressions": 5, "costClp": 100, "conversions": 0.0,
+            "searchBudgetLostImpressionShare": 0.62}
+    sync.update_report_history({"campaignQuality": [quality], "searchTerms": [term]}, None, path)
+    stored = _stored(path)["reports"]
+    kept = stored["campaignQuality"][0]
+    assert kept["searchBudgetLostImpressionShare"] == 0.62 and kept["searchImpressionShare"] == 0.3
+    assert kept["interactions"] == 44 and "averageCpc" not in kept
+    assert "searchBudgetLostImpressionShare" not in stored["searchTerms"][0]  # en los demás informes se siguen descartando

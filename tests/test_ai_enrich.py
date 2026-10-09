@@ -176,3 +176,64 @@ def test_build_reads_ai_suggestions_and_ignores_missing_or_corrupt_file(tmp_path
     assert out["rejected"] == 1 and out["detailDays"] == 3 and "extra" not in out
     assert [s["title"] for s in out["suggestions"]] == ["Revisar"]
     assert out["suggestions"][0]["confidence"] == "Baja"  # una confianza no permitida se baja a "Baja"
+
+
+def _quality(day, **vals):
+    return {"date": day, "campaignId": "1", "interactions": "44", "invalidClicks": "12", "phoneCalls": "5",
+            "searchImpressionShare": 0.2957, "searchBudgetLostImpressionShare": 0.6228,
+            "searchRankLostImpressionShare": 0.0815, "searchTopImpressionShare": 0.1892, **vals}
+
+
+def _data_with_quality():
+    data = _data()
+    data["reports"]["campaignQuality"] = [_quality("2026-10-09")]
+    data["reports"]["campaignSettings"] = [{"dailyBudgetClp": 15000, "biddingStrategy": "TARGET_SPEND"}]
+    return data
+
+
+def test_facts_include_budget_and_quality_as_percentages_with_one_decimal():
+    facts = ai.build_facts(_data_with_quality(), {})
+    q = facts["cuota_y_presupuesto"]
+    assert q["presupuestoDiarioClp"] == 15000 and q["estrategiaDePuja"] == "TARGET_SPEND"
+    row = q["filas"][0]
+    assert row["cuotaImpresionesPct"] == 29.6 and row["perdidaPorPresupuestoPct"] == 62.3
+    assert row["perdidaPorRankingPct"] == 8.2 and row["clicsInvalidos"] == 12 and row["diaParcial"] is True
+
+
+def test_missing_quality_is_left_out_not_zero():
+    data = _data()  # sin campaignQuality ni campaignSettings
+    q = ai.build_facts(data, {})["cuota_y_presupuesto"]
+    assert q["filas"] == [] and "presupuestoDiarioClp" not in q
+
+
+def test_quality_prefers_fresh_rows_over_old_history_without_shares():
+    history = {"reports": {"campaignQuality": [{"date": "2026-10-09", "campaignId": "1", "clicks": 41},
+                                                {"date": "2026-10-08", "campaignId": "1", "clicks": 52,
+                                                 "searchBudgetLostImpressionShare": 0.778}]}}
+    rows = ai.build_facts(_data_with_quality(), history)["cuota_y_presupuesto"]["filas"]
+    by_day = {r["fecha"]: r for r in rows}
+    assert by_day["2026-10-09"]["perdidaPorPresupuestoPct"] == 62.3  # lo fresco reemplaza al historial sin cuotas
+    assert by_day["2026-10-08"]["perdidaPorPresupuestoPct"] == 77.8  # el día viejo se conserva del historial
+
+
+def test_shares_are_not_reported_when_two_campaigns_share_a_day():
+    data = _data_with_quality()
+    data["reports"]["campaignQuality"] = [_quality("2026-10-09"), {**_quality("2026-10-09"), "campaignId": "2"}]
+    row = ai.build_facts(data, {})["cuota_y_presupuesto"]["filas"][0]
+    assert "cuotaImpresionesPct" not in row and row["interacciones"] == 88  # conteos sí se suman; porcentajes no se promedian
+
+
+def test_validator_accepts_budget_percentages_in_spanish_format_and_rejects_invented_ones():
+    facts = ai.build_facts(_data_with_quality(), {})
+    good = {"title": "Evaluar el presupuesto", "action": "Con una pérdida por presupuesto de 62,3 % y cuota de 29,6 %, evaluar con el dueño.",
+            "reason": "Presupuesto diario de $15.000.", "refs": ["cuota_y_presupuesto"], "confidence": "Media"}
+    bad = {"title": "Subir presupuesto", "action": "Se perdería un 80 % de impresiones.", "reason": "x",
+           "refs": ["cuota_y_presupuesto"], "confidence": "Media"}
+    valid, rejected = ai.validate([good, bad], facts)
+    assert [v["title"] for v in valid] == ["Evaluar el presupuesto"] and len(rejected) == 1 and "80" in rejected[0]
+
+
+def test_prompt_states_the_clicks_goal_and_forbids_executing_budget_changes():
+    prompt = ai.build_prompt(ai.build_facts(_data_with_quality(), {}), "Campaign #1")
+    assert "más clics" in prompt and "cuota_y_presupuesto" in prompt
+    assert "No ejecutes ni des por hecho cambios de presupuesto" in prompt

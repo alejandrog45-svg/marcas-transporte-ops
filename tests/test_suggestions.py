@@ -41,3 +41,26 @@ def test_without_history_falls_back_to_fresh_rows():
     out = sg.build_suggestions(_data([_t("2026-10-09", "solo fresco", 2, 80)]), {})
     best = next(s for s in out["suggestions"] if s["title"] == "Agregar palabras de alto rendimiento")
     assert "«solo fresco»: 2 clics" in best["data"]["evidence"]
+
+
+def _titles(out):
+    return {s["title"]: s for s in out["suggestions"]}
+
+
+def test_budget_rule_flags_high_lost_share_with_real_numbers():
+    data = _data([_t("2026-10-09", "a", 3, 100)])
+    data["metrics"] = {"searchBudgetLostImpressionShare": 0.6228, "searchImpressionShare": 0.2957,
+                       "searchRankLostImpressionShare": 0.0815}
+    s = _titles(sg.build_suggestions(data, {}))["Evaluar si el presupuesto limita el alcance"]
+    assert s["kind"] == "REVISAR" and "62.3 %" in s["data"]["evidence"] and "29.6 %" in s["data"]["evidence"]
+    assert "no se cambia nada solo" in s["action"]
+
+
+def test_budget_rule_is_quiet_when_loss_is_low_and_honest_when_missing():
+    low = _data([_t("2026-10-09", "a", 3, 100)])
+    low["metrics"] = {"searchBudgetLostImpressionShare": 0.03}
+    assert _titles(sg.build_suggestions(low, {}))["Evaluar si el presupuesto limita el alcance"]["kind"] == "SIN ALERTA"
+    none = _data([_t("2026-10-09", "a", 3, 100)])
+    none["metrics"] = {"searchBudgetLostImpressionShare": None}
+    s = _titles(sg.build_suggestions(none, {}))["Evaluar si el presupuesto limita el alcance"]
+    assert s["kind"] == "DATOS INSUFICIENTES" and "No se inventa" in s["data"]["reason"]

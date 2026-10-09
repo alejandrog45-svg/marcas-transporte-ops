@@ -95,6 +95,33 @@ def merge_terms(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return list(merged.values())
 
 
+def budget_suggestion(metrics: dict[str, Any], campaign: str, updated_at: str) -> dict[str, Any]:
+    """Si Google dice que se pierden impresiones por presupuesto, se propone evaluarlo (nunca se cambia nada)."""
+    lost, share, rank = (metrics.get(k) for k in ("searchBudgetLostImpressionShare", "searchImpressionShare", "searchRankLostImpressionShare"))
+    if lost is None:
+        return {"title": "Evaluar si el presupuesto limita el alcance", "action": "Esperar a que Google devuelva la cuota de impresiones.",
+                "kind": "DATOS INSUFICIENTES",
+                "data": evidence("Google Ads no devolvió la pérdida de impresiones por presupuesto.", updated_at, campaign,
+                                 "No se inventa una cifra.", "Baja", "Que la campaña tenga impresiones en el período.")}
+    lost_pct = float(lost) * 100
+    high = lost_pct >= 10
+    parts = [f"Pérdida por presupuesto: {lost_pct:.1f} %"]
+    if share is not None:
+        parts.append(f"cuota de impresiones: {float(share) * 100:.1f} %")
+    if rank is not None:
+        parts.append(f"pérdida por ranking: {float(rank) * 100:.1f} %")
+    return {
+        "title": "Evaluar si el presupuesto limita el alcance",
+        "action": ("Evaluar con el dueño si conviene dar más presupuesto o concentrarlo en lo que mejor rinde; no se cambia nada solo."
+                   if high else "Sin alerta: la pérdida por presupuesto es baja."),
+        "kind": "REVISAR" if high else "SIN ALERTA",
+        "data": evidence("; ".join(parts) + ".", updated_at, campaign,
+                         "Google estima las impresiones que no obtuvo por presupuesto." if high else "El presupuesto no parece ser el límite.",
+                         "Media" if high else "Baja",
+                         "Presupuesto y estrategia de puja; el día en curso aún no termina."),
+    }
+
+
 def build_suggestions(data: dict[str, Any], history: dict[str, Any] | None = None) -> dict[str, Any]:
     reports = data.get("reports") or {}
     campaigns = data.get("campaigns") or []
@@ -177,6 +204,7 @@ def build_suggestions(data: dict[str, Any], history: dict[str, Any] | None = Non
                 "Que el seguimiento de conversiones esté funcionando.",
             ),
         },
+        budget_suggestion(metrics, campaign, updated_at),
         {
             "title": "Comparar la campaña actual con el historial",
             "action": "Comparar manualmente el último período contra el anterior antes de cambiar de campaña." if latest and previous else "Esperar otra fecha sincronizada para comparar.",

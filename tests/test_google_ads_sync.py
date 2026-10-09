@@ -227,3 +227,58 @@ def test_geo_locations_still_get_names_after_refactor(monkeypatch):
     reports = {"locations": [{"geoTargetConstant": "geoTargetConstants/20160"}]}
     sync.enrich_geo_locations("123", {}, reports)
     assert reports["locations"][0]["name"] == "Santiago Metropolitan Region"
+
+
+def test_campaign_quality_query_is_campaign_level_and_read_only():
+    sql = sync.report_queries("2026-10-08", "2026-10-09")["campaignQuality"]
+    assert "FROM campaign" in sql and "metrics.search_budget_lost_impression_share" in sql
+    assert "message_chats" not in sql and all(w not in sql.upper() for w in ("MUTATE", "UPDATE", "REMOVE"))
+    # sin segmentos incompatibles con las cuotas de impresiones
+    assert all(seg not in sql for seg in ("segments.hour", "segments.device", "segments.ad_network_type", "search_term_view"))
+
+
+def _quality_row(day, cid="1", **vals):
+    base = {"campaignId": cid, "date": day, "interactions": None, "invalidClicks": None, "phoneCalls": None,
+            "searchImpressionShare": None, "searchBudgetLostImpressionShare": None,
+            "searchRankLostImpressionShare": None, "searchTopImpressionShare": None,
+            "absoluteTopImpressionPercentage": None, "topImpressionPercentage": None}
+    return {**base, **vals}
+
+
+def test_campaign_quality_fills_metrics_of_the_same_day_only():
+    result = {"metrics": {"dateTo": "2026-10-09", "interactions": None, "searchImpressionShare": None,
+                          "searchBudgetLostImpressionShare": None},
+              "reports": {"campaignQuality": [
+                  _quality_row("2026-10-08", interactions="99", searchImpressionShare=0.9),
+                  _quality_row("2026-10-09", interactions="52", invalidClicks="1", searchImpressionShare=0.41,
+                               searchBudgetLostImpressionShare=0.38)]}}
+    sync.apply_campaign_quality(result)
+    m = result["metrics"]
+    assert m["interactions"] == 52 and m["invalidClicks"] == 1  # no mezcla el 10-08
+    assert m["searchImpressionShare"] == 0.41 and m["searchBudgetLostImpressionShare"] == 0.38
+    assert "phoneCalls" not in m  # Google no lo devolvió: no se inventa
+
+
+def test_campaign_quality_does_not_average_shares_across_campaigns():
+    result = {"metrics": {"dateTo": "2026-10-09"}, "reports": {"campaignQuality": [
+        _quality_row("2026-10-09", cid="1", interactions=10, searchImpressionShare=0.5),
+        _quality_row("2026-10-09", cid="2", interactions=5, searchImpressionShare=0.2)]}}
+    sync.apply_campaign_quality(result)
+    assert result["metrics"]["interactions"] == 15
+    assert "searchImpressionShare" not in result["metrics"]  # dos campañas: no se promedia
+
+
+def test_campaign_quality_ignores_errors_and_missing_day():
+    for reports in ({"campaignQuality": {"error": "HTTP 400", "rows": []}}, {"campaignQuality": []},
+                    {"campaignQuality": [_quality_row("2026-10-01", interactions=3)]}, {}):
+        result = {"metrics": {"dateTo": "2026-10-09", "interactions": None}, "reports": reports}
+        sync.apply_campaign_quality(result)
+        assert result["metrics"]["interactions"] is None
+
+
+def test_campaign_quality_report_rows_keep_real_base_numbers_and_campaign():
+    rows = sync.compact_report("campaignQuality", [{
+        "campaign": {"id": "7", "name": "Campaign #1"}, "segments": {"date": "2026-10-09"},
+        "metrics": {"impressions": "800", "clicks": "44", "costMicros": "11267000000", "searchImpressionShare": 0.41}}])
+    assert rows[0]["campaignId"] == "7" and rows[0]["clicks"] == 44 and rows[0]["costClp"] == 11267
+    assert rows[0]["searchImpressionShare"] == 0.41

@@ -83,6 +83,14 @@ def report_queries(date_from: str, date_to: str) -> dict[str, str]:
         "regions": ("SELECT geographic_view.country_criterion_id, geographic_view.location_type, "
                     + METRIC_FIELDS + " "
                     "FROM geographic_view " + period + " ORDER BY geographic_view.country_criterion_id"),
+        # Métricas de calidad solo a nivel campaña y por fecha (compatibles entre sí); si Google las
+        # rechaza, el informe queda con error y el resto de la descarga sigue igual.
+        "campaignQuality": ("SELECT campaign.id, campaign.name, segments.date, " + METRIC_FIELDS + ", "
+                            "metrics.interactions, metrics.invalid_clicks, metrics.phone_calls, "
+                            "metrics.search_impression_share, metrics.search_budget_lost_impression_share, "
+                            "metrics.search_rank_lost_impression_share, metrics.search_top_impression_share, "
+                            "metrics.absolute_top_impression_percentage, metrics.top_impression_percentage "
+                            "FROM campaign " + period + " ORDER BY segments.date"),
         "dayOfWeek": ("SELECT segments.day_of_week, " + METRIC_FIELDS + " FROM campaign " + period +
                       " ORDER BY segments.day_of_week"),
         "networks": ("SELECT segments.ad_network_type, " + METRIC_FIELDS + " FROM campaign " + period +
@@ -319,6 +327,8 @@ def compact_report(name: str, rows: list[dict]) -> list[dict]:
         elif name == "regions":
             item.update({"countryCriterionId": str((row.get("geographicView") or {}).get("countryCriterionId", "")),
                          "locationType": (row.get("geographicView") or {}).get("locationType", "UNSPECIFIED")})
+        elif name == "campaignQuality":
+            item.update({"campaignId": str(campaign.get("id", "")), "campaignName": campaign.get("name", "")})
         elif name == "dayOfWeek":
             item["dayOfWeek"] = s.get("dayOfWeek", "UNSPECIFIED")
         elif name == "networks":
@@ -401,6 +411,35 @@ def enrich_geo_regions(customer: str, headers: dict[str, str], reports: dict) ->
     mapping = geo_names(customer, headers, resources)
     for item in regions:
         item.update(mapping.get("geoTargetConstants/" + str(item.get("countryCriterionId", "")), {}))
+
+
+QUALITY_SUMS = ("interactions", "invalidClicks", "phoneCalls")
+QUALITY_SHARES = ("searchImpressionShare", "searchBudgetLostImpressionShare", "searchRankLostImpressionShare",
+                  "searchTopImpressionShare", "absoluteTopImpressionPercentage", "topImpressionPercentage")
+
+
+def apply_campaign_quality(result: dict) -> None:
+    """Copia a metrics las métricas de calidad del MISMO día que metrics (no mezcla días).
+
+    Los conteos se suman entre campañas; las cuotas (porcentajes) solo se copian si hay una única
+    campaña ese día, porque un promedio de porcentajes no sería un dato real de Google.
+    """
+    rows = (result.get("reports") or {}).get("campaignQuality")
+    metrics = result.get("metrics")
+    if not isinstance(rows, list) or not rows or not isinstance(metrics, dict):
+        return
+    day = str(metrics.get("dateTo") or "")
+    day_rows = [r for r in rows if str(r.get("date") or "") == day]
+    if not day_rows:
+        return
+    for key in QUALITY_SUMS:
+        values = [float(r[key]) for r in day_rows if r.get(key) is not None]
+        if values:
+            metrics[key] = sum(values)
+    if len(day_rows) == 1:
+        for key in QUALITY_SHARES:
+            if day_rows[0].get(key) is not None:
+                metrics[key] = float(day_rows[0][key])
 
 
 HISTORY_NAME = "google_ads_history_ubertransfer.json"
@@ -492,6 +531,10 @@ def main() -> None:
         enrich_geo_regions(cid, headers, result["reports"])
     except RuntimeError as error:
         result["geoRegionLookupError"] = str(error)[:300]
+    try:
+        apply_campaign_quality(result)
+    except (TypeError, ValueError) as error:  # un dato raro nunca debe romper la descarga
+        result["qualityMetricsError"] = str(error)[:300]
     # El catálogo de campañas se consulta sin filtro de fecha: así una campaña
     # nueva aparece aunque todavía no haya generado impresiones y una campaña
     # detenida sigue visible sin fabricar métricas cero.

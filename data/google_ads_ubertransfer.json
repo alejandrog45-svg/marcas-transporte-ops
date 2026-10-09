@@ -30,10 +30,10 @@
   "alerts": [],
   "mode": "read_only",
   "status": "connected",
-  "lastSync": "2026-10-09T19:59:40.890608Z",
+  "lastSync": "2026-10-09T20:07:33.608171Z",
   "source": "Google Ads API",
   "metrics": {
-    "impressions": 674,
+    "impressions": 677,
     "clicks": 41,
     "costClp": 10645,
     "conversions": 0.0,
@@ -82,7 +82,7 @@
       "topImpressionPercentage": null
     },
     {
-      "impressions": 674,
+      "impressions": 677,
       "clicks": 41,
       "costClp": 10645,
       "conversions": 0.0,
@@ -139,11 +139,11 @@
       "name": "Campaign #1",
       "status": "ENABLED",
       "date": "2026-10-09",
-      "impressions": 674,
+      "impressions": 677,
       "clicks": 41,
       "costMicros": 10645000000,
       "costClp": 10645,
-      "ctr": 0.06083086053412463,
+      "ctr": 0.060561299852289516,
       "conversions": 0.0,
       "averageCpc": 0.0,
       "costPerConversion": 0.0,
@@ -674,7 +674,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 23,
+        "impressions": 28,
         "clicks": 2,
         "costClp": 410,
         "conversions": 0.0,
@@ -699,7 +699,7 @@
     "devices": [
       {
         "date": null,
-        "impressions": 294,
+        "impressions": 296,
         "clicks": 16,
         "costClp": 3744,
         "conversions": 0.0,
@@ -722,7 +722,7 @@
       },
       {
         "date": null,
-        "impressions": 1162,
+        "impressions": 1168,
         "clicks": 77,
         "costClp": 21969,
         "conversions": 0.0,
@@ -796,7 +796,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 674,
+        "impressions": 679,
         "clicks": 41,
         "costClp": 10645,
         "conversions": 0.0,
@@ -853,7 +853,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 674,
+        "impressions": 679,
         "clicks": 41,
         "costClp": 10645,
         "conversions": 0.0,
@@ -6870,6 +6870,33 @@
         "searchTopImpressionShare": null,
         "absoluteTopImpressionPercentage": null,
         "topImpressionPercentage": null,
+        "term": "buses al aeropuerto desde quillota",
+        "campaignId": "24325669851",
+        "campaignName": "Campaign #1",
+        "adGroupId": "201907353538",
+        "adGroupName": "Grupo de anuncios 1"
+      },
+      {
+        "date": "2026-10-09",
+        "impressions": 1,
+        "clicks": 0,
+        "costClp": 0,
+        "conversions": 0.0,
+        "averageCpc": null,
+        "costPerConversion": null,
+        "conversionsValue": null,
+        "allConversions": null,
+        "allConversionsValue": null,
+        "phoneCalls": null,
+        "messageChats": null,
+        "interactions": null,
+        "invalidClicks": null,
+        "searchImpressionShare": null,
+        "searchBudgetLostImpressionShare": null,
+        "searchRankLostImpressionShare": null,
+        "searchTopImpressionShare": null,
+        "absoluteTopImpressionPercentage": null,
+        "topImpressionPercentage": null,
         "term": "buses al aeropuerto desde viña del mar",
         "campaignId": "24325669851",
         "campaignName": "Campaign #1",
@@ -8436,6 +8463,33 @@
         "searchTopImpressionShare": null,
         "absoluteTopImpressionPercentage": null,
         "topImpressionPercentage": null,
+        "term": "ruta del aerodirecto",
+        "campaignId": "24325669851",
+        "campaignName": "Campaign #1",
+        "adGroupId": "201907353538",
+        "adGroupName": "Grupo de anuncios 1"
+      },
+      {
+        "date": "2026-10-09",
+        "impressions": 1,
+        "clicks": 0,
+        "costClp": 0,
+        "conversions": 0.0,
+        "averageCpc": null,
+        "costPerConversion": null,
+        "conversionsValue": null,
+        "allConversions": null,
+        "allConversionsValue": null,
+        "phoneCalls": null,
+        "messageChats": null,
+        "interactions": null,
+        "invalidClicks": null,
+        "searchImpressionShare": null,
+        "searchBudgetLostImpressionShare": null,
+        "searchRankLostImpressionShare": null,
+        "searchTopImpressionShare": null,
+        "absoluteTopImpressionPercentage": null,
+        "topImpressionPercentage": null,
         "term": "se puede tomar uber en el aeropuerto de santiago de chile",
         "campaignId": "24325669851",
         "campaignName": "Campaign #1",
@@ -9416,7 +9470,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 21,
+        "impressions": 23,
         "clicks": 0,
         "costClp": 0,
         "conversions": 0.0,
@@ -9517,6 +9571,33 @@
         "absoluteTopImpressionPercentage": null,
         "topImpressionPercentage": null,
         "term": "transvip al aeropuerto",
+        "campaignId": "24325669851",
+        "campaignName": "Campaign #1",
+        "adGroupId": "201907353538",
+        "adGroupName": "Grupo de anuncios 1"
+      },
+      {
+        "date": "2026-10-09",
+        "impressions": 1,
+        "clicks": 0,
+        "costClp": 0,
+        "conversions": 0.0,
+        "averageCpc": null,
+        "costPerConversion": null,
+        "conversionsValue": null,
+        "allConversions": null,
+        "allConversionsValue": null,
+        "phoneCalls": null,
+        "messageChats": null,
+        "interactions": null,
+        "invalidClicks": null,
+        "searchImpressionShare": null,
+        "searchBudgetLostImpressionShare": null,
+        "searchRankLostImpressionShare": null,
+        "searchTopImpressionShare": null,
+        "absoluteTopImpressionPercentage": null,
+        "topImpressionPercentage": null,
+        "term": "transvip antofagasta telefono",
         "campaignId": "24325669851",
         "campaignName": "Campaign #1",
         "adGroupId": "201907353538",
@@ -10768,7 +10849,7 @@
     "regions": [
       {
         "date": null,
-        "impressions": 998,
+        "impressions": 1002,
         "clicks": 64,
         "costClp": 17040,
         "conversions": 0.0,
@@ -10792,7 +10873,7 @@
       },
       {
         "date": null,
-        "impressions": 470,
+        "impressions": 471,
         "clicks": 29,
         "costClp": 8673,
         "conversions": 0.0,
@@ -10841,7 +10922,7 @@
       },
       {
         "date": null,
-        "impressions": 674,
+        "impressions": 677,
         "clicks": 41,
         "costClp": 10645,
         "conversions": 0.0,
@@ -10866,7 +10947,7 @@
     "networks": [
       {
         "date": null,
-        "impressions": 1468,
+        "impressions": 1473,
         "clicks": 93,
         "costClp": 25713,
         "conversions": 0.0,
@@ -11087,7 +11168,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 271,
+        "impressions": 274,
         "clicks": 25,
         "costClp": 6280,
         "conversions": 0.0,
@@ -11115,7 +11196,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 313,
+        "impressions": 315,
         "clicks": 7,
         "costClp": 1901,
         "conversions": 0.0,
@@ -11295,10 +11376,18 @@
         "viewThroughLookbackDays": 30
       }
     ],
-    "campaignSettings": {
-      "error": "Google Ads respondió HTTP 400: [{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Request contains an invalid argument.\",\n    \"status\": \"INVALID_ARGUMENT\",\n    \"details\": [\n      {\n        \"@type\": \"type.googleapis.com/google.ads.googleads.v25.errors.GoogleAdsFailure\",\n        \"errors\": [\n          {\n            \"errorCode\": {\n              \"queryError\": \"UNRECOGNIZED_FIELD\"\n            },\n            \"message\": \"Unrecognized fields in the query: 'campaign.start_date', 'campaign.end_date'.\"\n          }\n        ],\n        \"reque",
-      "rows": []
-    },
+    "campaignSettings": [
+      {
+        "campaignId": "24325669851",
+        "campaignName": "Campaign #1",
+        "status": "ENABLED",
+        "channel": "SEARCH",
+        "biddingStrategy": "TARGET_SPEND",
+        "startDate": "2026-10-08",
+        "endDate": null,
+        "dailyBudgetClp": 15000
+      }
+    ],
     "locations": [
       {
         "campaignId": "24325669851",

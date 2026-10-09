@@ -93,3 +93,5 @@ La última comprobación debe investigar el error visible `auth/internal-error` 
 3. Sesión/cookies de Google y bloqueo de ventanas emergentes del navegador.
 4. Que la aplicación publicada y `authDomain` correspondan al mismo proyecto Firebase.
 5. Consola del navegador y registros de Authentication para obtener el error exacto.
+
+**Corrección aplicada:** se reemplazó el popup de Google por redirección directa (`signInWithRedirect`), se publicó en Firebase y la URL respondió HTTP 200. Falta únicamente confirmar el inicio de sesión real con una sesión de Google en el navegador.

@@ -33,6 +33,23 @@ header,.bg-surface-container-low{border-color:var(--panel-line)!important}
 @media(max-width:700px){main{padding:12px!important}.real-filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.real-filter{min-width:0!important}.real-filter:last-of-type{grid-column:1/-1}.real-filter select,.real-filter input{width:100%;min-width:0}.real-filters>#ads-reset{grid-column:1/-1;width:100%;justify-content:center}.real-kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.real-kpi{padding:12px}.real-kpi .value{font-size:22px}.real-grid{grid-template-columns:1fr;gap:12px}.real-card.wide{grid-column:auto}.real-bar-row{grid-template-columns:82px 1fr 42px;gap:6px}.real-line{height:220px}.real-line-summary{gap:8px 14px}.real-line-summary span{font-size:11px}.real-table{font-size:11px}.real-table th{font-size:10px;padding:7px}.real-table td{padding:8px 7px}.real-table-wrap{margin-left:-4px;margin-right:-4px}.real-subnav{max-width:100%;overflow:hidden}}
 @media(max-width:420px){.real-kpis{grid-template-columns:1fr 1fr}.real-kpi .label{font-size:10px}.real-kpi .value{font-size:19px}.real-bar-row{grid-template-columns:70px 1fr 36px;font-size:11px}.real-line{height:200px}.real-line-summary{display:grid;grid-template-columns:1fr 1fr}.real-line-legend{font-size:10px}}
 </style>
+<style>
+/* Navegación UberTransfer: rojo del logo, negro para contraste y verde como acento. */
+:root{--brand-red:#ed1c24;--brand-red-dark:#b90f16;--brand-black:#111318;--brand-green:#58b947}
+#nav{gap:7px!important}
+#nav a{border:1px solid transparent!important;border-radius:12px!important;background:#fff!important;color:#273142!important;min-height:44px;box-shadow:0 3px 10px rgba(17,19,24,.06);transition:transform .15s ease,background-color .15s ease,color .15s ease,box-shadow .15s ease,border-color .15s ease}
+#nav a:hover{border-color:#f3a0a4!important;background:#fff4f4!important;color:var(--brand-red-dark)!important;transform:translateX(2px);box-shadow:0 5px 14px rgba(237,28,36,.12)}
+#nav a[class*="border-primary-container"]{border-color:var(--brand-red-dark)!important;background:var(--brand-red)!important;color:#fff!important;box-shadow:0 6px 16px rgba(237,28,36,.28)}
+#nav a[class*="border-primary-container"] .material-symbols-outlined{color:#fff!important}
+#mnav{gap:8px!important;padding:8px 12px!important;background:#fff!important;border-top:1px solid var(--panel-line);box-shadow:0 -5px 16px rgba(17,19,24,.08)}
+#mnav a{border:1px solid #f3c4c6!important;border-radius:10px!important;background:#fff!important;color:#4b5563!important;font-weight:700;box-shadow:0 2px 8px rgba(17,19,24,.05);transition:background-color .15s ease,color .15s ease,border-color .15s ease,transform .15s ease}
+#mnav a:hover{background:#fff4f4!important;color:var(--brand-red-dark)!important}
+#mnav a[class*="border-primary-container"]{border-color:var(--brand-red-dark)!important;background:var(--brand-red)!important;color:#fff!important;box-shadow:0 4px 12px rgba(237,28,36,.25)}
+.real-subnav button{border-color:#f3c4c6;background:#fff;color:#4b5563;font-weight:700;box-shadow:0 2px 8px rgba(17,19,24,.05)}
+.real-subnav button:hover,.real-subnav button.active{border-color:var(--brand-red-dark);background:var(--brand-red);color:#fff}
+#ads-suggestions-export{border-color:var(--brand-red-dark)!important;background:var(--brand-red)!important;color:#fff!important;box-shadow:0 4px 12px rgba(237,28,36,.2)}
+#ads-suggestions-export:hover{background:var(--brand-red-dark)!important}
+</style>
 </head>
 <body class="bg-background text-on-surface antialiased overflow-x-hidden min-h-screen flex">
 <div id="gate" role="dialog" aria-modal="true" aria-label="Acceso al panel" style="position:fixed;inset:0;z-index:1000;background:#0b1220;display:flex;align-items:center;justify-content:center;padding:16px">
@@ -344,10 +361,10 @@ const SEC=[
   ["history","Historial","history","Historial sincronizado","Evolución de las consultas guardadas por fecha."],
 ["kw","Palabras clave","key","Palabras clave actuales","Datos actuales de Google Ads; el Planificador histórico no se usa como fuente activa."],
 ["ver","Datos y verificación","verified","Google Ads y consistencia","Fuentes, integridad, sincronización y verificaciones del panel."]];
-const NAVA="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors duration-150 ease-in-out";
-const NAVB="flex items-center gap-3 px-3 py-2 rounded-lg bg-surface-container-high text-primary font-semibold border-l-2 border-primary-container transition-colors duration-150 ease-in-out";
-const MNA="shrink-0 px-3 py-1.5 rounded-lg text-label-md font-label-md text-on-surface-variant bg-surface-container border border-outline-variant";
-const MNB="shrink-0 px-3 py-1.5 rounded-lg text-label-md font-label-md text-primary bg-surface-container-high border border-primary-container";
+const NAVA="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-medium transition-colors duration-150 ease-in-out";
+const NAVB="flex items-center gap-3 px-3 py-2 rounded-lg text-white font-semibold border-l-2 border-primary-container transition-colors duration-150 ease-in-out";
+const MNA="shrink-0 px-3 py-1.5 rounded-lg text-label-md font-label-md text-on-surface-variant";
+const MNB="shrink-0 px-3 py-1.5 rounded-lg text-label-md font-label-md text-white border border-primary-container";
 let custom=store.get("custom",[]);
 const nG=()=>DATA.filter(d=>!d.custom).length;
 const RC=/transvip|turbus|tur bus|airtaxi|cabify|uber\b|easy taxi|pullman|bus\b/i;

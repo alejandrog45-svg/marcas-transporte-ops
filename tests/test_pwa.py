@@ -55,3 +55,14 @@ def test_template_marks_pwa_block_and_build_strips_it_for_aereostar():
     assert "<script>" not in head_script
     build = (ROOT / "tools" / "panel" / "build.py").read_text(encoding="utf-8")
     assert "<!--PWA-->" in build and "AEICON" in build
+
+
+def test_pwa_app_code_runs_after_login_not_in_the_pre_login_gate():
+    # build.py corta la plantilla en "Acceso privado y nube": lo de antes es la app (se ejecuta
+    # tras descifrar y ya tiene META); lo de después corre al cargar, sin META. Si el código de la
+    # PWA queda después de esa marca, el script de acceso falla y el login se cuelga.
+    tpl = (ROOT / "tools" / "panel" / "template.html").read_text(encoding="utf-8")
+    mark = tpl.index("/* ===== Acceso privado y nube")
+    assert tpl.index("App instalable (PWA), badge") < mark
+    assert tpl.index("const PANEL_VERSION=") < mark
+    assert tpl.index("function vbCheck") < mark

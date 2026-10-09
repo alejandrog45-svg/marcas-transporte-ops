@@ -363,6 +363,69 @@ def enrich_geo_locations(customer: str, headers: dict[str, str], reports: dict) 
         item.update(mapping.get(str(item.get("geoTargetConstant", "")), {}))
 
 
+HISTORY_NAME = "google_ads_history_ubertransfer.json"
+HISTORY_KEEP_DAYS = 90
+HISTORY_VALUES = ("impressions", "clicks", "costClp", "conversions")
+# Métricas que no son dimensiones: en el historial solo se conservan HISTORY_VALUES.
+HISTORY_DROP = frozenset((
+    "averageCpc", "costPerConversion", "conversionsValue", "allConversions", "allConversionsValue",
+    "phoneCalls", "messageChats", "interactions", "invalidClicks", "searchImpressionShare",
+    "searchBudgetLostImpressionShare", "searchRankLostImpressionShare", "searchTopImpressionShare",
+    "absoluteTopImpressionPercentage", "topImpressionPercentage", "ctr", "costMicros",
+))
+
+
+def update_report_history(reports: dict, previous_reports: dict | None, path: Path) -> dict:
+    """Acumula por día los informes con fecha (términos, horas, dispositivos, etc.).
+
+    Cada ejecución solo pide los últimos días: los días devueltos reemplazan a los
+    guardados (el día de hoy llega parcial y luego completo) y los demás se
+    conservan, hasta HISTORY_KEEP_DAYS. Un informe con error o sin filas no borra
+    lo acumulado.
+    """
+    try:
+        stored = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+    except (OSError, ValueError):
+        stored = {}
+    acc = {k: list(v) for k, v in (stored.get("reports") or {}).items() if isinstance(v, list)}
+
+    def dated(rows) -> bool:
+        return isinstance(rows, list) and bool(rows) and isinstance(rows[0], dict) and "date" in rows[0]
+
+    def compact(row: dict) -> dict:
+        return {k: v for k, v in row.items() if k not in HISTORY_DROP or k in HISTORY_VALUES}
+
+    if not acc:  # primera vez: se siembra con lo que ya tenía el archivo anterior
+        for name, rows in (previous_reports or {}).items():
+            if dated(rows):
+                acc[name] = [compact(r) for r in rows]
+    for name, rows in reports.items():
+        if not dated(rows):
+            continue
+        fresh_days = {r.get("date") for r in rows}
+        kept = [r for r in acc.get(name, []) if r.get("date") not in fresh_days]
+        acc[name] = kept + [compact(r) for r in rows]
+    days = sorted({r["date"] for rows in acc.values() for r in rows if r.get("date")})
+    if len(days) > HISTORY_KEEP_DAYS:
+        cutoff = days[-HISTORY_KEEP_DAYS]
+        acc = {n: [r for r in rows if (r.get("date") or "") >= cutoff] for n, rows in acc.items()}
+        days = days[-HISTORY_KEEP_DAYS:]
+    for rows in acc.values():
+        rows.sort(key=lambda r: r.get("date") or "")
+    # Una fila por línea: los commits diarios quedan como diferencias pequeñas.
+    head = {"brand": "UberTransfer", "keepDays": HISTORY_KEEP_DAYS, "days": days,
+            "updatedAt": dt.datetime.now(dt.timezone.utc).isoformat().replace("+00:00", "Z")}
+    body = ",\n".join(
+        json.dumps(name, ensure_ascii=False) + ":[\n" +
+        ",\n".join(json.dumps(r, ensure_ascii=False, separators=(",", ":")) for r in rows) + "\n]"
+        for name, rows in sorted(acc.items())
+    )
+    text = json.dumps(head, ensure_ascii=False)[:-1] + ',"reports":{\n' + body + "\n}}\n"
+    path.write_text(text, encoding="utf-8")
+    return {"file": path.name, "days": len(days), "from": days[0] if days else None,
+            "to": days[-1] if days else None}
+
+
 def main() -> None:
     date_from, date_to = dates()
     token = access_token()
@@ -427,6 +490,12 @@ def main() -> None:
                            "campaignName": ad.get("campaignName", ""), "adGroupName": ad.get("adGroupName", ""),
                            "firstSeen": old.get("firstSeen", date_from), "lastSeen": date_from}
     result["adHistory"] = sorted(ad_history.values(), key=lambda x: x["adId"])
+    try:
+        # El archivo anterior sigue intacto aquí: sirve para sembrar el historial la primera vez.
+        previous_reports = (json.loads(OUT.read_text(encoding="utf-8")).get("reports") if OUT.exists() else None)
+        result["detailHistory"] = update_report_history(result["reports"], previous_reports, OUT.with_name(HISTORY_NAME))
+    except Exception as error:  # el historial de detalle nunca debe romper la bajada de datos
+        result["detailHistoryError"] = str(error)[:300]
     OUT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"ok": True, "customerId": cid, "date": date_from, "rows": len(rows), "metrics": result["metrics"]}))
 

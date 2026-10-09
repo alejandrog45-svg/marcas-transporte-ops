@@ -83,3 +83,62 @@ def test_normalize_does_not_replace_stopped_campaign_with_zeroes(tmp_path, monke
     assert result["history"][-1]["dateFrom"] == "2026-10-08"
     assert result["activityRows"] == 0
     assert result["campaignIds"] == ["123"]
+
+
+def _term(day, term, clicks, cost, **extra):
+    return {"date": day, "term": term, "impressions": clicks * 10, "clicks": clicks, "costClp": cost,
+            "conversions": 0.0, "averageCpc": None, "ctr": 0.1, **extra}
+
+
+def _stored(path):
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def test_report_history_accumulates_days_and_replaces_partial_day(tmp_path):
+    path = tmp_path / "history.json"
+    first = {"searchTerms": [_term("2026-10-08", "a", 2, 400), _term("2026-10-09", "a", 1, 100)]}
+    sync.update_report_history(first, None, path)
+    # Al día siguiente solo se piden los dos últimos días: el 10-08 debe seguir guardado
+    # y el 10-09 (que llegó parcial) debe reemplazarse por la versión completa.
+    second = {"searchTerms": [_term("2026-10-09", "a", 3, 700), _term("2026-10-10", "b", 4, 800)]}
+    summary = sync.update_report_history(second, None, path)
+    rows = _stored(path)["reports"]["searchTerms"]
+    assert [(r["date"], r["term"], r["clicks"]) for r in rows] == [
+        ("2026-10-08", "a", 2), ("2026-10-09", "a", 3), ("2026-10-10", "b", 4)]
+    assert summary["days"] == 3 and summary["from"] == "2026-10-08" and summary["to"] == "2026-10-10"
+    assert "averageCpc" not in rows[0] and "ctr" not in rows[0]  # solo valores base, sin nulos de relleno
+
+
+def test_report_history_seeds_from_previous_file_on_first_run(tmp_path):
+    path = tmp_path / "history.json"
+    previous = {"searchTerms": [_term("2026-10-08", "viejo", 5, 900)], "conversionActions": [{"name": "Calls"}]}
+    sync.update_report_history({"searchTerms": [_term("2026-10-09", "nuevo", 1, 100)]}, previous, path)
+    reports = _stored(path)["reports"]
+    assert [r["term"] for r in reports["searchTerms"]] == ["viejo", "nuevo"]
+    assert "conversionActions" not in reports  # los catálogos sin fecha no se acumulan
+
+
+def test_report_history_keeps_data_when_a_report_errors_or_is_empty(tmp_path):
+    path = tmp_path / "history.json"
+    sync.update_report_history({"searchTerms": [_term("2026-10-08", "a", 2, 400)]}, None, path)
+    sync.update_report_history({"searchTerms": {"error": "HTTP 400", "rows": []}}, None, path)
+    sync.update_report_history({"searchTerms": []}, None, path)
+    assert [r["term"] for r in _stored(path)["reports"]["searchTerms"]] == ["a"]
+
+
+def test_report_history_trims_to_keep_days(tmp_path, monkeypatch):
+    path = tmp_path / "history.json"
+    monkeypatch.setattr(sync, "HISTORY_KEEP_DAYS", 3)
+    for day in ("2026-10-01", "2026-10-02", "2026-10-03", "2026-10-04", "2026-10-05"):
+        sync.update_report_history({"searchTerms": [_term(day, "a", 1, 100)]}, None, path)
+    assert _stored(path)["days"] == ["2026-10-03", "2026-10-04", "2026-10-05"]
+
+
+def test_report_history_tolerates_rows_with_null_date(tmp_path):
+    path = tmp_path / "history.json"
+    rows = [_term("2026-10-09", "a", 1, 100), {**_term(None, "sin fecha", 1, 50)}]
+    sync.update_report_history({"searchTerms": rows}, None, path)
+    sync.update_report_history({"searchTerms": rows}, None, path)
+    stored = _stored(path)
+    assert stored["days"] == ["2026-10-09"]
+    assert len(stored["reports"]["searchTerms"]) == 2  # la fila sin fecha se reemplaza, no se duplica

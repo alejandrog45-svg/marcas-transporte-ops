@@ -701,7 +701,7 @@ async function cloudInit(){
   await loadScript(B+"firebase-app-compat.js");await loadScript(B+"firebase-auth-compat.js");await loadScript(B+"firebase-firestore-compat.js");
   const cfg=await fetch("/__/firebase/init.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error("init.json HTTP "+r.status);return r.json()});
   firebase.initializeApp(cfg);firebase.auth().getRedirectResult().catch(authFail);
-  GB("gatebtn").onclick=()=>{const p=new firebase.auth.GoogleAuthProvider();p.setCustomParameters({prompt:"select_account"});const mob=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);gateShow("Abriendo Google…",false);if(mob){firebase.auth().signInWithRedirect(p).catch(authFail)}else{firebase.auth().signInWithPopup(p).catch(e=>{if(e&&e.code==="auth/popup-blocked"){firebase.auth().signInWithRedirect(p).catch(authFail)}else authFail(e)})}};
+  GB("gatebtn").onclick=()=>{const p=new firebase.auth.GoogleAuthProvider();p.setCustomParameters({prompt:"select_account"});gateShow("Abriendo Google…",false);firebase.auth().signInWithRedirect(p).catch(authFail)};
   GB("logout").onclick=()=>firebase.auth().signOut();
   firebase.auth().onAuthStateChanged(cloudUser)
  }catch(e){gateShow("No se pudo cargar el inicio de sesión ("+e.message+"). Recarga la página.",true,"Recargar");GB("gatebtn").onclick=()=>location.reload()}}

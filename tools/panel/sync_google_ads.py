@@ -47,10 +47,18 @@ def dates() -> tuple[str, str]:
         if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", forced):
             raise ValueError("GOOGLE_ADS_DATE debe tener formato YYYY-MM-DD")
         return forced, forced
+    forced_from = os.environ.get("GOOGLE_ADS_DATE_FROM", "").strip()
+    forced_to = os.environ.get("GOOGLE_ADS_DATE_TO", "").strip()
+    if forced_from or forced_to:
+        if not (re.fullmatch(r"\d{4}-\d{2}-\d{2}", forced_from) and
+                re.fullmatch(r"\d{4}-\d{2}-\d{2}", forced_to)):
+            raise ValueError("GOOGLE_ADS_DATE_FROM y GOOGLE_ADS_DATE_TO deben tener formato YYYY-MM-DD")
+        if forced_from > forced_to:
+            raise ValueError("GOOGLE_ADS_DATE_FROM no puede ser posterior a GOOGLE_ADS_DATE_TO")
+        return forced_from, forced_to
     today = dt.datetime.now(dt.timezone.utc).date()
     yesterday = today - dt.timedelta(days=1)
-    value = yesterday.isoformat()
-    return value, value
+    return yesterday.isoformat(), today.isoformat()
 
 
 def query(date_from: str, date_to: str) -> str:
@@ -170,18 +178,30 @@ def normalize(rows: list[dict], date_from: str, date_to: str) -> dict:
             "topImpressionPercentage": metrics.get("topImpressionPercentage"),
         })
     previous = json.loads(OUT.read_text(encoding="utf-8")) if OUT.exists() else {}
-    if campaigns:
-        totals = {key: sum(row[key] for row in campaigns) for key in ("impressions", "clicks", "costClp", "conversions")}
-        snapshot = {**totals, "dateFrom": date_from, "dateTo": date_to, "activityStatus": "con actividad"}
+
+    def make_snapshot(day: str, day_rows: list[dict]) -> dict:
+        totals = {key: sum(row[key] for row in day_rows) for key in ("impressions", "clicks", "costClp", "conversions")}
+        snapshot = {**totals, "dateFrom": day, "dateTo": day, "activityStatus": "con actividad"}
         for key in ("conversionsValue", "allConversions", "allConversionsValue", "phoneCalls", "messageChats", "interactions", "invalidClicks"):
-            snapshot[key] = sum(row[key] for row in campaigns)
+            snapshot[key] = sum(row[key] for row in day_rows)
         snapshot["averageCpc"] = round(snapshot["costClp"] / snapshot["clicks"], 2) if snapshot["clicks"] else None
         snapshot["costPerConversion"] = round(snapshot["costClp"] / snapshot["conversions"], 2) if snapshot["conversions"] else None
         for key in ("searchImpressionShare", "searchBudgetLostImpressionShare", "searchRankLostImpressionShare", "searchTopImpressionShare", "absoluteTopImpressionPercentage", "topImpressionPercentage"):
-            values = [row[key] for row in campaigns if row.get(key) is not None]
+            values = [row[key] for row in day_rows if row.get(key) is not None]
             snapshot[key] = values[0] if len(values) == 1 else None
-        history = [h for h in (previous.get("history") or []) if h.get("dateFrom") != date_from]
-        history.append(snapshot)
+        return snapshot
+
+    daily_rows: dict[str, list[dict]] = {}
+    for row in campaigns:
+        day = str(row.get("date") or "")
+        if day:
+            daily_rows.setdefault(day, []).append(row)
+    daily_snapshots = [make_snapshot(day, daily_rows[day]) for day in sorted(daily_rows)]
+    if daily_snapshots:
+        snapshot = daily_snapshots[-1]
+        returned_days = {h["dateFrom"] for h in daily_snapshots}
+        history = [h for h in (previous.get("history") or []) if h.get("dateFrom") not in returned_days]
+        history.extend(daily_snapshots)
     else:
         # Sin filas no significa que el rendimiento anterior sea cero: una
         # campaña detenida simplemente deja de generar actividad.

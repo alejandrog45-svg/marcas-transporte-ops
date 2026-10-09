@@ -98,7 +98,7 @@ def report_queries(date_from: str, date_to: str) -> dict[str, str]:
                               "ORDER BY conversion_action.name"),
         "campaignSettings": ("SELECT campaign.id, campaign.name, campaign.status, "
                              "campaign.advertising_channel_type, campaign.bidding_strategy_type, "
-                             "campaign.start_date, campaign.end_date, campaign_budget.amount_micros "
+                             "campaign.start_date_time, campaign.end_date_time, campaign_budget.amount_micros "
                              "FROM campaign ORDER BY campaign.id"),
         "locations": ("SELECT campaign.id, campaign.name, campaign_criterion.criterion_id, "
                       "campaign_criterion.type, campaign_criterion.negative, "
@@ -246,6 +246,28 @@ def normalize(rows: list[dict], date_from: str, date_to: str) -> dict:
     }
 
 
+# Consulta mínima de ajustes (sin fechas): respaldo si Google rechaza los campos de fecha.
+CAMPAIGN_SETTINGS_BASIC = ("SELECT campaign.id, campaign.name, campaign.status, "
+                           "campaign.advertising_channel_type, campaign.bidding_strategy_type, "
+                           "campaign_budget.amount_micros FROM campaign ORDER BY campaign.id")
+
+
+def campaign_date(campaign: dict, key: str):
+    """Fecha (AAAA-MM-DD) de inicio o término. Google usa 2037-12-30 para «sin fecha de término»."""
+    raw = campaign.get(key + "Time") or campaign.get(key)
+    day = str(raw)[:10] if raw else None
+    return None if day == "2037-12-30" else day
+
+
+def fetch_campaign_settings(cid: str, headers: dict, statement: str) -> list[dict]:
+    try:
+        return compact_report("campaignSettings", search_stream(cid, headers, statement))
+    except RuntimeError as error:
+        if "UNRECOGNIZED_FIELD" not in str(error):
+            raise
+        return compact_report("campaignSettings", search_stream(cid, headers, CAMPAIGN_SETTINGS_BASIC))
+
+
 def compact_report(name: str, rows: list[dict]) -> list[dict]:
     compact = []
     for row in rows:
@@ -320,8 +342,10 @@ def compact_report(name: str, rows: list[dict]) -> list[dict]:
             item = {"campaignId": str(campaign.get("id", "")), "campaignName": campaign.get("name", ""),
                     "status": campaign.get("status", "UNSPECIFIED"), "channel": campaign.get("advertisingChannelType", "UNSPECIFIED"),
                     "biddingStrategy": campaign.get("biddingStrategyType", "UNSPECIFIED"),
-                    "startDate": campaign.get("startDate"), "endDate": campaign.get("endDate"),
-                    "dailyBudgetClp": round(int(campaign_budget.get("amountMicros", 0)) / 1_000_000)}
+                    "startDate": campaign_date(campaign, "startDate"), "endDate": campaign_date(campaign, "endDate"),
+                    # Sin presupuesto en la respuesta es "sin dato", no 0.
+                    "dailyBudgetClp": (round(int(campaign_budget["amountMicros"]) / 1_000_000)
+                                       if campaign_budget.get("amountMicros") is not None else None)}
         elif name == "locations":
             criterion = row.get("campaignCriterion") or {}
             location = criterion.get("location") or {}
@@ -440,7 +464,8 @@ def main() -> None:
     result["reports"] = {}
     for name, statement in report_queries(date_from, date_to).items():
         try:
-            result["reports"][name] = compact_report(name, search_stream(cid, headers, statement))
+            result["reports"][name] = (fetch_campaign_settings(cid, headers, statement) if name == "campaignSettings"
+                                       else compact_report(name, search_stream(cid, headers, statement)))
         except RuntimeError as error:
             result["reports"][name] = {"error": str(error), "rows": []}
     try:

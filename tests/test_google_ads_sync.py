@@ -142,3 +142,55 @@ def test_report_history_tolerates_rows_with_null_date(tmp_path):
     stored = _stored(path)
     assert stored["days"] == ["2026-10-09"]
     assert len(stored["reports"]["searchTerms"]) == 2  # la fila sin fecha se reemplaza, no se duplica
+
+
+def _settings_row(**campaign):
+    return {"campaign": {"id": "1", "name": "Campaign #1", "status": "ENABLED",
+                         "advertisingChannelType": "SEARCH", "biddingStrategyType": "MAXIMIZE_CLICKS", **campaign},
+            "campaignBudget": {"amountMicros": "5000000000"}}
+
+
+def test_campaign_settings_query_uses_date_time_fields_of_current_api():
+    sql = query("2026-10-08", "2026-10-09")  # la de ajustes sale de report_queries
+    queries = sync.report_queries("2026-10-08", "2026-10-09")
+    assert "campaign.start_date_time" in queries["campaignSettings"]
+    assert "campaign.start_date," not in queries["campaignSettings"] and sql
+
+
+def test_campaign_settings_dates_and_budget_are_normalized():
+    rows = sync.compact_report("campaignSettings", [
+        _settings_row(startDateTime="2026-10-08 00:00:00", endDateTime="2037-12-30 00:00:00")])
+    item = rows[0]
+    assert item["startDate"] == "2026-10-08"
+    assert item["endDate"] is None  # 2037-12-30 es el «sin fecha de término» de Google
+    assert item["dailyBudgetClp"] == 5000
+
+
+def test_campaign_settings_missing_budget_is_none_not_zero():
+    row = _settings_row()
+    row.pop("campaignBudget")
+    assert sync.compact_report("campaignSettings", [row])[0]["dailyBudgetClp"] is None
+
+
+def test_campaign_settings_falls_back_to_query_without_dates(monkeypatch):
+    calls = []
+
+    def fake_stream(cid, headers, statement):
+        calls.append(statement)
+        if "start_date_time" in statement:
+            raise RuntimeError("HTTP 400: UNRECOGNIZED_FIELD campaign.start_date_time")
+        return [_settings_row()]
+    monkeypatch.setattr(sync, "search_stream", fake_stream)
+    rows = sync.fetch_campaign_settings("123", {}, "SELECT campaign.start_date_time FROM campaign")
+    assert rows[0]["biddingStrategy"] == "MAXIMIZE_CLICKS" and rows[0]["dailyBudgetClp"] == 5000
+    assert len(calls) == 2 and "start_date_time" not in calls[1]
+
+
+def test_campaign_settings_other_errors_are_not_swallowed(monkeypatch):
+    import pytest
+
+    def boom(cid, headers, statement):
+        raise RuntimeError("HTTP 403: PERMISSION_DENIED")
+    monkeypatch.setattr(sync, "search_stream", boom)
+    with pytest.raises(RuntimeError, match="PERMISSION_DENIED"):
+        sync.fetch_campaign_settings("123", {}, "SELECT 1")

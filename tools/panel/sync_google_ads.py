@@ -19,15 +19,12 @@ CUSTOMER_DEFAULT = "2035504421"
 API_VERSION = "v25"
 
 METRIC_FIELDS = ("metrics.impressions, metrics.clicks, metrics.cost_micros, metrics.ctr, "
-                 "metrics.conversions, metrics.average_cpc, metrics.cost_per_conversion, "
-                 "metrics.conversions_value, metrics.all_conversions, metrics.all_conversions_value")
+                 "metrics.conversions")
 # Keep this shared SELECT limited to metrics supported by every report resource
-# used below. Metrics such as message_chats, phone_calls and interactions are
-# resource-specific in Google Ads API v25 and can make the whole SearchStream
-# fail with PROHIBITED_METRIC_IN_SELECT_OR_WHERE_CLAUSE.
-METRIC_FIELDS += (", metrics.search_impression_share, metrics.search_budget_lost_impression_share, "
-                 "metrics.search_rank_lost_impression_share, metrics.search_top_impression_share, "
-                 "metrics.absolute_top_impression_percentage, metrics.top_impression_percentage")
+# used below. Advanced metrics are resource/segment-specific in Google Ads API
+# v25 and can make the whole SearchStream fail with
+# PROHIBITED_METRIC_IN_SELECT_OR_WHERE_CLAUSE. Optional fields remain supported
+# by normalization when a compatible dedicated query supplies them.
 
 
 def required(name: str) -> str:

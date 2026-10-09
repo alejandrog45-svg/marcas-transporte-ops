@@ -410,7 +410,10 @@ def main() -> None:
         result["campaignIds"] = sorted(ids)
         result["campaignNames"] = sorted(names)
     ad_history = {str(x.get("adId")): x for x in (result.get("adHistory") or []) if x.get("adId")}
-    for ad in result["reports"].get("ads", []):
+    ads_report = result["reports"].get("ads", [])
+    # A report-specific GAQL error is stored as {error, rows}; it must not be
+    # iterated as if it were a list of ad rows or the whole sync would fail.
+    for ad in ads_report if isinstance(ads_report, list) else []:
         aid = ad.get("adId")
         if not aid:
             continue

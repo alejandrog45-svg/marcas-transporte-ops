@@ -1,10 +1,18 @@
 import json
+import struct
 from pathlib import Path
-
-from PIL import Image
 
 ROOT = Path(__file__).parents[1]
 SITE = ROOT / "site"
+
+
+def _png_size(path):
+    """Ancho y alto leídos de la cabecera IHDR del PNG (sin librerías de imagen)."""
+    data = path.read_bytes()[:24]
+    assert data[:8] == b"PNG
+
+", path
+    return struct.unpack(">II", data[16:24])
 
 
 def _manifest():
@@ -21,7 +29,7 @@ def test_manifest_is_installable_and_icons_exist_with_declared_size():
         path = SITE / icon["src"].lstrip("/")
         assert path.exists(), icon["src"]
         w, h = (int(x) for x in icon["sizes"].split("x"))
-        assert Image.open(path).size == (w, h)
+        assert _png_size(path) == (w, h)
     assert {"192x192", "512x512"} <= {i["sizes"] for i in m["icons"]}
 
 

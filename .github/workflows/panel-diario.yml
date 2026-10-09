@@ -30,6 +30,15 @@ jobs:
           SITE_URL: ${{ vars.SITE_URL || 'https://ubertransfer.cl' }}
         run: PYTHONPATH=src python -m marcas_transporte_ops audit
 
+      - name: Sincronizar Google Ads UberTransfer (solo lectura)
+        env:
+          GOOGLE_ADS_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_ADS_OAUTH_CLIENT_ID }}
+          GOOGLE_ADS_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_ADS_OAUTH_CLIENT_SECRET }}
+          GOOGLE_ADS_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
+          GOOGLE_ADS_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_CUSTOMER_ID || '2035504421' }}
+          GOOGLE_ADS_DEVELOPER_TOKEN: ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
+        run: python tools/panel/sync_google_ads.py
+
       - name: Armar panel
         run: python tools/panel/build.py
 

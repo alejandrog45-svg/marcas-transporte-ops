@@ -264,6 +264,8 @@ conductor uber</textarea></div>
 <div class="bg-surface-container-low border border-outline-variant/60 rounded-xl p-5"><h2 class="text-headline-sm font-headline-sm text-on-surface font-semibold mb-3">Esta consulta</h2><div id="vnow" class="space-y-2 text-body-md"></div></div>
 <div class="bg-surface-container-low border border-outline-variant/60 rounded-xl p-5"><h2 class="text-headline-sm font-headline-sm text-on-surface font-semibold mb-3">Frescura de las fuentes</h2><div id="vsrc" class="space-y-3 text-body-md"></div></div>
 <div class="bg-surface-container-low border border-outline-variant/60 rounded-xl p-5"><h2 class="text-headline-sm font-headline-sm text-on-surface font-semibold mb-3">Seguimiento de Google Ads</h2><div id="adsstate" class="space-y-2 text-body-md"></div><p class="text-[11px] text-outline mt-3">Conector preparado en modo solo lectura. No cambia campañas, anuncios, pujas ni presupuestos.</p></div>
+<div class="bg-surface-container-low border border-outline-variant/60 rounded-xl p-5"><h2 class="text-headline-sm font-headline-sm text-on-surface font-semibold mb-3">Estadísticas y evolución real</h2><div id="adschart"></div><div id="adshistory" class="mt-4"></div></div>
+<div class="bg-surface-container-low border border-outline-variant/60 rounded-xl p-5"><h2 class="text-headline-sm font-headline-sm text-on-surface font-semibold mb-3">Desglose para optimizar campañas</h2><div id="adsbreakdown"></div></div>
 <div class="bg-surface-container-low border border-outline-variant/60 rounded-xl p-5"><div class="flex items-center justify-between mb-3"><h2 class="text-headline-sm font-headline-sm text-on-surface font-semibold">Estado de ubertransfer.cl</h2><button id="probebtn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary-container text-white text-label-md font-label-md font-semibold hover:bg-blue-600 transition-colors"><span class="material-symbols-outlined text-sm">speed</span><span>Medir ahora</span></button></div><div id="vsite" class="space-y-2 text-body-md"></div></div>
 <div class="bg-surface-container-low border border-outline-variant/60 rounded-xl p-5"><h2 class="text-headline-sm font-headline-sm text-on-surface font-semibold mb-3">Historial de consultas en vivo</h2><div id="vhist" class="text-body-md"></div><p class="text-[11px] text-outline mt-3">Se guarda en este navegador y en la nube (últimas 10). Cada consulta registra hora, resultado de las verificaciones y tiempos del sitio. <b>Qué mide:</b> la respuesta de ubertransfer.cl desde tu conexión (3 solicitudes), si estás viendo la versión publicada, tu reloj frente al servidor y las verificaciones de este panel. <b>Qué NO consulta:</b> Google Ads, Search Console ni GA4 (sin conectar).</p></div>
 <div class="bg-surface-container-low border border-outline-variant/60 rounded-xl p-5"><h2 class="text-headline-sm font-headline-sm text-on-surface font-semibold mb-3">Privacidad de este panel</h2><ul class="list-disc pl-5 text-body-md text-on-surface-variant space-y-1"><li>El acceso es <b>solo con inicio de sesión de Google</b> y únicamente para las cuentas autorizadas (el dueño y Rafael). Sin sesión no se ve ningún dato.</li><li>Las frases de Google, la previsión y las tendencias viajan <b>cifradas</b> (AES-256) y se descifran al entrar; la clave solo la pueden leer las cuentas autorizadas.</li><li>Siguen siendo públicos el texto de la Guía y la auditoría técnica del sitio (no hay datos de clientes) y Google no indexa la página (noindex).</li><li>Tus marcadas, negativas, frases propias, marcas dueñas e historial se guardan en la nube y solo se ven con sesión. No hay claves ni datos de clientes.</li></ul></div>
@@ -276,7 +278,7 @@ conductor uber</textarea></div>
 
 <script>
 const DATA=__DATA__;
-const META=__META__;
+const META=Object.assign({},__META__,{audit:null});
 const RAW=JSON.stringify(DATA);
 const ORIG=JSON.parse(RAW);
 const $=id=>document.getElementById(id);
@@ -286,15 +288,8 @@ const NEG_OLD="gratis\ngratuito\nempleo\ntrabajo\nsueldo\ncurso\nlicencia\narrie
 const NEG_NEW="gratis\ngratuito\nempleo\nbolsa de trabajo\noferta de trabajo\nbusco trabajo\nsueldo\ncurso\nlicencia\narriendo auto\nrent a car\npasaje de bus\nmetro\ntransantiago\nturbus\nrecorrido\nmapa\ncómo llegar\nteléfono aeropuerto\napp\naplicación\nconductor uber";
 const store={get(k,d){try{const v=localStorage.getItem(KP+k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(KP+k,JSON.stringify(v))}catch(e){}if(typeof cloudTouch==="function")cloudTouch(k)}};
 const SEC=[
-["guia","Guía","menu_book","Guía para empezar","Cómo funciona una campaña de Búsqueda, explicado en simple."],
-["kw","Palabras clave","key","Palabras clave para traslados SCL","Análisis de intención de búsqueda y oportunidades para transfers Aeropuerto de Santiago (Pudahuel)."],
-["sim","Simulador","calculate","Simulador de presupuesto","Tu cálculo con las frases marcadas y, al lado, la previsión oficial de Google. Ninguna crea campañas ni cobra."],
-["borr","Borrador de campaña","edit_document","Borrador de campaña","Estructura, negativas y anuncio, sin crear nada en Google Ads."],
-["rec","Recorrido","route","Recorrido de creación","Cómo se crea una campaña de Búsqueda, paso a paso (simulación)."],
-["mej","Mejoras del sitio","web","Mejoras del sitio","Pendientes técnicos y de contenido según la auditoría."],
-["aud","Auditoría","fact_check","Auditoría en línea","Comprobaciones hechas ahora mismo en tu navegador y resultados del servidor, cada uno con su evidencia."],
-["ias","Ideas de IAs","psychology","Ideas de ChatGPT y Gemini","Ideas sin verificar, contrastadas con los datos reales."],
-["ver","Datos y verificación","verified","Datos y verificación","Qué tan frescos y consistentes son los datos que ves, comprobado ahora mismo."]];
+["kw","Palabras clave","key","Palabras clave","Volúmenes, competencia, pujas y clasificación de las búsquedas exportadas de Google Ads."],
+["ver","Resumen real","dashboard","Google Ads y datos del panel","Métricas reales, estadísticas, gráfico histórico, campañas, fuentes y consistencia de los datos."]];
 const NAVA="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors duration-150 ease-in-out";
 const NAVB="flex items-center gap-3 px-3 py-2 rounded-lg bg-surface-container-high text-primary font-semibold border-l-2 border-primary-container transition-colors duration-150 ease-in-out";
 const MNA="shrink-0 px-3 py-1.5 rounded-lg text-label-md font-label-md text-on-surface-variant bg-surface-container border border-outline-variant";
@@ -312,7 +307,7 @@ custom.forEach(k=>{if(!DATA.some(d=>d.k===k))DATA.push({k:k,v:0,c:"",lo:0,hi:0,y
 (META.ampliacion||[]).forEach(a=>{if(!DATA.some(d=>d.k===a.k))DATA.push({k:a.k,v:a.v,c:a.c,lo:a.lo,hi:a.hi,yoy:"",custom:1,seed:1,rango:a.rango,dueno:a.dueno})});
 DATA.forEach(d=>{d.g=grp(d.k);d.t=RC.test(d.k)?"comp":OUT.test(d.k)?"fuera":"ok"});
 let sel=new Set(store.get("sel",[]));
-if(store.get("sel",null)===null&&META.forecast){META.forecast.keywords.forEach(k=>sel.add(k));store.set("sel",[...sel])}let sk="v",sd=-1,page=0,cur="guia";
+if(store.get("sel",null)===null&&META.forecast){META.forecast.keywords.forEach(k=>sel.add(k));store.set("sel",[...sel])}let sk="v",sd=-1,page=0,cur="ver";
 function fmt(n){return n?(Number.isInteger(n)?String(n).replace(/\B(?=(\d{3})+(?!\d))/g,"."):n.toLocaleString("es-CL")):"—"}
 function money(n){return n?"$"+fmt(n):"—"}
 function chosen(){return DATA.filter(d=>sel.has(d.k))}
@@ -486,6 +481,26 @@ function checks(){const c=[];const add=(ok,l,dt)=>c.push({ok,l,dt});
  {const cd=[...document.querySelectorAll("#topk .font-numeric-table")].map(x=>x.textContent.trim())[3],sx=simCalc();add(!sx.w||cd===rg(sx.cmin*sx.dias,sx.cmax*sx.dias),"Simulador: la tarjeta de clics al mes usa los mismos días que el cálculo","tarjeta "+(cd||"?")+" · días "+sx.dias)}
  if(AS.ver)add(AS.ver.err?null:AS.ver.ok,"La versión que ves es la publicada (Firebase)",AS.ver.err?"no medible (abierto desde archivo o sin red)":(AS.ver.ok?"al día: mismos datos y misma versión ("+AS.ver.latest.dataSha.slice(0,12)+"…)":"HAY UNA VERSIÓN NUEVA publicada ("+fmtDT(new Date(AS.ver.latest.builtAt))+"): recarga la página"));
  return c}
+function adsExtraRender(){
+ const G=META.googleAds||{},M=G.metrics||{},H=G.history||[],R=G.reports||{},safe=v=>esc(String(v??"—")),n=v=>fmt(Number(v||0)),money0=v=>money(Number(v||0));
+ const chart=$("adschart"),hist=$("adshistory"),bd=$("adsbreakdown");if(!chart||!hist||!bd)return;
+ if(G.status!=="connected"){chart.innerHTML='<div class="text-outline text-[13px]">Google Ads aún no tiene una sincronización real disponible.</div>';hist.innerHTML="";bd.innerHTML="";return}
+ const alerts=G.alerts||[],campaignHistory=G.campaignHistory||[];
+ const alertHtml=alerts.length?'<div class="mb-3 rounded-lg border border-amber-500/40 bg-amber-500/10 p-3 text-amber-200"><b>Alerta de cambio en Google Ads</b><ul class="mt-1 list-disc pl-5">'+alerts.map(a=>'<li>La campaña cambió de nombre: '+safe((a.previous||[]).join(", ")||"sin nombre anterior")+' → '+safe((a.current||[]).join(", ")||"sin nombre actual")+'</li>').join("")+'</ul></div>':'';
+ const hs=H.slice().sort((a,b)=>String(a.dateFrom).localeCompare(String(b.dateFrom))),mx=Math.max(1,...hs.map(x=>Number(x.clicks||0)));
+ chart.innerHTML=alertHtml+'<div class="grid grid-cols-2 md:grid-cols-4 gap-2">'+[['Impresiones',n(M.impressions)],['Clics',n(M.clicks)],['Costo CLP',money0(M.costClp)],['Conversiones',n(M.conversions)]].map(x=>'<div class="rounded-lg bg-surface-container p-3"><div class="text-[11px] text-outline">'+x[0]+'</div><b class="font-numeric-table text-lg">'+x[1]+'</b></div>').join("")+'</div>'+
+ '<div class="mt-4"><div class="text-[12px] text-outline mb-2">Clics reales por día</div><div class="flex items-end gap-1 h-28">'+(hs.length?hs.map(x=>'<div class="flex-1 flex flex-col items-center justify-end h-full" title="'+safe(x.dateFrom)+': '+n(x.clicks)+' clics"><span class="text-[9px] text-outline">'+n(x.clicks)+'</span><div class="w-full rounded-t bg-primary-container" style="height:'+Math.max(4,Math.round(Number(x.clicks||0)/mx*78))+'%"></div><span class="text-[9px] text-outline mt-1">'+safe(String(x.dateFrom||"").slice(5))+'</span></div>').join(""):'<div class="text-outline text-[13px]">No hay histórico suficiente; se muestra solo el día sincronizado.</div>')+'</div></div>';
+ hist.innerHTML='<div class="text-[12px] font-semibold text-on-surface mb-2">Historial descargado desde Google Ads</div>'+(hs.length?'<div class="overflow-x-auto"><table class="w-full text-[12px]"><thead><tr class="text-outline text-left"><th class="p-2">Fecha</th><th class="p-2 text-right">Impresiones</th><th class="p-2 text-right">Clics</th><th class="p-2 text-right">Costo CLP</th><th class="p-2 text-right">Conversiones</th></tr></thead><tbody>'+hs.map(x=>'<tr class="border-t border-outline-variant/30"><td class="p-2 font-numeric-table">'+safe(x.dateFrom)+'</td><td class="p-2 text-right font-numeric-table">'+n(x.impressions)+'</td><td class="p-2 text-right font-numeric-table">'+n(x.clicks)+'</td><td class="p-2 text-right font-numeric-table">'+money0(x.costClp)+'</td><td class="p-2 text-right font-numeric-table">'+n(x.conversions)+'</td></tr>').join("")+'</tbody></table></div>':'<div class="text-outline text-[13px]">Sin histórico anterior en Google Ads.</div>');
+ const terms=Array.isArray(R.searchTerms)?R.searchTerms.slice().sort((a,b)=>Number(b.clicks||0)-Number(a.clicks||0)).slice(0,20):[],devices=Array.isArray(R.devices)?R.devices:[],hours=Array.isArray(R.hourly)?R.hourly:[],groups=Array.isArray(R.adGroups)?R.adGroups:[],ads=Array.isArray(R.ads)?R.ads:[];
+ const table=(title,headers,rows)=>'<div class="mt-4"><div class="text-[12px] font-semibold text-on-surface mb-2">'+title+'</div>'+(!rows.length?'<div class="text-outline text-[13px]">Google Ads no devolvió filas para este período.</div>':'<div class="overflow-x-auto"><table class="w-full text-[12px]"><thead><tr class="text-outline text-left">'+headers.map(h=>'<th class="p-2">'+h+'</th>').join("")+'</tr></thead><tbody>'+rows.map(r=>'<tr class="border-t border-outline-variant/30">'+r.map(v=>'<td class="p-2">'+v+'</td>').join("")+'</tr>').join("")+'</tbody></table></div>')+'</div>';
+ bd.innerHTML=table("Anuncios reales",["ID","Nombre","Estado","Grupo","Campaña","Clics","Conversiones"],ads.map(x=>[safe(x.adId),safe(x.adName),safe(x.adStatus),safe(x.adGroupName),safe(x.campaignName),'<span class="font-numeric-table">'+n(x.clicks)+'</span>','<span class="font-numeric-table">'+n(x.conversions)+'</span>']))+
+ table("Campañas conocidas",["ID","Nombre","Estado","Primera fecha","Última fecha"],campaignHistory.map(x=>[safe(x.campaignId),safe(x.name),safe(x.status),safe(x.firstSeen),safe(x.lastSeen)]))+
+ table("Términos de búsqueda reales",["Término","Campaña","Clics","Costo CLP","Conversiones"],terms.map(x=>[safe(x.term),safe(x.campaignName),'<span class="font-numeric-table">'+n(x.clicks)+'</span>','<span class="font-numeric-table">'+money0(x.costClp)+'</span>','<span class="font-numeric-table">'+n(x.conversions)+'</span>']))+
+ table("Grupos de anuncios reales",["Grupo","Campaña","Impresiones","Clics","Costo CLP"],groups.map(x=>[safe(x.adGroupName),safe(x.campaignName),'<span class="font-numeric-table">'+n(x.impressions)+'</span>','<span class="font-numeric-table">'+n(x.clicks)+'</span>','<span class="font-numeric-table">'+money0(x.costClp)+'</span>']))+
+ table("Dispositivos reales",["Dispositivo","Impresiones","Clics","Costo CLP","Conversiones"],devices.map(x=>[safe(x.device),'<span class="font-numeric-table">'+n(x.impressions)+'</span>','<span class="font-numeric-table">'+n(x.clicks)+'</span>','<span class="font-numeric-table">'+money0(x.costClp)+'</span>','<span class="font-numeric-table">'+n(x.conversions)+'</span>']))+
+ table("Distribución horaria real",["Hora","Impresiones","Clics","Costo CLP"],hours.map(x=>[safe(String(x.hour).padStart(2,"0")+":00"),'<span class="font-numeric-table">'+n(x.impressions)+'</span>','<span class="font-numeric-table">'+n(x.clicks)+'</span>','<span class="font-numeric-table">'+money0(x.costClp)+'</span>']))+
+ table("Regiones reales",["Criterio geográfico","Tipo","Impresiones","Clics","Costo CLP"],(Array.isArray(R.regions)?R.regions:[]).map(x=>[safe(x.countryCriterionId),safe(x.locationType),'<span class="font-numeric-table">'+n(x.impressions)+'</span>','<span class="font-numeric-table">'+n(x.clicks)+'</span>','<span class="font-numeric-table">'+money0(x.costClp)+'</span>']));
+}
 function verRender(){const c=checks(),ok=c.filter(x=>x.ok===true).length,fail=c.filter(x=>x.ok===false).length,na=c.filter(x=>x.ok===null).length;
  const ic=x=>x.ok===true?'<span class="material-symbols-outlined text-emerald-300">check_circle</span>':x.ok===false?'<span class="material-symbols-outlined text-red-300">error</span>':'<span class="material-symbols-outlined text-outline">pending</span>';
  const li=x=>'<li class="py-2.5 flex gap-3 items-start">'+ic(x)+'<div class="min-w-0"><div class="text-body-md text-on-surface">'+x.l+'</div><div class="text-[12px] text-outline break-words">'+x.dt+'</div></div></li>';
@@ -502,6 +517,7 @@ function verRender(){const c=checks(),ok=c.filter(x=>x.ok===true).length,fail=c.
  if(AUD){const P=META.audit.pages||[];sr.push('<div><div class="text-on-surface font-medium">Auditoría técnica del sitio</div><div class="text-outline text-[13px]">Generada '+fmtDT(AUD)+' ('+ago(AUD)+') · '+P.length+' páginas</div><ul class="mt-1 space-y-0.5 text-[13px]">'+P.map(p=>'<li class="flex justify-between gap-3"><span class="truncate text-outline">'+(p.url.replace("https://ubertransfer.cl","")||"/")+'</span><span class="font-numeric-table shrink-0">'+p.status+' · '+p.seconds+' s'+(p.issues.length?' · '+p.issues.length+' avisos':'')+'</span></li>').join("")+'</ul></div>')}
  {const S=META.seoStatus||{state:"sin_ejecutar",missing:[]};sr.push('<div class="text-[12px] text-outline">Search Console y GA4: '+(S.state==="ok"?'<b>conectados</b>, última extracción real '+esc(S.lastRun||"?"):'<b>sin conectar</b> · el flujo «SEO diario» <b>no está extrayendo datos</b>'+(S.missing&&S.missing.length?' (faltan: '+S.missing.map(esc).join(", ")+')':'')+'. No se muestran cifras de esas fuentes.')+'</div>')}
  $("vsrc").innerHTML=sr.join("");
+ adsExtraRender();
  renderSite()}
 function renderSite(){const p=AS.probe;if(!p){$("vsite").innerHTML='<div class="text-outline text-[13px]">Pulsa "Medir ahora" para hacer una prueba en vivo desde tu navegador.</div>';return}
  if(p.err){$("vsite").innerHTML='<div class="text-red-300">Sin respuesta a las '+fmtDT(p.at)+': '+p.err+'</div>';return}
@@ -634,7 +650,7 @@ function audRender(){
  el.innerHTML=h}
 function audOpen(){if(!AUDR&&!AUDBUSY)audRun(false);else audRender()}
 $("aud").onclick=e=>{const a=e.target.closest("[data-ap]");if(a){audPage(a.dataset.ap);return}if(e.target.closest("#audrun")){audRun(true);return}if(e.target.closest("#audcopy")){const t=audResumen()||"Todavía no se ejecuta la auditoría.";navigator.clipboard.writeText(t).then(()=>{$("audcopyt").textContent="Copiado";setTimeout(()=>{const x=$("audcopyt");if(x)x.textContent="Copiar informe"},1500)},()=>{$("audcopyt").textContent="Selecciona y copia a mano"})}};
-render();show(SEC.some(s=>s[0]===store.get("tab","guia"))?store.get("tab","guia"):"guia");
+render();show(SEC.some(s=>s[0]===store.get("tab","ver"))?store.get("tab","ver"):"ver");
 
 /* ===== Acceso privado y nube (Firebase Auth con Google + Firestore) ===== */
 const GB=id=>document.getElementById(id);

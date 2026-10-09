@@ -30,10 +30,10 @@
   "alerts": [],
   "mode": "read_only",
   "status": "connected",
-  "lastSync": "2026-10-09T14:21:47.186164Z",
+  "lastSync": "2026-10-09T14:30:51.484835Z",
   "source": "Google Ads API",
   "metrics": {
-    "impressions": 288,
+    "impressions": 294,
     "clicks": 16,
     "costClp": 4635,
     "conversions": 0.0,
@@ -82,7 +82,7 @@
       "topImpressionPercentage": null
     },
     {
-      "impressions": 288,
+      "impressions": 294,
       "clicks": 16,
       "costClp": 4635,
       "conversions": 0.0,
@@ -139,11 +139,11 @@
       "name": "Campaign #1",
       "status": "ENABLED",
       "date": "2026-10-09",
-      "impressions": 288,
+      "impressions": 294,
       "clicks": 16,
       "costMicros": 4635000000,
       "costClp": 4635,
-      "ctr": 0.05555555555555555,
+      "ctr": 0.05442176870748299,
       "conversions": 0.0,
       "averageCpc": 0.0,
       "costPerConversion": 0.0,
@@ -559,7 +559,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 3,
+        "impressions": 9,
         "clicks": 0,
         "costClp": 0,
         "conversions": 0.0,
@@ -584,7 +584,7 @@
     "devices": [
       {
         "date": null,
-        "impressions": 231,
+        "impressions": 233,
         "clicks": 9,
         "costClp": 2202,
         "conversions": 0.0,
@@ -607,7 +607,7 @@
       },
       {
         "date": null,
-        "impressions": 845,
+        "impressions": 849,
         "clicks": 59,
         "costClp": 17501,
         "conversions": 0.0,
@@ -681,7 +681,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 288,
+        "impressions": 294,
         "clicks": 16,
         "costClp": 4635,
         "conversions": 0.0,
@@ -738,7 +738,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 288,
+        "impressions": 294,
         "clicks": 16,
         "costClp": 4635,
         "conversions": 0.0,
@@ -7141,6 +7141,33 @@
       },
       {
         "date": "2026-10-09",
+        "impressions": 1,
+        "clicks": 0,
+        "costClp": 0,
+        "conversions": 0.0,
+        "averageCpc": null,
+        "costPerConversion": null,
+        "conversionsValue": null,
+        "allConversions": null,
+        "allConversionsValue": null,
+        "phoneCalls": null,
+        "messageChats": null,
+        "interactions": null,
+        "invalidClicks": null,
+        "searchImpressionShare": null,
+        "searchBudgetLostImpressionShare": null,
+        "searchRankLostImpressionShare": null,
+        "searchTopImpressionShare": null,
+        "absoluteTopImpressionPercentage": null,
+        "topImpressionPercentage": null,
+        "term": "taxi aeropuerto",
+        "campaignId": "24325669851",
+        "campaignName": "Campaign #1",
+        "adGroupId": "201907353538",
+        "adGroupName": "Grupo de anuncios 1"
+      },
+      {
+        "date": "2026-10-09",
         "impressions": 3,
         "clicks": 0,
         "costClp": 0,
@@ -7249,7 +7276,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 5,
+        "impressions": 6,
         "clicks": 0,
         "costClp": 0,
         "conversions": 0.0,
@@ -8439,7 +8466,7 @@
     "regions": [
       {
         "date": null,
-        "impressions": 729,
+        "impressions": 732,
         "clicks": 46,
         "costClp": 12598,
         "conversions": 0.0,
@@ -8463,7 +8490,7 @@
       },
       {
         "date": null,
-        "impressions": 353,
+        "impressions": 356,
         "clicks": 22,
         "costClp": 7105,
         "conversions": 0.0,
@@ -8512,7 +8539,7 @@
       },
       {
         "date": null,
-        "impressions": 288,
+        "impressions": 294,
         "clicks": 16,
         "costClp": 4635,
         "conversions": 0.0,
@@ -8537,7 +8564,7 @@
     "networks": [
       {
         "date": null,
-        "impressions": 1082,
+        "impressions": 1088,
         "clicks": 68,
         "costClp": 19703,
         "conversions": 0.0,
@@ -8758,7 +8785,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 109,
+        "impressions": 113,
         "clicks": 8,
         "costClp": 2293,
         "conversions": 0.0,
@@ -8870,7 +8897,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 141,
+        "impressions": 142,
         "clicks": 1,
         "costClp": 314,
         "conversions": 0.0,
@@ -8898,7 +8925,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 5,
+        "impressions": 6,
         "clicks": 0,
         "costClp": 0,
         "conversions": 0.0,

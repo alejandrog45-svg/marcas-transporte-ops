@@ -110,10 +110,12 @@ def report_queries(date_from: str, date_to: str) -> dict[str, str]:
         "callActionSettings": ("SELECT conversion_action.id, conversion_action.name, conversion_action.type, "
                                "conversion_action.phone_call_duration_seconds, conversion_action.primary_for_goal "
                                "FROM conversion_action WHERE conversion_action.type IN ('AD_CALL', 'WEBSITE_CALL')"),
-        "callDetails": ("SELECT segments.date, campaign.id, campaign.name, call_view.call_duration_seconds, "
+        # call_view no admite segments.date (PROHIBITED_SEGMENT...): se piden las últimas llamadas y la
+        # fecha sale de su hora de inicio.
+        "callDetails": ("SELECT campaign.id, campaign.name, call_view.call_duration_seconds, "
                         "call_view.call_status, call_view.type, call_view.start_call_date_time, "
                         "call_view.end_call_date_time, call_view.caller_area_code, call_view.caller_country_code "
-                        "FROM call_view " + period + " ORDER BY segments.date, call_view.start_call_date_time"),
+                        "FROM call_view ORDER BY call_view.start_call_date_time DESC LIMIT 500"),
         "campaignSettings": ("SELECT campaign.id, campaign.name, campaign.status, "
                              "campaign.advertising_channel_type, campaign.bidding_strategy_type, "
                              "campaign.start_date_time, campaign.end_date_time, campaign_budget.amount_micros "
@@ -372,10 +374,12 @@ def compact_report(name: str, rows: list[dict]) -> list[dict]:
         elif name == "callDetails":
             call = row.get("callView") or {}
             seconds = call.get("callDurationSeconds")
-            item = {"date": s.get("date"), "campaignId": str(campaign.get("id", "")), "campaignName": campaign.get("name", ""),
+            started = call.get("startCallDateTime")
+            item = {"date": str(started)[:10] if started else None, "campaignId": str(campaign.get("id", "")),
+                    "campaignName": campaign.get("name", ""),
                     "durationSeconds": int(seconds) if seconds is not None else None,
                     "status": call.get("callStatus", "UNSPECIFIED"), "callType": call.get("type", "UNSPECIFIED"),
-                    "startedAt": call.get("startCallDateTime"), "endedAt": call.get("endCallDateTime"),
+                    "startedAt": started, "endedAt": call.get("endCallDateTime"),
                     "areaCode": call.get("callerAreaCode"), "country": call.get("callerCountryCode")}
         elif name == "campaignSettings":
             campaign_budget = row.get("campaignBudget") or {}

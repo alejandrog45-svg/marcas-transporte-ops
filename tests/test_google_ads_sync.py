@@ -305,7 +305,7 @@ def test_tracking_queries_are_read_only_and_separate_from_conversion_actions():
         sql = queries[name].upper()
         assert all(word not in sql for word in ("MUTATE", "UPDATE ", "REMOVE", "MESSAGE_CHATS")), name
     assert "FROM customer" in queries["accountTracking"] and "FROM call_view" in queries["callDetails"]
-    assert "segments.date BETWEEN" in queries["callDetails"]
+    assert "segments." not in queries["callDetails"]  # call_view no admite segmentos de fecha
     assert "phone_call_duration_seconds" not in queries["conversionActions"]  # el informe que ya funciona no se toca
 
 
@@ -323,10 +323,10 @@ def test_account_tracking_and_call_action_settings_are_normalized_without_invent
 
 
 def test_call_details_keep_duration_status_and_date_for_history():
-    row = {"segments": {"date": "2026-10-09"}, "campaign": {"id": "5", "name": "Campaign #1"},
+    row = {"campaign": {"id": "5", "name": "Campaign #1"},
            "callView": {"callDurationSeconds": "34", "callStatus": "RECEIVED", "type": "MOBILE_CALL_FROM_ADS",
                         "startCallDateTime": "2026-10-09 10:02:11", "callerAreaCode": "9", "callerCountryCode": "CL"}}
-    call = sync.compact_report("callDetails", [row, {"segments": {"date": "2026-10-09"}, "callView": {}}])
+    call = sync.compact_report("callDetails", [row, {"callView": {}}])
     assert call[0]["durationSeconds"] == 34 and call[0]["status"] == "RECEIVED" and call[0]["date"] == "2026-10-09"
     assert call[1]["durationSeconds"] is None  # llamada sin duración informada: no se inventa 0
     assert "phoneNumber" not in call[0] and "callerNumber" not in call[0]  # no se guarda el número de nadie

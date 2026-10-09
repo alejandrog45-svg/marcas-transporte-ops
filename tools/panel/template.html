@@ -138,7 +138,7 @@ header,.bg-surface-container-low{border-color:var(--panel-line)!important}
 <div id="ads-alerts"></div><div class="real-kpis" id="ads-kpis"></div><div id="ads-quality" class="real-quality" aria-live="polite"></div>
 <div class="real-grid"><div class="real-card wide"><h2>Rendimiento por día</h2><div class="helper">Impresiones, clics y costo entregados por Google Ads. No se muestran proyecciones.</div><div id="ads-daily" class="real-bars"></div></div>
 <div class="real-card"><h2>Distribución por dispositivo</h2><div class="helper">Comparación de tráfico real por tipo de dispositivo.</div><div id="ads-devices" class="real-bars"></div></div>
-<div class="real-card"><h2>Chile por tipo de ubicación</h2><div class="helper">Google Ads devolvió Chile (criterio 2152) dividido entre interés y presencia. No se recibieron comunas ni regiones individuales.</div><div id="ads-regions" class="real-bars"></div></div></div>
+<div class="real-card"><h2>Chile por tipo de ubicación</h2><div class="helper">Google Ads devolvió el país entero dividido entre interés y presencia. No se recibieron comunas ni regiones individuales.</div><div id="ads-regions" class="real-bars"></div></div></div>
 </section>
 
 <section id="campaigns" class="real-dashboard"><div class="real-card wide"><h2>Campañas y anuncios reales</h2><div class="helper">Historial acumulado de campañas detectadas por sincronización. Una campaña nueva se agregará cuando Google Ads la devuelva.</div><div id="ads-campaign-table" class="real-table-wrap"></div></div><div class="real-card wide"><h2>Anuncios publicados</h2><div id="ads-ad-table" class="real-table-wrap"></div></div><div class="real-card wide"><h2>Configuración de campaña</h2><div class="helper">Presupuesto, estrategia, red y fechas devueltos por Google Ads. Solo lectura.</div><div id="ads-settings" class="real-table-wrap"></div></div><div class="real-card wide"><h2>Ubicaciones configuradas</h2><div class="helper">Zonas objetivo y excluidas configuradas en Google Ads. Esta tabla no representa impresiones; representa la configuración de la campaña.</div><div id="ads-locations" class="real-table-wrap"></div></div></section>
@@ -346,7 +346,7 @@ conductor uber</textarea></div>
 
 <script>
 const DATA=__DATA__;
-const META=__META__;META.audit=null;
+const META=__META__;if(META.plannerActive!==false)META.audit=null;
 if(META.plannerActive===false){DATA.length=0;META.forecast=null;META.trends=null;META.ampliacion=[]}
 const RAW=JSON.stringify(DATA);
 const ORIG=JSON.parse(RAW);
@@ -387,7 +387,7 @@ custom.forEach(k=>{if(!DATA.some(d=>d.k===k))DATA.push({k:k,v:0,c:"",lo:0,hi:0,y
 (META.ampliacion||[]).forEach(a=>{if(!DATA.some(d=>d.k===a.k))DATA.push({k:a.k,v:a.v,c:a.c,lo:a.lo,hi:a.hi,yoy:"",custom:1,seed:1,rango:a.rango,dueno:a.dueno})});
 DATA.forEach(d=>{d.g=grp(d.k);d.t=RC.test(d.k)?"comp":OUT.test(d.k)?"fuera":"ok"});
 const ADS=META.googleAds||{},ADSR=ADS.reports||{};let adsReady=false;
-function geoLabel(x){const t=String(x?.locationType||x||"");if(t==="AREA_OF_INTEREST")return"Interés por Chile";if(t==="LOCATION_OF_PRESENCE")return"Presencia en Chile";return t||"Sin tipo de ubicación"}
+function geoLabel(x){const t=String(x?.locationType||x||""),p=x&&x.name?x.name:"el país";if(t==="AREA_OF_INTEREST")return"Interés por "+p;if(t==="LOCATION_OF_PRESENCE")return"Presencia en "+p;return t||"Sin tipo de ubicación"}
 const realMiss=v=>v===null||v===undefined||v===""||!isFinite(Number(v)),realFmt=v=>realMiss(v)?"—":Number(v).toLocaleString("es-CL"),realMoney=v=>realMiss(v)?"—":"$"+realFmt(Math.round(Number(v))),realPct=(a,b)=>b?((Number(a||0)/Number(b))*100).toFixed(2)+" %":"—";
 function adsTermCat(t){const s=String(t||"").toLowerCase();if(/uber\s*-?transfer|ubertransfer/.test(s))return"Marca propia";if(RC.test(s.replace(/\bbus(?:es)?\b/g,"")))return"Competidor";const ng=(($("neg")||{}).value||"").split("\n").map(x=>x.trim().toLowerCase()).filter(Boolean);if(ng.some(w=>s.includes(w)))return"Posible negativa";if(/\bbus(?:es)?\b/.test(s))return"Bus / transporte público";if(/aeropuert|\bscl\b|arturo merino|pudahuel/.test(s))return"Aeropuerto";return"Transporte general"}
 function adsAgg(rows,keyFn){const m=new Map(),S=["impressions","clicks","costClp","conversions"];for(const r of rows){const k=keyFn(r);let a=m.get(k);if(!a){a=Object.assign({},r);a._d=[];m.set(k,a);S.forEach(f=>{a[f]=r[f]==null?null:Number(r[f])})}else S.forEach(f=>{if(r[f]!=null)a[f]=(a[f]==null?0:a[f])+Number(r[f])});if(r.date)a._d.push(r.date)}return [...m.values()].map(a=>{const d=a._d.sort();delete a._d;if(d.length)a.date=d[0]===d[d.length-1]?d[0]:d[0]+" a "+d[d.length-1];return a})}
@@ -622,7 +622,7 @@ function adsExtraRender(){
  table("Grupos de anuncios reales",["Grupo","Campaña","Impresiones","Clics","Costo CLP"],groups.map(x=>[safe(x.adGroupName),safe(x.campaignName),'<span class="font-numeric-table">'+n(x.impressions)+'</span>','<span class="font-numeric-table">'+n(x.clicks)+'</span>','<span class="font-numeric-table">'+money0(x.costClp)+'</span>']))+
  table("Dispositivos reales",["Dispositivo","Impresiones","Clics","Costo CLP","Conversiones"],devices.map(x=>[safe(x.device),'<span class="font-numeric-table">'+n(x.impressions)+'</span>','<span class="font-numeric-table">'+n(x.clicks)+'</span>','<span class="font-numeric-table">'+money0(x.costClp)+'</span>','<span class="font-numeric-table">'+n(x.conversions)+'</span>']))+
  table("Distribución horaria real",["Hora","Impresiones","Clics","Costo CLP"],hours.map(x=>[safe(String(x.hour).padStart(2,"0")+":00"),'<span class="font-numeric-table">'+n(x.impressions)+'</span>','<span class="font-numeric-table">'+n(x.clicks)+'</span>','<span class="font-numeric-table">'+money0(x.costClp)+'</span>']))+
- table("Regiones reales",["Criterio geográfico","Tipo","Impresiones","Clics","Costo CLP"],(Array.isArray(R.regions)?R.regions:[]).map(x=>[safe(x.countryCriterionId),safe(x.locationType),'<span class="font-numeric-table">'+n(x.impressions)+'</span>','<span class="font-numeric-table">'+n(x.clicks)+'</span>','<span class="font-numeric-table">'+money0(x.costClp)+'</span>']));
+ table("Regiones reales",["Criterio geográfico","Tipo","Impresiones","Clics","Costo CLP"],(Array.isArray(R.regions)?R.regions:[]).map(x=>[safe(x.name||x.countryCriterionId),safe(x.locationType),'<span class="font-numeric-table">'+n(x.impressions)+'</span>','<span class="font-numeric-table">'+n(x.clicks)+'</span>','<span class="font-numeric-table">'+money0(x.costClp)+'</span>']));
 }
 function verRender(){const c=checks(),ok=c.filter(x=>x.ok===true).length,fail=c.filter(x=>x.ok===false).length,na=c.filter(x=>x.ok===null).length;
  const ic=x=>x.ok===true?'<span class="material-symbols-outlined text-emerald-300">check_circle</span>':x.ok===false?'<span class="material-symbols-outlined text-red-300">error</span>':'<span class="material-symbols-outlined text-outline">pending</span>';

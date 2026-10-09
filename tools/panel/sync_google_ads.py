@@ -358,13 +358,10 @@ def compact_report(name: str, rows: list[dict]) -> list[dict]:
     return compact
 
 
-def enrich_geo_locations(customer: str, headers: dict[str, str], reports: dict) -> None:
-    locations = reports.get("locations")
-    if not isinstance(locations, list):
-        return
-    resources = sorted({str(x.get("geoTargetConstant")) for x in locations if x.get("geoTargetConstant")})
+def geo_names(customer: str, headers: dict[str, str], resources: list[str]) -> dict[str, dict]:
+    """Nombre de cada geoTargetConstant (p. ej. geoTargetConstants/2152 -> Chile)."""
     if not resources:
-        return
+        return {}
     quoted = ",".join("'" + value.replace("'", "\\'") + "'" for value in resources)
     statement = ("SELECT geo_target_constant.resource_name, geo_target_constant.id, "
                  "geo_target_constant.name, geo_target_constant.canonical_name, "
@@ -374,8 +371,7 @@ def enrich_geo_locations(customer: str, headers: dict[str, str], reports: dict) 
     mapping = {}
     for row in search_stream(customer, headers, statement):
         geo = row.get("geoTargetConstant") or {}
-        resource = str(geo.get("resourceName", ""))
-        mapping[resource] = {
+        mapping[str(geo.get("resourceName", ""))] = {
             "geoTargetId": str(geo.get("id", "")),
             "name": geo.get("name", ""),
             "canonicalName": geo.get("canonicalName", ""),
@@ -383,8 +379,28 @@ def enrich_geo_locations(customer: str, headers: dict[str, str], reports: dict) 
             "targetType": geo.get("targetType", "UNSPECIFIED"),
             "geoStatus": geo.get("status", "UNSPECIFIED"),
         }
+    return mapping
+
+
+def enrich_geo_locations(customer: str, headers: dict[str, str], reports: dict) -> None:
+    locations = reports.get("locations")
+    if not isinstance(locations, list):
+        return
+    resources = sorted({str(x.get("geoTargetConstant")) for x in locations if x.get("geoTargetConstant")})
+    mapping = geo_names(customer, headers, resources)
     for item in locations:
         item.update(mapping.get(str(item.get("geoTargetConstant", "")), {}))
+
+
+def enrich_geo_regions(customer: str, headers: dict[str, str], reports: dict) -> None:
+    """La vista geográfica entrega solo el ID del país: se le agrega su nombre."""
+    regions = reports.get("regions")
+    if not isinstance(regions, list):
+        return
+    resources = sorted({"geoTargetConstants/" + str(x["countryCriterionId"]) for x in regions if x.get("countryCriterionId")})
+    mapping = geo_names(customer, headers, resources)
+    for item in regions:
+        item.update(mapping.get("geoTargetConstants/" + str(item.get("countryCriterionId", "")), {}))
 
 
 HISTORY_NAME = "google_ads_history_ubertransfer.json"
@@ -472,6 +488,10 @@ def main() -> None:
         enrich_geo_locations(cid, headers, result["reports"])
     except RuntimeError as error:
         result["geoLookupError"] = str(error)
+    try:  # el nombre del país es un extra: si Google lo rechaza, el panel muestra el ID
+        enrich_geo_regions(cid, headers, result["reports"])
+    except RuntimeError as error:
+        result["geoRegionLookupError"] = str(error)[:300]
     # El catálogo de campañas se consulta sin filtro de fecha: así una campaña
     # nueva aparece aunque todavía no haya generado impresiones y una campaña
     # detenida sigue visible sin fabricar métricas cero.

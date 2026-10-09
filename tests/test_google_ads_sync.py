@@ -194,3 +194,36 @@ def test_campaign_settings_other_errors_are_not_swallowed(monkeypatch):
     monkeypatch.setattr(sync, "search_stream", boom)
     with pytest.raises(RuntimeError, match="PERMISSION_DENIED"):
         sync.fetch_campaign_settings("123", {}, "SELECT 1")
+
+
+def test_geo_regions_get_the_country_name(monkeypatch):
+    seen = []
+
+    def fake_stream(cid, headers, statement):
+        seen.append(statement)
+        return [{"geoTargetConstant": {"resourceName": "geoTargetConstants/2152", "id": "2152", "name": "Chile",
+                                       "canonicalName": "Chile", "countryCode": "CL", "targetType": "Country"}}]
+    monkeypatch.setattr(sync, "search_stream", fake_stream)
+    reports = {"regions": [{"countryCriterionId": "2152", "locationType": "AREA_OF_INTEREST", "clicks": 66},
+                           {"countryCriterionId": "2152", "locationType": "LOCATION_OF_PRESENCE", "clicks": 27}]}
+    sync.enrich_geo_regions("123", {}, reports)
+    assert [r["name"] for r in reports["regions"]] == ["Chile", "Chile"]
+    assert reports["regions"][0]["clicks"] == 66 and "'geoTargetConstants/2152'" in seen[0]
+    assert len(seen) == 1  # una sola consulta para todas las filas
+
+
+def test_geo_regions_without_ids_do_not_call_google(monkeypatch):
+    def boom(*args):
+        raise AssertionError("no debería consultar")
+    monkeypatch.setattr(sync, "search_stream", boom)
+    sync.enrich_geo_regions("123", {}, {"regions": [{"locationType": "AREA_OF_INTEREST"}]})
+    sync.enrich_geo_regions("123", {}, {"regions": {"error": "x"}})
+
+
+def test_geo_locations_still_get_names_after_refactor(monkeypatch):
+    monkeypatch.setattr(sync, "search_stream", lambda *a: [{"geoTargetConstant": {
+        "resourceName": "geoTargetConstants/20160", "id": "20160", "name": "Santiago Metropolitan Region",
+        "targetType": "Region"}}])
+    reports = {"locations": [{"geoTargetConstant": "geoTargetConstants/20160"}]}
+    sync.enrich_geo_locations("123", {}, reports)
+    assert reports["locations"][0]["name"] == "Santiago Metropolitan Region"

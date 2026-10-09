@@ -46,6 +46,8 @@ def test_normalize_keeps_one_snapshot_per_day_and_replaces_returned_days(tmp_pat
     ]
     assert result["metrics"]["dateFrom"] == "2026-10-09"
     assert result["metrics"]["clicks"] == 7
+    # "Última fecha" debe ser el último día con datos, no el inicio de la consulta.
+    assert result["campaignHistory"][0]["lastSeen"] == "2026-10-09"
 
 
 def test_normalize_keeps_real_totals_and_history(tmp_path, monkeypatch):

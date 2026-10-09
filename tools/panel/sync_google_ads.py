@@ -220,9 +220,11 @@ def normalize(rows: list[dict], date_from: str, date_to: str) -> dict:
     for row in campaigns:
         cid = row["campaignId"]
         old = campaign_history.get(cid, {})
+        # La última fecha es el último día con filas, no el inicio de la consulta.
+        seen = max(row.get("date") or date_from, old.get("lastSeen") or "")
         campaign_history[cid] = {
             "campaignId": cid, "name": row["name"], "status": row["status"],
-            "firstSeen": old.get("firstSeen", date_from), "lastSeen": date_from,
+            "firstSeen": old.get("firstSeen", date_from), "lastSeen": seen,
         }
     return {
         "brand": "UberTransfer",

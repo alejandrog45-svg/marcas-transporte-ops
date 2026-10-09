@@ -56,3 +56,31 @@ kbd{font:inherit;font-size:10px;padding:0 4px;border:1px solid rgba(255,255,255,
 @media(max-width:767px){#tb td:nth-child(8){grid-column:2/4}}
 /* Rutas y textos largos dentro de las tarjetas: que se partan en vez de desbordar */
 #ias code,#mej code,#ver code,#rec code,#guia code{overflow-wrap:anywhere;word-break:break-word}
+
+/* ===== Badge de versión AG, botón Instalar app y aviso de actualización ===== */
+[data-vbadge][hidden],.installapp[hidden],#updbar[hidden]{display:none!important}
+.vbadge{position:relative;display:inline-flex;align-items:stretch;height:22px;border:0;border-radius:999px;overflow:hidden;cursor:pointer;font:700 11px/22px Inter,system-ui,sans-serif;color:#fff;box-shadow:0 0 0 1px rgba(237,28,36,.35),0 4px 12px -5px rgba(237,28,36,.7);transition:transform .15s ease,box-shadow .15s ease}
+.vbadge:hover{transform:translateY(-1px);box-shadow:0 0 0 1px rgba(237,28,36,.55),0 6px 14px -5px rgba(237,28,36,.85)}
+.vbadge:focus-visible{outline:2px solid #172033;outline-offset:2px}
+.vbadge::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.35) 50%,transparent 65%);transform:translateX(-120%);animation:vbshine 7s ease-in-out 2s infinite;pointer-events:none}
+.vb-ag{display:flex;align-items:center;padding:0 8px 0 10px;background:#14161c;letter-spacing:.14em}
+.vb-v{display:flex;align-items:center;gap:6px;padding:0 9px 0 8px;background:linear-gradient(135deg,#ed1c24,#b3121a);letter-spacing:.03em}
+.vb-dot{width:7px;height:7px;border-radius:50%;background:#6ab04c;box-shadow:0 0 0 2px rgba(255,255,255,.4);animation:vbpulse 2.6s ease-in-out infinite}
+.vbadge.is-new .vb-dot{background:#f59e0b;animation-duration:1.1s}
+.vbadge.is-new{animation:vbglow 1.6s ease-in-out infinite}
+.vb-logo{width:36px;height:36px;border-radius:9px;overflow:hidden;flex-shrink:0;box-shadow:0 1px 4px rgba(23,32,51,.3)}
+.vb-logo img{display:block;width:100%;height:100%}
+.installapp{display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:10px;border:1px solid #ed1c24;background:#fff;color:#ed1c24;font:700 12px Inter,system-ui,sans-serif;cursor:pointer;white-space:nowrap;transition:background .15s,color .15s}
+.installapp:hover{background:#ed1c24;color:#fff}
+#vbtoast{position:fixed;left:50%;bottom:22px;z-index:60;transform:translate(-50%,14px);padding:9px 16px;border-radius:999px;background:#14161c;color:#fff;font:600 13px Inter,system-ui,sans-serif;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s}
+#vbtoast.show{opacity:1;transform:translate(-50%,0)}
+#updbar{position:fixed;left:50%;bottom:18px;z-index:55;transform:translateX(-50%);display:flex;align-items:center;gap:12px;width:max-content;max-width:min(560px,calc(100vw - 24px));padding:10px 12px;background:#fff;border:1px solid #f3b4b7;border-left:4px solid #ed1c24;border-radius:14px;box-shadow:0 12px 30px -10px rgba(23,32,51,.45);animation:ubin .35s ease-out}
+#updbar img{border-radius:8px;flex-shrink:0}
+.ub-t{display:flex;flex-direction:column;min-width:0;font-size:13px;line-height:1.35;color:#172033}.ub-t b{font-size:14px}
+#ubgo{padding:8px 14px;border:0;border-radius:10px;background:#ed1c24;color:#fff;font-weight:700;font-size:13px;cursor:pointer;white-space:nowrap}#ubgo:hover{background:#b3121a}
+#ubx{padding:4px 6px;border:0;background:transparent;color:#68758a;font-size:16px;cursor:pointer}
+@keyframes vbpulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(.8)}}
+@keyframes vbshine{0%,70%,100%{transform:translateX(-120%)}85%{transform:translateX(120%)}}
+@keyframes vbglow{0%,100%{box-shadow:0 0 0 1px rgba(245,158,11,.5),0 4px 12px -5px rgba(245,158,11,.7)}50%{box-shadow:0 0 0 3px rgba(245,158,11,.35),0 4px 16px -3px rgba(245,158,11,.9)}}
+@keyframes ubin{from{opacity:0;transform:translate(-50%,16px)}to{opacity:1;transform:translate(-50%,0)}}
+@media (prefers-reduced-motion:reduce){.vbadge::after,.vb-dot,.vbadge.is-new,#updbar{animation:none}}

@@ -17,7 +17,7 @@
           { "key": "Referrer-Policy", "value": "no-referrer" },
           { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), payment=()" },
           { "key": "Strict-Transport-Security", "value": "max-age=31536000; includeSubDomains" },
-          { "key": "Content-Security-Policy", "value": "default-src 'none'; script-src 'self' 'unsafe-inline' https://apis.google.com; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://ubertransfer.cl https://aereostar.cl https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://www.googleapis.com; frame-src https://ubertransfer-ops.firebaseapp.com https://accounts.google.com; base-uri 'none'; form-action 'none'; frame-ancestors 'none'" }
+          { "key": "Content-Security-Policy", "value": "default-src 'none'; script-src 'self' 'unsafe-inline' https://apis.google.com; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://ubertransfer.cl https://aereostar.cl https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://www.googleapis.com; frame-src https://ubertransfer-ops.firebaseapp.com https://accounts.google.com; manifest-src 'self'; worker-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'" }
         ]
       }
     ]

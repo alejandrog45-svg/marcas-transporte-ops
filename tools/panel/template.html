@@ -4,7 +4,8 @@
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>UberTransfer — Panel de investigación</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231a73e8'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-size='20' font-weight='700' text-anchor='middle' fill='white'%3EU%3C/text%3E%3C/svg%3E"/>
+<!--PWA--><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#ed1c24"><link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png"><link rel="apple-touch-icon" href="/icons/apple-touch-icon.png"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UberTransfer"><meta name="apple-mobile-web-app-status-bar-style" content="default"><script type="text/javascript">window.__ip=null;addEventListener("beforeinstallprompt",function(e){e.preventDefault();window.__ip=e;dispatchEvent(new Event("ip-ready"))});if("serviceWorker" in navigator&&location.protocol!=="file:")addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(){})});</script><!--/PWA-->
+<!--AEICON<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231a73e8'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-size='20' font-weight='700' text-anchor='middle' fill='white'%3EU%3C/text%3E%3C/svg%3E"/>AEICON-->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
@@ -65,7 +66,7 @@ header,.bg-surface-container-low{border-color:var(--panel-line)!important}
 <div class="space-y-6">
 <div class="flex items-center justify-between px-2 pt-1 pb-2">
 <div class="flex items-center gap-2.5">
-<div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center text-on-primary font-headline-md font-bold shadow-sm shadow-primary-container/30">
+<div id="brandlogo" class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center text-on-primary font-headline-md font-bold shadow-sm shadow-primary-container/30">
 <span class="material-symbols-outlined text-white">flight_takeoff</span>
 </div>
 <div>
@@ -73,7 +74,7 @@ header,.bg-surface-container-low{border-color:var(--panel-line)!important}
 <span class="text-headline-md font-headline-md text-on-surface font-bold tracking-tight">UberTransfer</span>
 <span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-surface-container-high text-secondary border border-outline-variant/60">SCL</span>
 </div>
-<p class="text-label-sm font-label-sm text-outline">Panel de investigación</p>
+<p class="text-label-sm font-label-sm text-outline">Panel de investigación</p><div class="mt-1" data-vbadge hidden></div>
 </div>
 </div>
 </div>
@@ -99,7 +100,7 @@ header,.bg-surface-container-low{border-color:var(--panel-line)!important}
 <span>DATOS REALES · SOLO LECTURA</span>
 </div>
 </div>
-<div class="flex flex-wrap items-center gap-2 w-full lg:w-auto"><a id="brandsw" href="/aereostar/" class="inline-flex items-center px-2.5 py-1.5 rounded-lg border border-outline-variant text-[12px] font-semibold text-on-surface-variant hover:bg-surface-container-high transition-colors whitespace-nowrap">Panel Aereostar →</a><span id="who" class="hidden text-[11px] text-outline truncate max-w-[140px] sm:max-w-[200px]" title=""></span><span id="cloudst" class="hidden text-[11px] text-outline whitespace-nowrap" role="status"></span><button id="logout" type="button" class="hidden px-2.5 py-1.5 rounded-lg bg-surface-container border border-outline-variant text-on-surface text-label-md font-label-md hover:bg-surface-container-high transition-colors">Salir</button><button id="livebtn" title="Verifica ubertransfer.cl desde tu conexión, comprueba la versión publicada y recalcula la consistencia del panel. No consulta Google Ads." class="flex items-center justify-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-primary-container text-white text-label-md font-label-md font-semibold hover:bg-blue-600 transition-colors shadow-sm shadow-primary-container/20 grow sm:grow-0"><span class="material-symbols-outlined text-sm" id="liveic">sync</span><span id="livet">Verificar sitio y panel</span></button></div>
+<div class="flex flex-wrap items-center gap-2 w-full lg:w-auto"><a id="brandsw" href="/aereostar/" class="inline-flex items-center px-2.5 py-1.5 rounded-lg border border-outline-variant text-[12px] font-semibold text-on-surface-variant hover:bg-surface-container-high transition-colors whitespace-nowrap">Panel Aereostar →</a><button id="installapp" type="button" class="installapp" hidden><span class="material-symbols-outlined" style="font-size:16px">install_mobile</span>Instalar app</button><span class="lg:hidden" data-vbadge hidden></span><span id="who" class="hidden text-[11px] text-outline truncate max-w-[140px] sm:max-w-[200px]" title=""></span><span id="cloudst" class="hidden text-[11px] text-outline whitespace-nowrap" role="status"></span><button id="logout" type="button" class="hidden px-2.5 py-1.5 rounded-lg bg-surface-container border border-outline-variant text-on-surface text-label-md font-label-md hover:bg-surface-container-high transition-colors">Salir</button><button id="livebtn" title="Verifica ubertransfer.cl desde tu conexión, comprueba la versión publicada y recalcula la consistencia del panel. No consulta Google Ads." class="flex items-center justify-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-primary-container text-white text-label-md font-label-md font-semibold hover:bg-blue-600 transition-colors shadow-sm shadow-primary-container/20 grow sm:grow-0"><span class="material-symbols-outlined text-sm" id="liveic">sync</span><span id="livet">Verificar sitio y panel</span></button></div>
 <div class="relative w-full lg:w-56 xl:w-64">
 <span class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-outline">
 <span class="material-symbols-outlined text-sm">search</span>
@@ -172,7 +173,7 @@ header,.bg-surface-container-low{border-color:var(--panel-line)!important}
 <li>Nada se crea, pausa ni cambia en Google Ads sin que el dueño lo apruebe: presupuesto, pujas y anuncios.</li>
 <li>Una frase, un dueño: si una frase de aeropuerto también la trabaja Aereostar, se decide con Rafael quién la lleva.</li>
 <li>Siguen <b>PENDIENTES</b> y no se inventan: la tarifa de los tramos sin cubrir, la capacidad real de la flota y las rutas y comunas atendidas.</li></ul></div>
-<div class="card"><h2>Cuándo se actualiza</h2><p>El panel se rearma cada día entre las 07:45 y las 08:45 (hora de Chile). La hora de la última descarga aparece arriba, junto a "Google Ads:".</p></div>
+<div class="card"><h2>Instalar como app y actualizar</h2><ul><li><b>Android, Windows y Mac (Chrome o Edge):</b> pulsa «Instalar app» arriba. Se abre en su propia ventana, como una app.</li><li><b>iPhone:</b> en Safari, Compartir → «Agregar a pantalla de inicio».</li><li>Cuando hay datos o un diseño nuevo aparece el aviso <b>«Hay una versión nueva»</b> con el botón <b>Actualizar</b>. También puedes pulsar el badge <b>AG · v.1</b> para buscar actualizaciones.</li></ul></div><div class="card"><h2>Cuándo se actualiza</h2><p>El panel se rearma cada día entre las 07:45 y las 08:45 (hora de Chile). La hora de la última descarga aparece arriba, junto a "Google Ads:".</p></div>
 </section>
 
 <section id="kw">
@@ -814,6 +815,20 @@ async function cloudUser(u){
   CLOUDU=null;CLOUD_REF=null;
   if(e.code==="permission-denied"){CLOUDMSG="La cuenta "+u.email+" no tiene acceso a este panel. Usa otra cuenta.";firebase.auth().signOut()}
   else gateShow("No se pudo abrir el panel ("+(e.code||e.message)+"). Reintenta.",true,"Reintentar")}}
+/* ===== App instalable (PWA), badge de versión y botón de actualizar: solo UberTransfer ===== */
+const PANEL_VERSION="1",PWA_ON=META.plannerActive===false&&location.protocol!=="file:";
+let VB_NEW=null,IP=window.__ip||null;
+function vbBuilt(){return META.builtAt?fmtDT(new Date(META.builtAt)):"sin fecha"}
+function vbPaint(){document.querySelectorAll("[data-vbadge]").forEach(el=>{el.hidden=!PWA_ON;if(!PWA_ON)return;const nw=!!VB_NEW;el.innerHTML='<button type="button" class="vbadge'+(nw?" is-new":"")+'" title="'+esc("Creado por AG · versión "+PANEL_VERSION+" · armado "+vbBuilt()+(nw?" · hay una versión nueva: pulsa para actualizar":" · pulsa para buscar actualizaciones"))+'" aria-label="Versión '+PANEL_VERSION+", creado por AG. "+(nw?"Hay una actualización disponible.":"Pulsa para buscar actualizaciones.")+'"><span class="vb-ag">AG</span><span class="vb-v">v.'+PANEL_VERSION+'<i class="vb-dot"></i></span></button>';el.firstChild.onclick=()=>{if(VB_NEW)vbUpdate();else vbCheck(true)}})}
+function vbToast(m){let t=$("vbtoast");if(!t){t=document.createElement("div");t.id="vbtoast";t.setAttribute("role","status");document.body.appendChild(t)}t.textContent=m;t.className="show";clearTimeout(t._h);t._h=setTimeout(()=>{t.className=""},3500)}
+function vbBar(){let b=$("updbar");if(!VB_NEW){if(b)b.hidden=true;return}if(!b){b=document.createElement("div");b.id="updbar";b.setAttribute("role","alert");b.innerHTML='<img src="/icons/logo-128.png" alt="" width="36" height="36"><div class="ub-t"><b>Hay una versión nueva</b><span id="ubd"></span></div><button type="button" id="ubgo">Actualizar</button><button type="button" id="ubx" aria-label="Ocultar aviso">✕</button>';document.body.appendChild(b);$("ubgo").onclick=vbUpdate;$("ubx").onclick=()=>{b.hidden=true}}b.hidden=false;$("ubd").textContent="Datos o diseño actualizados ("+fmtDT(new Date(VB_NEW.builtAt))+"). Pulsa Actualizar para verla."}
+async function vbCheck(manual){if(!PWA_ON)return;try{const r=await fetch("version.json?_="+Date.now(),{cache:"no-store"});if(!r.ok)throw new Error("HTTP "+r.status);const v=await r.json();const nw=!!(v.builtAt&&META.builtAt&&v.builtAt!==META.builtAt);VB_NEW=nw?v:null;vbPaint();vbBar();if(manual&&!nw)vbToast("Ya tienes la versión actual (v."+PANEL_VERSION+")")}catch(e){if(manual)vbToast("No se pudo comprobar ahora: "+e.message)}}
+async function vbUpdate(){vbToast("Actualizando…");try{if(window.caches){const ks=await caches.keys();await Promise.all(ks.map(k=>caches.delete(k)))}const reg=navigator.serviceWorker&&await navigator.serviceWorker.getRegistration();if(reg)await reg.update()}catch(e){}location.reload()}
+function vbInstallShow(){const b=$("installapp");if(b)b.hidden=!(PWA_ON&&IP)}
+addEventListener("ip-ready",()=>{IP=window.__ip;vbInstallShow()});
+addEventListener("appinstalled",()=>{IP=null;window.__ip=null;vbInstallShow();vbToast("App instalada")});
+if($("installapp"))$("installapp").onclick=async()=>{if(!IP)return;IP.prompt();try{await IP.userChoice}catch(e){}IP=null;window.__ip=null;vbInstallShow()};
+if(PWA_ON){const bl=$("brandlogo");if(bl){bl.className="vb-logo";bl.innerHTML='<img src="/icons/logo-128.png" alt="Logo UberTransfer" width="36" height="36">'}vbPaint();vbInstallShow();setTimeout(vbCheck,4000);setInterval(vbCheck,300000);document.addEventListener("visibilitychange",()=>{if(!document.hidden)vbCheck()});addEventListener("online",()=>vbCheck())}
 /*BOOT*/async function cloudBoot(db){}/*ENDBOOT*/
 function authFail(e){if(e&&(e.code==="auth/popup-closed-by-user"||e.code==="auth/cancelled-popup-request"))return;const m=String((e&&e.message)||"").replace(/\s+/g," ").replace(/^Firebase: /,"").slice(0,140);gateShow("No se pudo iniciar sesión ("+((e&&e.code)||"error")+")"+(m?": "+m:"")+".",true,"Reintentar")}
 async function cloudInit(){

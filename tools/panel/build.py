@@ -20,6 +20,7 @@ Uso:  python tools/panel/build.py
 Requiere Node.js (solo para compilar el CSS de Tailwind, una vez por armado).
 No hace ninguna llamada de red salvo `npm install` la primera vez.
 """
+import re
 import csv, datetime, hashlib, io, json, os, shutil, subprocess, sys
 from pathlib import Path
 
@@ -322,6 +323,11 @@ def ae_checklist(au):
 
 def brand_aereostar(page, ch=None):
     """Convierte la plantilla (hecha para UberTransfer) en la del panel de Aereostar."""
+    # App instalable, badge y botones son solo de UberTransfer: se quitan y se restaura su favicon
+    page = re.sub(r"<!--PWA-->.*?<!--/PWA-->", "", page, flags=re.S)
+    ico = re.search(r"<!--AEICON(.*?)AEICON-->", page, flags=re.S)
+    assert ico, "aereostar: no se encontró el favicon guardado"
+    page = page.replace(ico.group(0), ico.group(1))
     def one(s, o, n):
         assert s.count(o) == 1, ("aereostar: no se encontró exactamente una vez: " + o[:60], s.count(o))
         return s.replace(o, n)

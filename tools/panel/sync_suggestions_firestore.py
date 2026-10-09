@@ -91,7 +91,20 @@ def build_suggestions(data: dict[str, Any]) -> dict[str, Any]:
     regions = rows(reports, "regions")
     metrics = data.get("metrics") or {}
     updated_at = str(data.get("lastSync") or dt.datetime.now(dt.timezone.utc).isoformat().replace("+00:00", "Z"))
-    campaign = text(max(campaigns, key=lambda r: number(r, "clicks"), default={}), "name", "campaignName")
+    active = [
+        row for row in campaigns
+        if text(row, "status", default="").upper() in {"ENABLED", "ACTIVE"}
+    ]
+    current_rows = active or campaigns
+    current = max(current_rows, key=lambda r: number(r, "clicks"), default={})
+    campaign = text(current, "name", "campaignName")
+    campaign_status = text(current, "status", default="sin estado")
+    history = data.get("history") or []
+    if not isinstance(history, list):
+        history = []
+    history = sorted(history, key=lambda row: str(row.get("dateFrom", "")))
+    latest = history[-1] if history else None
+    previous = history[-2] if len(history) > 1 else None
     best_term = max(terms, key=lambda r: number(r, "clicks"), default=None)
     costly = sorted(
         [r for r in terms if number(r, "clicks") > 0 and number(r, "conversions") == 0 and number(r, "costClp") > 0],
@@ -107,7 +120,8 @@ def build_suggestions(data: dict[str, Any]) -> dict[str, Any]:
             "action": "Preparar un borrador manual usando la estructura observada.",
             "kind": "PROPUESTA",
             "data": evidence(
-                f"Campañas consultadas: {len(campaigns)}; impresiones y clics reales.",
+                f"Campaña actual: {campaign}; estado {campaign_status}; "
+                f"{len(campaigns)} fila(s) de Google Ads y {len(history)} fecha(s) históricas.",
                 updated_at,
                 campaign,
                 "Existe una campaña real para revisar antes de copiar.",
@@ -145,6 +159,24 @@ def build_suggestions(data: dict[str, Any]) -> dict[str, Any]:
                 "Tiene gasto y clics, pero Google Ads no reportó conversiones." if costly else "No se fabrica una alerta.",
                 "Media" if costly else "Baja",
                 "Que el seguimiento de conversiones esté funcionando.",
+            ),
+        },
+        {
+            "title": "Comparar la campaña actual con el historial",
+            "action": "Comparar manualmente el último período contra el anterior antes de cambiar de campaña." if latest and previous else "Esperar otra fecha sincronizada para comparar.",
+            "kind": "HISTORIAL REAL" if latest and previous else "HISTORIAL INSUFICIENTE",
+            "data": evidence(
+                (
+                    f"Último período {text(latest, 'dateFrom')}: {number(latest, 'clicks'):g} clics / "
+                    f"{number(latest, 'impressions'):g} impresiones; anterior {text(previous, 'dateFrom')}: "
+                    f"{number(previous, 'clicks'):g} clics / {number(previous, 'impressions'):g} impresiones."
+                ) if latest and previous else
+                f"Google Ads devolvió {len(history)} fecha(s) histórica(s); se requieren al menos 2.",
+                str((latest or {}).get("dateFrom") or updated_at),
+                campaign,
+                "Permite evaluar una campaña nueva frente a la actividad acumulada sin confundir nombres con rendimiento." if latest and previous else "No se inventa una tendencia con una sola fecha.",
+                "Media" if latest and previous else "Baja",
+                "Confirmar fechas de inicio/detención y que ambos períodos sean comparables.",
             ),
         },
     ]

@@ -40,6 +40,8 @@ jobs:
         run: python tools/panel/sync_google_ads.py
 
       - name: Armar panel
+        env:
+          PANEL_DATA_KEY: ${{ secrets.PANEL_DATA_KEY }}
         run: python tools/panel/build.py
 
       - name: Guardar histórico de la auditoría

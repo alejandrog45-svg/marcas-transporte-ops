@@ -73,6 +73,30 @@ def report_queries(date_from: str, date_to: str) -> dict[str, str]:
         "regions": ("SELECT geographic_view.country_criterion_id, geographic_view.location_type, "
                     "metrics.impressions, metrics.clicks, metrics.cost_micros, metrics.conversions "
                     "FROM geographic_view " + period + " ORDER BY geographic_view.country_criterion_id"),
+        "dayOfWeek": ("SELECT segments.day_of_week, metrics.impressions, metrics.clicks, "
+                      "metrics.cost_micros, metrics.conversions FROM campaign " + period +
+                      " ORDER BY segments.day_of_week"),
+        "networks": ("SELECT segments.ad_network_type, metrics.impressions, metrics.clicks, "
+                     "metrics.cost_micros, metrics.conversions FROM campaign " + period +
+                     " ORDER BY segments.ad_network_type"),
+        "keywords": ("SELECT ad_group_criterion.keyword.text, ad_group_criterion.keyword.match_type, "
+                      "campaign.id, campaign.name, ad_group.id, ad_group.name, segments.date, "
+                      "metrics.impressions, metrics.clicks, metrics.cost_micros, metrics.conversions "
+                      "FROM keyword_view " + period + " ORDER BY segments.date, metrics.clicks DESC"),
+        "conversionActions": ("SELECT conversion_action.id, conversion_action.name, conversion_action.category, "
+                              "conversion_action.type, conversion_action.status, conversion_action.counting_type, "
+                              "conversion_action.include_in_conversions_metric, "
+                              "conversion_action.click_through_lookback_window_days, "
+                              "conversion_action.view_through_lookback_window_days FROM conversion_action "
+                              "ORDER BY conversion_action.name"),
+        "campaignSettings": ("SELECT campaign.id, campaign.name, campaign.status, "
+                             "campaign.advertising_channel_type, campaign.bidding_strategy_type, "
+                             "campaign.start_date, campaign.end_date, campaign_budget.amount_micros "
+                             "FROM campaign ORDER BY campaign.id"),
+        "locations": ("SELECT campaign.id, campaign.name, campaign_criterion.criterion_id, "
+                      "campaign_criterion.type, campaign_criterion.negative, "
+                      "campaign_criterion.location.geo_target_constant FROM campaign_criterion "
+                      "WHERE campaign_criterion.type = LOCATION ORDER BY campaign.id, campaign_criterion.criterion_id"),
     }
 
 
@@ -208,6 +232,39 @@ def compact_report(name: str, rows: list[dict]) -> list[dict]:
         elif name == "regions":
             item.update({"countryCriterionId": str((row.get("geographicView") or {}).get("countryCriterionId", "")),
                          "locationType": (row.get("geographicView") or {}).get("locationType", "UNSPECIFIED")})
+        elif name == "dayOfWeek":
+            item["dayOfWeek"] = s.get("dayOfWeek", "UNSPECIFIED")
+        elif name == "networks":
+            item["network"] = s.get("adNetworkType", "UNSPECIFIED")
+        elif name == "keywords":
+            criterion = row.get("adGroupCriterion") or {}
+            keyword = criterion.get("keyword") or {}
+            item.update({"keyword": keyword.get("text", ""), "matchType": keyword.get("matchType", "UNSPECIFIED"),
+                         "campaignId": str(campaign.get("id", "")), "campaignName": campaign.get("name", ""),
+                         "adGroupId": str(group.get("id", "")), "adGroupName": group.get("name", "")})
+        elif name == "conversionActions":
+            action = row.get("conversionAction") or {}
+            item = {"conversionActionId": str(action.get("id", "")), "name": action.get("name", ""),
+                    "category": action.get("category", "UNSPECIFIED"), "type": action.get("type", "UNSPECIFIED"),
+                    "status": action.get("status", "UNSPECIFIED"), "countingType": action.get("countingType", "UNSPECIFIED"),
+                    "includeInConversionsMetric": bool(action.get("includeInConversionsMetric", False)),
+                    "clickThroughLookbackDays": int(action.get("clickThroughLookbackWindowDays", 0) or 0),
+                    "viewThroughLookbackDays": int(action.get("viewThroughLookbackWindowDays", 0) or 0)}
+        elif name == "campaignSettings":
+            campaign_budget = row.get("campaignBudget") or {}
+            item = {"campaignId": str(campaign.get("id", "")), "campaignName": campaign.get("name", ""),
+                    "status": campaign.get("status", "UNSPECIFIED"), "channel": campaign.get("advertisingChannelType", "UNSPECIFIED"),
+                    "biddingStrategy": campaign.get("biddingStrategyType", "UNSPECIFIED"),
+                    "startDate": campaign.get("startDate"), "endDate": campaign.get("endDate"),
+                    "dailyBudgetClp": round(int(campaign_budget.get("amountMicros", 0)) / 1_000_000)}
+        elif name == "locations":
+            criterion = row.get("campaignCriterion") or {}
+            location = criterion.get("location") or {}
+            item = {"campaignId": str(campaign.get("id", "")), "campaignName": campaign.get("name", ""),
+                    "criterionId": str(criterion.get("criterionId", "")),
+                    "geoTargetConstant": location.get("geoTargetConstant", ""),
+                    "criterionType": criterion.get("type", "UNSPECIFIED"),
+                    "negative": bool(criterion.get("negative", False))}
         compact.append(item)
     return compact
 def main() -> None:

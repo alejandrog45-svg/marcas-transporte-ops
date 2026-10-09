@@ -10,7 +10,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
 <style>__CSS__</style>
-<style>#guia,#sim,#borr,#rec,#mej,#aud,#ias,#simpanel{display:none!important}</style>
+<style>#guia,#sim,#borr,#rec,#mej,#aud,#ias,#simpanel{display:none!important}
+:root{--panel-bg:#f6f8fb;--panel-card:#fff;--panel-ink:#172033;--panel-muted:#68758a;--panel-line:#dfe5ee;--panel-blue:#2563eb;--panel-cyan:#0891b2;--panel-green:#059669;--panel-amber:#d97706;--panel-red:#dc2626}
+body{background:var(--panel-bg)!important;color:var(--panel-ink)!important}
+aside,.bg-surface-container-lowest,.bg-surface-container-low,.bg-surface-container,.bg-surface-container-high{background-color:var(--panel-card)!important;color:var(--panel-ink)!important}
+header,.bg-surface-container-low{border-color:var(--panel-line)!important}
+.text-on-surface,.text-on-surface-variant{color:var(--panel-ink)!important}.text-outline{color:var(--panel-muted)!important}.border-outline-variant{border-color:var(--panel-line)!important}
+#gs,#q,#fg,#fd,#ft,#fo,#mv,#ps,#sortm{background:#fff!important;color:var(--panel-ink)!important;border-color:var(--panel-line)!important}
+.real-dashboard{display:grid;gap:18px}.real-filters{display:flex;flex-wrap:wrap;gap:10px;align-items:end;background:#fff;border:1px solid var(--panel-line);border-radius:14px;padding:14px;box-shadow:0 4px 18px rgba(30,50,80,.05)}
+.real-filter{display:grid;gap:5px;min-width:150px}.real-filter label{font-size:11px;font-weight:700;color:var(--panel-muted);text-transform:uppercase;letter-spacing:.04em}.real-filter select,.real-filter input{height:36px;border:1px solid var(--panel-line);border-radius:8px;background:#fff;color:var(--panel-ink);padding:0 10px;font-size:13px}
+.real-kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.real-kpi{background:#fff;border:1px solid var(--panel-line);border-radius:14px;padding:16px;box-shadow:0 4px 18px rgba(30,50,80,.05)}.real-kpi .label{font-size:11px;color:var(--panel-muted);font-weight:700;text-transform:uppercase}.real-kpi .value{font-size:26px;line-height:1.15;font-weight:800;margin-top:8px}.real-kpi .note{font-size:11px;color:var(--panel-muted);margin-top:5px}
+.real-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.real-card{background:#fff;border:1px solid var(--panel-line);border-radius:14px;padding:18px;box-shadow:0 4px 18px rgba(30,50,80,.05);min-width:0}.real-card.wide{grid-column:1/-1}.real-card h2{font-size:15px;font-weight:800;margin:0 0 4px;color:var(--panel-ink)}.real-card .helper{font-size:12px;color:var(--panel-muted);margin-bottom:14px}.real-bars{display:grid;gap:9px}.real-bar-row{display:grid;grid-template-columns:minmax(100px,1fr) 3fr 48px;gap:9px;align-items:center;font-size:12px}.real-bar-label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.real-bar-track{height:10px;background:#edf2f7;border-radius:99px;overflow:hidden}.real-bar-fill{height:100%;background:linear-gradient(90deg,#2563eb,#38bdf8);border-radius:99px}.real-bar-value{text-align:right;font-weight:700}.real-table-wrap{overflow:auto}.real-table{width:100%;border-collapse:collapse;font-size:12px}.real-table th{color:var(--panel-muted);font-size:11px;text-transform:uppercase;text-align:left;padding:9px;border-bottom:1px solid var(--panel-line);white-space:nowrap}.real-table td{padding:10px 9px;border-bottom:1px solid #edf1f5;white-space:nowrap}.real-table tr:hover td{background:#f8fafc}.real-empty{padding:22px;border:1px dashed var(--panel-line);border-radius:10px;color:var(--panel-muted);font-size:13px}.real-badge{display:inline-flex;padding:3px 7px;border-radius:99px;font-size:10px;font-weight:700;background:#eff6ff;color:#1d4ed8}.real-alert{border:1px solid #fcd34d;background:#fffbeb;color:#92400e;border-radius:10px;padding:11px;font-size:12px}.real-subnav{display:flex;gap:8px;overflow:auto;padding-bottom:2px}.real-subnav button{border:1px solid var(--panel-line);background:#fff;color:var(--panel-muted);border-radius:8px;padding:7px 10px;font-size:12px;cursor:pointer}.real-subnav button.active{color:#1d4ed8;border-color:#93c5fd;background:#eff6ff}@media(max-width:1100px){.real-kpis{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:700px){.real-grid{grid-template-columns:1fr}.real-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.real-card.wide{grid-column:auto}.real-bar-row{grid-template-columns:100px 1fr 42px}}
+</style>
 </head>
 <body class="bg-background text-on-surface antialiased overflow-x-hidden min-h-screen flex">
 <div id="gate" role="dialog" aria-modal="true" aria-label="Acceso al panel" style="position:fixed;inset:0;z-index:1000;background:#0b1220;display:flex;align-items:center;justify-content:center;padding:16px">
@@ -41,7 +52,7 @@
 <nav class="space-y-1" id="nav" aria-label="Secciones"></nav>
 </div>
 <div class="pt-4 border-t border-outline-variant/40">
-<p class="text-[11px] leading-relaxed text-outline">Datos: Planificador de palabras clave de Google Ads, Chile, sept 2025 – ago 2026 (exportado 29-09-2026).</p>
+<p class="text-[11px] leading-relaxed text-outline">Fuente principal: Google Ads sincronizado · La pestaña «Palabras clave» es histórico del Planificador y no representa el rendimiento actual.</p>
 </div>
 </div>
 </aside>
@@ -87,6 +98,28 @@
 </div>
 
 <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4" id="topk"></div>
+
+<section id="overview" class="real-dashboard">
+<div class="real-filters" aria-label="Filtros de datos reales">
+<div class="real-filter"><label for="ads-period">Período</label><select id="ads-period"><option value="all">Todo el período sincronizado</option></select></div>
+<div class="real-filter"><label for="ads-device">Dispositivo</label><select id="ads-device"><option value="all">Todos los dispositivos</option></select></div>
+<div class="real-filter"><label for="ads-region">Región / criterio</label><select id="ads-region"><option value="all">Todas las regiones</option></select></div>
+<div class="real-filter" style="min-width:220px;flex:1"><label for="ads-search">Buscar en términos reales</label><input id="ads-search" type="search" placeholder="Filtrar términos de búsqueda…"/></div>
+<button id="ads-reset" type="button" class="real-subnav" style="align-self:end"><span>Restablecer filtros</span></button>
+</div>
+<div id="ads-alerts"></div><div class="real-kpis" id="ads-kpis"></div>
+<div class="real-grid"><div class="real-card wide"><h2>Rendimiento por día</h2><div class="helper">Impresiones, clics y costo entregados por Google Ads. No se muestran proyecciones.</div><div id="ads-daily" class="real-bars"></div></div>
+<div class="real-card"><h2>Distribución por dispositivo</h2><div class="helper">Comparación de tráfico real por tipo de dispositivo.</div><div id="ads-devices" class="real-bars"></div></div>
+<div class="real-card"><h2>Distribución por región</h2><div class="helper">Criterios geográficos devueltos por Google Ads.</div><div id="ads-regions" class="real-bars"></div></div></div>
+</section>
+
+<section id="campaigns" class="real-dashboard"><div class="real-card wide"><h2>Campañas y anuncios reales</h2><div class="helper">Historial acumulado de campañas detectadas por sincronización. Una campaña nueva se agregará cuando Google Ads la devuelva.</div><div id="ads-campaign-table" class="real-table-wrap"></div></div><div class="real-card wide"><h2>Anuncios publicados</h2><div id="ads-ad-table" class="real-table-wrap"></div></div></section>
+
+<section id="performance" class="real-dashboard"><div class="real-grid"><div class="real-card wide"><h2>Actividad por hora</h2><div class="helper">Horas locales informadas por Google Ads para el período consultado.</div><div id="ads-hours" class="real-bars"></div></div><div class="real-card wide"><h2>Principales términos de búsqueda</h2><div class="helper">Consultas reales que activaron el anuncio, ordenadas por clics.</div><div id="ads-terms" class="real-table-wrap"></div></div></div></section>
+
+<section id="segments" class="real-dashboard"><div class="real-grid"><div class="real-card wide"><h2>Grupos de anuncios</h2><div id="ads-groups" class="real-table-wrap"></div></div><div class="real-card wide"><h2>Lectura de resultados</h2><div class="helper">Interpretación estrictamente limitada a las métricas recibidas. Conversiones en cero significa que Google Ads no reportó conversiones en este período; no permite afirmar cuántos usuarios concretaron fuera del seguimiento configurado.</div><div id="ads-insights"></div></div></div></section>
+
+<section id="history" class="real-dashboard"><div class="real-card wide"><h2>Historial de métricas sincronizadas</h2><div class="helper">Registro por fecha guardado en la fuente local del panel.</div><div id="ads-history-table" class="real-table-wrap"></div></div></section>
 
 <section id="guia">
 <div class="card good"><h2>Cómo funciona esto, en simple</h2>
@@ -289,8 +322,13 @@ const NEG_OLD="gratis\ngratuito\nempleo\ntrabajo\nsueldo\ncurso\nlicencia\narrie
 const NEG_NEW="gratis\ngratuito\nempleo\nbolsa de trabajo\noferta de trabajo\nbusco trabajo\nsueldo\ncurso\nlicencia\narriendo auto\nrent a car\npasaje de bus\nmetro\ntransantiago\nturbus\nrecorrido\nmapa\ncómo llegar\nteléfono aeropuerto\napp\naplicación\nconductor uber";
 const store={get(k,d){try{const v=localStorage.getItem(KP+k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(KP+k,JSON.stringify(v))}catch(e){}if(typeof cloudTouch==="function")cloudTouch(k)}};
 const SEC=[
+["overview","Resumen","dashboard","Rendimiento real","Resumen filtrable de Google Ads: KPIs, tendencia y distribución del tráfico."],
+["campaigns","Campañas y anuncios","campaign","Campañas y anuncios reales","Historial de campañas, anuncios y estados devueltos por Google Ads."],
+["performance","Rendimiento","monitoring","Rendimiento por hora","Clics, impresiones, costo y términos de búsqueda del período consultado."],
+["segments","Segmentos","pie_chart","Dispositivos y regiones","Desglose real por dispositivo, criterio geográfico y grupo de anuncios."],
+["history","Historial","history","Historial sincronizado","Evolución de las consultas guardadas por fecha."],
 ["kw","Palabras clave","key","Palabras clave","Volúmenes, competencia, pujas y clasificación de las búsquedas exportadas de Google Ads."],
-["ver","Resumen real","dashboard","Google Ads y datos del panel","Métricas reales, estadísticas, gráfico histórico, campañas, fuentes y consistencia de los datos."]];
+["ver","Datos y verificación","verified","Google Ads y consistencia","Fuentes, integridad, sincronización y verificaciones del panel."]];
 const NAVA="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors duration-150 ease-in-out";
 const NAVB="flex items-center gap-3 px-3 py-2 rounded-lg bg-surface-container-high text-primary font-semibold border-l-2 border-primary-container transition-colors duration-150 ease-in-out";
 const MNA="shrink-0 px-3 py-1.5 rounded-lg text-label-md font-label-md text-on-surface-variant bg-surface-container border border-outline-variant";
@@ -307,6 +345,23 @@ function grp(k){k=k.toLowerCase();
 custom.forEach(k=>{if(!DATA.some(d=>d.k===k))DATA.push({k:k,v:0,c:"",lo:0,hi:0,yoy:"",custom:1})});
 (META.ampliacion||[]).forEach(a=>{if(!DATA.some(d=>d.k===a.k))DATA.push({k:a.k,v:a.v,c:a.c,lo:a.lo,hi:a.hi,yoy:"",custom:1,seed:1,rango:a.rango,dueno:a.dueno})});
 DATA.forEach(d=>{d.g=grp(d.k);d.t=RC.test(d.k)?"comp":OUT.test(d.k)?"fuera":"ok"});
+const ADS=META.googleAds||{},ADSR=ADS.reports||{};let adsReady=false;
+const realFmt=v=>Number(v||0).toLocaleString("es-CL"),realMoney=v=>"$"+realFmt(Math.round(Number(v||0))),realPct=(a,b)=>b?((Number(a||0)/Number(b))*100).toFixed(2)+" %":"—";
+function realRows(key){return Array.isArray(ADSR[key])?ADSR[key]:[]}
+function realSum(rows){return rows.reduce((a,x)=>({impressions:a.impressions+Number(x.impressions||0),clicks:a.clicks+Number(x.clicks||0),costClp:a.costClp+Number(x.costClp||0),conversions:a.conversions+Number(x.conversions||0)}),{impressions:0,clicks:0,costClp:0,conversions:0})}
+function realMetric(){const period=$("ads-period")?.value||"all",dev=$("ads-device")?.value||"all",reg=$("ads-region")?.value||"all";let m={impressions:Number(ADS.metrics?.impressions||0),clicks:Number(ADS.metrics?.clicks||0),costClp:Number(ADS.metrics?.costClp||0),conversions:Number(ADS.metrics?.conversions||0)};if(period!=="all"){const h=(ADS.history||[]).filter(x=>String(x.dateFrom)===period);if(h.length)m=realSum(h)}if(dev!=="all")m=realSum(realRows("devices").filter(x=>String(x.device)===dev));if(reg!=="all")m=realSum(realRows("regions").filter(x=>String(x.locationType)===reg));return m}
+function realBars(el,rows,label,val,fmt=realFmt){if(!el)return;if(!rows.length){el.innerHTML='<div class="real-empty">Google Ads no devolvió filas reales para este desglose.</div>';return}const mx=Math.max(1,...rows.map(x=>Number(x[val]||0)));el.innerHTML=rows.map(x=>'<div class="real-bar-row" title="'+esc(String(x[label]??""))+'"><span class="real-bar-label">'+esc(String(x[label]??"Sin dato"))+'</span><span class="real-bar-track"><span class="real-bar-fill" style="width:'+Math.max(2,Math.round(Number(x[val]||0)/mx*100))+'%"></span></span><span class="real-bar-value">'+fmt(x[val])+'</span></div>').join("")}
+function realTable(el,heads,rows){if(!el)return;if(!rows.length){el.innerHTML='<div class="real-empty">Google Ads no devolvió filas reales para esta consulta.</div>';return}el.innerHTML='<table class="real-table"><thead><tr>'+heads.map(h=>'<th>'+h+'</th>').join("")+'</tr></thead><tbody>'+rows.join("")+'</tbody></table>'}
+function realRow(cells){return '<tr>'+cells.map(x=>'<td>'+x+'</td>').join("")+'</tr>'}
+function adsDashboard(){if(!$("ads-kpis")||ADS.status!=="connected")return;const period=$("ads-period").value||"all",dev=$("ads-device").value||"all",reg=$("ads-region").value||"all",search=($("ads-search").value||"").toLowerCase(),m=realMetric(),ctr=realPct(m.clicks,m.impressions),cpc=m.clicks?realMoney(m.costClp/m.clicks):"—";
+ $("ads-kpis").innerHTML=[["Impresiones",realFmt(m.impressions),period==="all"?"período completo":period],["Clics",realFmt(m.clicks),"tráfico recibido"],["CTR",ctr,"clics / impresiones"],["Costo",realMoney(m.costClp),"costo informado por Google"],["Conversiones",realFmt(m.conversions),m.conversions?"acciones registradas":"Google no reportó conversiones"]].map(x=>'<div class="real-kpi"><div class="label">'+x[0]+'</div><div class="value">'+x[1]+'</div><div class="note">'+x[2]+'</div></div>').join("");
+ const alerts=ADS.alerts||[];$("ads-alerts").innerHTML=alerts.length?'<div class="real-alert">⚠ Google Ads reportó cambios de nombre: '+alerts.map(a=>esc((a.previous||[]).join(", ")+" → "+(a.current||[]).join(", "))).join(" · ")+'</div>':"";
+ realBars($("ads-daily"),(ADS.history||[]).filter(x=>period==="all"||String(x.dateFrom)===period),"dateFrom","clicks");realBars($("ads-devices"),realRows("devices").filter(x=>dev==="all"||String(x.device)===dev),"device","clicks");realBars($("ads-regions"),realRows("regions").filter(x=>reg==="all"||String(x.locationType)===reg),"locationType","clicks");realBars($("ads-hours"),realRows("hourly"),"hour","clicks");
+ const terms=realRows("searchTerms").filter(x=>!search||String(x.term||"").toLowerCase().includes(search)).sort((a,b)=>Number(b.clicks||0)-Number(a.clicks||0)).slice(0,50);realTable($("ads-terms"),["Término","Campaña","Clics","Impresiones","Costo","Conversiones"],terms.map(x=>realRow([esc(x.term||"—"),esc(x.campaignName||"—"),realFmt(x.clicks),realFmt(x.impressions),realMoney(x.costClp),realFmt(x.conversions)])));
+ const camps=ADS.campaignHistory||[];realTable($("ads-campaign-table"),["ID","Campaña","Estado","Primera fecha","Última fecha"],camps.map(x=>realRow([esc(x.campaignId||"—"),esc(x.name||"—"),'<span class="real-badge">'+esc(x.status||"—")+'</span>',esc(x.firstSeen||"—"),esc(x.lastSeen||"—")])));const ads=realRows("ads");realTable($("ads-ad-table"),["ID","Nombre","Estado","Grupo","Campaña","Clics","Conversiones"],ads.map(x=>realRow([esc(x.adId||"—"),esc(x.adName||"—"),esc(x.adStatus||"—"),esc(x.adGroupName||"—"),esc(x.campaignName||"—"),realFmt(x.clicks),realFmt(x.conversions)])));
+ const groups=realRows("adGroups");realTable($("ads-groups"),["Grupo","Campaña","Impresiones","Clics","Costo","Conversiones"],groups.map(x=>realRow([esc(x.adGroupName||"—"),esc(x.campaignName||"—"),realFmt(x.impressions),realFmt(x.clicks),realMoney(x.costClp),realFmt(x.conversions)])));const hist=(ADS.history||[]).slice().sort((a,b)=>String(b.dateFrom).localeCompare(String(a.dateFrom)));realTable($("ads-history-table"),["Fecha","Impresiones","Clics","CTR","Costo","CPC","Conversiones"],hist.map(x=>realRow([esc(x.dateFrom||"—"),realFmt(x.impressions),realFmt(x.clicks),realPct(x.clicks,x.impressions),realMoney(x.costClp),x.clicks?realMoney(x.costClp/x.clicks):"—",realFmt(x.conversions)])));
+ const ins=[];if(terms.length)ins.push("Los términos con más clics en el período son: "+terms.slice(0,5).map(x=>"«"+x.term+"» ("+realFmt(x.clicks)+")").join(", ")+".");if(m.conversions===0)ins.push("No se muestran conversiones concretadas porque Google Ads reportó 0 en esta sincronización; hace falta recibir eventos de conversión para medir contactos o reservas.");if(m.clicks>0)ins.push("El CTR observado es "+ctr+" y el CPC medio es "+cpc+"; son métricas reales de esta consulta, no una proyección.");$("ads-insights").innerHTML=ins.map(x=>'<div class="real-alert" style="margin-bottom:8px;background:#eff6ff;border-color:#bfdbfe;color:#1e3a8a">'+esc(x)+'</div>').join("")}
+function adsFilters(){if(adsReady)return;adsReady=true;[...new Set((ADS.history||[]).map(x=>String(x.dateFrom)).filter(Boolean))].sort().forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;$("ads-period").appendChild(o)});[...new Set(realRows("devices").map(x=>String(x.device||"Sin dato")))].forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;$("ads-device").appendChild(o)});[...new Set(realRows("regions").map(x=>String(x.locationType||"Sin dato")))].forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;$("ads-region").appendChild(o)});["ads-period","ads-device","ads-region","ads-search"].forEach(id=>$(id).addEventListener("input",adsDashboard));$("ads-reset").onclick=()=>{["ads-period","ads-device","ads-region"].forEach(id=>$(id).value="all");$("ads-search").value="";adsDashboard()};adsDashboard()}
 let sel=new Set(store.get("sel",[]));
 if(store.get("sel",null)===null&&META.forecast){META.forecast.keywords.forEach(k=>sel.add(k));store.set("sel",[...sel])}let sk="v",sd=-1,page=0,cur="ver";
 function fmt(n){return n?(Number.isInteger(n)?String(n).replace(/\B(?=(\d{3})+(?!\d))/g,"."):n.toLocaleString("es-CL")):"—"}
@@ -328,7 +383,7 @@ function show(id){cur=id;
   $("n_"+s).className=on?NAVB:NAVA;$("n_"+s).querySelector(".material-symbols-outlined").className="material-symbols-outlined "+(on?"text-secondary":"text-outline");
   $("m_"+s).className=on?MNB:MNA;if(on){$("crumb").textContent=t;$("ptitle").textContent=ti;$("psub").textContent=su}});
  const panel=$("simpanel");if(id==="sim")$("simhost").appendChild(panel);else $("kwside").appendChild(panel);
- store.set("tab",id);if(id==="borr")borr();if(id==="ver"&&!AS.probe)probe();if(id==="aud")audOpen();window.scrollTo(0,0)}
+  store.set("tab",id);if(id==="overview"||id==="campaigns"||id==="performance"||id==="segments"||id==="history")adsFilters();if(id==="borr")borr();if(id==="ver"&&!AS.probe)probe();if(id==="aud")audOpen();window.scrollTo(0,0)}
 [...new Set(DATA.map(d=>d.g))].sort().forEach(g=>{const o=document.createElement("option");o.value=g;o.textContent=g;$("fg").appendChild(o)});
 const GC={Aeropuerto:"bg-secondary",Eventos:"bg-primary-container",Corporativo:"bg-cyan-400",Compartido:"bg-tertiary",Otros:"bg-outline"};
 function pill(c){if(c==="Alta")return'<span class="inline-block px-2.5 py-0.5 rounded text-[11px] font-medium bg-red-500/10 text-red-300 border border-red-500/20">Alta</span>';
@@ -652,7 +707,7 @@ function audRender(){
  el.innerHTML=h}
 function audOpen(){if(!AUDR&&!AUDBUSY)audRun(false);else audRender()}
 $("aud").onclick=e=>{const a=e.target.closest("[data-ap]");if(a){audPage(a.dataset.ap);return}if(e.target.closest("#audrun")){audRun(true);return}if(e.target.closest("#audcopy")){const t=audResumen()||"Todavía no se ejecuta la auditoría.";navigator.clipboard.writeText(t).then(()=>{$("audcopyt").textContent="Copiado";setTimeout(()=>{const x=$("audcopyt");if(x)x.textContent="Copiar informe"},1500)},()=>{$("audcopyt").textContent="Selecciona y copia a mano"})}};
-render();show(SEC.some(s=>s[0]===store.get("tab","ver"))?store.get("tab","ver"):"ver");
+render();if(store.get("ui_version","")!=="2"){store.set("ui_version","2");store.set("tab","overview")}adsFilters();show(SEC.some(s=>s[0]===store.get("tab","overview"))?store.get("tab","overview"):"overview");
 
 /* ===== Acceso privado y nube (Firebase Auth con Google + Firestore) ===== */
 const GB=id=>document.getElementById(id);

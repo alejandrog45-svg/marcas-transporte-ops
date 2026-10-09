@@ -169,10 +169,10 @@ def normalize(rows: list[dict], date_from: str, date_to: str) -> dict:
             "conversionsValue": float(metrics.get("conversionsValue", 0) or 0),
             "allConversions": float(metrics.get("allConversions", 0) or 0),
             "allConversionsValue": float(metrics.get("allConversionsValue", 0) or 0),
-            "phoneCalls": float(metrics.get("phoneCalls", 0) or 0),
-            "messageChats": float(metrics.get("messageChats", 0) or 0),
-            "interactions": float(metrics.get("interactions", 0) or 0),
-            "invalidClicks": int(metrics.get("invalidClicks", 0) or 0),
+            "phoneCalls": float(metrics["phoneCalls"]) if metrics.get("phoneCalls") is not None else None,
+            "messageChats": float(metrics["messageChats"]) if metrics.get("messageChats") is not None else None,
+            "interactions": float(metrics["interactions"]) if metrics.get("interactions") is not None else None,
+            "invalidClicks": int(metrics["invalidClicks"]) if metrics.get("invalidClicks") is not None else None,
             "searchImpressionShare": metrics.get("searchImpressionShare"),
             "searchBudgetLostImpressionShare": metrics.get("searchBudgetLostImpressionShare"),
             "searchRankLostImpressionShare": metrics.get("searchRankLostImpressionShare"),
@@ -186,7 +186,8 @@ def normalize(rows: list[dict], date_from: str, date_to: str) -> dict:
         totals = {key: sum(row[key] for row in day_rows) for key in ("impressions", "clicks", "costClp", "conversions")}
         snapshot = {**totals, "dateFrom": day, "dateTo": day, "activityStatus": "con actividad"}
         for key in ("conversionsValue", "allConversions", "allConversionsValue", "phoneCalls", "messageChats", "interactions", "invalidClicks"):
-            snapshot[key] = sum(row[key] for row in day_rows)
+            values = [row[key] for row in day_rows if row.get(key) is not None]
+            snapshot[key] = sum(values) if values else None
         snapshot["averageCpc"] = round(snapshot["costClp"] / snapshot["clicks"], 2) if snapshot["clicks"] else None
         snapshot["costPerConversion"] = round(snapshot["costClp"] / snapshot["conversions"], 2) if snapshot["conversions"] else None
         for key in ("searchImpressionShare", "searchBudgetLostImpressionShare", "searchRankLostImpressionShare", "searchTopImpressionShare", "absoluteTopImpressionPercentage", "topImpressionPercentage"):

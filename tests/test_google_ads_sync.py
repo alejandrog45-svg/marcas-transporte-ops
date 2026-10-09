@@ -297,3 +297,36 @@ def test_report_history_keeps_quality_shares_only_for_campaign_quality(tmp_path)
     assert kept["searchBudgetLostImpressionShare"] == 0.62 and kept["searchImpressionShare"] == 0.3
     assert kept["interactions"] == 44 and "averageCpc" not in kept
     assert "searchBudgetLostImpressionShare" not in stored["searchTerms"][0]  # en los demás informes se siguen descartando
+
+
+def test_tracking_queries_are_read_only_and_separate_from_conversion_actions():
+    queries = sync.report_queries("2026-10-08", "2026-10-09")
+    for name in ("accountTracking", "callActionSettings", "callDetails"):
+        sql = queries[name].upper()
+        assert all(word not in sql for word in ("MUTATE", "UPDATE ", "REMOVE", "MESSAGE_CHATS")), name
+    assert "FROM customer" in queries["accountTracking"] and "FROM call_view" in queries["callDetails"]
+    assert "segments.date BETWEEN" in queries["callDetails"]
+    assert "phone_call_duration_seconds" not in queries["conversionActions"]  # el informe que ya funciona no se toca
+
+
+def test_account_tracking_and_call_action_settings_are_normalized_without_inventing_values():
+    track = sync.compact_report("accountTracking", [{"customer": {
+        "autoTaggingEnabled": True, "conversionTrackingSetting": {"conversionTrackingStatus": "CONVERSION_TRACKING_MANAGED_BY_SELF"}}}])[0]
+    assert track["autoTaggingEnabled"] is True and track["conversionTrackingStatus"].startswith("CONVERSION_TRACKING")
+    missing = sync.compact_report("accountTracking", [{"customer": {}}])[0]
+    assert missing["autoTaggingEnabled"] is None  # sin dato: no se convierte en False
+    action = sync.compact_report("callActionSettings", [{"conversionAction": {
+        "id": "7", "name": "Calls from ads", "type": "AD_CALL", "phoneCallDurationSeconds": 60, "primaryForGoal": True}}])[0]
+    assert action["phoneCallDurationSeconds"] == 60 and action["primaryForGoal"] is True
+    no_duration = sync.compact_report("callActionSettings", [{"conversionAction": {"id": "8", "name": "x"}}])[0]
+    assert no_duration["phoneCallDurationSeconds"] is None
+
+
+def test_call_details_keep_duration_status_and_date_for_history():
+    row = {"segments": {"date": "2026-10-09"}, "campaign": {"id": "5", "name": "Campaign #1"},
+           "callView": {"callDurationSeconds": "34", "callStatus": "RECEIVED", "type": "MOBILE_CALL_FROM_ADS",
+                        "startCallDateTime": "2026-10-09 10:02:11", "callerAreaCode": "9", "callerCountryCode": "CL"}}
+    call = sync.compact_report("callDetails", [row, {"segments": {"date": "2026-10-09"}, "callView": {}}])
+    assert call[0]["durationSeconds"] == 34 and call[0]["status"] == "RECEIVED" and call[0]["date"] == "2026-10-09"
+    assert call[1]["durationSeconds"] is None  # llamada sin duración informada: no se inventa 0
+    assert "phoneNumber" not in call[0] and "callerNumber" not in call[0]  # no se guarda el número de nadie

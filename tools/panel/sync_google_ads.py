@@ -104,6 +104,16 @@ def report_queries(date_from: str, date_to: str) -> dict[str, str]:
                               "conversion_action.click_through_lookback_window_days, "
                               "conversion_action.view_through_lookback_window_days FROM conversion_action "
                               "ORDER BY conversion_action.name"),
+        # Medición de resultados: ¿se puede unir cada clic con lo que hizo después?
+        "accountTracking": ("SELECT customer.auto_tagging_enabled, "
+                            "customer.conversion_tracking_setting.conversion_tracking_status FROM customer"),
+        "callActionSettings": ("SELECT conversion_action.id, conversion_action.name, conversion_action.type, "
+                               "conversion_action.phone_call_duration_seconds, conversion_action.primary_for_goal "
+                               "FROM conversion_action WHERE conversion_action.type IN ('AD_CALL', 'WEBSITE_CALL')"),
+        "callDetails": ("SELECT segments.date, campaign.id, campaign.name, call_view.call_duration_seconds, "
+                        "call_view.call_status, call_view.type, call_view.start_call_date_time, "
+                        "call_view.end_call_date_time, call_view.caller_area_code, call_view.caller_country_code "
+                        "FROM call_view " + period + " ORDER BY segments.date, call_view.start_call_date_time"),
         "campaignSettings": ("SELECT campaign.id, campaign.name, campaign.status, "
                              "campaign.advertising_channel_type, campaign.bidding_strategy_type, "
                              "campaign.start_date_time, campaign.end_date_time, campaign_budget.amount_micros "
@@ -347,6 +357,26 @@ def compact_report(name: str, rows: list[dict]) -> list[dict]:
                     "includeInConversionsMetric": bool(action.get("includeInConversionsMetric", False)),
                     "clickThroughLookbackDays": int(action.get("clickThroughLookbackWindowDays", 0) or 0),
                     "viewThroughLookbackDays": int(action.get("viewThroughLookbackWindowDays", 0) or 0)}
+        elif name == "accountTracking":
+            customer_row = row.get("customer") or {}
+            setting = customer_row.get("conversionTrackingSetting") or {}
+            item = {"autoTaggingEnabled": customer_row.get("autoTaggingEnabled"),
+                    "conversionTrackingStatus": setting.get("conversionTrackingStatus", "UNSPECIFIED")}
+        elif name == "callActionSettings":
+            action = row.get("conversionAction") or {}
+            seconds = action.get("phoneCallDurationSeconds")
+            item = {"conversionActionId": str(action.get("id", "")), "name": action.get("name", ""),
+                    "type": action.get("type", "UNSPECIFIED"),
+                    "phoneCallDurationSeconds": int(seconds) if seconds is not None else None,
+                    "primaryForGoal": action.get("primaryForGoal")}
+        elif name == "callDetails":
+            call = row.get("callView") or {}
+            seconds = call.get("callDurationSeconds")
+            item = {"date": s.get("date"), "campaignId": str(campaign.get("id", "")), "campaignName": campaign.get("name", ""),
+                    "durationSeconds": int(seconds) if seconds is not None else None,
+                    "status": call.get("callStatus", "UNSPECIFIED"), "callType": call.get("type", "UNSPECIFIED"),
+                    "startedAt": call.get("startCallDateTime"), "endedAt": call.get("endCallDateTime"),
+                    "areaCode": call.get("callerAreaCode"), "country": call.get("callerCountryCode")}
         elif name == "campaignSettings":
             campaign_budget = row.get("campaignBudget") or {}
             item = {"campaignId": str(campaign.get("id", "")), "campaignName": campaign.get("name", ""),

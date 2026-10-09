@@ -12,6 +12,7 @@ normalize, query, dates = sync.normalize, sync.query, sync.dates
 def test_query_is_report_only():
     sql = query("2026-10-08", "2026-10-08")
     assert "metrics.clicks" in sql
+    assert "message_chats" not in sql
     assert all(word not in sql.upper() for word in ("MUTATE", "UPDATE", "REMOVE"))
 
 

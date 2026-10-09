@@ -169,23 +169,27 @@ def normalize(rows: list[dict], date_from: str, date_to: str) -> dict:
             "absoluteTopImpressionPercentage": metrics.get("absoluteTopImpressionPercentage"),
             "topImpressionPercentage": metrics.get("topImpressionPercentage"),
         })
-    totals = {
-        key: sum(row[key] for row in campaigns)
-        for key in ("impressions", "clicks", "costClp", "conversions")
-    }
     previous = json.loads(OUT.read_text(encoding="utf-8")) if OUT.exists() else {}
-    snapshot = {**totals, "dateFrom": date_from, "dateTo": date_to}
-    for key in ("conversionsValue", "allConversions", "allConversionsValue", "phoneCalls", "messageChats", "interactions", "invalidClicks"):
-        snapshot[key] = sum(row[key] for row in campaigns)
-    snapshot["averageCpc"] = round(snapshot["costClp"] / snapshot["clicks"], 2) if snapshot["clicks"] else None
-    snapshot["costPerConversion"] = round(snapshot["costClp"] / snapshot["conversions"], 2) if snapshot["conversions"] else None
-    for key in ("searchImpressionShare", "searchBudgetLostImpressionShare", "searchRankLostImpressionShare", "searchTopImpressionShare", "absoluteTopImpressionPercentage", "topImpressionPercentage"):
-        values = [row[key] for row in campaigns if row.get(key) is not None]
-        snapshot[key] = values[0] if len(values) == 1 else None
-    history = [h for h in (previous.get("history") or []) if h.get("dateFrom") != date_from]
-    history.append(snapshot)
+    if campaigns:
+        totals = {key: sum(row[key] for row in campaigns) for key in ("impressions", "clicks", "costClp", "conversions")}
+        snapshot = {**totals, "dateFrom": date_from, "dateTo": date_to, "activityStatus": "con actividad"}
+        for key in ("conversionsValue", "allConversions", "allConversionsValue", "phoneCalls", "messageChats", "interactions", "invalidClicks"):
+            snapshot[key] = sum(row[key] for row in campaigns)
+        snapshot["averageCpc"] = round(snapshot["costClp"] / snapshot["clicks"], 2) if snapshot["clicks"] else None
+        snapshot["costPerConversion"] = round(snapshot["costClp"] / snapshot["conversions"], 2) if snapshot["conversions"] else None
+        for key in ("searchImpressionShare", "searchBudgetLostImpressionShare", "searchRankLostImpressionShare", "searchTopImpressionShare", "absoluteTopImpressionPercentage", "topImpressionPercentage"):
+            values = [row[key] for row in campaigns if row.get(key) is not None]
+            snapshot[key] = values[0] if len(values) == 1 else None
+        history = [h for h in (previous.get("history") or []) if h.get("dateFrom") != date_from]
+        history.append(snapshot)
+    else:
+        # Sin filas no significa que el rendimiento anterior sea cero: una
+        # campaña detenida simplemente deja de generar actividad.
+        snapshot = dict(previous.get("metrics") or {})
+        snapshot["activityStatus"] = "sin actividad nueva"
+        history = list(previous.get("history") or [])
     history = sorted(history, key=lambda h: h.get("dateFrom", ""))[-90:]
-    current_names = sorted({row["name"] for row in campaigns if row["name"]})
+    current_names = sorted({row["name"] for row in campaigns if row["name"]}) or sorted(previous.get("campaignNames") or [])
     previous_names = sorted(previous.get("campaignNames") or [])
     alerts = []
     if previous_names and current_names != previous_names:
@@ -202,7 +206,7 @@ def normalize(rows: list[dict], date_from: str, date_to: str) -> dict:
     return {
         "brand": "UberTransfer",
         "customerId": customer_id(os.environ.get("GOOGLE_ADS_CUSTOMER_ID", CUSTOMER_DEFAULT)),
-        "campaignIds": sorted({row["campaignId"] for row in campaigns if row["campaignId"]}),
+        "campaignIds": sorted({row["campaignId"] for row in campaigns if row["campaignId"]}) or sorted(previous.get("campaignIds") or []),
         "campaignNames": current_names,
         "campaignHistory": sorted(campaign_history.values(), key=lambda x: x["campaignId"]),
         "adHistory": list(previous_ads.values()),
@@ -214,6 +218,8 @@ def normalize(rows: list[dict], date_from: str, date_to: str) -> dict:
         "metrics": snapshot,
         "history": history,
         "campaigns": campaigns,
+        "activityRows": len(campaigns),
+        "activityStatus": "con actividad" if campaigns else "sin actividad nueva; se conserva el último dato real",
     }
 
 
@@ -355,6 +361,33 @@ def main() -> None:
         enrich_geo_locations(cid, headers, result["reports"])
     except RuntimeError as error:
         result["geoLookupError"] = str(error)
+    # El catálogo de campañas se consulta sin filtro de fecha: así una campaña
+    # nueva aparece aunque todavía no haya generado impresiones y una campaña
+    # detenida sigue visible sin fabricar métricas cero.
+    settings = result["reports"].get("campaignSettings")
+    if isinstance(settings, list):
+        campaign_history = {str(x.get("campaignId")): x for x in result.get("campaignHistory", []) if x.get("campaignId")}
+        names = set(result.get("campaignNames") or [])
+        ids = set(result.get("campaignIds") or [])
+        for item in settings:
+            campaign_id = str(item.get("campaignId", ""))
+            name = item.get("campaignName", "")
+            if not campaign_id:
+                continue
+            old = campaign_history.get(campaign_id, {})
+            campaign_history[campaign_id] = {
+                "campaignId": campaign_id,
+                "name": name,
+                "status": item.get("status", old.get("status", "UNSPECIFIED")),
+                "firstSeen": old.get("firstSeen", date_from),
+                "lastSeen": old.get("lastSeen", date_from),
+            }
+            ids.add(campaign_id)
+            if name:
+                names.add(name)
+        result["campaignHistory"] = sorted(campaign_history.values(), key=lambda x: x["campaignId"])
+        result["campaignIds"] = sorted(ids)
+        result["campaignNames"] = sorted(names)
     ad_history = {str(x.get("adId")): x for x in (result.get("adHistory") or []) if x.get("adId")}
     for ad in result["reports"].get("ads", []):
         aid = ad.get("adId")

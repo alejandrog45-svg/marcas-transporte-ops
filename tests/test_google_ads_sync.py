@@ -29,3 +29,22 @@ def test_normalize_keeps_real_totals_and_history(tmp_path, monkeypatch):
     assert result["metrics"]["clicks"] == 36
     assert result["history"][0]["dateFrom"] == "2026-10-08"
     assert "observed" not in result
+
+
+def test_normalize_does_not_replace_stopped_campaign_with_zeroes(tmp_path, monkeypatch):
+    output = tmp_path / "google_ads.json"
+    output.write_text(json.dumps({
+        "campaignIds": ["123"], "campaignNames": ["Campaña detenida"],
+        "metrics": {"impressions": 479, "clicks": 36, "costClp": 11878, "conversions": 0,
+                     "dateFrom": "2026-10-08", "dateTo": "2026-10-08"},
+        "history": [{"dateFrom": "2026-10-08", "dateTo": "2026-10-08", "impressions": 479,
+                     "clicks": 36, "costClp": 11878, "conversions": 0}],
+        "campaignHistory": [{"campaignId": "123", "name": "Campaña detenida", "status": "PAUSED",
+                              "firstSeen": "2026-10-08", "lastSeen": "2026-10-08"}],
+    }), encoding="utf-8")
+    monkeypatch.setattr(sync, "OUT", output)
+    result = normalize([], "2026-10-09", "2026-10-09")
+    assert result["metrics"]["clicks"] == 36
+    assert result["history"][-1]["dateFrom"] == "2026-10-08"
+    assert result["activityRows"] == 0
+    assert result["campaignIds"] == ["123"]

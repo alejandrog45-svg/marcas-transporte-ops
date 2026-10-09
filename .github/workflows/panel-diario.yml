@@ -63,7 +63,7 @@ jobs:
           umask 077
           printf '%s' "$FIREBASE_SA" > "$RUNNER_TEMP/firebase-sa.json"
           export GOOGLE_APPLICATION_CREDENTIALS="$RUNNER_TEMP/firebase-sa.json"
-          npx --yes firebase-tools@15.19.0 deploy --only hosting,firestore:rules --project ubertransfer-ops --non-interactive
+          npx --yes firebase-tools@15.19.0 deploy --only hosting --project ubertransfer-ops --non-interactive
           rm -f "$RUNNER_TEMP/firebase-sa.json"
 
       - name: Fallar si la auditoría no se ejecutó

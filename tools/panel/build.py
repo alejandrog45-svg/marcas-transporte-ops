@@ -349,7 +349,7 @@ def main():
         "srcName": src_meta["srcName"], "srcSha": src_sha, "srcRows": src_meta["rows"],
         "dataSha": data_sha, "exportedAt": src_meta["exportedAt"],
         "builtAt": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "audit": audit, "forecast": forecast, "trends": tr, "seoStatus": seo_status,
+        "audit": audit, "forecast": forecast, "trends": tr, "plannerActive": False, "seoStatus": seo_status,
         "googleAds": google_ads,
     }
 
@@ -378,7 +378,7 @@ def main():
         {"name": "UberTransfer", "ias": "ias.html", "transform": lambda p: p, "enc": ENC_FILE, "meta": meta,
          "site": ROOT / "site", "docs": ROOT / "docs" / "panel_keywords.html"},
         {"name": "Aereostar", "ias": "ias_aereostar.html", "transform": ae_tf, "enc": DATA / "panel_data_aereostar.enc.json",
-         "meta": dict(meta, ampliacion=[], audit=ae_audit, googleAds=aereostar_ads), "site": ROOT / "site" / "aereostar",
+         "meta": dict(meta, ampliacion=[], audit=ae_audit, forecast=forecast, trends=tr, plannerActive=True, googleAds=aereostar_ads), "site": ROOT / "site" / "aereostar",
          "docs": ROOT / "docs" / "panel_aereostar.html"},
     ]
     resumen = []
@@ -389,7 +389,7 @@ def main():
         secret_json = json.dumps({"data": rows, "meta": {k: m[k] for k in SECRET_KEYS}}, ensure_ascii=False, separators=(",", ":"))
         assert json.dumps(json.loads(secret_json)["data"], ensure_ascii=False, separators=(",", ":")) == data_json, \
             "el cifrado altera el orden/formato de las filas: la huella SHA-256 no coincidiría"
-        pub = {k: m[k] for k in ("builtAt", "audit", "seoStatus")}
+        pub = {k: m[k] for k in ("builtAt", "audit", "seoStatus", "plannerActive")}
         enc = make_enc(secret_json, env, V["enc"])
         pub_html, app_js, gate_js = split_encrypted(page_tpl, enc, pub)
         final_plain = plain.replace("__CSS__", css)

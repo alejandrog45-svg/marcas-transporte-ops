@@ -38,6 +38,19 @@ Fecha: 2026-10-09 (America/Santiago)
 - Apps Script de Google Ads queda como fuente alternativa/manual; el workflow diario principal ya no depende de ejecutarlo.
 - Secretos de Actions esperados: `GOOGLE_ADS_OAUTH_CLIENT_ID`, `GOOGLE_ADS_OAUTH_CLIENT_SECRET`, `GOOGLE_ADS_REFRESH_TOKEN`, `GOOGLE_ADS_CUSTOMER_ID`, `GOOGLE_ADS_DEVELOPER_TOKEN`, `FIREBASE_SERVICE_ACCOUNT`.
 
+## Google Ads y Google Apps Script
+
+- Cuenta de Google Ads conectada para UberTransfer: `203-550-4421`.
+- Acceso permitido: solo lectura. No crear campañas, no pausar anuncios, no cambiar presupuesto y no modificar pujas.
+- Conector principal automático: `tools/panel/sync_google_ads.py`, ejecutado por `.github/workflows/panel-diario.yml`.
+- Datos que consulta: campañas, estado, configuración, anuncios, grupos, términos de búsqueda, dispositivos, horarios, regiones, conversiones e histórico diario acumulado.
+- Archivo de salida: `data/google_ads_ubertransfer.json`.
+- Script de Google Ads visible en la cuenta: **UberTransfer - Sugerencias Google Ads**. Su proyecto Apps Script estaba abierto en el editor de Google y guarda recomendaciones en Firestore `panel/aiSuggestions`.
+- El workflow nuevo genera también sugerencias desde Python después de sincronizar Google Ads; por eso Apps Script es opcional/manual y no debe duplicar ni modificar campañas.
+- URL del proyecto Apps Script conocida en la sesión: `https://script.google.com/home/projects/1vZU0-bY1sPIYNHNSVnmeGhBiKR_9ZBEcZLN1yjQtAtcIJWNa_KT1nNjj/edit`.
+- Errores históricos resueltos o documentados: métrica incompatible `message_chats`, sintaxis `principal`/`Unexpected identifier`, despliegue Firebase con `403 serviceusage` y error de Apps Script al usar `ad.get` sobre una cadena. No reintroducir esas métricas ni asumir que los objetos de Google Ads tienen `.get`.
+- Si una campaña actual se detiene y aparece otra, el siguiente workflow detecta la nueva campaña activa y conserva el histórico para comparar períodos. Las recomendaciones son reglas transparentes, no una IA generativa.
+
 ## Pendiente crítico
 
 ### Firebase CLI local

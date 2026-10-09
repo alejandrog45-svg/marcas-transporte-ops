@@ -3,13 +3,14 @@
  *
  * Ejecutar main() desde Google Ads Scripts. Este script NO crea, modifica,
  * pausa ni publica campañas. Solo consulta AdsApp.report() y guarda el
- * resultado de las recomendaciones en Firestore para que el panel lo lea.
+ * resultado de las recomendaciones mediante un Web App de Apps Script para
+ * que el panel lo lea desde Firestore.
  *
- * Antes de activarlo, configurar FIRESTORE_PROJECT_ID y revisar el documento
+ * Antes de activarlo, configurar BRIDGE_URL y BRIDGE_TOKEN y revisar el documento
  * docs/ads/google_ads_script_setup.md.
  */
-var FIRESTORE_PROJECT_ID = 'ubertransfer-ops';
-var FIRESTORE_DOCUMENT = 'panel/aiSuggestions';
+var BRIDGE_URL = 'PEGAR_AQUI_URL_WEB_APP';
+var BRIDGE_TOKEN = 'PEGAR_AQUI_TOKEN_DEL_PUENTE';
 var LOOKBACK = 'LAST_30_DAYS';
 
 function main() {
@@ -36,7 +37,7 @@ function main() {
   );
 
   var suggestions = buildSuggestions(campaignRows, termRows, deviceRows, hourRows, geoRows);
-  writeFirestore({
+  writeBridge({
     source: 'Google Ads Scripts · AdsApp.report() · solo lectura',
     accountId: account.getCustomerId(),
     period: LOOKBACK,
@@ -86,37 +87,30 @@ function buildSuggestions(camps, terms, devices, hours, regions) {
   return out;
 }
 
-function writeFirestore(payload) {
-  var values = payload.suggestions.map(function (s) {
-    return {
-      mapValue: {
-        fields: {
-          title: { stringValue: s.title },
-          action: { stringValue: s.action },
-          kind: { stringValue: s.kind },
-          data: {
-            mapValue: {
-              fields: {
-                evidence: { stringValue: s.data.evidence },
-                date: { stringValue: s.data.date },
-                campaign: { stringValue: s.data.campaign },
-                reason: { stringValue: s.data.reason },
-                confidence: { stringValue: s.data.confidence },
-                confirm: { stringValue: s.data.confirm }
-              }
-            }
-          }
-        }
-      }
-    };
-  });
-  var fields = {
-    source: { stringValue: payload.source },
-    accountId: { stringValue: payload.accountId },
-    period: { stringValue: payload.period },
-    updatedAt: { timestampValue: payload.updatedAt },
-    suggestions: { arrayValue: { values: values } }
+function writeBridge(payload) {
+  if (!BRIDGE_URL || BRIDGE_URL.indexOf('https://script.google.com/macros/s/') !== 0 || BRIDGE_URL.indexOf('/exec') === -1) {
+    throw new Error('Configura BRIDGE_URL con la URL /exec del Web App.');
+  }
+  if (!BRIDGE_TOKEN || BRIDGE_TOKEN.indexOf('PEGAR_AQUI') === 0) {
+    throw new Error('Configura BRIDGE_TOKEN con el token del puente.');
+  }
+  var body = {
+    token: BRIDGE_TOKEN,
+    id: Utilities.getUuid(),
+    ts: Date.now(),
+    payload: payload
   };
-  var url = 'https://firestore.googleapis.com/v1/projects/' + FIRESTORE_PROJECT_ID + '/databases/(default)/documents/' + FIRESTORE_DOCUMENT;
-  UrlFetchApp.fetch(url, { method: 'patch', contentType: 'application/json', headers: { Authorization: 'Bearer ' + ScriptApp.getOAuthToken() }, payload: JSON.stringify({ fields: fields }), muteHttpExceptions: false });
+  var response = UrlFetchApp.fetch(BRIDGE_URL, {
+    method: 'post',
+    contentType: 'application/json',
+    payload: JSON.stringify(body),
+    followRedirects: true,
+    muteHttpExceptions: true
+  });
+  var status = response.getResponseCode();
+  var text = response.getContentText();
+  if (status < 200 || status >= 300) throw new Error('Puente Apps Script respondio HTTP ' + status + ': ' + text.slice(0, 300));
+  var result;
+  try { result = JSON.parse(text); } catch (e) { throw new Error('El puente no devolvio JSON valido.'); }
+  if (!result.ok) throw new Error('El puente rechazo la escritura: ' + (result.error || 'error desconocido'));
 }

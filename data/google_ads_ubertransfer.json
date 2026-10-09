@@ -30,10 +30,10 @@
   "alerts": [],
   "mode": "read_only",
   "status": "connected",
-  "lastSync": "2026-10-09T23:09:14.951977Z",
+  "lastSync": "2026-10-09T23:12:15.116193Z",
   "source": "Google Ads API",
   "metrics": {
-    "impressions": 887,
+    "impressions": 893,
     "clicks": 51,
     "costClp": 12830,
     "conversions": 0.0,
@@ -53,8 +53,8 @@
     "searchBudgetLostImpressionShare": 0.6227598566308243,
     "searchRankLostImpressionShare": 0.08154121863799284,
     "searchTopImpressionShare": 0.18923766816143497,
-    "absoluteTopImpressionPercentage": 0.10822998872604284,
-    "topImpressionPercentage": 0.6268320180383314
+    "absoluteTopImpressionPercentage": 0.10750279955207166,
+    "topImpressionPercentage": 0.6259798432250839
   },
   "history": [
     {
@@ -82,7 +82,7 @@
       "topImpressionPercentage": null
     },
     {
-      "impressions": 887,
+      "impressions": 893,
       "clicks": 51,
       "costClp": 12830,
       "conversions": 0.0,
@@ -102,8 +102,8 @@
       "searchBudgetLostImpressionShare": 0.6227598566308243,
       "searchRankLostImpressionShare": 0.08154121863799284,
       "searchTopImpressionShare": 0.18923766816143497,
-      "absoluteTopImpressionPercentage": 0.10822998872604284,
-      "topImpressionPercentage": 0.6268320180383314
+      "absoluteTopImpressionPercentage": 0.10750279955207166,
+      "topImpressionPercentage": 0.6259798432250839
     }
   ],
   "campaigns": [
@@ -139,11 +139,11 @@
       "name": "Campaign #1",
       "status": "ENABLED",
       "date": "2026-10-09",
-      "impressions": 887,
+      "impressions": 893,
       "clicks": 51,
       "costMicros": 12830000000,
       "costClp": 12830,
-      "ctr": 0.05749718151071026,
+      "ctr": 0.05711086226203808,
       "conversions": 0.0,
       "averageCpc": 0.0,
       "costPerConversion": 0.0,
@@ -743,7 +743,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 80,
+        "impressions": 86,
         "clicks": 7,
         "costClp": 1563,
         "conversions": 0.0,
@@ -791,7 +791,7 @@
       },
       {
         "date": null,
-        "impressions": 1356,
+        "impressions": 1362,
         "clicks": 87,
         "costClp": 24154,
         "conversions": 0.0,
@@ -865,7 +865,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 887,
+        "impressions": 893,
         "clicks": 51,
         "costClp": 12830,
         "conversions": 0.0,
@@ -922,7 +922,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 887,
+        "impressions": 893,
         "clicks": 51,
         "costClp": 12830,
         "conversions": 0.0,
@@ -7830,6 +7830,33 @@
         "searchTopImpressionShare": null,
         "absoluteTopImpressionPercentage": null,
         "topImpressionPercentage": null,
+        "term": "cabify transfer",
+        "campaignId": "24325669851",
+        "campaignName": "Campaign #1",
+        "adGroupId": "201907353538",
+        "adGroupName": "Grupo de anuncios 1"
+      },
+      {
+        "date": "2026-10-09",
+        "impressions": 1,
+        "clicks": 0,
+        "costClp": 0,
+        "conversions": 0.0,
+        "averageCpc": null,
+        "costPerConversion": null,
+        "conversionsValue": null,
+        "allConversions": null,
+        "allConversionsValue": null,
+        "phoneCalls": null,
+        "messageChats": null,
+        "interactions": null,
+        "invalidClicks": null,
+        "searchImpressionShare": null,
+        "searchBudgetLostImpressionShare": null,
+        "searchRankLostImpressionShare": null,
+        "searchTopImpressionShare": null,
+        "absoluteTopImpressionPercentage": null,
+        "topImpressionPercentage": null,
         "term": "cabify transfer aeropuerto santiago",
         "campaignId": "24325669851",
         "campaignName": "Campaign #1",
@@ -8378,6 +8405,33 @@
       },
       {
         "date": "2026-10-09",
+        "impressions": 2,
+        "clicks": 0,
+        "costClp": 0,
+        "conversions": 0.0,
+        "averageCpc": null,
+        "costPerConversion": null,
+        "conversionsValue": null,
+        "allConversions": null,
+        "allConversionsValue": null,
+        "phoneCalls": null,
+        "messageChats": null,
+        "interactions": null,
+        "invalidClicks": null,
+        "searchImpressionShare": null,
+        "searchBudgetLostImpressionShare": null,
+        "searchRankLostImpressionShare": null,
+        "searchTopImpressionShare": null,
+        "absoluteTopImpressionPercentage": null,
+        "topImpressionPercentage": null,
+        "term": "cómo llegar al aeropuerto de santiago en metro",
+        "campaignId": "24325669851",
+        "campaignName": "Campaign #1",
+        "adGroupId": "201907353538",
+        "adGroupName": "Grupo de anuncios 1"
+      },
+      {
+        "date": "2026-10-09",
         "impressions": 1,
         "clicks": 0,
         "costClp": 0,
@@ -8830,6 +8884,33 @@
         "absoluteTopImpressionPercentage": null,
         "topImpressionPercentage": null,
         "term": "horarios de buses al aeropuerto tepual",
+        "campaignId": "24325669851",
+        "campaignName": "Campaign #1",
+        "adGroupId": "201907353538",
+        "adGroupName": "Grupo de anuncios 1"
+      },
+      {
+        "date": "2026-10-09",
+        "impressions": 1,
+        "clicks": 0,
+        "costClp": 0,
+        "conversions": 0.0,
+        "averageCpc": null,
+        "costPerConversion": null,
+        "conversionsValue": null,
+        "allConversions": null,
+        "allConversionsValue": null,
+        "phoneCalls": null,
+        "messageChats": null,
+        "interactions": null,
+        "invalidClicks": null,
+        "searchImpressionShare": null,
+        "searchBudgetLostImpressionShare": null,
+        "searchRankLostImpressionShare": null,
+        "searchTopImpressionShare": null,
+        "absoluteTopImpressionPercentage": null,
+        "topImpressionPercentage": null,
+        "term": "los heroes centropuerto",
         "campaignId": "24325669851",
         "campaignName": "Campaign #1",
         "adGroupId": "201907353538",
@@ -10484,7 +10565,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 6,
+        "impressions": 7,
         "clicks": 0,
         "costClp": 0,
         "conversions": 0.0,
@@ -12079,7 +12160,7 @@
     "regions": [
       {
         "date": null,
-        "impressions": 1150,
+        "impressions": 1155,
         "clicks": 71,
         "costClp": 18543,
         "conversions": 0.0,
@@ -12109,7 +12190,7 @@
       },
       {
         "date": null,
-        "impressions": 531,
+        "impressions": 532,
         "clicks": 32,
         "costClp": 9355,
         "conversions": 0.0,
@@ -12165,7 +12246,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 887,
+        "impressions": 893,
         "clicks": 51,
         "costClp": 12830,
         "conversions": 0.0,
@@ -12182,8 +12263,8 @@
         "searchBudgetLostImpressionShare": 0.6227598566308243,
         "searchRankLostImpressionShare": 0.08154121863799284,
         "searchTopImpressionShare": 0.18923766816143497,
-        "absoluteTopImpressionPercentage": 0.10822998872604284,
-        "topImpressionPercentage": 0.6268320180383314,
+        "absoluteTopImpressionPercentage": 0.10750279955207166,
+        "topImpressionPercentage": 0.6259798432250839,
         "campaignId": "24325669851",
         "campaignName": "Campaign #1"
       }
@@ -12214,7 +12295,7 @@
       },
       {
         "date": null,
-        "impressions": 887,
+        "impressions": 893,
         "clicks": 51,
         "costClp": 12830,
         "conversions": 0.0,
@@ -12239,7 +12320,7 @@
     "networks": [
       {
         "date": null,
-        "impressions": 1681,
+        "impressions": 1687,
         "clicks": 103,
         "costClp": 27898,
         "conversions": 0.0,
@@ -12460,7 +12541,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 365,
+        "impressions": 367,
         "clicks": 31,
         "costClp": 7622,
         "conversions": 0.0,
@@ -12488,7 +12569,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 393,
+        "impressions": 397,
         "clicks": 8,
         "costClp": 2061,
         "conversions": 0.0,

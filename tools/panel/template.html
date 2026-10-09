@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
 <style>__CSS__</style>
-<style>#guia,#sim,#borr,#rec,#mej,#aud,#ias,#simpanel{display:none!important}
+<style>#sim,#borr,#rec,#ias,#simpanel{display:none!important}
 :root{--panel-bg:#f6f8fb;--panel-card:#fff;--panel-ink:#172033;--panel-muted:#68758a;--panel-line:#dfe5ee;--panel-blue:#2563eb;--panel-cyan:#0891b2;--panel-green:#059669;--panel-amber:#d97706;--panel-red:#dc2626}
 body{background:var(--panel-bg)!important;color:var(--panel-ink)!important}
 .real-quality{margin:18px 0;padding:18px;background:#fff;border:1px solid var(--panel-line);border-radius:14px}.real-quality-head h2{margin:0 0 4px;font-size:17px}.real-quality-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}.real-quality-item{border:1px solid var(--panel-line);border-radius:10px;padding:12px;display:grid;gap:5px;background:#fbfcfe}.real-quality-item span{font-size:12px;color:var(--panel-muted)}.real-quality-item b{font-size:20px;color:var(--panel-ink)}.real-quality-item small{font-size:10px;color:var(--panel-muted);overflow-wrap:anywhere}.real-subtext{display:block;color:var(--panel-muted);font-size:11px;margin-top:3px}@media(max-width:700px){.real-quality-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:420px){.real-quality-grid{grid-template-columns:1fr}}
@@ -369,6 +369,7 @@ if(META.plannerActive===false)SEC.push(
 ["aud","Auditoría","fact_check","Auditoría en línea","Comprobaciones hechas ahora mismo en tu navegador y resultados del servidor, cada uno con su evidencia."],
 ["mej","Mejoras del sitio","web","Mejoras del sitio","Pendientes técnicos y de contenido según la auditoría."],
 ["guia","Guía","menu_book","Guía del panel","Cómo leer y usar el panel con datos reales de Google Ads."]);
+["guia","mej","aud"].forEach(id=>{if(!SEC.some(x=>x[0]===id))document.getElementById(id).style.display="none"});
 const NAVA="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-medium transition-colors duration-150 ease-in-out";
 const NAVB="flex items-center gap-3 px-3 py-2 rounded-lg text-white font-semibold border-l-2 border-primary-container transition-colors duration-150 ease-in-out";
 const MNA="shrink-0 px-3 py-1.5 rounded-lg text-label-md font-label-md text-on-surface-variant";

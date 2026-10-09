@@ -1,14 +1,14 @@
 {
-  "source": "IA (gemini-3.5-flash) sobre datos reales de Google Ads · solo lectura",
-  "generatedAt": "2026-10-09T22:32:08.742755Z",
-  "adsLastSync": "2026-10-09T22:31:33.705777Z",
+  "source": "IA (gemini-3.6-flash) sobre datos reales de Google Ads · solo lectura",
+  "generatedAt": "2026-10-09T22:45:05.709277Z",
+  "adsLastSync": "2026-10-09T22:44:38.561989Z",
   "accountId": "2035504421",
   "detailDays": 2,
   "suggestions": [
     {
       "title": "Revisar términos de búsqueda de competidores",
-      "action": "Evaluar con el dueño si se desea mantener la activación de anuncios para búsquedas asociadas a marcas de la competencia.",
-      "reason": "Se han registrado clics en términos de competidores como 'cabify aeropuerto' (3 clics y costo de 715 CLP), 'transvip reserva' (2 clics y costo de 504 CLP), 'cabify aeropuerto teléfono' (2 clics y costo de 410 CLP) y 'teléfono de transvip' (2 clics y costo de 395 CLP) sin registrar conversiones. Al tener solo 2 días de historial, la confianza es baja y se requiere más tiempo para evaluar este tráfico.",
+      "action": "Evaluar con el dueño si conviene mantener o negativizar búsquedas de marcas competidoras como 'cabify aeropuerto' o 'transvip reserva'.",
+      "reason": "En los datos figuran 'cabify aeropuerto' con 3 clics (costoClp 715) y 'transvip reserva' con 2 clics. Dado que el historial abarca 'diasConDetalle': 2 y existen 0.0 conversiones registradas, la confianza es baja y solo se analiza la relevancia del tráfico.",
       "confidence": "Baja",
       "refs": [
         "terminos_mas_clics",
@@ -90,9 +90,9 @@
       }
     },
     {
-      "title": "Comparar rendimiento de tráfico por dispositivo",
-      "action": "Monitorear y comparar el comportamiento de los usuarios que ingresan desde dispositivos móviles frente a computadores de escritorio.",
-      "reason": "El tráfico proviene mayoritariamente de 'mobile' con 80 clics y un costo de 22591 CLP, en comparación con 'desktop' que registra 16 clics y un costo de 3744 CLP. Dado que solo contamos con 2 días de historial detallado, se sugiere observar la tendencia antes de proponer ajustes.",
+      "title": "Revisar el rendimiento del tráfico en dispositivos móviles",
+      "action": "Comparar la experiencia de usuario y navegación móvil frente a escritorio con aprobación del dueño.",
+      "reason": "El dispositivo 'mobile' concentra la mayor parte del tráfico con 83 clics y 1318 impresiones (costoClp de 23339), en comparación con 'desktop' que suma 16 clics y 316 impresiones. Dado que hay pocos días de historial ('diasConDetalle': 2), la recomendación es preventiva.",
       "confidence": "Baja",
       "refs": [
         "dispositivos",
@@ -104,14 +104,14 @@
           "filas": [
             {
               "dispositivo": "mobile",
-              "clics": 80,
-              "impresiones": 1304,
-              "costoClp": 22591
+              "clics": 83,
+              "impresiones": 1318,
+              "costoClp": 23339
             },
             {
               "dispositivo": "desktop",
               "clics": 16,
-              "impresiones": 314,
+              "impresiones": 316,
               "costoClp": 3744
             },
             {
@@ -132,14 +132,63 @@
       }
     },
     {
-      "title": "Monitorear tráfico en horas de mayor volumen",
-      "action": "Revisar el comportamiento del tráfico en las primeras horas de la mañana, específicamente entre las 8:00 y las 9:00.",
-      "reason": "Las horas con mayor acumulación de clics y costo son las 8 (11 clics, 4437 CLP) y las 9 (12 clics, 3879 CLP). Al tener un historial muy corto de 2 días (con el 2026-10-09 como día parcial), es necesario observar si esta concentración de tráfico se mantiene en el tiempo.",
+      "title": "Evaluar la intención del tráfico en términos de mayor costo",
+      "action": "Revisar junto al dueño la concordancia de términos como 'transfer aeropuerto' y 'transfer aeropuerto santiago' para asegurar la calidad de las visitas.",
+      "reason": "'transfer aeropuerto' acumula 5 clics con costoClp de 1404 y 'transfer aeropuerto santiago' registra 4 clics con costoClp de 1197, ambos con 0.0 conversiones. Al contar con solo 2 días en 'cobertura', se recomienda analizar el tráfico atraído sin alterar pujas o presupuestos.",
+      "confidence": "Baja",
+      "refs": [
+        "terminos_costosos_sin_conversion",
+        "cobertura"
+      ],
+      "evidence": {
+        "terminos_costosos_sin_conversion": {
+          "descripcion": "Términos con más gasto y 0 conversiones registradas",
+          "filas": [
+            {
+              "termino": "transfer aeropuerto",
+              "clics": 5,
+              "costoClp": 1404
+            },
+            {
+              "termino": "transfer aeropuerto santiago",
+              "clics": 4,
+              "costoClp": 1197
+            },
+            {
+              "termino": "cabify aeropuerto",
+              "clics": 3,
+              "costoClp": 715
+            },
+            {
+              "termino": "uber transfer",
+              "clics": 3,
+              "costoClp": 648
+            },
+            {
+              "termino": "viña a aeropuerto santiago",
+              "clics": 1,
+              "costoClp": 513
+            }
+          ]
+        },
+        "cobertura": {
+          "descripcion": "Cuántos días de historial detallado existen (pocos días = conclusiones débiles)",
+          "diasConDetalle": 2,
+          "desde": "2026-10-08",
+          "hasta": "2026-10-09",
+          "conversionesRegistradas": 0.0
+        }
+      }
+    },
+    {
+      "title": "Analizar la concentración de tráfico en horas pico de la mañana",
+      "action": "Monitorear el comportamiento del tráfico en las horas 8 y 9 para validar el volumen de clics con el dueño.",
+      "reason": "La hora 9 registra 12 clics (costoClp de 3879) y la hora 8 genera 11 clics (costoClp de 4437). Como el día '2026-10-09' tiene 'diaParcial': true y solo se tienen 2 días de registro, la muestra es muy reducida.",
       "confidence": "Baja",
       "refs": [
         "horas",
-        "cobertura",
-        "dias"
+        "dias",
+        "cobertura"
       ],
       "evidence": {
         "horas": {
@@ -202,8 +251,8 @@
             },
             {
               "hora": 19,
-              "clics": 7,
-              "costoClp": 1452
+              "clics": 10,
+              "costoClp": 2200
             },
             {
               "hora": 20,
@@ -217,13 +266,6 @@
             }
           ]
         },
-        "cobertura": {
-          "descripcion": "Cuántos días de historial detallado existen (pocos días = conclusiones débiles)",
-          "diasConDetalle": 2,
-          "desde": "2026-10-08",
-          "hasta": "2026-10-09",
-          "conversionesRegistradas": 0.0
-        },
         "dias": {
           "descripcion": "Totales de la campaña por día (el día parcial aún no terminó)",
           "filas": [
@@ -239,96 +281,10 @@
             },
             {
               "fecha": "2026-10-09",
-              "impresiones": 833,
-              "clics": 44,
-              "costoClp": 11267,
-              "ctrPct": 5.28,
-              "cpcClp": 256,
-              "conversiones": 0.0,
-              "diaParcial": true
-            }
-          ]
-        }
-      }
-    },
-    {
-      "title": "Revisar alineación de página de destino para términos principales",
-      "action": "Analizar si la página de destino responde de manera óptima a las búsquedas de transfer al aeropuerto.",
-      "reason": "El término 'transfer aeropuerto' acumuló 5 clics (costo de 1404 CLP) y 'transfer aeropuerto santiago' acumuló 4 clics (costo de 1197 CLP), siendo los términos más costosos sin registrar conversiones en este breve periodo de 2 días.",
-      "confidence": "Baja",
-      "refs": [
-        "terminos_costosos_sin_conversion",
-        "cobertura"
-      ],
-      "evidence": {
-        "terminos_costosos_sin_conversion": {
-          "descripcion": "Términos con más gasto y 0 conversiones registradas",
-          "filas": [
-            {
-              "termino": "transfer aeropuerto",
-              "clics": 5,
-              "costoClp": 1404
-            },
-            {
-              "termino": "transfer aeropuerto santiago",
-              "clics": 4,
-              "costoClp": 1197
-            },
-            {
-              "termino": "cabify aeropuerto",
-              "clics": 3,
-              "costoClp": 715
-            },
-            {
-              "termino": "uber transfer",
-              "clics": 3,
-              "costoClp": 648
-            },
-            {
-              "termino": "viña a aeropuerto santiago",
-              "clics": 1,
-              "costoClp": 513
-            }
-          ]
-        },
-        "cobertura": {
-          "descripcion": "Cuántos días de historial detallado existen (pocos días = conclusiones débiles)",
-          "diasConDetalle": 2,
-          "desde": "2026-10-08",
-          "hasta": "2026-10-09",
-          "conversionesRegistradas": 0.0
-        }
-      }
-    },
-    {
-      "title": "Verificar la configuración del seguimiento de conversiones",
-      "action": "Comprobar técnicamente que las etiquetas de conversión estén correctamente implementadas en el sitio web.",
-      "reason": "Se han registrado un total de 52 clics el 2026-10-08 y 44 clics el 2026-10-09 (día parcial), pero el reporte muestra 0.0 conversiones registradas. Con solo 2 días de historial, es prudente asegurar que el sistema de medición funcione correctamente antes de evaluar el rendimiento del tráfico.",
-      "confidence": "Baja",
-      "refs": [
-        "dias",
-        "cobertura"
-      ],
-      "evidence": {
-        "dias": {
-          "descripcion": "Totales de la campaña por día (el día parcial aún no terminó)",
-          "filas": [
-            {
-              "fecha": "2026-10-08",
-              "impresiones": 794,
-              "clics": 52,
-              "costoClp": 15068,
-              "ctrPct": 6.55,
-              "cpcClp": 290,
-              "conversiones": 0.0,
-              "diaParcial": false
-            },
-            {
-              "fecha": "2026-10-09",
-              "impresiones": 833,
-              "clics": 44,
-              "costoClp": 11267,
-              "ctrPct": 5.28,
+              "impresiones": 849,
+              "clics": 47,
+              "costoClp": 12015,
+              "ctrPct": 5.54,
               "cpcClp": 256,
               "conversiones": 0.0,
               "diaParcial": true

@@ -278,7 +278,7 @@ conductor uber</textarea></div>
 
 <script>
 const DATA=__DATA__;
-const META=Object.assign({},__META__,{audit:null});
+const META=__META__;META.audit=null;
 const RAW=JSON.stringify(DATA);
 const ORIG=JSON.parse(RAW);
 const $=id=>document.getElementById(id);

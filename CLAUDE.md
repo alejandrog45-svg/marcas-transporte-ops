@@ -20,6 +20,8 @@
 - Comandos: `PYTHONPATH=src python3 -m marcas_transporte_ops {audit|seo}` · tests: `python3 -m pytest -q`.
 
 ## ⭐ ESTADO Y PRÓXIMOS PASOS (leer esto primero)
+**Traspaso actualizado 2026-10-09:** leer primero `docs/TRASPASO_CLAUDE_CODE_2026-10-09.md`. El último cambio visual está en el commit `25f183a` y ya fue desplegado en Firebase Hosting. La CLI local quedó sin cuentas autorizadas al cerrar la sesión temporal de Alejandro; falta restaurarla a `ferreteriaoviedo.elmanzano@gmail.com` introduciendo la contraseña en Google. No borrar ni commitear los dos archivos locales sin seguimiento indicados en el traspaso.
+
 **Estado al cierre (30-09-2026, tarde):**
 - **Dos paneles publicados**, misma plantilla y datos separados: UberTransfer en https://ubertransfer-ops.web.app/ (redirige a `https://ubertransfer-ops.firebaseapp.com/`) y Aereostar en `/aereostar/`. Botón de cambio en los encabezados. Navegador: prefijo `ae_`; nube: `panel/estado` y `panel/estado_aereostar`. 19/19 verificaciones en ambos.
 - **Acceso:** inicio de sesión con Google (Firebase Auth) solo para `alejandrog45@gmail.com` y `alimentosaltoque76@gmail.com` (Rafael), según `firestore.rules`. FALTA la prueba real de Rafael y la del celular del dueño tras el arreglo del dominio (ver «Trampas»).

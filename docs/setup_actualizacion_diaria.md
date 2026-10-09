@@ -2,9 +2,16 @@
 
 Cada día a las 11:45 UTC (07:45–08:45 hora de Chile) GitHub:
 1. audita ubertransfer.cl (datos reales del día),
-2. arma el panel (`python tools/panel/build.py`),
-3. guarda la auditoría en `data/` (histórico),
-4. publica el panel en https://ubertransfer-ops.web.app.
+2. sincroniza Google Ads en modo solo lectura,
+3. genera y guarda las sugerencias en Firestore (`panel/aiSuggestions`),
+4. arma el panel (`python tools/panel/build.py`),
+5. guarda la auditoría en `data/` (histórico),
+6. publica el panel en https://ubertransfer-ops.web.app.
+
+Las sugerencias se calculan con reglas transparentes sobre los datos reales; no
+son una IA generativa y no crean ni modifican campañas. El script de Google
+Ads/Apps Script queda disponible como alternativa manual, pero ya no es
+necesario ejecutarlo para la actualización diaria.
 
 Sin la clave de Firebase (paso 1–3) el flujo igual audita y guarda el histórico, pero **avisa y no publica**.
 

@@ -39,6 +39,11 @@ jobs:
           GOOGLE_ADS_DEVELOPER_TOKEN: ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
         run: python tools/panel/sync_google_ads.py
 
+      - name: Actualizar sugerencias de campaña (solo lectura)
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: python tools/panel/sync_suggestions_firestore.py
+
       - name: Armar panel
         env:
           PANEL_DATA_KEY: ${{ secrets.PANEL_DATA_KEY }}

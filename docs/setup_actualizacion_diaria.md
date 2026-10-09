@@ -24,6 +24,7 @@ Usa la cuenta de Google `alejandrog45@gmail.com` para Google Cloud y la cuenta d
 3. En "Rol", agrega estos dos y pulsa **Continuar** → **Listo**:
    - **Firebase Hosting Admin**
    - **API Keys Viewer**
+   - **Cloud Datastore User** (para guardar `panel/aiSuggestions` en Firestore)
    (Solo pueden publicar el sitio de este proyecto. Sin acceso a facturación ni a otros servicios.)
 
 ### 2. Crear la clave (JSON)

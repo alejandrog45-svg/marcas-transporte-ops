@@ -40,9 +40,15 @@ jobs:
         run: python tools/panel/sync_google_ads.py
 
       - name: Actualizar sugerencias de campaña (solo lectura)
+        continue-on-error: true
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-        run: python tools/panel/sync_suggestions_firestore.py
+        run: |
+          if [ -z "$FIREBASE_SERVICE_ACCOUNT" ]; then
+            echo "::warning::Falta FIREBASE_SERVICE_ACCOUNT: el panel se publicará sin actualizar sugerencias en Firestore."
+          else
+            python tools/panel/sync_suggestions_firestore.py
+          fi
 
       - name: Armar panel
         env:

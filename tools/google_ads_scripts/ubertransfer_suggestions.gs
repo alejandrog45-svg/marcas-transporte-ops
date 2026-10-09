@@ -87,7 +87,36 @@ function buildSuggestions(camps, terms, devices, hours, regions) {
 }
 
 function writeFirestore(payload) {
-  var fields = { source: { stringValue: payload.source }, accountId: { stringValue: payload.accountId }, period: { stringValue: payload.period }, updatedAt: { timestampValue: payload.updatedAt }, suggestions: { arrayValue: { values: payload.suggestions.map(function (s) { return { mapValue: { fields: { title: { stringValue: s.title }, action: { stringValue: s.action }, kind: { stringValue: s.kind }, data: { mapValue: { fields: { evidence: { stringValue: s.data.evidence }, date: { stringValue: s.data.date }, campaign: { stringValue: s.data.campaign }, reason: { stringValue: s.data.reason }, confidence: { stringValue: s.data.confidence }, confirm: { stringValue: s.data.confirm } } } } } } } }; }) } } };
+  var values = payload.suggestions.map(function (s) {
+    return {
+      mapValue: {
+        fields: {
+          title: { stringValue: s.title },
+          action: { stringValue: s.action },
+          kind: { stringValue: s.kind },
+          data: {
+            mapValue: {
+              fields: {
+                evidence: { stringValue: s.data.evidence },
+                date: { stringValue: s.data.date },
+                campaign: { stringValue: s.data.campaign },
+                reason: { stringValue: s.data.reason },
+                confidence: { stringValue: s.data.confidence },
+                confirm: { stringValue: s.data.confirm }
+              }
+            }
+          }
+        }
+      }
+    };
+  });
+  var fields = {
+    source: { stringValue: payload.source },
+    accountId: { stringValue: payload.accountId },
+    period: { stringValue: payload.period },
+    updatedAt: { timestampValue: payload.updatedAt },
+    suggestions: { arrayValue: { values: values } }
+  };
   var url = 'https://firestore.googleapis.com/v1/projects/' + FIRESTORE_PROJECT_ID + '/databases/(default)/documents/' + FIRESTORE_DOCUMENT;
   UrlFetchApp.fetch(url, { method: 'patch', contentType: 'application/json', headers: { Authorization: 'Bearer ' + ScriptApp.getOAuthToken() }, payload: JSON.stringify({ fields: fields }), muteHttpExceptions: false });
 }

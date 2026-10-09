@@ -18,6 +18,14 @@ OUT = ROOT / "data" / "google_ads_ubertransfer.json"
 CUSTOMER_DEFAULT = "2035504421"
 API_VERSION = "v25"
 
+METRIC_FIELDS = ("metrics.impressions, metrics.clicks, metrics.cost_micros, metrics.ctr, "
+                 "metrics.conversions, metrics.average_cpc, metrics.cost_per_conversion, "
+                 "metrics.conversions_value, metrics.all_conversions, metrics.all_conversions_value, "
+                 "metrics.phone_calls, metrics.message_chats, metrics.interactions, metrics.invalid_clicks, "
+                 "metrics.search_impression_share, metrics.search_budget_lost_impression_share, "
+                 "metrics.search_rank_lost_impression_share, metrics.search_top_impression_share, "
+                 "metrics.absolute_top_impression_percentage, metrics.top_impression_percentage")
+
 
 def required(name: str) -> str:
     value = os.environ.get(name, "").strip()
@@ -46,9 +54,7 @@ def dates() -> tuple[str, str]:
 
 
 def query(date_from: str, date_to: str) -> str:
-    return ("SELECT campaign.id, campaign.name, campaign.status, segments.date, "
-            "metrics.impressions, metrics.clicks, metrics.cost_micros, "
-            "metrics.ctr, metrics.conversions FROM campaign "
+    return ("SELECT campaign.id, campaign.name, campaign.status, segments.date, " + METRIC_FIELDS + " FROM campaign "
             f"WHERE segments.date BETWEEN '{date_from}' AND '{date_to}' "
             "ORDER BY segments.date, campaign.id")
 
@@ -56,32 +62,25 @@ def query(date_from: str, date_to: str) -> str:
 def report_queries(date_from: str, date_to: str) -> dict[str, str]:
     period = f"WHERE segments.date BETWEEN '{date_from}' AND '{date_to}'"
     return {
-        "hourly": ("SELECT segments.date, segments.hour, metrics.impressions, metrics.clicks, "
-                   "metrics.cost_micros, metrics.conversions FROM campaign " + period + " ORDER BY segments.date, segments.hour"),
-        "devices": ("SELECT segments.device, metrics.impressions, metrics.clicks, metrics.cost_micros, "
-                    "metrics.conversions FROM campaign " + period + " ORDER BY segments.device"),
+        "hourly": ("SELECT segments.date, segments.hour, " + METRIC_FIELDS + " FROM campaign " + period + " ORDER BY segments.date, segments.hour"),
+        "devices": ("SELECT segments.device, " + METRIC_FIELDS + " FROM campaign " + period + " ORDER BY segments.device"),
         "adGroups": ("SELECT campaign.id, campaign.name, ad_group.id, ad_group.name, segments.date, "
-                     "metrics.impressions, metrics.clicks, metrics.cost_micros, metrics.conversions "
+                     + METRIC_FIELDS + " "
                      "FROM ad_group " + period + " ORDER BY segments.date, campaign.id, ad_group.id"),
         "ads": ("SELECT campaign.id, campaign.name, ad_group.id, ad_group.name, ad_group_ad.ad.id, "
-                "ad_group_ad.ad.name, ad_group_ad.status, segments.date, metrics.impressions, "
-                "metrics.clicks, metrics.cost_micros, metrics.conversions FROM ad_group_ad " + period +
+                "ad_group_ad.ad.name, ad_group_ad.status, segments.date, " + METRIC_FIELDS + " FROM ad_group_ad " + period +
                 " ORDER BY segments.date, campaign.id, ad_group.id, ad_group_ad.ad.id"),
         "searchTerms": ("SELECT search_term_view.search_term, campaign.id, campaign.name, ad_group.id, "
-                        "ad_group.name, segments.date, metrics.impressions, metrics.clicks, "
-                        "metrics.cost_micros, metrics.conversions FROM search_term_view " + period + " ORDER BY segments.date, metrics.clicks DESC"),
+                        "ad_group.name, segments.date, " + METRIC_FIELDS + " FROM search_term_view " + period + " ORDER BY segments.date, metrics.clicks DESC"),
         "regions": ("SELECT geographic_view.country_criterion_id, geographic_view.location_type, "
-                    "metrics.impressions, metrics.clicks, metrics.cost_micros, metrics.conversions "
+                    + METRIC_FIELDS + " "
                     "FROM geographic_view " + period + " ORDER BY geographic_view.country_criterion_id"),
-        "dayOfWeek": ("SELECT segments.day_of_week, metrics.impressions, metrics.clicks, "
-                      "metrics.cost_micros, metrics.conversions FROM campaign " + period +
+        "dayOfWeek": ("SELECT segments.day_of_week, " + METRIC_FIELDS + " FROM campaign " + period +
                       " ORDER BY segments.day_of_week"),
-        "networks": ("SELECT segments.ad_network_type, metrics.impressions, metrics.clicks, "
-                     "metrics.cost_micros, metrics.conversions FROM campaign " + period +
+        "networks": ("SELECT segments.ad_network_type, " + METRIC_FIELDS + " FROM campaign " + period +
                      " ORDER BY segments.ad_network_type"),
         "keywords": ("SELECT ad_group_criterion.keyword.text, ad_group_criterion.keyword.match_type, "
-                      "campaign.id, campaign.name, ad_group.id, ad_group.name, segments.date, "
-                      "metrics.impressions, metrics.clicks, metrics.cost_micros, metrics.conversions "
+                      "campaign.id, campaign.name, ad_group.id, ad_group.name, segments.date, " + METRIC_FIELDS + " "
                       "FROM keyword_view " + period + " ORDER BY segments.date, metrics.clicks DESC"),
         "conversionActions": ("SELECT conversion_action.id, conversion_action.name, conversion_action.category, "
                               "conversion_action.type, conversion_action.status, conversion_action.counting_type, "
@@ -154,6 +153,21 @@ def normalize(rows: list[dict], date_from: str, date_to: str) -> dict:
             "costClp": round(int(metrics.get("costMicros", 0)) / 1_000_000),
             "ctr": float(metrics.get("ctr", 0)),
             "conversions": float(metrics.get("conversions", 0)),
+            "averageCpc": float(metrics.get("averageCpc", 0) or 0),
+            "costPerConversion": float(metrics.get("costPerConversion", 0) or 0),
+            "conversionsValue": float(metrics.get("conversionsValue", 0) or 0),
+            "allConversions": float(metrics.get("allConversions", 0) or 0),
+            "allConversionsValue": float(metrics.get("allConversionsValue", 0) or 0),
+            "phoneCalls": float(metrics.get("phoneCalls", 0) or 0),
+            "messageChats": float(metrics.get("messageChats", 0) or 0),
+            "interactions": float(metrics.get("interactions", 0) or 0),
+            "invalidClicks": int(metrics.get("invalidClicks", 0) or 0),
+            "searchImpressionShare": metrics.get("searchImpressionShare"),
+            "searchBudgetLostImpressionShare": metrics.get("searchBudgetLostImpressionShare"),
+            "searchRankLostImpressionShare": metrics.get("searchRankLostImpressionShare"),
+            "searchTopImpressionShare": metrics.get("searchTopImpressionShare"),
+            "absoluteTopImpressionPercentage": metrics.get("absoluteTopImpressionPercentage"),
+            "topImpressionPercentage": metrics.get("topImpressionPercentage"),
         })
     totals = {
         key: sum(row[key] for row in campaigns)
@@ -161,6 +175,13 @@ def normalize(rows: list[dict], date_from: str, date_to: str) -> dict:
     }
     previous = json.loads(OUT.read_text(encoding="utf-8")) if OUT.exists() else {}
     snapshot = {**totals, "dateFrom": date_from, "dateTo": date_to}
+    for key in ("conversionsValue", "allConversions", "allConversionsValue", "phoneCalls", "messageChats", "interactions", "invalidClicks"):
+        snapshot[key] = sum(row[key] for row in campaigns)
+    snapshot["averageCpc"] = round(snapshot["costClp"] / snapshot["clicks"], 2) if snapshot["clicks"] else None
+    snapshot["costPerConversion"] = round(snapshot["costClp"] / snapshot["conversions"], 2) if snapshot["conversions"] else None
+    for key in ("searchImpressionShare", "searchBudgetLostImpressionShare", "searchRankLostImpressionShare", "searchTopImpressionShare", "absoluteTopImpressionPercentage", "topImpressionPercentage"):
+        values = [row[key] for row in campaigns if row.get(key) is not None]
+        snapshot[key] = values[0] if len(values) == 1 else None
     history = [h for h in (previous.get("history") or []) if h.get("dateFrom") != date_from]
     history.append(snapshot)
     history = sorted(history, key=lambda h: h.get("dateFrom", ""))[-90:]
@@ -210,6 +231,21 @@ def compact_report(name: str, rows: list[dict]) -> list[dict]:
             "clicks": int(m.get("clicks", 0)),
             "costClp": round(int(m.get("costMicros", 0)) / 1_000_000),
             "conversions": float(m.get("conversions", 0)),
+            "averageCpc": m.get("averageCpc"),
+            "costPerConversion": m.get("costPerConversion"),
+            "conversionsValue": m.get("conversionsValue"),
+            "allConversions": m.get("allConversions"),
+            "allConversionsValue": m.get("allConversionsValue"),
+            "phoneCalls": m.get("phoneCalls"),
+            "messageChats": m.get("messageChats"),
+            "interactions": m.get("interactions"),
+            "invalidClicks": m.get("invalidClicks"),
+            "searchImpressionShare": m.get("searchImpressionShare"),
+            "searchBudgetLostImpressionShare": m.get("searchBudgetLostImpressionShare"),
+            "searchRankLostImpressionShare": m.get("searchRankLostImpressionShare"),
+            "searchTopImpressionShare": m.get("searchTopImpressionShare"),
+            "absoluteTopImpressionPercentage": m.get("absoluteTopImpressionPercentage"),
+            "topImpressionPercentage": m.get("topImpressionPercentage"),
         }
         if name == "hourly":
             item["hour"] = int(s.get("hour", 0))
@@ -267,6 +303,37 @@ def compact_report(name: str, rows: list[dict]) -> list[dict]:
                     "negative": bool(criterion.get("negative", False))}
         compact.append(item)
     return compact
+
+
+def enrich_geo_locations(customer: str, headers: dict[str, str], reports: dict) -> None:
+    locations = reports.get("locations")
+    if not isinstance(locations, list):
+        return
+    resources = sorted({str(x.get("geoTargetConstant")) for x in locations if x.get("geoTargetConstant")})
+    if not resources:
+        return
+    quoted = ",".join("'" + value.replace("'", "\\'") + "'" for value in resources)
+    statement = ("SELECT geo_target_constant.resource_name, geo_target_constant.id, "
+                 "geo_target_constant.name, geo_target_constant.canonical_name, "
+                 "geo_target_constant.country_code, geo_target_constant.target_type, "
+                 "geo_target_constant.status FROM geo_target_constant "
+                 f"WHERE geo_target_constant.resource_name IN ({quoted})")
+    mapping = {}
+    for row in search_stream(customer, headers, statement):
+        geo = row.get("geoTargetConstant") or {}
+        resource = str(geo.get("resourceName", ""))
+        mapping[resource] = {
+            "geoTargetId": str(geo.get("id", "")),
+            "name": geo.get("name", ""),
+            "canonicalName": geo.get("canonicalName", ""),
+            "countryCode": geo.get("countryCode", ""),
+            "targetType": geo.get("targetType", "UNSPECIFIED"),
+            "geoStatus": geo.get("status", "UNSPECIFIED"),
+        }
+    for item in locations:
+        item.update(mapping.get(str(item.get("geoTargetConstant", "")), {}))
+
+
 def main() -> None:
     date_from, date_to = dates()
     token = access_token()
@@ -284,6 +351,10 @@ def main() -> None:
             result["reports"][name] = compact_report(name, search_stream(cid, headers, statement))
         except RuntimeError as error:
             result["reports"][name] = {"error": str(error), "rows": []}
+    try:
+        enrich_geo_locations(cid, headers, result["reports"])
+    except RuntimeError as error:
+        result["geoLookupError"] = str(error)
     ad_history = {str(x.get("adId")): x for x in (result.get("adHistory") or []) if x.get("adId")}
     for ad in result["reports"].get("ads", []):
         aid = ad.get("adId")

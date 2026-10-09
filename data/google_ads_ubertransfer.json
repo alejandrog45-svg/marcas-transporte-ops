@@ -30,10 +30,10 @@
   "alerts": [],
   "mode": "read_only",
   "status": "connected",
-  "lastSync": "2026-10-09T20:22:38.778507Z",
+  "lastSync": "2026-10-09T20:26:11.931127Z",
   "source": "Google Ads API",
   "metrics": {
-    "impressions": 693,
+    "impressions": 694,
     "clicks": 41,
     "costClp": 10645,
     "conversions": 0.0,
@@ -82,7 +82,7 @@
       "topImpressionPercentage": null
     },
     {
-      "impressions": 693,
+      "impressions": 694,
       "clicks": 41,
       "costClp": 10645,
       "conversions": 0.0,
@@ -139,11 +139,11 @@
       "name": "Campaign #1",
       "status": "ENABLED",
       "date": "2026-10-09",
-      "impressions": 693,
+      "impressions": 694,
       "clicks": 41,
       "costMicros": 10645000000,
       "costClp": 10645,
-      "ctr": 0.05916305916305916,
+      "ctr": 0.059077809798270896,
       "conversions": 0.0,
       "averageCpc": 0.0,
       "costPerConversion": 0.0,
@@ -10950,7 +10950,7 @@
       },
       {
         "date": null,
-        "impressions": 474,
+        "impressions": 475,
         "clicks": 29,
         "costClp": 8673,
         "conversions": 0.0,
@@ -11245,7 +11245,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 279,
+        "impressions": 280,
         "clicks": 25,
         "costClp": 6280,
         "conversions": 0.0,

@@ -1,4 +1,4 @@
-{"brand": "UberTransfer", "keepDays": 90, "days": ["2026-10-08", "2026-10-09"], "updatedAt": "2026-10-09T20:22:45.477948Z","reports":{
+{"brand": "UberTransfer", "keepDays": 90, "days": ["2026-10-08", "2026-10-09"], "updatedAt": "2026-10-09T20:26:18.104387Z","reports":{
 "adGroups":[
 {"date":"2026-10-08","impressions":794,"clicks":52,"costClp":15068,"conversions":0.0,"campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":694,"clicks":41,"costClp":10645,"conversions":0.0,"campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"}
@@ -50,7 +50,7 @@
 {"date":"2026-10-08","impressions":45,"clicks":1,"costClp":329,"conversions":0.0,"keyword":"transfer aeropuerto","matchType":"EXACT","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-08","impressions":11,"clicks":0,"costClp":0,"conversions":0.0,"keyword":"transfer","matchType":"EXACT","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-08","impressions":2,"clicks":0,"costClp":0,"conversions":0.0,"keyword":"aeropuerto","matchType":"EXACT","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
-{"date":"2026-10-09","impressions":279,"clicks":25,"costClp":6280,"conversions":0.0,"keyword":"transfer aeropuerto","matchType":"PHRASE","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
+{"date":"2026-10-09","impressions":280,"clicks":25,"costClp":6280,"conversions":0.0,"keyword":"transfer aeropuerto","matchType":"PHRASE","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":323,"clicks":7,"costClp":1901,"conversions":0.0,"keyword":"transporte aeropuerto","matchType":"PHRASE","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":36,"clicks":5,"costClp":1329,"conversions":0.0,"keyword":"transfer aeropuerto","matchType":"EXACT","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":29,"clicks":3,"costClp":838,"conversions":0.0,"keyword":"transfer aeropuerto santiago","matchType":"PHRASE","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
@@ -63,7 +63,7 @@
 ],
 "regions":[
 {"date":null,"impressions":1013,"clicks":64,"costClp":17040,"conversions":0.0,"countryCriterionId":"2152","locationType":"AREA_OF_INTEREST"},
-{"date":null,"impressions":474,"clicks":29,"costClp":8673,"conversions":0.0,"countryCriterionId":"2152","locationType":"LOCATION_OF_PRESENCE"}
+{"date":null,"impressions":475,"clicks":29,"costClp":8673,"conversions":0.0,"countryCriterionId":"2152","locationType":"LOCATION_OF_PRESENCE"}
 ],
 "searchTerms":[
 {"date":"2026-10-08","impressions":53,"clicks":2,"costClp":441,"conversions":0.0,"term":"cabify aeropuerto","campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},

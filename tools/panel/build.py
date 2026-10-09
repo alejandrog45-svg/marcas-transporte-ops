@@ -61,11 +61,16 @@ def read_google_ads_status(path, brand, default_campaign_ids=()):
     names = obj.get("campaignNames", [])
     if not isinstance(names, list) or any(not isinstance(x, str) or not x.strip() for x in names):
         raise SystemExit(f"Google Ads: campaignNames inválidos en {p.name}.")
+    reports = obj.get("reports", {})
+    if not isinstance(reports, dict):
+        raise SystemExit(f"Google Ads: reports inválidos en {p.name}.")
     return {"brand": brand, "customerId": customer or None, "campaignIds": [str(x) for x in ids],
-            "campaignNames": names,
+            "campaignNames": names, "campaignHistory": obj.get("campaignHistory", []),
+            "adHistory": obj.get("adHistory", []), "alerts": obj.get("alerts", []),
             "mode": "read_only", "status": obj.get("status", "pending_api"),
             "lastSync": obj.get("lastSync"), "source": "Google Ads API", "metrics": obj.get("metrics"),
-            "observed": obj.get("observed")}
+            "history": obj.get("history", []), "campaigns": obj.get("campaigns", []),
+            "reports": reports, "observed": obj.get("observed")}
 
 
 def num(s):

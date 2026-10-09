@@ -4,7 +4,7 @@
   {
    "url": "https://ubertransfer.cl/",
    "status": 200,
-   "seconds": 2.74,
+   "seconds": 2.38,
    "issues": [
     "39 imágenes sin lazy-load"
    ],
@@ -25,7 +25,7 @@
   {
    "url": "https://ubertransfer.cl/nosotros-transfer-aeropuerto-santiago/",
    "status": 200,
-   "seconds": 1.95,
+   "seconds": 2.03,
    "issues": [
     "title largo (92 car.)",
     "13 imágenes sin lazy-load"
@@ -47,7 +47,7 @@
   {
    "url": "https://ubertransfer.cl/servicio-transfer-aeropuerto-santiago/",
    "status": 200,
-   "seconds": 2.39,
+   "seconds": 2.04,
    "issues": [
     "title largo (74 car.)",
     "description larga (181 car.)",
@@ -70,7 +70,7 @@
   {
    "url": "https://ubertransfer.cl/contacto-transfer-aeropuerto-santiago/",
    "status": 200,
-   "seconds": 2.36,
+   "seconds": 1.93,
    "issues": [
     "title largo (82 car.)"
    ],
@@ -89,7 +89,7 @@
    }
   }
  ],
- "generated": "2026-10-09T02:36:36Z",
+ "generated": "2026-10-09T14:21:33Z",
  "discovery": {
   "robots": 200,
   "sitemaps": [

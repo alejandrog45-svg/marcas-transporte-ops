@@ -15,6 +15,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[2]
 ADS_FILE = ROOT / "data" / "google_ads_ubertransfer.json"
+HISTORY_FILE = ROOT / "data" / "google_ads_history_ubertransfer.json"
 PROJECT_ID = "ubertransfer-ops"
 DOCUMENT = "panel/aiSuggestions"
 DATASTORE_SCOPE = "https://www.googleapis.com/auth/datastore"
@@ -80,12 +81,27 @@ def rows(reports: dict[str, Any], name: str) -> list[dict[str, Any]]:
     return value if isinstance(value, list) else []
 
 
-def build_suggestions(data: dict[str, Any]) -> dict[str, Any]:
+def merge_terms(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Suma por término todos los días: una fila diaria no dice cuál término rinde más."""
+    merged: dict[str, dict[str, Any]] = {}
+    for row in rows:
+        key = text(row, "term", "searchTerm", default="").strip().lower()
+        if not key:
+            continue
+        item = merged.setdefault(key, {"term": text(row, "term", "searchTerm"), "campaignName": row.get("campaignName"),
+                                       "clicks": 0.0, "impressions": 0.0, "costClp": 0.0, "conversions": 0.0})
+        for field in ("clicks", "impressions", "costClp", "conversions"):
+            item[field] += number(row, field)
+    return list(merged.values())
+
+
+def build_suggestions(data: dict[str, Any], history: dict[str, Any] | None = None) -> dict[str, Any]:
     reports = data.get("reports") or {}
     campaigns = data.get("campaigns") or []
     if not isinstance(campaigns, list):
         campaigns = []
-    terms = rows(reports, "searchTerms")
+    # Primero el historial acumulado (todos los días guardados); si no existe, los datos frescos.
+    terms = merge_terms(rows((history or {}).get("reports") or {}, "searchTerms") or rows(reports, "searchTerms"))
     devices = rows(reports, "devices")
     hours = rows(reports, "hourly")
     regions = rows(reports, "regions")
@@ -223,7 +239,8 @@ def main() -> None:
     if not ADS_FILE.exists():
         raise RuntimeError(f"No existe {ADS_FILE}")
     data = json.loads(ADS_FILE.read_text(encoding="utf-8"))
-    payload = build_suggestions(data)
+    history = json.loads(HISTORY_FILE.read_text(encoding="utf-8")) if HISTORY_FILE.exists() else {}
+    payload = build_suggestions(data, history)
     write_firestore(payload)
     print(json.dumps({"ok": True, "accountId": payload["accountId"], "suggestions": len(payload["suggestions"])}))
 

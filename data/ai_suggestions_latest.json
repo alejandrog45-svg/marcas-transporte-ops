@@ -1,18 +1,62 @@
 {
   "source": "IA (gemini-3.5-flash) sobre datos reales de Google Ads · solo lectura",
-  "generatedAt": "2026-10-09T22:13:52.720470Z",
-  "adsLastSync": "2026-10-09T22:12:50.489669Z",
+  "generatedAt": "2026-10-09T22:17:33.980836Z",
+  "adsLastSync": "2026-10-09T22:17:05.809916Z",
   "accountId": "2035504421",
   "detailDays": 2,
   "suggestions": [
     {
-      "title": "Revisar términos de búsqueda de competidores",
-      "action": "Revisar y evaluar si se desea seguir captando tráfico de marcas competidoras como 'cabify aeropuerto' (3 clics y 715 CLP de costo) o 'transvip reserva' (2 clics y 504 CLP de costo).",
-      "reason": "Dado que el historial es muy corto (solo 2 días de cobertura) y no registramos conversiones (0.0), es prudente que el dueño decida si este tráfico de competidores es de utilidad para el negocio.",
+      "title": "Revisar acumulación de datos por corto historial",
+      "action": "Monitorear el rendimiento del tráfico durante más días antes de realizar modificaciones estructurales en la campaña.",
+      "reason": "Solo se cuenta con 2 días de historial detallado (desde el 2026-10-08 hasta el 2026-10-09, siendo este último un día parcial) y se registran 0.0 conversiones, por lo que los datos de tráfico actuales son preliminares.",
+      "confidence": "Baja",
+      "refs": [
+        "cobertura",
+        "dias"
+      ],
+      "evidence": {
+        "cobertura": {
+          "descripcion": "Cuántos días de historial detallado existen (pocos días = conclusiones débiles)",
+          "diasConDetalle": 2,
+          "desde": "2026-10-08",
+          "hasta": "2026-10-09",
+          "conversionesRegistradas": 0.0
+        },
+        "dias": {
+          "descripcion": "Totales de la campaña por día (el día parcial aún no terminó)",
+          "filas": [
+            {
+              "fecha": "2026-10-08",
+              "impresiones": 794,
+              "clics": 52,
+              "costoClp": 15068,
+              "ctrPct": 6.55,
+              "cpcClp": 290,
+              "conversiones": 0.0,
+              "diaParcial": false
+            },
+            {
+              "fecha": "2026-10-09",
+              "impresiones": 800,
+              "clics": 44,
+              "costoClp": 11267,
+              "ctrPct": 5.5,
+              "cpcClp": 256,
+              "conversiones": 0.0,
+              "diaParcial": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "title": "Evaluar términos de búsqueda de competidores",
+      "action": "Revisar con el dueño si se desea continuar captando tráfico de marcas competidoras como 'cabify aeropuerto' (3 clics y costo de 715 CLP) o 'transvip reserva' (2 clics y costo de 504 CLP).",
+      "reason": "Estos términos de competidores están generando clics y costos dentro del historial, pero actualmente registran 0.0 conversiones.",
       "confidence": "Baja",
       "refs": [
         "terminos_mas_clics",
-        "cobertura"
+        "terminos_costosos_sin_conversion"
       ],
       "evidence": {
         "terminos_mas_clics": {
@@ -80,67 +124,6 @@
             }
           ]
         },
-        "cobertura": {
-          "descripcion": "Cuántos días de historial detallado existen (pocos días = conclusiones débiles)",
-          "diasConDetalle": 2,
-          "desde": "2026-10-08",
-          "hasta": "2026-10-09",
-          "conversionesRegistradas": 0.0
-        }
-      }
-    },
-    {
-      "title": "Comparar tráfico entre dispositivos móviles y ordenadores",
-      "action": "Analizar y comparar la experiencia de usuario en móviles frente a ordenadores, considerando que 'mobile' generó 80 clics y 1269 impresiones con un costo de 22591 CLP, mientras que 'desktop' obtuvo 16 clics y 311 impresiones con un costo de 3744 CLP.",
-      "reason": "La gran mayoría del tráfico proviene de dispositivos móviles. Al tener solo 2 días de historial y 0.0 conversiones registradas, sugerimos revisar que la web cargue perfectamente en celulares para asegurar la calidad de este tráfico.",
-      "confidence": "Baja",
-      "refs": [
-        "dispositivos",
-        "cobertura"
-      ],
-      "evidence": {
-        "dispositivos": {
-          "descripcion": "Clics, impresiones y costo por dispositivo, sumando el historial",
-          "filas": [
-            {
-              "dispositivo": "mobile",
-              "clics": 80,
-              "impresiones": 1269,
-              "costoClp": 22591
-            },
-            {
-              "dispositivo": "desktop",
-              "clics": 16,
-              "impresiones": 311,
-              "costoClp": 3744
-            },
-            {
-              "dispositivo": "tablet",
-              "clics": 0,
-              "impresiones": 9,
-              "costoClp": 0
-            }
-          ]
-        },
-        "cobertura": {
-          "descripcion": "Cuántos días de historial detallado existen (pocos días = conclusiones débiles)",
-          "diasConDetalle": 2,
-          "desde": "2026-10-08",
-          "hasta": "2026-10-09",
-          "conversionesRegistradas": 0.0
-        }
-      }
-    },
-    {
-      "title": "Revisar términos de búsqueda de mayor costo sin conversión",
-      "action": "Revisar la relevancia de los términos 'transfer aeropuerto' (5 clics y costo de 1404 CLP) y 'transfer aeropuerto santiago' (4 clics y costo de 1197 CLP) para confirmar si atraen el tipo de tráfico de traslado esperado.",
-      "reason": "Estos términos representan los mayores costos acumulados en estos 2 días de cobertura detallada, pero registran 0.0 conversiones. Es necesario validar manualmente si la intención de búsqueda es la correcta.",
-      "confidence": "Baja",
-      "refs": [
-        "terminos_costosos_sin_conversion",
-        "cobertura"
-      ],
-      "evidence": {
         "terminos_costosos_sin_conversion": {
           "descripcion": "Términos con más gasto y 0 conversiones registradas",
           "filas": [
@@ -170,24 +153,50 @@
               "costoClp": 513
             }
           ]
-        },
-        "cobertura": {
-          "descripcion": "Cuántos días de historial detallado existen (pocos días = conclusiones débiles)",
-          "diasConDetalle": 2,
-          "desde": "2026-10-08",
-          "hasta": "2026-10-09",
-          "conversionesRegistradas": 0.0
         }
       }
     },
     {
-      "title": "Monitorear el tráfico en las horas de mayor actividad matutina",
-      "action": "Observar y evaluar el comportamiento del tráfico en las primeras horas de la mañana, específicamente a las 8 (11 clics y 4437 CLP de costo) y a las 9 (12 clics y 3879 CLP de costo).",
-      "reason": "Estas horas concentran una parte importante del tráfico y del costo en los 2 días analizados. Al no contar con conversiones registradas (0.0), se recomienda verificar si el tráfico en este bloque horario es de calidad.",
+      "title": "Comparar rendimiento de tráfico por dispositivo",
+      "action": "Analizar la experiencia de usuario en la página de destino para dispositivos móviles en comparación con ordenadores.",
+      "reason": "El dispositivo 'mobile' concentra la mayor parte del tráfico con 80 clics y un costo de 22591 CLP, frente a los 16 clics y 3744 CLP de 'desktop', por lo que es clave asegurar que la navegación móvil sea óptima.",
       "confidence": "Baja",
       "refs": [
-        "horas",
-        "cobertura"
+        "dispositivos"
+      ],
+      "evidence": {
+        "dispositivos": {
+          "descripcion": "Clics, impresiones y costo por dispositivo, sumando el historial",
+          "filas": [
+            {
+              "dispositivo": "mobile",
+              "clics": 80,
+              "impresiones": 1274,
+              "costoClp": 22591
+            },
+            {
+              "dispositivo": "desktop",
+              "clics": 16,
+              "impresiones": 311,
+              "costoClp": 3744
+            },
+            {
+              "dispositivo": "tablet",
+              "clics": 0,
+              "impresiones": 9,
+              "costoClp": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "title": "Revisar tráfico en las horas de mayor actividad",
+      "action": "Evaluar la calidad del tráfico recibido en las horas con mayor volumen de clics, específicamente a las 9 horas (12 clics y costo de 3879 CLP) y a las 8 horas (11 clics y costo de 4437 CLP).",
+      "reason": "Estas horas representan los picos de mayor tráfico y costo en el historial acumulado, por lo que se debe verificar si corresponden a usuarios con la intención de búsqueda correcta.",
+      "confidence": "Baja",
+      "refs": [
+        "horas"
       ],
       "evidence": {
         "horas": {
@@ -264,13 +273,113 @@
               "costoClp": 322
             }
           ]
+        }
+      }
+    },
+    {
+      "title": "Analizar términos genéricos con mayor costo",
+      "action": "Revisar la relevancia de los términos 'transfer aeropuerto' (5 clics y costo de 1404 CLP) y 'transfer aeropuerto santiago' (4 clics y costo de 1197 CLP).",
+      "reason": "Son los términos que más clics y costo han acumulado en la campaña sin registrar ninguna conversión (0.0 conversiones).",
+      "confidence": "Baja",
+      "refs": [
+        "terminos_mas_clics",
+        "terminos_costosos_sin_conversion"
+      ],
+      "evidence": {
+        "terminos_mas_clics": {
+          "descripcion": "Términos de búsqueda con más clics, sumando todos los días del historial",
+          "filas": [
+            {
+              "termino": "transfer aeropuerto",
+              "clics": 5,
+              "costoClp": 1404,
+              "conversiones": 0.0
+            },
+            {
+              "termino": "transfer aeropuerto santiago",
+              "clics": 4,
+              "costoClp": 1197,
+              "conversiones": 0.0
+            },
+            {
+              "termino": "cabify aeropuerto",
+              "clics": 3,
+              "costoClp": 715,
+              "conversiones": 0.0
+            },
+            {
+              "termino": "uber transfer",
+              "clics": 3,
+              "costoClp": 648,
+              "conversiones": 0.0
+            },
+            {
+              "termino": "transvip reserva",
+              "clics": 2,
+              "costoClp": 504,
+              "conversiones": 0.0
+            },
+            {
+              "termino": "transfer de viña al aeropuerto",
+              "clics": 2,
+              "costoClp": 430,
+              "conversiones": 0.0
+            },
+            {
+              "termino": "cabify aeropuerto teléfono",
+              "clics": 2,
+              "costoClp": 410,
+              "conversiones": 0.0
+            },
+            {
+              "termino": "teléfono de transvip",
+              "clics": 2,
+              "costoClp": 395,
+              "conversiones": 0.0
+            },
+            {
+              "termino": "viña a aeropuerto santiago",
+              "clics": 1,
+              "costoClp": 513,
+              "conversiones": 0.0
+            },
+            {
+              "termino": "traslado aeropuerto",
+              "clics": 1,
+              "costoClp": 508,
+              "conversiones": 0.0
+            }
+          ]
         },
-        "cobertura": {
-          "descripcion": "Cuántos días de historial detallado existen (pocos días = conclusiones débiles)",
-          "diasConDetalle": 2,
-          "desde": "2026-10-08",
-          "hasta": "2026-10-09",
-          "conversionesRegistradas": 0.0
+        "terminos_costosos_sin_conversion": {
+          "descripcion": "Términos con más gasto y 0 conversiones registradas",
+          "filas": [
+            {
+              "termino": "transfer aeropuerto",
+              "clics": 5,
+              "costoClp": 1404
+            },
+            {
+              "termino": "transfer aeropuerto santiago",
+              "clics": 4,
+              "costoClp": 1197
+            },
+            {
+              "termino": "cabify aeropuerto",
+              "clics": 3,
+              "costoClp": 715
+            },
+            {
+              "termino": "uber transfer",
+              "clics": 3,
+              "costoClp": 648
+            },
+            {
+              "termino": "viña a aeropuerto santiago",
+              "clics": 1,
+              "costoClp": 513
+            }
+          ]
         }
       }
     }

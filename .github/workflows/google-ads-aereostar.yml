@@ -1,0 +1,40 @@
+name: Google Ads Aereostar (solo lectura, manual)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  leer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - name: Leer cuenta 548-530-8262 (solo SELECT, no cambia nada)
+        env:
+          GOOGLE_ADS_BRAND: Aereostar
+          GOOGLE_ADS_CUSTOMER_ID: "5485308262"
+          GOOGLE_ADS_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_ADS_OAUTH_CLIENT_ID }}
+          GOOGLE_ADS_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_ADS_OAUTH_CLIENT_SECRET }}
+          GOOGLE_ADS_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
+          GOOGLE_ADS_DEVELOPER_TOKEN: ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
+          GOOGLE_ADS_LOGIN_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_LOGIN_CUSTOMER_ID }}
+        run: python tools/panel/sync_google_ads.py
+      - name: Resumen de campañas
+        run: |
+          python - <<'PY'
+          import json
+          d = json.load(open("data/google_ads_aereostar.json", encoding="utf-8"))
+          print("cuenta:", d.get("customerId"), "| campañas:", d.get("campaignIds"), d.get("campaignNames"))
+          for c in d.get("campaignHistory", []):
+              print(c)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: google_ads_aereostar
+          path: data/google_ads_aereostar*.json

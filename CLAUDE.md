@@ -67,6 +67,12 @@ Nada se da por hecho sin haberlo probado. Cero cifras inventadas. Una tarea a la
 
 ## Historial de sesiones
 
+### 2026-10-10 — Sesión de nube (celular)
+- PR #1 (docs, hallazgos GA4/GSC y etiqueta de Google sin datos) abierto en borrador desde `main-hxz81b`; no fusionado. 71 pruebas OK.
+- «Problema 2» de Auditoría resuelto: la leyenda decía «PENDIENTE = falta un dato externo» sin decir cuál; ahora explica y remite al bloque «Pendiente: necesita datos o decisiones…» (lista fija `BIZ` en `template.html`: horario, tarifas, promo, rutas, nombre «Uber», coordinación Aereostar, conversiones, GA4/GSC). No era un fallo del panel. Publicado con aprobación del dueño (push a `main` + `panel-diario.yml`).
+- Voz: no hay conversación en vivo desde la sesión; se pueden enviar audios mp3 sintéticos (gTTS, sin datos sensibles).
+- Pendientes del dueño/Rafael: acceso GA4/Search Console, revisar etiqueta de Google («NO HAY DATOS»), cuál cuenta Aereostar de Ads es la real (548-530-8262 o 465-674-2227), repo a privado, APIKEY.txt, borrar script de Ads, confirmar DATA TRANSPORTE.
+
 ### 2026-10-09 (tarde) — Claude Code: historial de detalle, IA (Gemini) y ajustes de campaña
 - **Herramientas: usar las de W** (`W:\PROYECTOS CUENTA ALEJANDROG45\herramientas-portables\`: python-portable con pytest, nodejs-portable, gh-portable con `GH_CONFIG_DIR=...\gh-config` (cuenta alejandrog45-svg, scope workflow), npm-global\firebase.cmd). El `python` del PATH es el de Inkscape: no usarlo. CLI Firebase de Alejandro, sesión aislada: `W:\firebase-cli-alejandro\firebase-alejandro.cmd` (login HECHO el 09-10 por el dueño con `... login --no-localhost` como alejandrog45@gmail.com y verificado con `hosting:sites:list --project ubertransfer-ops`; en el flujo nuevo de la CLI se pega el CÓDIGO largo del paso 3, no el ID de sesión de 5 caracteres; la CLI de E: sigue sin cuentas).
 - **Commits** (todos en `main`, workflow probado con ejecución manual y panel verificado EN VIVO con la sesión del dueño): `2b23058` `lastSeen` = último día con datos; `6c3aeaf` términos agrupados por término + columna/resumen «Tipo» (marca propia, competidor, bus/transporte público, posible negativa, aeropuerto, general); `aede92f` **historial diario de los informes con fecha** en `data/google_ads_history_ubertransfer.json` (90 días; antes los términos/horas/dispositivos se borraban en cada descarga y solo quedaban 2 días); `5dafe65`+`88be6c3` **sugerencias con IA**; `b9d7ad1` `campaignSettings` con `start_date_time`/`end_date_time` (+ respaldo sin fechas) y presupuesto ausente = vacío, no 0.

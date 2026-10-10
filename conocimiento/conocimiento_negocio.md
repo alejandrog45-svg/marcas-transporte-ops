@@ -73,3 +73,6 @@ Horario real, comunas y rutas atendidas, tarifas, flota, estado de Google Busine
 - Panel de Aereostar (30-09): https://ubertransfer-ops.web.app/aereostar/ — separado del de UberTransfer para medir cada marca por su lado (mismos accesos, datos propios). Sin campañas. No se inventan teléfono, tarifas ni horarios de Aereostar: figuran como PENDIENTE hasta que Rafael los confirme.
 - Auditoría técnica de aereostar.cl (30-09, solo lectura): 11 páginas, todas responden 200 y rápido (0,3–0,8 s; UberTransfer tarda más). Fallas repetidas: sin meta description en las 11, títulos demasiado largos (79–105 car.), home sin H1, /portfolio/ con dos H1 y páginas del sitemap que parecen de la plantilla del tema (a confirmar con Rafael). Sí tiene página /tarifas/ (200), a diferencia de UberTransfer.
 - Centro de Comando (E:\CONOCIMIENTO DEL NEGOCIO): hub de Ferretería Oviedo; no registra UberTransfer/Aereostar. Este proyecto se mantiene independiente (sin mezclar código, datos ni credenciales). Detalle: conocimiento/centro_comando.md.
+
+## Decisión 2026-10-10: leyenda de la Auditoría
+- PENDIENTE en la Auditoría = dato o decisión externa (lista fija `BIZ`), no un error del panel. La leyenda lo explica y remite al bloque de pendientes. No revertir sin pedido del dueño.

@@ -39,6 +39,17 @@ jobs:
           GOOGLE_ADS_DEVELOPER_TOKEN: ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
         run: python tools/panel/sync_google_ads.py
 
+      - name: Sincronizar Google Ads Aereostar (solo lectura)
+        continue-on-error: true   # si falla, UberTransfer y el resto del flujo siguen igual
+        env:
+          GOOGLE_ADS_BRAND: Aereostar
+          GOOGLE_ADS_CUSTOMER_ID: "5485308262"
+          GOOGLE_ADS_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_ADS_OAUTH_CLIENT_ID }}
+          GOOGLE_ADS_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_ADS_OAUTH_CLIENT_SECRET }}
+          GOOGLE_ADS_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
+          GOOGLE_ADS_DEVELOPER_TOKEN: ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
+        run: python tools/panel/sync_google_ads.py
+
       - name: Actualizar sugerencias de campaña (solo lectura)
         continue-on-error: true
         env:

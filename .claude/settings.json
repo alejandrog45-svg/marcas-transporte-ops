@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -m pytest:*)",
+      "Bash(python3 tools/check_seguridad.py:*)",
+      "Bash(python3 tools/panel/huella_paneles.py:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git fetch:*)"
+    ],
+    "deny": [
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(firebase login:*)",
+      "Bash(firebase deploy:*)"
+    ]
+  }
+}

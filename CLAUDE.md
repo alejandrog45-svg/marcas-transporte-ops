@@ -71,6 +71,7 @@ Nada se da por hecho sin haberlo probado. Cero cifras inventadas. Una tarea a la
 - Comprobado: Chrome del dueño NO disponible en la nube (solo Chromium sin sesiones); Supermetrics sin autenticar (Google Ads `AW`, GA4, Search Console): falta que el dueño abra el enlace de acceso. GitHub ve las 3 repos. Nada se modificó en cuentas ni campañas.
 - Supermetrics autorizado por el dueño (solo lectura): Google Ads lee las 3 cuentas; **la cuenta Aereostar `548-530-8262` (la misma del panel, campaña `24331409273`) fue activada por el dueño el 08-10 y gasta ~$15–16 mil/día, 0 conversiones; el panel muestra aún la captura previa «detenida» (dato desactualizado)**; GSC sin permiso sobre `ubertransfer.cl`; GA4 solo ve `cabrasgo`. Detalle en el traspaso.
 - Plan de paridad del panel de Aereostar (`docs/plan_aereostar_paridad.md`): pasos 0–7 preparados en la rama del PR #4 (UberTransfer byte a byte igual, plantilla intacta; Aereostar con 11 secciones y datos propios). NO publicado ni fusionado. Falta: fusionar, lanzar `ads-acceso-aereostar.yml`, desplegar reglas de Firestore (PC) y «sí, publica».
+- Accesos para trabajar desde la nube: `docs/ACCESOS_NUBE.md` (qué hay y qué falta) y permisos de solo lectura en `.claude/settings.json`. Plugin de navegador: «Browser Use» aparece DESHABILITADO en la cuenta (habilitar en claude.ai y abrir sesión nueva).
 - Instrucciones para actualizar carpetas locales y revocar accesos al volver al PC: `docs/TRASPASO_NUBE_A_PC_2026-10-10.md`.
 
 ### 2026-10-10 — Sesión de nube (celular)

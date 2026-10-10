@@ -7,7 +7,7 @@ El panel de UberTransfer queda preparado para mostrar métricas reales de Google
 | Marca | Cuenta | Campaña | Estado inicial |
 |---|---:|---:|---|
 | UberTransfer | `2035504421` | `24325669851` | Conectada en modo explorador, solo lectura |
-| Aereostar | `5485308262` | `24331409273` | Pausada |
+| Aereostar | `5485308262` | `24331409273` | Activa desde el 08-10 (verificado en Google Ads el 10-10); lectura solo con ADS_BRAND=aereostar |
 | Amadigital | `3717064621` | no conectar | Solo referencia histórica |
 
 Los archivos `data/google_ads_*.json` contienen únicamente configuración no secreta. Nunca deben contener tokens OAuth, refresh tokens, claves privadas ni credenciales.

@@ -1,4 +1,4 @@
-{"brand": "Aereostar", "keepDays": 90, "days": ["2026-10-09"], "updatedAt": "2026-10-10T05:25:27.222111Z","reports":{
+{"brand": "Aereostar", "keepDays": 90, "days": ["2026-10-09"], "updatedAt": "2026-10-10T05:59:43.730117Z","reports":{
 "adGroups":[
 {"date":"2026-10-09","impressions":706,"clicks":41,"costClp":16008,"conversions":0.0,"campaignId":"24331409273","campaignName":"Campaign #1","adGroupId":"201085896699","adGroupName":"Grupo de anuncios 1"}
 ],
@@ -6,7 +6,7 @@
 {"date":"2026-10-09","impressions":706,"clicks":41,"costClp":16008,"conversions":0.0,"adId":"827350205743","adName":"","adStatus":"ENABLED","campaignId":"24331409273","campaignName":"Campaign #1","adGroupId":"201085896699","adGroupName":"Grupo de anuncios 1"}
 ],
 "campaignQuality":[
-{"date":"2026-10-09","impressions":706,"clicks":41,"costClp":16008,"conversions":0.0,"phoneCalls":"0","interactions":"41","invalidClicks":"1","searchImpressionShare":0.18514492753623188,"searchBudgetLostImpressionShare":0.8148550724637681,"searchRankLostImpressionShare":0,"searchTopImpressionShare":0.10511054729974628,"absoluteTopImpressionPercentage":0.12091038406827881,"topImpressionPercentage":0.577524893314367,"campaignId":"24331409273","campaignName":"Campaign #1"}
+{"date":"2026-10-09","impressions":706,"clicks":41,"costClp":16008,"conversions":0.0,"phoneCalls":"0","interactions":"41","invalidClicks":"1","searchImpressionShare":0.18261997405966277,"searchBudgetLostImpressionShare":0.8173800259403372,"searchRankLostImpressionShare":0,"searchTopImpressionShare":0.10572916666666667,"absoluteTopImpressionPercentage":0.12091038406827881,"topImpressionPercentage":0.577524893314367,"campaignId":"24331409273","campaignName":"Campaign #1"}
 ],
 "dayOfWeek":[
 {"date":null,"impressions":706,"clicks":41,"costClp":16008,"conversions":0.0,"dayOfWeek":"FRIDAY"}

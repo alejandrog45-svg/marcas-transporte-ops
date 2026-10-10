@@ -1,4 +1,4 @@
-{"brand": "UberTransfer", "keepDays": 90, "days": ["2026-10-08", "2026-10-09"], "updatedAt": "2026-10-10T05:25:17.311141Z","reports":{
+{"brand": "UberTransfer", "keepDays": 90, "days": ["2026-10-08", "2026-10-09"], "updatedAt": "2026-10-10T05:59:35.215428Z","reports":{
 "adGroups":[
 {"date":"2026-10-08","impressions":794,"clicks":52,"costClp":15068,"conversions":0.0,"campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":1125,"clicks":65,"costClp":15810,"conversions":0.0,"campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"}
@@ -19,7 +19,7 @@
 ],
 "campaignQuality":[
 {"date":"2026-10-08","impressions":794,"clicks":52,"costClp":15068,"conversions":0.0,"phoneCalls":"3","interactions":"52","invalidClicks":"15","searchImpressionShare":0.18027210884353742,"searchBudgetLostImpressionShare":0.7780045351473923,"searchRankLostImpressionShare":0.041723356009070296,"searchTopImpressionShare":0.10711050724637682,"absoluteTopImpressionPercentage":0.0818639798488665,"topImpressionPercentage":0.5944584382871536,"campaignId":"24325669851","campaignName":"Campaign #1"},
-{"date":"2026-10-09","impressions":1125,"clicks":65,"costClp":15810,"conversions":0.0,"phoneCalls":"5","interactions":"65","invalidClicks":"12","searchImpressionShare":0.25220040622884227,"searchBudgetLostImpressionShare":0.6631685849695328,"searchRankLostImpressionShare":0.08463100880162491,"searchTopImpressionShare":0.1581442600745005,"absoluteTopImpressionPercentage":0.09422222222222222,"topImpressionPercentage":0.6142222222222222,"campaignId":"24325669851","campaignName":"Campaign #1"}
+{"date":"2026-10-09","impressions":1125,"clicks":65,"costClp":15810,"conversions":0.0,"phoneCalls":"5","interactions":"65","invalidClicks":"12","searchImpressionShare":0.24277705907718844,"searchBudgetLostImpressionShare":0.691893057352307,"searchRankLostImpressionShare":0.06532988357050452,"searchTopImpressionShare":0.14888123924268504,"absoluteTopImpressionPercentage":0.09422222222222222,"topImpressionPercentage":0.6142222222222222,"campaignId":"24325669851","campaignName":"Campaign #1"}
 ],
 "dayOfWeek":[
 {"date":null,"impressions":1125,"clicks":65,"costClp":15810,"conversions":0.0,"dayOfWeek":"FRIDAY"}

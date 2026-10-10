@@ -14,10 +14,13 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[2]
-ADS_FILE = ROOT / "data" / "google_ads_ubertransfer.json"
-HISTORY_FILE = ROOT / "data" / "google_ads_history_ubertransfer.json"
+# Marca por entorno (por defecto UberTransfer, sin cambios): cada marca con su archivo, su historial y SU documento de Firestore.
+BRAND = os.environ.get("GOOGLE_ADS_BRAND", "UberTransfer").strip() or "UberTransfer"
+BRAND_SLUG = BRAND.lower()
+ADS_FILE = ROOT / "data" / f"google_ads_{BRAND_SLUG}.json"
+HISTORY_FILE = ROOT / "data" / f"google_ads_history_{BRAND_SLUG}.json"
 PROJECT_ID = "ubertransfer-ops"
-DOCUMENT = "panel/aiSuggestions"
+DOCUMENT = "panel/aiSuggestions" if BRAND_SLUG == "ubertransfer" else f"panel/aiSuggestions_{BRAND_SLUG}"
 DATASTORE_SCOPE = "https://www.googleapis.com/auth/datastore"
 
 

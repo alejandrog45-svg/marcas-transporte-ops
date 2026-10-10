@@ -24,9 +24,13 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[2]
-ADS_FILE = ROOT / "data" / "google_ads_ubertransfer.json"
-HISTORY_FILE = ROOT / "data" / "google_ads_history_ubertransfer.json"
-OUT_FILE = ROOT / "data" / "ai_suggestions_latest.json"
+# Marca por entorno (por defecto UberTransfer, sin cambios): cada marca con sus datos, su historial y su archivo de sugerencias.
+BRAND = os.environ.get("GOOGLE_ADS_BRAND", "UberTransfer").strip() or "UberTransfer"
+BRAND_SLUG = BRAND.lower()
+ADS_FILE = ROOT / "data" / f"google_ads_{BRAND_SLUG}.json"
+HISTORY_FILE = ROOT / "data" / f"google_ads_history_{BRAND_SLUG}.json"
+OUT_FILE = ROOT / "data" / ("ai_suggestions_latest.json" if BRAND_SLUG == "ubertransfer" else f"ai_suggestions_{BRAND_SLUG}_latest.json")
+BRAND_DESC = {"ubertransfer": "transfer y traslados en Chile", "aereostar": "traslados y servicio de aeropuerto en Chile"}
 DEFAULT_MODEL = "gemini-3.6-flash"
 FALLBACK_MODELS = ("gemini-3.5-flash", "gemini-3.1-flash-lite", "gemini-flash-latest")
 MAX_SUGGESTIONS = 5
@@ -146,7 +150,7 @@ def build_facts(data: dict[str, Any], history: dict[str, Any]) -> dict[str, dict
 
 def build_prompt(facts: dict[str, dict[str, Any]], campaign: str) -> str:
     return (
-        "Eres analista de Google Ads para UberTransfer (transfer y traslados en Chile). "
+        "Eres analista de Google Ads para " + BRAND + " (" + BRAND_DESC.get(BRAND_SLUG, "transporte en Chile") + "). "
         "Recibes HECHOS ya calculados de la campaña \"" + campaign + "\". Redacta propuestas para que el dueño las revise a mano.\n"
         "REGLAS ESTRICTAS:\n"
         "- Usa solo los hechos entregados. No inventes ni calcules cifras nuevas; si citas un número, debe aparecer tal cual en un hecho que cites.\n"

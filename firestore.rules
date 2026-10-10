@@ -53,6 +53,12 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    // Lo mismo para Aereostar: su propio documento (no se mezclan las recomendaciones de las dos marcas).
+    match /panel/aiSuggestions_aereostar {
+      allow read: if autorizado();
+      allow write: if false;
+    }
+
     match /{document=**} {
       allow read, write: if false;
     }

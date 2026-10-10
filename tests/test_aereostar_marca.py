@@ -84,3 +84,26 @@ def test_cada_marca_conserva_su_logo_original():
     if out.returncode == 0:                                          # sin origin/main (otro entorno) no se puede comparar
         cambios = [l for l in out.stdout.splitlines() if l and l[0] in "MDR"]
         assert not cambios, cambios
+
+
+def test_barra_de_marca_en_celular_con_el_logo_de_cada_marca():
+    """En celular no existe el menú lateral: la barra #mbrand muestra el logo y el nombre de CADA marca."""
+    tpl = (ROOT / "tools" / "panel" / "template.html").read_text(encoding="utf-8")
+    assert tpl.count('id="mbrand"') == 1 and 'src="/icons/logo-128.png" alt="Logo UberTransfer"' in tpl
+    page = _build().brand_aereostar(tpl)
+    assert 'class="mb-logo" src="/aereostar/icons/logo-128.png" alt="Logo Aereostar"' in page
+    assert "UberTransfer" not in page[page.index('id="mbrand"'):page.index('id="mbrand"') + 400]
+    css = (ROOT / "tools" / "panel" / "extra.css").read_text(encoding="utf-8")
+    assert "#mbrand{display:flex" in css and "min-width:1024px" in css  # banner también en escritorio
+
+
+def test_banner_rota_fotos_propias_de_cada_marca():
+    """El banner alterna 3 fotos por marca; Aereostar nunca referencia archivos de UberTransfer y viceversa."""
+    b = (ROOT / "tools/panel/build.py").read_text(encoding="utf-8")
+    ae = b[b.index("AE_BG ="):b.index("\n", b.index("AE_BG ="))]
+    ut = b[b.index("UT_BG ="):b.index("\n", b.index("UT_BG ="))]
+    assert ae.count("aereostar-") == 4 and "ubertransfer" not in ae
+    assert ut.count("ubertransfer-") == 3 and "aereostar" not in ut
+    for n in ("ubertransfer-banner-2", "ubertransfer-banner-3", "aereostar-banner-2", "aereostar-banner-3", "aereostar-banner-4"):
+        assert (ROOT / f"site/bg/{n}.jpg").stat().st_size < 90_000
+    assert "@keyframes mbslide" in (ROOT / "tools/panel/extra.css").read_text(encoding="utf-8")

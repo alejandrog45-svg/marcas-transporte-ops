@@ -2,6 +2,9 @@ name: Google Ads Aereostar (solo lectura, manual)
 
 on:
   workflow_dispatch:
+  push:   # temporal: permite probarlo desde esta rama sin fusionar; quitar al fusionar
+    branches: [ccr-35e6f729-g1bjgx]
+    paths: [".github/workflows/google-ads-aereostar.yml"]
 
 permissions:
   contents: read

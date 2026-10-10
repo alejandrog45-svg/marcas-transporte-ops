@@ -94,4 +94,4 @@ def test_barra_de_marca_en_celular_con_el_logo_de_cada_marca():
     assert 'class="mb-logo" src="/aereostar/icons/logo-128.png" alt="Logo Aereostar"' in page
     assert "UberTransfer" not in page[page.index('id="mbrand"'):page.index('id="mbrand"') + 400]
     css = (ROOT / "tools" / "panel" / "extra.css").read_text(encoding="utf-8")
-    assert "#mbrand{display:none}" in css and "max-width:1023px" in css
+    assert "#mbrand{display:flex" in css and "min-width:1024px" in css  # banner también en escritorio

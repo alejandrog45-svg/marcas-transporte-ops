@@ -32,3 +32,8 @@ docs/panel_keywords.html
 site/aereostar/index.html
 site/aereostar/version.json
 docs/panel_aereostar.html
+
+# capturas de prueba de pantalla (no van al repo público)
+mobfix_*.png
+*_375.png
+*_1366.png

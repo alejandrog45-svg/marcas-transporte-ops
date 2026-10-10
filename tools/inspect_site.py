@@ -4,7 +4,7 @@
 Verifica con evidencia las afirmaciones que hicieron ChatGPT, Gemini y Meta AI sobre el HTML del sitio.
 Escribe data/inspeccion_sitio_latest.json. No usa rutas de escáner ni sondea archivos sensibles.
 """
-import json, os, re, sys, time, urllib.request, collections
+import json, os, re, time, urllib.request, collections
 from html.parser import HTMLParser
 
 BASE = os.environ.get("SITE_URL", "https://ubertransfer.cl").rstrip("/")

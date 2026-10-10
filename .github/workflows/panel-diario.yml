@@ -1,7 +1,7 @@
 name: Panel diario (auditoría + publicación)
 on:
   schedule:
-    - cron: "45 11 * * *"   # todos los días 11:45 UTC (07:45–08:45 hora de Chile)
+    - cron: "30 5 * * *"   # 05:30 UTC = 02:30 hora de Chile en verano (01:30 en invierno). GitHub suele retrasar las ejecuciones programadas: puede arrancar entre las 02:30 y las 08:00
   workflow_dispatch:
 permissions:
   contents: write

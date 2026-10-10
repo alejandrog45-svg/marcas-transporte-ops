@@ -30,10 +30,10 @@
   "alerts": [],
   "mode": "read_only",
   "status": "connected",
-  "lastSync": "2026-10-10T01:40:39.007089Z",
+  "lastSync": "2026-10-10T02:09:25.020245Z",
   "source": "Google Ads API",
   "metrics": {
-    "impressions": 1128,
+    "impressions": 1125,
     "clicks": 65,
     "costClp": 15810,
     "conversions": 0.0,
@@ -53,8 +53,8 @@
     "searchBudgetLostImpressionShare": 0.6631685849695328,
     "searchRankLostImpressionShare": 0.08463100880162491,
     "searchTopImpressionShare": 0.1581442600745005,
-    "absoluteTopImpressionPercentage": 0.09397163120567376,
-    "topImpressionPercentage": 0.6134751773049646
+    "absoluteTopImpressionPercentage": 0.09422222222222222,
+    "topImpressionPercentage": 0.6142222222222222
   },
   "history": [
     {
@@ -82,7 +82,7 @@
       "topImpressionPercentage": null
     },
     {
-      "impressions": 1128,
+      "impressions": 1125,
       "clicks": 65,
       "costClp": 15810,
       "conversions": 0.0,
@@ -102,8 +102,8 @@
       "searchBudgetLostImpressionShare": 0.6631685849695328,
       "searchRankLostImpressionShare": 0.08463100880162491,
       "searchTopImpressionShare": 0.1581442600745005,
-      "absoluteTopImpressionPercentage": 0.09397163120567376,
-      "topImpressionPercentage": 0.6134751773049646
+      "absoluteTopImpressionPercentage": 0.09422222222222222,
+      "topImpressionPercentage": 0.6142222222222222
     }
   ],
   "campaigns": [
@@ -112,11 +112,11 @@
       "name": "Campaign #1",
       "status": "ENABLED",
       "date": "2026-10-09",
-      "impressions": 1128,
+      "impressions": 1125,
       "clicks": 65,
       "costMicros": 15810000000,
       "costClp": 15810,
-      "ctr": 0.057624113475177305,
+      "ctr": 0.057777777777777775,
       "conversions": 0.0,
       "averageCpc": 0.0,
       "costPerConversion": 0.0,
@@ -440,7 +440,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 106,
+        "impressions": 104,
         "clicks": 2,
         "costClp": 389,
         "conversions": 0.0,
@@ -463,7 +463,7 @@
       },
       {
         "date": "2026-10-09",
-        "impressions": 15,
+        "impressions": 14,
         "clicks": 4,
         "costClp": 873,
         "conversions": 0.0,
@@ -488,7 +488,7 @@
     "devices": [
       {
         "date": null,
-        "impressions": 161,
+        "impressions": 159,
         "clicks": 11,
         "costClp": 2497,
         "conversions": 0.0,
@@ -511,7 +511,7 @@
       },
       {
         "date": null,
-        "impressions": 961,
+        "impressions": 960,
         "clicks": 54,
         "costClp": 13313,
         "conversions": 0.0,
@@ -559,7 +559,7 @@
     "adGroups": [
       {
         "date": "2026-10-09",
-        "impressions": 1128,
+        "impressions": 1125,
         "clicks": 65,
         "costClp": 15810,
         "conversions": 0.0,
@@ -587,7 +587,7 @@
     "ads": [
       {
         "date": "2026-10-09",
-        "impressions": 1128,
+        "impressions": 1125,
         "clicks": 65,
         "costClp": 15810,
         "conversions": 0.0,
@@ -5227,33 +5227,6 @@
         "searchTopImpressionShare": null,
         "absoluteTopImpressionPercentage": null,
         "topImpressionPercentage": null,
-        "term": "transfer maipu aeropuerto",
-        "campaignId": "24325669851",
-        "campaignName": "Campaign #1",
-        "adGroupId": "201907353538",
-        "adGroupName": "Grupo de anuncios 1"
-      },
-      {
-        "date": "2026-10-09",
-        "impressions": 1,
-        "clicks": 0,
-        "costClp": 0,
-        "conversions": 0.0,
-        "averageCpc": null,
-        "costPerConversion": null,
-        "conversionsValue": null,
-        "allConversions": null,
-        "allConversionsValue": null,
-        "phoneCalls": null,
-        "messageChats": null,
-        "interactions": null,
-        "invalidClicks": null,
-        "searchImpressionShare": null,
-        "searchBudgetLostImpressionShare": null,
-        "searchRankLostImpressionShare": null,
-        "searchTopImpressionShare": null,
-        "absoluteTopImpressionPercentage": null,
-        "topImpressionPercentage": null,
         "term": "transfer oficial aeropuerto",
         "campaignId": "24325669851",
         "campaignName": "Campaign #1",
@@ -7667,7 +7640,7 @@
     "regions": [
       {
         "date": null,
-        "impressions": 771,
+        "impressions": 768,
         "clicks": 40,
         "costClp": 9824,
         "conversions": 0.0,
@@ -7729,7 +7702,7 @@
     "campaignQuality": [
       {
         "date": "2026-10-09",
-        "impressions": 1128,
+        "impressions": 1125,
         "clicks": 65,
         "costClp": 15810,
         "conversions": 0.0,
@@ -7746,8 +7719,8 @@
         "searchBudgetLostImpressionShare": 0.6631685849695328,
         "searchRankLostImpressionShare": 0.08463100880162491,
         "searchTopImpressionShare": 0.1581442600745005,
-        "absoluteTopImpressionPercentage": 0.09397163120567376,
-        "topImpressionPercentage": 0.6134751773049646,
+        "absoluteTopImpressionPercentage": 0.09422222222222222,
+        "topImpressionPercentage": 0.6142222222222222,
         "campaignId": "24325669851",
         "campaignName": "Campaign #1"
       }
@@ -7755,7 +7728,7 @@
     "dayOfWeek": [
       {
         "date": null,
-        "impressions": 1128,
+        "impressions": 1125,
         "clicks": 65,
         "costClp": 15810,
         "conversions": 0.0,
@@ -7780,7 +7753,7 @@
     "networks": [
       {
         "date": null,
-        "impressions": 1128,
+        "impressions": 1125,
         "clicks": 65,
         "costClp": 15810,
         "conversions": 0.0,
@@ -7805,7 +7778,7 @@
     "keywords": [
       {
         "date": "2026-10-09",
-        "impressions": 454,
+        "impressions": 451,
         "clicks": 37,
         "costClp": 8894,
         "conversions": 0.0,

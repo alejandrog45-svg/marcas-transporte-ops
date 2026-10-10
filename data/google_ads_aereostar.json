@@ -30,7 +30,7 @@
   "alerts": [],
   "mode": "read_only",
   "status": "connected",
-  "lastSync": "2026-10-10T05:59:36.059307Z",
+  "lastSync": "2026-10-10T06:18:37.030622Z",
   "source": "Google Ads API",
   "metrics": {
     "impressions": 706,

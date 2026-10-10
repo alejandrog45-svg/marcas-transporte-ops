@@ -1,0 +1,158 @@
+{
+  "source": "IA (gemini-3.1-flash-lite) sobre datos reales de Google Ads · solo lectura",
+  "generatedAt": "2026-10-10T06:19:31.355187Z",
+  "adsLastSync": "2026-10-10T06:18:37.030622Z",
+  "accountId": "5485308262",
+  "detailDays": 1,
+  "suggestions": [
+    {
+      "title": "Evaluar aumento de presupuesto diario",
+      "action": "Considerar incrementar el presupuesto diario de 15000 CLP.",
+      "reason": "La campaña perdió un 81.7% de impresiones debido a la limitación del presupuesto, lo que impide captar más clics potenciales.",
+      "confidence": "Baja",
+      "refs": [
+        "cuota_y_presupuesto"
+      ],
+      "evidence": {
+        "cuota_y_presupuesto": {
+          "descripcion": "Presupuesto diario y, por día, qué porcentaje de las impresiones posibles se obtuvo y cuánto se perdió por presupuesto o por ranking. Un día parcial aún no terminó",
+          "presupuestoDiarioClp": 15000,
+          "estrategiaDePuja": "TARGET_SPEND",
+          "filas": [
+            {
+              "fecha": "2026-10-09",
+              "diaParcial": false,
+              "interacciones": 41,
+              "clicsInvalidos": 1,
+              "llamadas": 0,
+              "cuotaImpresionesPct": 18.3,
+              "perdidaPorPresupuestoPct": 81.7,
+              "perdidaPorRankingPct": 0.0,
+              "cuotaPrimerasPosicionesPct": 10.6
+            }
+          ]
+        }
+      }
+    },
+    {
+      "title": "Reforzar pujas en horario de alta demanda",
+      "action": "Analizar el rendimiento de la hora 8:00.",
+      "reason": "La hora 8:00 registró 14 clics, siendo el periodo con mayor volumen de tráfico en el historial disponible.",
+      "confidence": "Baja",
+      "refs": [
+        "horas"
+      ],
+      "evidence": {
+        "horas": {
+          "descripcion": "Clics y costo por hora del día, sumando el historial",
+          "filas": [
+            {
+              "hora": 8,
+              "clics": 14,
+              "costoClp": 9006
+            },
+            {
+              "hora": 9,
+              "clics": 2,
+              "costoClp": 524
+            },
+            {
+              "hora": 10,
+              "clics": 1,
+              "costoClp": 255
+            },
+            {
+              "hora": 11,
+              "clics": 3,
+              "costoClp": 800
+            },
+            {
+              "hora": 12,
+              "clics": 2,
+              "costoClp": 497
+            },
+            {
+              "hora": 13,
+              "clics": 3,
+              "costoClp": 809
+            },
+            {
+              "hora": 14,
+              "clics": 3,
+              "costoClp": 787
+            },
+            {
+              "hora": 15,
+              "clics": 2,
+              "costoClp": 484
+            },
+            {
+              "hora": 17,
+              "clics": 4,
+              "costoClp": 1050
+            },
+            {
+              "hora": 18,
+              "clics": 1,
+              "costoClp": 311
+            },
+            {
+              "hora": 19,
+              "clics": 2,
+              "costoClp": 502
+            },
+            {
+              "hora": 20,
+              "clics": 4,
+              "costoClp": 983
+            }
+          ]
+        }
+      }
+    },
+    {
+      "title": "Revisar términos de búsqueda de alto costo",
+      "action": "Evaluar la relevancia de términos como 'transfer pucv curauma' (1206 CLP).",
+      "reason": "Existen términos con un costo elevado por clic que no han generado conversiones, lo que podría estar drenando el presupuesto limitado.",
+      "confidence": "Baja",
+      "refs": [
+        "terminos_costosos_sin_conversion"
+      ],
+      "evidence": {
+        "terminos_costosos_sin_conversion": {
+          "descripcion": "Términos con más gasto y 0 conversiones registradas",
+          "filas": [
+            {
+              "termino": "transfer pucv curauma",
+              "clics": 1,
+              "costoClp": 1206
+            },
+            {
+              "termino": "buses terminal santiago a aeropuerto",
+              "clics": 1,
+              "costoClp": 704
+            },
+            {
+              "termino": "traslado al aeropuerto santiago",
+              "clics": 1,
+              "costoClp": 623
+            },
+            {
+              "termino": "servicio de traslado al aeropuerto",
+              "clics": 2,
+              "costoClp": 488
+            },
+            {
+              "termino": "transporte para el aeropuerto",
+              "clics": 1,
+              "costoClp": 481
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "rejected": [
+    "Optimizar inversión en dispositivos móviles: cifras que no están en los hechos citados [41]"
+  ]
+}

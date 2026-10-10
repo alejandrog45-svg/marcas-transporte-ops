@@ -781,8 +781,8 @@ function audOpen(){if(!AUDR&&!AUDBUSY)audRun(false);else audRender()}
 $("aud").onclick=e=>{const a=e.target.closest("[data-ap]");if(a){audPage(a.dataset.ap);return}if(e.target.closest("#audrun")){audRun(true);return}if(e.target.closest("#audcopy")){const t=audResumen()||"Todavía no se ejecuta la auditoría.";navigator.clipboard.writeText(t).then(()=>{$("audcopyt").textContent="Copiado";setTimeout(()=>{const x=$("audcopyt");if(x)x.textContent="Copiar informe"},1500)},()=>{$("audcopyt").textContent="Selecciona y copia a mano"})}};
 render();if(store.get("ui_version","")!=="2"){store.set("ui_version","2");store.set("tab","overview")}adsFilters();show(SEC.some(s=>s[0]===store.get("tab","overview"))?store.get("tab","overview"):"overview");
 
-/* ===== App instalable (PWA), badge de versión y botón de actualizar: solo UberTransfer ===== */
-const PANEL_VERSION="1",PWA_ON=META.plannerActive===false&&location.protocol!=="file:";
+/* ===== App instalable (PWA), badge de versión y botón de actualizar: UberTransfer y Aereostar ===== */
+const PANEL_VERSION="5",PWA_ON=(META.plannerActive===false||!!META.fullMenu)&&location.protocol!=="file:";
 let VB_NEW=null,IP=window.__ip||null;
 function vbBuilt(){return META.builtAt?fmtDT(new Date(META.builtAt)):"sin fecha"}
 function vbPaint(){document.querySelectorAll("[data-vbadge]").forEach(el=>{el.hidden=!PWA_ON;if(!PWA_ON)return;const nw=!!VB_NEW;el.innerHTML='<button type="button" class="vbadge'+(nw?" is-new":"")+'" title="'+esc("Creado por AG · versión "+PANEL_VERSION+" · armado "+vbBuilt()+(nw?" · hay una versión nueva: pulsa para actualizar":" · pulsa para buscar actualizaciones"))+'" aria-label="Versión '+PANEL_VERSION+", creado por AG. "+(nw?"Hay una actualización disponible.":"Pulsa para buscar actualizaciones.")+'"><span class="vb-ag">AG</span><span class="vb-v">v.'+PANEL_VERSION+'<i class="vb-dot"></i></span></button>';el.firstChild.onclick=()=>{if(VB_NEW)vbUpdate();else vbCheck(true)}})}

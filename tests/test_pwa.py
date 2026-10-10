@@ -46,7 +46,7 @@ def test_csp_allows_manifest_and_worker_but_stays_restrictive():
     assert "default-src 'none'" in csp and "frame-ancestors 'none'" in csp
 
 
-def test_template_marks_pwa_block_and_build_strips_it_for_aereostar():
+def test_template_marks_pwa_block_and_build_adapts_it_for_aereostar():
     tpl = (ROOT / "tools" / "panel" / "template.html").read_text(encoding="utf-8")
     assert tpl.count("<!--PWA-->") == 1 and tpl.count("<!--/PWA-->") == 1
     assert tpl.count("<!--AEICON") == 1 and tpl.count("AEICON-->") == 1
@@ -66,3 +66,37 @@ def test_pwa_app_code_runs_after_login_not_in_the_pre_login_gate():
     assert tpl.index("App instalable (PWA), badge") < mark
     assert tpl.index("const PANEL_VERSION=") < mark
     assert tpl.index("function vbCheck") < mark
+
+
+def test_aereostar_tiene_su_propia_pwa():
+    """Aereostar es instalable con su manifiesto, su service worker y sus íconos, sin pisar los de UberTransfer."""
+    base = SITE / "aereostar"
+    m = json.loads((base / "manifest.webmanifest").read_text(encoding="utf-8"))
+    assert m["display"] == "standalone" and m["scope"] == "/aereostar/" and m["start_url"] == "/aereostar/"
+    assert m["id"] == "/aereostar/" and m["short_name"] == "Aereostar" and m["theme_color"] == "#0b0b0b"
+    assert {"any", "maskable"} <= {i["purpose"] for i in m["icons"]}
+    for icon in m["icons"]:
+        assert icon["src"].startswith("/aereostar/icons/")
+        path = SITE / icon["src"].lstrip("/")
+        w, h = (int(x) for x in icon["sizes"].split("x"))
+        assert _png_size(path) == (w, h), icon["src"]
+    sw = (base / "sw.js").read_text(encoding="utf-8")
+    assert "ae-html-" in sw and "ae-static-" in sw and "ut-" not in sw          # cachés propios
+    assert "/aereostar/icons/" in sw and "'/icons/'" not in sw                  # solo sus propios íconos
+    assert "/__/" in sw and "version.json" in sw and "url.origin !== self.location.origin" in sw
+    assert "skipWaiting" in sw and "clients.claim" in sw
+
+
+def test_pagina_aereostar_registra_su_pwa_con_alcance_propio():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("panel_build", ROOT / "tools" / "panel" / "build.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    page = mod.brand_aereostar((ROOT / "tools" / "panel" / "template.html").read_text(encoding="utf-8"))
+    assert 'href="/aereostar/manifest.webmanifest"' in page and 'href="/manifest.webmanifest"' not in page
+    assert 'register("/aereostar/sw.js",{scope:"/aereostar/"})' in page and 'register("/sw.js")' not in page
+    assert 'content="#0b0b0b"' in page and 'content="#ed1c24"' not in page
+    assert '"/icons/' not in page and "'/icons/" not in page and "/aereostar/aereostar/" not in page
+    assert 'apple-mobile-web-app-title" content="Aereostar"' in page
+    assert "PWA_ON=(META.plannerActive===false||!!META.fullMenu)" in page
+

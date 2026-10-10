@@ -1,0 +1,37 @@
+{
+  "id": "/aereostar/",
+  "name": "Aereostar · Panel de investigación",
+  "short_name": "Aereostar",
+  "description": "Panel privado de campañas de Google Ads de Aereostar (solo lectura).",
+  "lang": "es-CL",
+  "start_url": "/aereostar/",
+  "scope": "/aereostar/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f6f8fb",
+  "theme_color": "#0b0b0b",
+  "categories": [
+    "business",
+    "productivity"
+  ],
+  "icons": [
+    {
+      "src": "/aereostar/icons/aereostar-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/aereostar/icons/aereostar-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/aereostar/icons/aereostar-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

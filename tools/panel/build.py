@@ -321,23 +321,53 @@ def ae_checklist(au):
     return items + AE_CH[1:]
 
 
-AE_BLUES = (("#1d4ed8", "#b84a08"), ("#1a73e8", "#e96712"), ("#2563eb", "#e96712"), ("#3b82f6", "#f29812"), ("37,99,235", "233,103,18"), ("37 99 235", "233 103 18"))
+UT_COLORS = (("#1d4ed8", "#b90f16"), ("#1a73e8", "#ed1c24"), ("#2563eb", "#ed1c24"), ("#3b82f6", "#f0484e"),
+             ("37,99,235", "237,28,36"), ("37 99 235", "237 28 36"))
+
+
+# Fondo fotográfico sutil de Aereostar: cubierta y cielo del aeropuerto (foto del dueño, sin logos ni textos)
+AE_BG = ':root{--bg-img:url("/bg/aereostar-fondo.jpg");--bg-op:.62}'
+# Fondo fotográfico sutil de UberTransfer (foto del dueño, recortada y comprimida en site/bg/); Aereostar no lo lleva hasta tener sus fotos
+UT_BG = ':root{--bg-img:url("/bg/ubertransfer-fondo.jpg")}'
+
+
+def ut_recolor(text):
+    """Pasa los azules de la plantilla al rojo del logo de UberTransfer (el panel usa solo los colores de su marca)."""
+    for o, n in UT_COLORS:
+        text = text.replace(o, n)
+    return text
+
+
+AE_COLORS = (("#1d4ed8", "#b84a08"), ("#1a73e8", "#e96712"), ("#2563eb", "#e96712"), ("#3b82f6", "#f29812"),
+             ("37,99,235", "233,103,18"), ("37 99 235", "233 103 18"),
+             ("#ed1c24", "#e96712"), ("#b90f16", "#b84a08"), ("#b3121a", "#b84a08"), ("237,28,36", "233,103,18"),
+             ("#f3a0a4", "#f8c9a0"), ("#f3c4c6", "#f8d3b0"), ("#f3b4b7", "#f8c9a0"), ("#fff4f4", "#fff4ea"),
+             ("#58b947", "#f8e71d"), ("#6ab04c", "#f8e71d"), ("#111318", "#0b0b0b"))
 
 
 def ae_recolor(text):
     """Pasa los azules de la plantilla al naranja del logo de Aereostar (solo se usa en el panel de Aereostar)."""
-    for o, n in AE_BLUES:
+    for o, n in AE_COLORS:
         text = text.replace(o, n)
     return text
 
 
 def brand_aereostar(page, ch=None):
     """Convierte la plantilla (hecha para UberTransfer) en la del panel de Aereostar."""
-    # App instalable, badge y botones son solo de UberTransfer: se quitan y se restaura su favicon
-    page = re.sub(r"<!--PWA-->.*?<!--/PWA-->", "", page, flags=re.S)
+    # App instalable (PWA): Aereostar tiene la suya, con su manifiesto, su service worker y sus íconos bajo /aereostar/
     ico = re.search(r"<!--AEICON(.*?)AEICON-->", page, flags=re.S)
     assert ico, "aereostar: no se encontró el favicon guardado"
-    page = page.replace(ico.group(0), ico.group(1))
+    page = page.replace(ico.group(0), "")          # el favicon SVG de UberTransfer no se usa: va el PNG del logo
+    pwa = re.search(r"<!--PWA-->.*?<!--/PWA-->", page, flags=re.S)
+    assert pwa, "aereostar: no se encontró el bloque PWA"
+    blk = pwa.group(0)
+    for o, n in (("/manifest.webmanifest", "/aereostar/manifest.webmanifest"),
+                 ('register("/sw.js")', 'register("/aereostar/sw.js",{scope:"/aereostar/"})'),
+                 ('content="#ed1c24"', 'content="#0b0b0b"')):
+        assert blk.count(o) == 1, ("aereostar PWA: no se encontró " + o)
+        blk = blk.replace(o, n)
+    page = page.replace(pwa.group(0), blk)
+    page = page.replace("/icons/", "/aereostar/icons/")   # logo, favicon, apple-touch y el aviso de actualización
     def one(s, o, n):
         assert s.count(o) == 1, ("aereostar: no se encontró exactamente una vez: " + o[:60], s.count(o))
         return s.replace(o, n)
@@ -346,23 +376,15 @@ def brand_aereostar(page, ch=None):
     page = page[:i] + "const CH=__CH_AE__;" + page[j:]
     page = page.replace("UberTransfer", "Aereostar").replace("ubertransfer.cl", "aereostar.cl")
     page = one(page, "<section id=\"guia\">", "<section id=\"guia\">" + AE_GUIA)
-    page = one(page, "%3EU%3C/text%3E", "%3EA%3C/text%3E")
-    page = one(page, "fill='%231a73e8'", "fill='%23e8710a'")
     page = one(page, 'href="/aereostar/" class="inline-flex', 'href="/" class="inline-flex')
     page = one(page, ">Panel Aereostar →</a>", ">← Panel UberTransfer</a>")
     i = page.index("const BIZ=window.__BIZ=["); j = page.index("];", i) + 2
     page = page[:i] + "const BIZ=window.__BIZ=" + json.dumps(AE_BIZ, ensure_ascii=False) + ";" + page[j:]
     page = ae_recolor(page)
-    # Identidad visual de Aereostar (logo y colores del logo: negro, naranja y amarillo)
-    for o, n in (("#ed1c24", "#e96712"), ("#b90f16", "#b84a08"), ("#58b947", "#f8e71d"), ("237,28,36", "233,103,18"),
-                 ("#f3a0a4", "#f8c9a0"), ("#f3c4c6", "#f8d3b0"), ("#fff4f4", "#fff4ea"), ("#111318", "#0b0b0b")):
-        assert o in page, ("aereostar: color no encontrado: " + o)
-        page = page.replace(o, n)
+    assert "#ed1c24" not in page and "#2563eb" not in page, "aereostar: quedaron colores de UberTransfer"
     page = one(page, '<span class="material-symbols-outlined text-white">flight_takeoff</span>',
                '<img src="/aereostar/icons/logo-128.png" alt="Logo Aereostar" width="32" height="32" style="border-radius:50%;display:block">')
-    page = re.sub(r'<link rel="icon" type="image/svg\+xml" href="data:image/svg\+xml,[^"]*"\s*/?>',
-                  '<link rel="icon" type="image/png" sizes="32x32" href="/aereostar/icons/favicon-32.png"><link rel="apple-touch-icon" href="/aereostar/icons/apple-touch-icon.png"><meta name="theme-color" content="#0b0b0b">', page, count=1)
-    assert "/aereostar/icons/favicon-32.png" in page, "aereostar: no se pudo poner el favicon"
+    assert "/aereostar/icons/favicon-32.png" in page and "/aereostar/manifest.webmanifest" in page, "aereostar: faltan el favicon o el manifiesto"
     page = one(page, 'const KP="";', 'const KP="ae_";')
     page = one(page, 'const MYB="ubertransfer";', 'const MYB="aereostar";')
     page = one(page, '.doc("estado")', '.doc("estado_aereostar")')
@@ -429,7 +451,7 @@ def main():
     SECRET_KEYS = ("srcName", "srcSha", "srcRows", "dataSha", "exportedAt", "forecast", "trends", "ampliacion", "googleAds")
     import re as _re
     VARIANTS = [
-        {"name": "UberTransfer", "ias": "ias.html", "transform": lambda p: p, "enc": ENC_FILE, "meta": meta,
+        {"name": "UberTransfer", "ias": "ias.html", "transform": ut_recolor, "enc": ENC_FILE, "meta": meta,
          "site": ROOT / "site", "docs": ROOT / "docs" / "panel_keywords.html"},
         {"name": "Aereostar", "ias": "ias_aereostar.html", "transform": ae_tf, "enc": DATA / "panel_data_aereostar.enc.json",
          "meta": dict(meta, ampliacion=[], audit=ae_audit, forecast=forecast, trends=tr, plannerActive=True, fullMenu=True, googleAds=aereostar_ads), "site": ROOT / "site" / "aereostar",
@@ -446,7 +468,7 @@ def main():
         pub = {k: m[k] for k in ("builtAt", "audit", "seoStatus", "plannerActive", "fullMenu") if k in m}
         enc = make_enc(secret_json, env, V["enc"])
         pub_html, app_js, gate_js = split_encrypted(page_tpl, enc, pub)
-        vcss = ae_recolor(css) if V["name"] == "Aereostar" else css
+        vcss = ae_recolor(css) + AE_BG if V["name"] == "Aereostar" else ut_recolor(css) + UT_BG
         final_plain = plain.replace("__CSS__", vcss)
         final_pub = pub_html.replace("__CSS__", vcss)
         assert "__DATA__" not in final_plain and "__META__" not in final_plain and "__CSS__" not in final_plain

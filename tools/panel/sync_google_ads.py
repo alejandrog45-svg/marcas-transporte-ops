@@ -14,7 +14,10 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "data" / "google_ads_ubertransfer.json"
+# Marca por entorno (por defecto UberTransfer, sin cambios). Cada marca: su ID, su archivo y su historial.
+BRAND = os.environ.get("GOOGLE_ADS_BRAND", "UberTransfer").strip() or "UberTransfer"
+BRAND_SLUG = BRAND.lower()
+OUT = ROOT / "data" / f"google_ads_{BRAND_SLUG}.json"
 CUSTOMER_DEFAULT = "2035504421"
 API_VERSION = "v25"
 
@@ -247,7 +250,7 @@ def normalize(rows: list[dict], date_from: str, date_to: str) -> dict:
             "firstSeen": old.get("firstSeen", date_from), "lastSeen": seen,
         }
     return {
-        "brand": "UberTransfer",
+        "brand": BRAND,
         "customerId": customer_id(os.environ.get("GOOGLE_ADS_CUSTOMER_ID", CUSTOMER_DEFAULT)),
         "campaignIds": sorted({row["campaignId"] for row in campaigns if row["campaignId"]}) or sorted(previous.get("campaignIds") or []),
         "campaignNames": current_names,
@@ -476,7 +479,7 @@ def apply_campaign_quality(result: dict) -> None:
                 metrics[key] = float(day_rows[0][key])
 
 
-HISTORY_NAME = "google_ads_history_ubertransfer.json"
+HISTORY_NAME = f"google_ads_history_{BRAND_SLUG}.json"
 HISTORY_KEEP_DAYS = 90
 HISTORY_VALUES = ("impressions", "clicks", "costClp", "conversions")
 # Métricas que no son dimensiones: en el historial solo se conservan HISTORY_VALUES.
@@ -528,7 +531,7 @@ def update_report_history(reports: dict, previous_reports: dict | None, path: Pa
     for rows in acc.values():
         rows.sort(key=lambda r: r.get("date") or "")
     # Una fila por línea: los commits diarios quedan como diferencias pequeñas.
-    head = {"brand": "UberTransfer", "keepDays": HISTORY_KEEP_DAYS, "days": days,
+    head = {"brand": BRAND, "keepDays": HISTORY_KEEP_DAYS, "days": days,
             "updatedAt": dt.datetime.now(dt.timezone.utc).isoformat().replace("+00:00", "Z")}
     body = ",\n".join(
         json.dumps(name, ensure_ascii=False) + ":[\n" +

@@ -67,6 +67,10 @@ Nada se da por hecho sin haberlo probado. Cero cifras inventadas. Una tarea a la
 
 ## Historial de sesiones
 
+### 2026-10-10 (nube, sesión 2) — Conexión de Aereostar (en curso)
+- `tools/panel/sync_google_ads.py` acepta `GOOGLE_ADS_BRAND` (por defecto UberTransfer, comportamiento idéntico): marca, archivo `data/google_ads_<marca>.json` e historial separados. 71 pruebas OK. NO hay aún paso en el workflow para Aereostar.
+- Bloqueado, pide decisión del dueño: ID real de Aereostar (los documentos del repo apuntan a 548-530-8262 con «Campaign #1» detenida; 465-674-2227 figura como otra) y si las credenciales OAuth actuales tienen acceso a esa cuenta. Esta sesión no tiene herramientas de navegador ni `gh` válido (GH_TOKEN inválido en bash; sí hay MCP de GitHub).
+
 ### 2026-10-10 — Sesión de nube (celular)
 - PR #1 (docs, hallazgos GA4/GSC y etiqueta de Google sin datos) abierto en borrador desde `main-hxz81b`; no fusionado. 71 pruebas OK.
 - «Problema 2» de Auditoría resuelto: la leyenda decía «PENDIENTE = falta un dato externo» sin decir cuál; ahora explica y remite al bloque «Pendiente: necesita datos o decisiones…» (lista fija `BIZ` en `template.html`: horario, tarifas, promo, rutas, nombre «Uber», coordinación Aereostar, conversiones, GA4/GSC). No era un fallo del panel. Publicado con aprobación del dueño (push a `main` + `panel-diario.yml`).

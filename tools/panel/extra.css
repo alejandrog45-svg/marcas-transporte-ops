@@ -26,6 +26,7 @@ code{background:#0D1527;padding:1px 6px;border-radius:4px}
 /* Celular y tablet: botones cómodos para el dedo */
 @media(max-width:1023px){
 #mnav a{display:inline-flex;align-items:center;min-height:44px;padding:0 14px}
+#mnav{scrollbar-width:none}#mnav::-webkit-scrollbar{display:none}
 #livebtn,#gs,#q,#fg,#ft,#mv,#ps,#sortm,#bud,#dias,#cr,#simcopy,#probebtn,#btn_ok,#btn_csv,#btn_add{min-height:44px}
 .card input:not([type=checkbox]),.card select,.card textarea{min-height:44px}
 input[type=checkbox]{width:22px;height:22px}

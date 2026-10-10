@@ -14,6 +14,7 @@
 ## Reglas
 - Sitio real: https://ubertransfer.cl (WordPress + Divi + Rank Math). No migrar.
 - **Nunca** commitear secretos: la clave de Google va solo como Secret `GOOGLE_SA_JSON` de GitHub. Ver `.gitignore`.
+- **CAMPAÑAS: SOLO SE LEEN (orden del dueño, 10-10).** Nunca pausar, activar, editar ni crear campañas, presupuesto, pujas o anuncios; ni siquiera como paso «de ayuda». Solo consultas (`searchStream`). Lo que se vea en los datos se informa como dato; qué hacer con la campaña lo decide el dueño en Google Ads. Hay una prueba que impide llamadas `mutate` en el sincronizador.
 - El sistema detecta y propone. **No** cambiar presupuesto/pujas/anuncios ni publicar contenido sin aprobación explícita.
 - Herramientas gratuitas primero. No añadir plataformas de pago sin una carencia medida.
 - No inventar datos del negocio (rutas, tarifas, horarios): marcar como pendiente hasta que el dueño confirme.

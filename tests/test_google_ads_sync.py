@@ -330,3 +330,11 @@ def test_call_details_keep_duration_status_and_date_for_history():
     assert call[0]["durationSeconds"] == 34 and call[0]["status"] == "RECEIVED" and call[0]["date"] == "2026-10-09"
     assert call[1]["durationSeconds"] is None  # llamada sin duración informada: no se inventa 0
     assert "phoneNumber" not in call[0] and "callerNumber" not in call[0]  # no se guarda el número de nadie
+
+
+def test_sincronizador_es_solo_lectura():
+    """Regla del dueño: las campañas solo se leen. Nada de llamadas mutate a Google Ads."""
+    from pathlib import Path
+    src = (Path(__file__).resolve().parents[1] / "tools" / "panel" / "sync_google_ads.py").read_text(encoding="utf-8")
+    assert "mutate" not in src.lower()
+    assert "googleAds:searchStream" in src

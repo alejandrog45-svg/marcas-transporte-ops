@@ -347,7 +347,7 @@ conductor uber</textarea></div>
 
 <script>
 const DATA=__DATA__;
-const META=__META__;if(META.plannerActive!==false)META.audit=null;
+const META=__META__;if(META.plannerActive!==false&&!META.fullMenu)META.audit=null;
 if(META.plannerActive===false){DATA.length=0;META.forecast=null;META.trends=null;META.ampliacion=[]}
 const RAW=JSON.stringify(DATA);
 const ORIG=JSON.parse(RAW);
@@ -366,7 +366,7 @@ const SEC=[
   ["history","Historial","history","Historial sincronizado","Evolución de las consultas guardadas por fecha."],
 ["kw","Palabras clave","key","Palabras clave actuales","Datos actuales de Google Ads; el Planificador histórico no se usa como fuente activa."],
 ["ver","Datos y verificación","verified","Google Ads y consistencia","Fuentes, integridad, sincronización y verificaciones del panel."]];
-if(META.plannerActive===false)SEC.push(
+if(META.plannerActive===false||META.fullMenu)SEC.push(
 ["aud","Auditoría","fact_check","Auditoría en línea","Comprobaciones hechas ahora mismo en tu navegador y resultados del servidor, cada uno con su evidencia."],
 ["mej","Mejoras del sitio","web","Mejoras del sitio","Pendientes técnicos y de contenido según la auditoría."],
 ["guia","Guía","menu_book","Guía del panel","Cómo leer y usar el panel con datos reales de Google Ads."]);

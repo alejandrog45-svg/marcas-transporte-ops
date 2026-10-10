@@ -67,6 +67,10 @@ Nada se da por hecho sin haberlo probado. Cero cifras inventadas. Una tarea a la
 
 ## Historial de sesiones
 
+### 2026-10-10 (nube, sesión 2) — Conexión de Aereostar (en curso)
+- `tools/panel/sync_google_ads.py` acepta `GOOGLE_ADS_BRAND` (por defecto UberTransfer, comportamiento idéntico): marca, archivo `data/google_ads_<marca>.json` e historial separados. 71 pruebas OK. NO hay aún paso en el workflow para Aereostar.
+- Dueño confirmó (10-10): la cuenta real de Aereostar es 548-530-8262. Lectura REAL (flujo `google-ads-aereostar.yml`, solo SELECT, ejecución 38020983198, credenciales actuales sí tienen acceso): una sola campaña, `24331409273` «Campaign #1». **ALERTA:** figura ENABLED (no pausada) y el 09-10 tuvo 706 impresiones, 41 clics, CLP 16.008, 0 conversiones, pérdida por presupuesto 81 %; aereostar.cl estaba suspendido. No se tocó nada: pausar/ajustar es decisión del dueño. El workflow tiene un disparo temporal por `push` a esta rama (quitar al fusionar). Falta: conectar el panel de Aereostar a este archivo y pasos de historial.
+
 ### 2026-10-10 — Sesión de nube (celular)
 - PR #1 (docs, hallazgos GA4/GSC y etiqueta de Google sin datos) abierto en borrador desde `main-hxz81b`; no fusionado. 71 pruebas OK.
 - «Problema 2» de Auditoría resuelto: la leyenda decía «PENDIENTE = falta un dato externo» sin decir cuál; ahora explica y remite al bloque «Pendiente: necesita datos o decisiones…» (lista fija `BIZ` en `template.html`: horario, tarifas, promo, rutas, nombre «Uber», coordinación Aereostar, conversiones, GA4/GSC). No era un fallo del panel. Publicado con aprobación del dueño (push a `main` + `panel-diario.yml`).

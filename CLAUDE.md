@@ -68,6 +68,11 @@ Nada se da por hecho sin haberlo probado. Cero cifras inventadas. Una tarea a la
 
 ## Historial de sesiones
 
+### 2026-10-10 (nube, sesión 2) — CIERRE DEL BLOQUE: todo fusionado y publicado
+- **Estado final verificado:** PR #5–#9 fusionados en `main`; publicado con `panel-diario.yml` ejecución 39 (13/13 pasos; armado 05:59:59 UTC; paneles, íconos, manifiestos, service workers y fotos de fondo responden 200; cada marca con su logo, color y foto; 0 datos en claro). PR #4 (otra sesión) CERRADO por orden del dueño (rama conservada). Queda abierto solo el PR #1 (solo documentación, de otra sesión; no tocar).
+- **Autorización vigente del dueño (10-10):** «deja todo actualizado, no esperes mi aprobación, solo sigue la regla antirretroceso» → se puede fusionar y publicar sin pedir permiso cada vez, siempre con pruebas, verificación en la URL real y sin tocar campañas (solo lectura), pagos ni claves. Sigue valiendo: una tarea a la vez, nada inventado, repo público (no subir fotos con personas ni afiches).
+- **Versión del panel:** insignia «AG · v.5» (subir `PANEL_VERSION` en cada cambio visual). **Pendiente del dueño:** abrir ambos paneles con su sesión de Google y confirmar a ojo el menú oscuro, la foto sutil y la insignia; probar «Instalar app» en el celular (no probado). Documentos clave de esta jornada: `docs/mejoras_clics_sin_subir_costos.md` y las secciones «cont. 3» a «cont. 7» de abajo.
+
 ### 2026-10-10 (nube, sesión 2, cont. 7) — Fondo fotográfico sutil en Aereostar (logos intactos)
 - Pedido del dueño: imágenes en Aereostar sin ningún logo de UberTransfer, sutiles y sin sobrecargar; **cada marca conserva su logo original**; regla antirretroceso estricta.
 - Foto: cubierta curva y cielo del aeropuerto (de las fotos que envió el dueño), recortada para que no salgan letras ni logos, casi neutra y comprimida a **20 KB** (`site/bg/aereostar-fondo.jpg`). Cada marca usa su propia foto (`UT_BG` / `AE_BG` en `build.py`); `--bg-op` (variable por marca) fija la fuerza: UberTransfer .34 (por defecto), Aereostar .62 porque su foto es más clara. En celular/tablet la opacidad baja a ×0,36.

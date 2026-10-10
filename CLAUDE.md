@@ -68,6 +68,11 @@ Nada se da por hecho sin haberlo probado. Cero cifras inventadas. Una tarea a la
 
 ## Historial de sesiones
 
+### 2026-10-10 (nube, sesión 2, cont. 5) — Diseño v3 (menú oscuro de marca, tarjetas con acento)
+- El dueño pidió activar Stitch o Canvas: **Stitch no está conectado en esta sesión** (no hay herramienta) y **Canva** está conectado pero sin kits de marca y no edita HTML; no se usaron. El rediseño se hizo con CSS sobre los tokens existentes (`docs/DESIGN_stitch.md`).
+- `extra.css` (solo CSS, sin tocar datos ni JS): menú lateral oscuro con brillo de marca y botones de menú translúcidos (activo = degradado de marca), cabecera translúcida con desenfoque, fondo con resplandor de marca, tarjetas KPI con franja de acento, títulos de tarjeta con barra de color, cabeceras de tabla y filas alternas. Los colores salen de `--b`, `--b-dark`, `--b-glow`, `--b-soft` (Aereostar los recibe en naranja por `ae_recolor`). La regla `prefers-reduced-motion` debe seguir al FINAL de `extra.css`.
+- `PANEL_VERSION` = «3». Probado en copia local: 11 menús y 0 errores en ambos paneles, verificaciones 17/19 (Aereostar) y 12/14 (UberTransfer) sin fallas, sin desbordes a 375/820/1366 px, PWA/instalabilidad sin errores. 79 pruebas OK.
+
 ### 2026-10-10 (nube, sesión 2, cont. 4) — PWA de Aereostar, colores de marca en todo el panel y movimiento
 - **Orden del dueño:** misma tecnología en Aereostar que UberTransfer (botón instalar, PWA, insignia de versión) con colores corporativos; diseño más moderno con movimiento y colores de cada marca en TODO el panel; todo probado, sin romper nada (regla antirretroceso).
 - **PWA de Aereostar** (antes solo UberTransfer; el test que fijaba «Aereostar sin PWA» se actualizó por orden expresa): `site/aereostar/manifest.webmanifest` (alcance y start_url `/aereostar/`, tema `#0b0b0b`), `site/aereostar/sw.js` (cachés `ae-*`, no guarda `version.json` ni `/__/`), íconos incl. `aereostar-maskable-512.png`. `build.py` deja el bloque PWA en Aereostar y le cambia rutas (`/aereostar/...`, registro con `scope:"/aereostar/"`); `template.html`: `PWA_ON` también con `META.fullMenu`. El SW de UberTransfer (alcance `/`) y el de Aereostar (`/aereostar/`) conviven: el más específico gana en `/aereostar/`.

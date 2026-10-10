@@ -124,4 +124,29 @@ html #nav a[class*="border-primary-container"],html #mnav a[class*="border-prima
 /* Celular: textos largos sin espacios se parten y las tablas anchas se desplazan dentro de su tarjeta */
 .real-quality-item{min-width:0}.real-quality-item>*{min-width:0;overflow-wrap:anywhere}
 @media(max-width:480px){.real-quality-grid{grid-template-columns:1fr}}
+
+/* ===== Diseño v3: menú lateral oscuro de marca, tarjetas con acento, cabecera translúcida =====
+   Solo CSS (sin tocar datos ni JS). Los colores de marca salen de --b / --b-dark / --b-glow / --b-soft. */
+html body{background:radial-gradient(900px 380px at 100% -6%,var(--b-soft),transparent 65%),var(--panel-bg)!important}
+html header{background:rgba(255,255,255,.84)!important;-webkit-backdrop-filter:saturate(1.5) blur(14px);backdrop-filter:saturate(1.5) blur(14px)}
+html aside{background:linear-gradient(185deg,#16181f 0%,#0b0c10 100%)!important;color:#fff!important;border-right:0!important;box-shadow:8px 0 32px -14px rgba(0,0,0,.55);overflow:hidden}
+html aside::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(460px 260px at 0% 0%,var(--b-glow),transparent 70%);opacity:.6}
+html aside>*{position:relative;z-index:1}
+html aside .text-on-surface{color:#fff!important}
+html aside .text-outline{color:#a3acbf!important}
+html aside .border-t,html aside [class*="border-outline-variant"]{border-color:rgba(255,255,255,.09)!important}
+html aside .bg-surface-container-high{background-color:rgba(255,255,255,.09)!important;color:#7fe3d3!important;border-color:rgba(255,255,255,.14)!important}
+html #nav a{background:rgba(255,255,255,.05)!important;color:#d9deea!important;border:1px solid rgba(255,255,255,.07)!important;box-shadow:none!important}
+html #nav a .material-symbols-outlined{color:#9aa4b8!important}
+html #nav a:hover{background:rgba(255,255,255,.11)!important;color:#fff!important;border-color:rgba(255,255,255,.16)!important;transform:translateX(3px);box-shadow:none!important}
+html #nav a:hover .material-symbols-outlined{color:#fff!important}
+html #nav a[class*="border-primary-container"]{background:linear-gradient(135deg,var(--b),var(--b-dark))!important;color:#fff!important;border-color:transparent!important;box-shadow:0 12px 26px -10px var(--b-glow)!important}
+html #nav a[class*="border-primary-container"] .material-symbols-outlined{color:#fff!important}
+html aside .vbadge{box-shadow:0 0 0 1px rgba(255,255,255,.22)}
+.real-kpi,#topk>*{position:relative;overflow:hidden}
+.real-kpi::before,#topk>*::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:linear-gradient(90deg,var(--b),transparent 85%);opacity:.9}
+.real-card>h2,.card>h2,.real-quality-head h2{display:flex;align-items:center;gap:10px}
+.real-card>h2::before,.card>h2::before,.real-quality-head h2::before{content:"";flex:0 0 4px;height:1.05em;border-radius:3px;background:linear-gradient(var(--b),var(--b-dark))}
+.real-table thead th,table thead th{background:linear-gradient(#fbfcfe,#f1f4f9)}
+.real-table tbody tr:nth-child(even):not(:hover){background:rgba(23,32,51,.022)}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}

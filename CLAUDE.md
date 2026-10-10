@@ -68,6 +68,12 @@ Nada se da por hecho sin haberlo probado. Cero cifras inventadas. Una tarea a la
 
 ## Historial de sesiones
 
+### 2026-10-10 (nube, sesión 2, cont. 7) — Fondo fotográfico sutil en Aereostar (logos intactos)
+- Pedido del dueño: imágenes en Aereostar sin ningún logo de UberTransfer, sutiles y sin sobrecargar; **cada marca conserva su logo original**; regla antirretroceso estricta.
+- Foto: cubierta curva y cielo del aeropuerto (de las fotos que envió el dueño), recortada para que no salgan letras ni logos, casi neutra y comprimida a **20 KB** (`site/bg/aereostar-fondo.jpg`). Cada marca usa su propia foto (`UT_BG` / `AE_BG` en `build.py`); `--bg-op` (variable por marca) fija la fuerza: UberTransfer .34 (por defecto), Aereostar .62 porque su foto es más clara. En celular/tablet la opacidad baja a ×0,36.
+- **Logos NO se tocaron:** UberTransfer sigue con `site/icons/*` y Aereostar con `site/aereostar/icons/*` (original en `docs/archivo/logo/logoaereostar.png`). Prueba nueva `test_cada_marca_conserva_su_logo_original` (compara con `origin/main`: no se puede modificar ni borrar un archivo de logo ya existente) y otra que impide que la página de Aereostar mencione archivos de UberTransfer.
+- Validado: la foto cambia como máximo 13/255 por canal en la zona del título de Aereostar (0–5 en tablet y celular), sin desbordes, 11 menús y 0 errores en ambos, verificaciones 17/19 y 12/14 sin fallas, instalabilidad sin errores, 82 pruebas. `PANEL_VERSION` = «5». Carga extra por panel: 20 KB (Aereostar) y 92 KB (UberTransfer), cargadas como fondo sin bloquear el panel.
+
 ### 2026-10-10 (nube, sesión 2, cont. 6) — Fondo fotográfico sutil en UberTransfer
 - Pedido del dueño: un fondo sutil, bien acomodado, de calidad y validado, sin entorpecer nada. De las 11 fotos que envió se usó UNA sin personas ni textos propios: el furgón plateado frente a la marquesina de cristal (`site/bg/ubertransfer-fondo.jpg`, recorte, aclarada y comprimida a ~92 KB). **El repositorio es PÚBLICO y `site/` es público por URL**: no subir fotos con personas ni afiches sin que el dueño lo decida.
 - Cómo funciona: `extra.css` dibuja la foto en `body::before` (franja superior derecha, `z-index:-1`, `pointer-events:none`, desenfoque de borde con máscara y opacidad .34 en escritorio / .12 en celular y tablet) SOLO si existe la variable `--bg-img`; `build.py` la define únicamente para UberTransfer (`UT_BG`). Aereostar no la lleva hasta que el dueño envíe fotos suyas.

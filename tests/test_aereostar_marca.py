@@ -57,4 +57,30 @@ def test_fondo_fotografico_solo_en_ubertransfer_y_liviano():
     assert "pointer-events:none" in css and "z-index:-1" in css       # no tapa ni recibe clics: queda detrás de todo
     assert "var(--bg-img,none)" in css                                # sin variable no hay foto (Aereostar)
     assert "ubertransfer-fondo.jpg" in b.UT_BG
-    assert "ubertransfer-fondo" not in b.ae_recolor(css)               # Aereostar no la hereda
+    assert "ubertransfer-fondo" not in b.ae_recolor(css)               # Aereostar no hereda la foto de UberTransfer
+
+
+def test_fondo_de_aereostar_propio_liviano_y_sin_logos_de_ubertransfer():
+    b = _build()
+    foto = ROOT / "site" / "bg" / "aereostar-fondo.jpg"
+    assert foto.exists() and foto.stat().st_size < 100_000
+    assert "aereostar-fondo.jpg" in b.AE_BG and "ubertransfer" not in b.AE_BG
+    assert "aereostar-fondo.jpg" not in b.UT_BG                        # cada marca con su propia foto
+    page = b.brand_aereostar((ROOT / "tools" / "panel" / "template.html").read_text(encoding="utf-8"))
+    assert "ubertransfer-fondo" not in page and "logouber" not in page and "/icons/ubertransfer" not in page
+
+
+def test_cada_marca_conserva_su_logo_original():
+    """Regla antirretroceso: el logo de UberTransfer y el de Aereostar no se mezclan ni se reemplazan."""
+    import subprocess
+    tpl = (ROOT / "tools" / "panel" / "template.html").read_text(encoding="utf-8")
+    assert tpl.count("/icons/logo-128.png") >= 2                      # UberTransfer usa su logo de siempre
+    page = _build().brand_aereostar(tpl)
+    assert "/aereostar/icons/logo-128.png" in page and 'src="/icons/' not in page   # Aereostar usa solo el suyo
+    # Los archivos de logo que ya estaban en main no se modifican ni se borran (solo se permite agregar nuevos).
+    out = subprocess.run(["git", "diff", "--name-status", "origin/main", "--",
+                          "site/icons", "site/aereostar/icons", "docs/archivo/logo"],
+                         cwd=ROOT, capture_output=True, text=True)
+    if out.returncode == 0:                                          # sin origin/main (otro entorno) no se puede comparar
+        cambios = [l for l in out.stdout.splitlines() if l and l[0] in "MDR"]
+        assert not cambios, cambios

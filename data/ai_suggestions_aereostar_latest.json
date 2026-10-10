@@ -1,17 +1,18 @@
 {
-  "source": "IA (gemini-3.1-flash-lite) sobre datos reales de Google Ads · solo lectura",
-  "generatedAt": "2026-10-10T06:19:31.355187Z",
-  "adsLastSync": "2026-10-10T06:18:37.030622Z",
+  "source": "IA (gemini-3.6-flash) sobre datos reales de Google Ads · solo lectura",
+  "generatedAt": "2026-10-10T07:25:15.300103Z",
+  "adsLastSync": "2026-10-10T07:24:23.930877Z",
   "accountId": "5485308262",
   "detailDays": 1,
   "suggestions": [
     {
-      "title": "Evaluar aumento de presupuesto diario",
-      "action": "Considerar incrementar el presupuesto diario de 15000 CLP.",
-      "reason": "La campaña perdió un 81.7% de impresiones debido a la limitación del presupuesto, lo que impide captar más clics potenciales.",
+      "title": "Evaluar incremento del presupuesto diario para capturar más tráfico",
+      "action": "Evaluar aumentar el presupuesto diario actual de 15000 CLP.",
+      "reason": "En el único día registrado (diasConDetalle: 1 en cobertura), la perdidaPorPresupuestoPct fue del 81.7% y la cuotaImpresionesPct alcanzó solo el 18.3%. Al tener pocos días de historial la confianza es baja, pero un mayor presupuesto permitiría obtener más clics.",
       "confidence": "Baja",
       "refs": [
-        "cuota_y_presupuesto"
+        "cuota_y_presupuesto",
+        "cobertura"
       ],
       "evidence": {
         "cuota_y_presupuesto": {
@@ -31,16 +32,24 @@
               "cuotaPrimerasPosicionesPct": 10.6
             }
           ]
+        },
+        "cobertura": {
+          "descripcion": "Cuántos días de historial detallado existen (pocos días = conclusiones débiles)",
+          "diasConDetalle": 1,
+          "desde": "2026-10-09",
+          "hasta": "2026-10-09",
+          "conversionesRegistradas": 0.0
         }
       }
     },
     {
-      "title": "Reforzar pujas en horario de alta demanda",
-      "action": "Analizar el rendimiento de la hora 8:00.",
-      "reason": "La hora 8:00 registró 14 clics, siendo el periodo con mayor volumen de tráfico en el historial disponible.",
+      "title": "Evaluar programación horaria centrada en horas pico de clics",
+      "action": "Evaluar concentrar o priorizar la participación en la hora 8.",
+      "reason": "La hora 8 registró la mayor cantidad de tráfico del día con 14 clics y un costoClp de 9006. Al contar con solo 1 día de historial (diasConDetalle: 1), se debe evaluar la continuidad de este patrón antes de aplicar cambios definitivos.",
       "confidence": "Baja",
       "refs": [
-        "horas"
+        "horas",
+        "cobertura"
       ],
       "evidence": {
         "horas": {
@@ -107,16 +116,24 @@
               "costoClp": 983
             }
           ]
+        },
+        "cobertura": {
+          "descripcion": "Cuántos días de historial detallado existen (pocos días = conclusiones débiles)",
+          "diasConDetalle": 1,
+          "desde": "2026-10-09",
+          "hasta": "2026-10-09",
+          "conversionesRegistradas": 0.0
         }
       }
     },
     {
-      "title": "Revisar términos de búsqueda de alto costo",
-      "action": "Evaluar la relevancia de términos como 'transfer pucv curauma' (1206 CLP).",
-      "reason": "Existen términos con un costo elevado por clic que no han generado conversiones, lo que podría estar drenando el presupuesto limitado.",
+      "title": "Evaluar revisión de términos de búsqueda poco afines",
+      "action": "Evaluar negativizar o ajustar concordancia para el término 'transfer pucv curauma'.",
+      "reason": "El término 'transfer pucv curauma' tuvo un costoClp de 1206 con solo 1 clics, siendo el costo por clic más alto del reporte sin aportar mayor volumen de tráfico relevante para traslados generales al aeropuerto.",
       "confidence": "Baja",
       "refs": [
-        "terminos_costosos_sin_conversion"
+        "terminos_costosos_sin_conversion",
+        "cobertura"
       ],
       "evidence": {
         "terminos_costosos_sin_conversion": {
@@ -148,11 +165,18 @@
               "costoClp": 481
             }
           ]
+        },
+        "cobertura": {
+          "descripcion": "Cuántos días de historial detallado existen (pocos días = conclusiones débiles)",
+          "diasConDetalle": 1,
+          "desde": "2026-10-09",
+          "hasta": "2026-10-09",
+          "conversionesRegistradas": 0.0
         }
       }
     }
   ],
   "rejected": [
-    "Optimizar inversión en dispositivos móviles: cifras que no están en los hechos citados [41]"
+    "Evaluar optimización prioritaria para dispositivos móviles: cifras que no están en los hechos citados [41]"
   ]
 }

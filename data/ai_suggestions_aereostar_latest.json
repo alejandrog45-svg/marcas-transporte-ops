@@ -1,14 +1,14 @@
 {
-  "source": "IA (gemini-3.6-flash) sobre datos reales de Google Ads · solo lectura",
-  "generatedAt": "2026-10-10T07:25:15.300103Z",
-  "adsLastSync": "2026-10-10T07:24:23.930877Z",
+  "source": "IA (gemini-3.5-flash) sobre datos reales de Google Ads · solo lectura",
+  "generatedAt": "2026-10-10T16:24:55.435548Z",
+  "adsLastSync": "2026-10-10T16:23:46.729568Z",
   "accountId": "5485308262",
-  "detailDays": 1,
+  "detailDays": 2,
   "suggestions": [
     {
-      "title": "Evaluar incremento del presupuesto diario para capturar más tráfico",
-      "action": "Evaluar aumentar el presupuesto diario actual de 15000 CLP.",
-      "reason": "En el único día registrado (diasConDetalle: 1 en cobertura), la perdidaPorPresupuestoPct fue del 81.7% y la cuotaImpresionesPct alcanzó solo el 18.3%. Al tener pocos días de historial la confianza es baja, pero un mayor presupuesto permitiría obtener más clics.",
+      "title": "Evaluar incremento del presupuesto diario de la campaña",
+      "action": "Evaluar la posibilidad de aumentar el presupuesto diario (actualmente de 15000 CLP) para capturar más impresiones y clics.",
+      "reason": "El día 2026-10-09 se registró una perdidaPorPresupuestoPct del 82.5% y una cuotaImpresionesPct de solo 17.5%. Dado que el historial abarca solo diasConDetalle: 2 (con 2026-10-10 marcado como diaParcial: true) y conversionesRegistradas: 0.0, la confianza en esta tendencia inicial es baja.",
       "confidence": "Baja",
       "refs": [
         "cuota_y_presupuesto",
@@ -26,26 +26,75 @@
               "interacciones": 41,
               "clicsInvalidos": 1,
               "llamadas": 0,
-              "cuotaImpresionesPct": 18.3,
-              "perdidaPorPresupuestoPct": 81.7,
+              "cuotaImpresionesPct": 17.5,
+              "perdidaPorPresupuestoPct": 82.5,
               "perdidaPorRankingPct": 0.0,
-              "cuotaPrimerasPosicionesPct": 10.6
+              "cuotaPrimerasPosicionesPct": 10.1
+            },
+            {
+              "fecha": "2026-10-10",
+              "diaParcial": true,
+              "interacciones": 18,
+              "clicsInvalidos": 2,
+              "llamadas": 0
             }
           ]
         },
         "cobertura": {
           "descripcion": "Cuántos días de historial detallado existen (pocos días = conclusiones débiles)",
-          "diasConDetalle": 1,
+          "diasConDetalle": 2,
           "desde": "2026-10-09",
-          "hasta": "2026-10-09",
+          "hasta": "2026-10-10",
           "conversionesRegistradas": 0.0
         }
       }
     },
     {
-      "title": "Evaluar programación horaria centrada en horas pico de clics",
-      "action": "Evaluar concentrar o priorizar la participación en la hora 8.",
-      "reason": "La hora 8 registró la mayor cantidad de tráfico del día con 14 clics y un costoClp de 9006. Al contar con solo 1 día de historial (diasConDetalle: 1), se debe evaluar la continuidad de este patrón antes de aplicar cambios definitivos.",
+      "title": "Priorizar la optimización para dispositivos móviles",
+      "action": "Evaluar centrar los anuncios e impresiones en dispositivos móviles (mobile) para captar el mayor volumen de tráfico.",
+      "reason": "El dispositivo mobile generó 55 clics y 835 impresiones (costoClp: 19853), frente a desktop que sumó 3 clics y 126 impresiones, y tablet con 1 clics y 4 impresiones. La baja cantidad de datos (diasConDetalle: 2) exige cautela.",
+      "confidence": "Baja",
+      "refs": [
+        "dispositivos",
+        "cobertura"
+      ],
+      "evidence": {
+        "dispositivos": {
+          "descripcion": "Clics, impresiones y costo por dispositivo, sumando el historial",
+          "filas": [
+            {
+              "dispositivo": "mobile",
+              "clics": 55,
+              "impresiones": 835,
+              "costoClp": 19853
+            },
+            {
+              "dispositivo": "desktop",
+              "clics": 3,
+              "impresiones": 126,
+              "costoClp": 980
+            },
+            {
+              "dispositivo": "tablet",
+              "clics": 1,
+              "impresiones": 4,
+              "costoClp": 784
+            }
+          ]
+        },
+        "cobertura": {
+          "descripcion": "Cuántos días de historial detallado existen (pocos días = conclusiones débiles)",
+          "diasConDetalle": 2,
+          "desde": "2026-10-09",
+          "hasta": "2026-10-10",
+          "conversionesRegistradas": 0.0
+        }
+      }
+    },
+    {
+      "title": "Aprovechar las horas con mayor volumen de clics",
+      "action": "Evaluar la concentración del presupuesto o programación publicitaria en las horas pico de búsqueda.",
+      "reason": "La hora 8 registró el mayor tráfico con 16 clics (costoClp: 9655), seguida por la hora 11 con 7 clics y las horas 10 y 12 con 6 clics cada una. Se debe tener en cuenta que el historial cubre únicamente diasConDetalle: 2.",
       "confidence": "Baja",
       "refs": [
         "horas",
@@ -57,28 +106,28 @@
           "filas": [
             {
               "hora": 8,
-              "clics": 14,
-              "costoClp": 9006
+              "clics": 16,
+              "costoClp": 9655
             },
             {
               "hora": 9,
-              "clics": 2,
-              "costoClp": 524
+              "clics": 5,
+              "costoClp": 1520
             },
             {
               "hora": 10,
-              "clics": 1,
-              "costoClp": 255
+              "clics": 6,
+              "costoClp": 1981
             },
             {
               "hora": 11,
-              "clics": 3,
-              "costoClp": 800
+              "clics": 7,
+              "costoClp": 1940
             },
             {
               "hora": 12,
-              "clics": 2,
-              "costoClp": 497
+              "clics": 6,
+              "costoClp": 1595
             },
             {
               "hora": 13,
@@ -119,64 +168,97 @@
         },
         "cobertura": {
           "descripcion": "Cuántos días de historial detallado existen (pocos días = conclusiones débiles)",
-          "diasConDetalle": 1,
+          "diasConDetalle": 2,
           "desde": "2026-10-09",
-          "hasta": "2026-10-09",
+          "hasta": "2026-10-10",
           "conversionesRegistradas": 0.0
         }
       }
     },
     {
-      "title": "Evaluar revisión de términos de búsqueda poco afines",
-      "action": "Evaluar negativizar o ajustar concordancia para el término 'transfer pucv curauma'.",
-      "reason": "El término 'transfer pucv curauma' tuvo un costoClp de 1206 con solo 1 clics, siendo el costo por clic más alto del reporte sin aportar mayor volumen de tráfico relevante para traslados generales al aeropuerto.",
+      "title": "Reforzar los términos de búsqueda que generan más tráfico",
+      "action": "Evaluar el rendimiento y concordancia de las palabras clave que más clics aportan.",
+      "reason": "El término 'transfer aeropuerto' lidera la acumulación de tráfico con 3 clics (costoClp: 894), seguido de 'buses al aeropuerto santiago' con 2 clics y 'servicio de traslado al aeropuerto' con 2 clics. No existen conversiones registadas (conversionesRegistradas: 0.0), por lo que el enfoque es exclusivamente en tráfico.",
       "confidence": "Baja",
       "refs": [
-        "terminos_costosos_sin_conversion",
+        "terminos_mas_clics",
         "cobertura"
       ],
       "evidence": {
-        "terminos_costosos_sin_conversion": {
-          "descripcion": "Términos con más gasto y 0 conversiones registradas",
+        "terminos_mas_clics": {
+          "descripcion": "Términos de búsqueda con más clics, sumando todos los días del historial",
           "filas": [
             {
-              "termino": "transfer pucv curauma",
-              "clics": 1,
-              "costoClp": 1206
+              "termino": "transfer aeropuerto",
+              "clics": 3,
+              "costoClp": 894,
+              "conversiones": 0.0
             },
             {
-              "termino": "buses terminal santiago a aeropuerto",
-              "clics": 1,
-              "costoClp": 704
-            },
-            {
-              "termino": "traslado al aeropuerto santiago",
-              "clics": 1,
-              "costoClp": 623
+              "termino": "buses al aeropuerto santiago",
+              "clics": 2,
+              "costoClp": 606,
+              "conversiones": 0.0
             },
             {
               "termino": "servicio de traslado al aeropuerto",
               "clics": 2,
-              "costoClp": 488
+              "costoClp": 488,
+              "conversiones": 0.0
+            },
+            {
+              "termino": "transfer pucv curauma",
+              "clics": 1,
+              "costoClp": 1206,
+              "conversiones": 0.0
+            },
+            {
+              "termino": "buses terminal santiago a aeropuerto",
+              "clics": 1,
+              "costoClp": 704,
+              "conversiones": 0.0
+            },
+            {
+              "termino": "traslado al aeropuerto santiago",
+              "clics": 1,
+              "costoClp": 623,
+              "conversiones": 0.0
             },
             {
               "termino": "transporte para el aeropuerto",
               "clics": 1,
-              "costoClp": 481
+              "costoClp": 481,
+              "conversiones": 0.0
+            },
+            {
+              "termino": "buses de terminal santiago a aeropuerto",
+              "clics": 1,
+              "costoClp": 368,
+              "conversiones": 0.0
+            },
+            {
+              "termino": "buses viña aeropuerto",
+              "clics": 1,
+              "costoClp": 365,
+              "conversiones": 0.0
+            },
+            {
+              "termino": "transfer compartidos aeropuerto santiago",
+              "clics": 1,
+              "costoClp": 337,
+              "conversiones": 0.0
             }
           ]
         },
         "cobertura": {
           "descripcion": "Cuántos días de historial detallado existen (pocos días = conclusiones débiles)",
-          "diasConDetalle": 1,
+          "diasConDetalle": 2,
           "desde": "2026-10-09",
-          "hasta": "2026-10-09",
+          "hasta": "2026-10-10",
           "conversionesRegistradas": 0.0
         }
       }
     }
   ],
-  "rejected": [
-    "Evaluar optimización prioritaria para dispositivos móviles: cifras que no están en los hechos citados [41]"
-  ]
+  "rejected": []
 }

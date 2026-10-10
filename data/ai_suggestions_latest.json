@@ -1,14 +1,14 @@
 {
   "source": "IA (gemini-3.6-flash) sobre datos reales de Google Ads · solo lectura",
-  "generatedAt": "2026-10-10T07:24:58.806131Z",
-  "adsLastSync": "2026-10-10T07:24:16.243095Z",
+  "generatedAt": "2026-10-10T16:24:19.165147Z",
+  "adsLastSync": "2026-10-10T16:23:38.019653Z",
   "accountId": "2035504421",
-  "detailDays": 2,
+  "detailDays": 3,
   "suggestions": [
     {
-      "title": "Evaluar aumento de presupuesto diario para capturar tráfico perdido",
-      "action": "Evaluar un incremento del presupuesto diario actual de 15000 CLP.",
-      "reason": "El hecho 'cuota_y_presupuesto' muestra pérdidas de impresiones por presupuesto de 77.8% el 2026-10-08 y 69.2% el 2026-10-09. Dado que solo hay 2 días de historial en 'cobertura', la confianza es baja, pero aumentar presupuesto es la vía principal para captar más clics.",
+      "title": "Evaluar incremento del presupuesto diario",
+      "action": "Evaluar un aumento en el presupuesto diario actual de 15000 CLP para capturar impresiones y clics perdidos.",
+      "reason": "La pérdida de impresiones por presupuesto fue de 77.8% el 2026-10-08 y de 70.2% el 2026-10-09. Se debe considerar que el historial abarca solo 3 días y el día 2026-10-10 figura como parcial (incompleto).",
       "confidence": "Baja",
       "refs": [
         "cuota_y_presupuesto",
@@ -37,26 +37,33 @@
               "interacciones": 65,
               "clicsInvalidos": 12,
               "llamadas": 5,
-              "cuotaImpresionesPct": 24.3,
-              "perdidaPorPresupuestoPct": 69.2,
-              "perdidaPorRankingPct": 6.5,
-              "cuotaPrimerasPosicionesPct": 14.9
+              "cuotaImpresionesPct": 23.3,
+              "perdidaPorPresupuestoPct": 70.2,
+              "perdidaPorRankingPct": 6.4,
+              "cuotaPrimerasPosicionesPct": 14.3
+            },
+            {
+              "fecha": "2026-10-10",
+              "diaParcial": true,
+              "interacciones": 22,
+              "clicsInvalidos": 2,
+              "llamadas": 1
             }
           ]
         },
         "cobertura": {
           "descripcion": "Cuántos días de historial detallado existen (pocos días = conclusiones débiles)",
-          "diasConDetalle": 2,
+          "diasConDetalle": 3,
           "desde": "2026-10-08",
-          "hasta": "2026-10-09",
+          "hasta": "2026-10-10",
           "conversionesRegistradas": 0.0
         }
       }
     },
     {
-      "title": "Priorizar el rendimiento en dispositivos móviles",
-      "action": "Evaluar la optimización de anuncios y landing page específicamente para móviles.",
-      "reason": "Según 'dispositivos', mobile generó 54 clics y 960 impresiones frente a 11 clics y 159 impresiones en desktop. Al haber solo 2 días de registro en 'cobertura', se sugiere evaluar acciones enfáticas en móviles con cautela.",
+      "title": "Priorizar la optimización del tráfico en dispositivos móviles",
+      "action": "Evaluar enfocar la estrategia de campaña hacia dispositivos móviles (mobile) para maximizar la cantidad de clics.",
+      "reason": "El dispositivo mobile generó 75 clics y 1263 impresiones, frente a desktop que obtuvo 12 clics y tablet con 0 clics. Al existir solo 3 días de historial acumulado, el nivel de certeza es acotado.",
       "confidence": "Baja",
       "refs": [
         "dispositivos",
@@ -68,37 +75,37 @@
           "filas": [
             {
               "dispositivo": "mobile",
-              "clics": 54,
-              "impresiones": 960,
-              "costoClp": 13313
+              "clics": 75,
+              "impresiones": 1263,
+              "costoClp": 18899
             },
             {
               "dispositivo": "desktop",
-              "clics": 11,
-              "impresiones": 159,
-              "costoClp": 2497
+              "clics": 12,
+              "impresiones": 180,
+              "costoClp": 2748
             },
             {
               "dispositivo": "tablet",
               "clics": 0,
-              "impresiones": 6,
+              "impresiones": 7,
               "costoClp": 0
             }
           ]
         },
         "cobertura": {
           "descripcion": "Cuántos días de historial detallado existen (pocos días = conclusiones débiles)",
-          "diasConDetalle": 2,
+          "diasConDetalle": 3,
           "desde": "2026-10-08",
-          "hasta": "2026-10-09",
+          "hasta": "2026-10-10",
           "conversionesRegistradas": 0.0
         }
       }
     },
     {
-      "title": "Aprovechar los horarios de mayor volumen de clics",
-      "action": "Evaluar ajustar la programación horaria para asegurar presencia en las horas con más tráfico.",
-      "reason": "El hecho 'horas' indica que la hora 19 registró la mayor cantidad de tráfico con 15 clics, seguida por la hora 9 (12 clics), hora 8 (11 clics), hora 11 (11 clics) y hora 12 (11 clics). Se cuenta con solo 2 días con detalle en 'cobertura'.",
+      "title": "Aprovechar los bloques horarios con mayor tráfico de clics",
+      "action": "Evaluar priorizar o ajustar el flujo de la campaña en las horas de mayor actividad para conseguir más clics.",
+      "reason": "Las horas con más clics registrados son la hora 12 (18 clics), hora 9 (16 clics), hora 11 (16 clics) y hora 19 (15 clics). Se cuenta con un detalle de solo 3 días en el historial.",
       "confidence": "Baja",
       "refs": [
         "horas",
@@ -110,28 +117,28 @@
           "filas": [
             {
               "hora": 8,
-              "clics": 11,
-              "costoClp": 4437
+              "clics": 13,
+              "costoClp": 5069
             },
             {
               "hora": 9,
-              "clics": 12,
-              "costoClp": 3879
+              "clics": 16,
+              "costoClp": 5176
             },
             {
               "hora": 10,
-              "clics": 6,
-              "costoClp": 1562
+              "clics": 10,
+              "costoClp": 2633
             },
             {
               "hora": 11,
-              "clics": 11,
-              "costoClp": 2972
+              "clics": 16,
+              "costoClp": 4142
             },
             {
               "hora": 12,
-              "clics": 11,
-              "costoClp": 3273
+              "clics": 18,
+              "costoClp": 4940
             },
             {
               "hora": 13,
@@ -187,17 +194,17 @@
         },
         "cobertura": {
           "descripcion": "Cuántos días de historial detallado existen (pocos días = conclusiones débiles)",
-          "diasConDetalle": 2,
+          "diasConDetalle": 3,
           "desde": "2026-10-08",
-          "hasta": "2026-10-09",
+          "hasta": "2026-10-10",
           "conversionesRegistradas": 0.0
         }
       }
     },
     {
-      "title": "Reforzar términos de búsqueda de mayor tráfico",
-      "action": "Evaluar enfocar la estrategia de pujas y anuncios en las búsquedas con más clics acumulados.",
-      "reason": "En 'terminos_mas_clics', 'transfer aeropuerto' lidera con 10 clics, seguido de 'transfer aeropuerto santiago' con 4 clics y 'cabify aeropuerto' con 4 clics. El historial registrado en 'cobertura' abarca solo 2 días con 0.0 conversiones.",
+      "title": "Potenciar los términos de búsqueda con mayor atracción de clics",
+      "action": "Evaluar la asignación de recursos a los términos que generan más volumen de tráfico hacia la web.",
+      "reason": "El término 'transfer aeropuerto' obtuvo 11 clics y 'transfer aeropuerto santiago' obtuvo 5 clics, siendo los de mayor tráfico. Hay 0.0 conversiones registradas en 3 días de historial, por lo que el análisis se enfoca solo en tráfico.",
       "confidence": "Baja",
       "refs": [
         "terminos_mas_clics",
@@ -209,14 +216,20 @@
           "filas": [
             {
               "termino": "transfer aeropuerto",
-              "clics": 10,
-              "costoClp": 2511,
+              "clics": 11,
+              "costoClp": 2732,
               "conversiones": 0.0
             },
             {
               "termino": "transfer aeropuerto santiago",
+              "clics": 5,
+              "costoClp": 1464,
+              "conversiones": 0.0
+            },
+            {
+              "termino": "transfer santiago valparaiso",
               "clics": 4,
-              "costoClp": 1197,
+              "costoClp": 1096,
               "conversiones": 0.0
             },
             {
@@ -244,6 +257,12 @@
               "conversiones": 0.0
             },
             {
+              "termino": "como llegar del aeropuerto de santiago al centro",
+              "clics": 2,
+              "costoClp": 650,
+              "conversiones": 0.0
+            },
+            {
               "termino": "transfer de viña al aeropuerto",
               "clics": 2,
               "costoClp": 430,
@@ -254,26 +273,14 @@
               "clics": 2,
               "costoClp": 410,
               "conversiones": 0.0
-            },
-            {
-              "termino": "teléfono de transvip",
-              "clics": 2,
-              "costoClp": 395,
-              "conversiones": 0.0
-            },
-            {
-              "termino": "viña a aeropuerto santiago",
-              "clics": 1,
-              "costoClp": 513,
-              "conversiones": 0.0
             }
           ]
         },
         "cobertura": {
           "descripcion": "Cuántos días de historial detallado existen (pocos días = conclusiones débiles)",
-          "diasConDetalle": 2,
+          "diasConDetalle": 3,
           "desde": "2026-10-08",
-          "hasta": "2026-10-09",
+          "hasta": "2026-10-10",
           "conversionesRegistradas": 0.0
         }
       }

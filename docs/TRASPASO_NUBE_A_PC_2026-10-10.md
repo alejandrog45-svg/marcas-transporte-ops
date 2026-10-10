@@ -13,6 +13,11 @@ Al abrir el PC, en la primera sesión de Claude Code local: «lee este archivo y
 - **Search Console:** conectado, pero `sc-domain:ubertransfer.cl` da USER_PERMISSION_DENIED (propiedad sin verificar; sigue pendiente Rafael).
 - **GA4:** solo ve la propiedad `cabrasgo` (otro proyecto, NO se leyó). La propiedad de ubertransfer (`G-26K0MDTFY1`) no es accesible hasta que Rafael dé acceso.
 
+## Consistencia de datos (10-10, solo lectura; no se tocó código ni datos del panel)
+- **UberTransfer: CONSISTENTE.** Supermetrics = `data/google_ads_ubertransfer.json` e historial en ambos días (08-10: 794 impr., 52 clics, $15.068; 09-10: 1.125, 65, $15.810; 0 conversiones).
+- **Aereostar: DESFASE REAL.** El panel/`data/google_ads_aereostar.json` dice «campaña detenida, 0 gasto» (captura del usuario del 08-10 14:51, sin sincronización). Google Ads real: campaña `Campaign #1` **ENABLED**, últimos 7 días 790 impr., 53 clics, $31.020, 0 conversiones (08-10 12 clics y 09-10 41, coherente con el aviso de pago de esa captura ya superado). Es el pendiente (5) conocido: la nube no lo corrige sola; cambiarlo altera el panel de Aereostar y requiere aprobación del dueño (regla antirretroceso: no se modificó nada).
+- Propuesta (sin aplicar): sincronizar solo lectura la cuenta `548-530-8262` en `sync_google_ads.py` y mostrar la fecha de la lectura en el panel de Aereostar.
+
 ## Qué se puede hacer desde la nube sin el PC
 1. **Publicar el panel:** push a `main` + flujo manual `panel-diario.yml` (usa Secrets de GitHub: `FIREBASE_SERVICE_ACCOUNT`, `GEMINI_API_KEY` y las de Google Ads de solo lectura que ya usa `tools/panel/sync_google_ads.py`). Una corrida diaria programada ya lee Google Ads, sugiere con IA y publica.
 2. **Cambios de CSS/plantilla/texto** del panel (`python tools/panel/build.py`, solo Node). NO frases, previsión ni tendencias (exigen la clave cifrada del PC).

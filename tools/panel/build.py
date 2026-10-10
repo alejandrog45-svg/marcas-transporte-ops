@@ -384,6 +384,9 @@ def brand_aereostar(page, ch=None):
     assert "#ed1c24" not in page and "#2563eb" not in page, "aereostar: quedaron colores de UberTransfer"
     page = one(page, '<span class="material-symbols-outlined text-white">flight_takeoff</span>',
                '<img src="/aereostar/icons/logo-128.png" alt="Logo Aereostar" width="32" height="32" style="border-radius:50%;display:block">')
+    # banner: el logo sin el disco negro (transparente), integrado en la franja; el nombre queda para lectores de pantalla
+    page, nsub = re.subn(r'<img class="mb-logo"[^>]*>', '<img class="mb-logo mb-wordmark" src="/aereostar/icons/logo-banner.png" alt="Logo Aereostar" width="150" height="57" decoding="async">', page, count=1)
+    assert nsub == 1, "aereostar: no se encontró el logo del banner"
     assert "/aereostar/icons/favicon-32.png" in page and "/aereostar/manifest.webmanifest" in page, "aereostar: faltan el favicon o el manifiesto"
     page = one(page, 'const SUGDOC="aiSuggestions"', 'const SUGDOC="aiSuggestions_aereostar"')   # sus recomendaciones, no las de UberTransfer
     page = one(page, 'const KP="";', 'const KP="ae_";')

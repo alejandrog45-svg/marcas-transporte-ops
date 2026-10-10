@@ -91,7 +91,8 @@ def test_barra_de_marca_en_celular_con_el_logo_de_cada_marca():
     tpl = (ROOT / "tools" / "panel" / "template.html").read_text(encoding="utf-8")
     assert tpl.count('id="mbrand"') == 1 and 'src="/icons/logo-128.png" alt="Logo UberTransfer"' in tpl
     page = _build().brand_aereostar(tpl)
-    assert 'class="mb-logo" src="/aereostar/icons/logo-128.png" alt="Logo Aereostar"' in page
+    assert 'class="mb-logo mb-wordmark" src="/aereostar/icons/logo-banner.png" alt="Logo Aereostar"' in page   # logo sin disco negro
+    assert (ROOT / "site/aereostar/icons/logo-banner.png").exists()
     assert "UberTransfer" not in page[page.index('id="mbrand"'):page.index('id="mbrand"') + 400]
     css = (ROOT / "tools" / "panel" / "extra.css").read_text(encoding="utf-8")
     assert "#mbrand{display:flex" in css and "min-width:1024px" in css  # banner también en escritorio

@@ -164,6 +164,10 @@ html body::before{content:"";position:absolute;z-index:-1;right:0;top:0;width:mi
 #mbrand .mb-t b{display:block;font:700 24px/1.12 'Plus Jakarta Sans',Inter,sans-serif;letter-spacing:-.01em};text-shadow:0 2px 14px rgba(0,0,0,.55)
 #mbrand .mb-t span{display:block;margin-top:2px;font-size:13px;line-height:1.3;color:#d3d9e6}
 @media(min-width:1024px){#mbrand{min-height:148px;padding:24px 28px 22px;gap:18px}#mbrand .mb-logo{width:80px;height:80px;flex-basis:80px;border-radius:20px}#mbrand .mb-t b{font-size:30px}#mbrand .mb-t span{font-size:14.5px}}
+#mbrand .mb-wordmark{width:auto;height:58px;flex:0 0 auto;border-radius:0;box-shadow:none;object-fit:contain;background:none;filter:drop-shadow(0 4px 14px rgba(0,0,0,.6))}
+#mbrand .mb-wordmark+.mb-t b{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media(min-width:1024px){#mbrand .mb-wordmark{height:88px}}
+@media(max-width:600px){#mbrand::before{background:linear-gradient(90deg,rgba(8,9,12,.9) 0%,rgba(8,9,12,.78) 62%,rgba(8,9,12,.34) 100%),radial-gradient(420px 170px at 0% 0%,var(--b-glow),transparent 72%)}#mbrand .mb-t span{text-shadow:0 1px 8px rgba(0,0,0,.8)}}
 @media(max-width:1023px){
 html #mnav{background:linear-gradient(#14161c,#0d0e12)!important;border-top:0!important;border-bottom:1px solid rgba(255,255,255,.07);box-shadow:0 10px 24px -12px rgba(0,0,0,.55)!important}
 html #mnav a{background:rgba(255,255,255,.07)!important;color:#dfe4ef!important;border:1px solid rgba(255,255,255,.1)!important;box-shadow:none!important}

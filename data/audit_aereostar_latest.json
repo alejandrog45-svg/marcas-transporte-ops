@@ -4,7 +4,7 @@
   {
    "url": "https://aereostar.cl/",
    "status": 200,
-   "seconds": 0.3,
+   "seconds": 0.28,
    "issues": [
     "title largo (105 car.)",
     "falta meta description",
@@ -27,7 +27,7 @@
   {
    "url": "https://aereostar.cl/portfolio/",
    "status": 200,
-   "seconds": 0.82,
+   "seconds": 0.7,
    "issues": [
     "title largo (89 car.)",
     "falta meta description",
@@ -50,7 +50,7 @@
   {
    "url": "https://aereostar.cl/compare/",
    "status": 200,
-   "seconds": 0.76,
+   "seconds": 0.84,
    "issues": [
     "title largo (79 car.)",
     "falta meta description"
@@ -72,7 +72,7 @@
   {
    "url": "https://aereostar.cl/trabaja-con-nosotros/",
    "status": 200,
-   "seconds": 0.77,
+   "seconds": 0.58,
    "issues": [
     "title largo (92 car.)",
     "falta meta description"
@@ -94,7 +94,7 @@
   {
    "url": "https://aereostar.cl/nuestra-flota/",
    "status": 200,
-   "seconds": 0.78,
+   "seconds": 0.72,
    "issues": [
     "title largo (85 car.)",
     "falta meta description"
@@ -116,7 +116,7 @@
   {
    "url": "https://aereostar.cl/reservar/",
    "status": 200,
-   "seconds": 0.71,
+   "seconds": 1.0,
    "issues": [
     "title largo (80 car.)",
     "falta meta description"
@@ -138,7 +138,7 @@
   {
    "url": "https://aereostar.cl/nosotros/",
    "status": 200,
-   "seconds": 0.61,
+   "seconds": 1.81,
    "issues": [
     "title largo (80 car.)",
     "falta meta description"
@@ -160,7 +160,7 @@
   {
    "url": "https://aereostar.cl/servicios/",
    "status": 200,
-   "seconds": 0.82,
+   "seconds": 0.83,
    "issues": [
     "title largo (81 car.)",
     "falta meta description"
@@ -182,7 +182,7 @@
   {
    "url": "https://aereostar.cl/tarifas/",
    "status": 200,
-   "seconds": 0.62,
+   "seconds": 0.73,
    "issues": [
     "title largo (87 car.)",
     "falta meta description"
@@ -204,7 +204,7 @@
   {
    "url": "https://aereostar.cl/contacto/",
    "status": 200,
-   "seconds": 0.62,
+   "seconds": 0.81,
    "issues": [
     "title largo (80 car.)",
     "falta meta description"
@@ -226,7 +226,7 @@
   {
    "url": "https://aereostar.cl/woodmart_slider/layout-parallax-slider/",
    "status": 200,
-   "seconds": 0.61,
+   "seconds": 0.56,
    "issues": [
     "title largo (103 car.)",
     "falta meta description"
@@ -246,7 +246,7 @@
    }
   }
  ],
- "generated": "2026-09-30T19:51:23Z",
+ "generated": "2026-10-10T03:07:18Z",
  "discovery": {
   "robots": 200,
   "sitemaps": [

@@ -20,7 +20,7 @@
   "alerts": [],
   "mode": "read_only",
   "status": "connected",
-  "lastSync": "2026-10-10T03:10:00Z",
+  "lastSync": "2026-10-10T03:10:29Z",
   "source": "Google Ads (lectura de solo lectura vía Supermetrics el 10-10-2026; el flujo diario con la API lo reemplazará)",
   "metrics": {
     "impressions": 706,

@@ -56,6 +56,38 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python tools/panel/ai_enrich_suggestions.py
 
+      # ---- Aereostar: datos 100 % propios (cuenta, archivos, historial y sugerencias separados). ----
+      # Van DESPUÉS de los pasos de UberTransfer y con continue-on-error: un fallo aquí nunca los detiene.
+      - name: Sincronizar Google Ads Aereostar (solo lectura)
+        continue-on-error: true
+        env:
+          ADS_BRAND: aereostar
+          GOOGLE_ADS_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_ADS_OAUTH_CLIENT_ID }}
+          GOOGLE_ADS_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_ADS_OAUTH_CLIENT_SECRET }}
+          GOOGLE_ADS_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
+          GOOGLE_ADS_CUSTOMER_ID_AEREOSTAR: ${{ secrets.GOOGLE_ADS_CUSTOMER_ID_AEREOSTAR || '5485308262' }}
+          GOOGLE_ADS_DEVELOPER_TOKEN: ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
+        run: python tools/panel/sync_google_ads.py
+
+      - name: Sugerencias de campaña Aereostar (solo lectura)
+        continue-on-error: true
+        env:
+          ADS_BRAND: aereostar
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: |
+          if [ -z "$FIREBASE_SERVICE_ACCOUNT" ]; then
+            echo "::warning::Falta FIREBASE_SERVICE_ACCOUNT: no se actualizan las sugerencias de Aereostar."
+          else
+            python tools/panel/sync_suggestions_firestore.py
+          fi
+
+      - name: Sugerencias con IA Aereostar (Gemini, solo lectura)
+        continue-on-error: true
+        env:
+          ADS_BRAND: aereostar
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python tools/panel/ai_enrich_suggestions.py
+
       - name: Armar panel
         env:
           PANEL_DATA_KEY: ${{ secrets.PANEL_DATA_KEY }}

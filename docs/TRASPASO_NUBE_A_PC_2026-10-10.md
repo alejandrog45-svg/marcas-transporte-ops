@@ -15,7 +15,7 @@ Al abrir el PC, en la primera sesión de Claude Code local: «lee este archivo y
 
 ## Consistencia de datos (10-10, solo lectura; no se tocó código ni datos del panel)
 - **UberTransfer: CONSISTENTE.** Supermetrics = `data/google_ads_ubertransfer.json` e historial en ambos días (08-10: 794 impr., 52 clics, $15.068; 09-10: 1.125, 65, $15.810; 0 conversiones).
-- **Aereostar: DESFASE REAL.** El panel/`data/google_ads_aereostar.json` dice «campaña detenida, 0 gasto» (captura del usuario del 08-10 14:51, sin sincronización). Google Ads real: campaña `Campaign #1` **ENABLED**, últimos 7 días 790 impr., 53 clics, $31.020, 0 conversiones (08-10 12 clics y 09-10 41, coherente con el aviso de pago de esa captura ya superado). Es el pendiente (5) conocido: la nube no lo corrige sola; cambiarlo altera el panel de Aereostar y requiere aprobación del dueño (regla antirretroceso: no se modificó nada).
+- **Aereostar: MISMA cuenta y campaña del panel (verificado).** `548-530-8262` y la campaña `24331409273` («Campaign #1») son exactamente las de `data/google_ads_aereostar.json`; no es otra «Aerostar». El dueño la activó hace 1–2 días (confirmado por él). Google Ads la muestra ENABLED con datos desde el 08-10 (84 impr., 12 clics, $15.012) y 09-10 (706, 41, $16.008); 7 días: 790 impr., 53 clics, $31.020, 0 conversiones. El panel sigue diciendo «detenida, 0 gasto» solo porque su dato es la captura del 08-10 14:51 (anterior a la activación) y esa cuenta no se sincroniza: **dato desactualizado, no error de identidad**. No se modificó nada.
 - Propuesta (sin aplicar): sincronizar solo lectura la cuenta `548-530-8262` en `sync_google_ads.py` y mostrar la fecha de la lectura en el panel de Aereostar.
 
 ## Qué se puede hacer desde la nube sin el PC

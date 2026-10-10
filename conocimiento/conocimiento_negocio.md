@@ -76,3 +76,4 @@ Horario real, comunas y rutas atendidas, tarifas, flota, estado de Google Busine
 
 ## Decisión 2026-10-10: leyenda de la Auditoría
 - PENDIENTE en la Auditoría = dato o decisión externa (lista fija `BIZ`), no un error del panel. La leyenda lo explica y remite al bloque de pendientes. No revertir sin pedido del dueño.
+- Medición (10-10): pasos A y C listos en `docs/pasos_medicion_rafael_y_dueno.md`; D (libro de contactos) y F (subir conversiones) requieren aprobación expresa del dueño. PENDIENTE se muestra en ámbar en la Auditoría.

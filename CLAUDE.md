@@ -70,6 +70,8 @@ Nada se da por hecho sin haberlo probado. Cero cifras inventadas. Una tarea a la
 ### 2026-10-10 — Sesión de nube (celular)
 - PR #1 (docs, hallazgos GA4/GSC y etiqueta de Google sin datos) abierto en borrador desde `main-hxz81b`; no fusionado. 71 pruebas OK.
 - «Problema 2» de Auditoría resuelto: la leyenda decía «PENDIENTE = falta un dato externo» sin decir cuál; ahora explica y remite al bloque «Pendiente: necesita datos o decisiones…» (lista fija `BIZ` en `template.html`: horario, tarifas, promo, rutas, nombre «Uber», coordinación Aereostar, conversiones, GA4/GSC). No era un fallo del panel. Publicado con aprobación del dueño (push a `main` + `panel-diario.yml`).
+- Rama `claude/great-rubin-uxhlqp` (PR en borrador, SIN publicar; publicar solo con «sí, publica» del dueño): sello de hora del encabezado con varias líneas en celular (antes se cortaba) y barra de desplazamiento del menú móvil oculta (eran las «barras negras»); PENDIENTE en ámbar en insignia y leyenda de la Auditoría. 71 pruebas OK. No se pudo ver en pantalla (login con Google): verificar en el celular tras publicar.
+- Nuevo `docs/pasos_medicion_rafael_y_dueno.md`: paso A (revisar teléfono, dueño) y paso C (GTM/GA4, Rafael). Pasos D y F del plan de medición siguen esperando aprobación expresa.
 - Voz: no hay conversación en vivo desde la sesión; se pueden enviar audios mp3 sintéticos (gTTS, sin datos sensibles).
 - Pendientes del dueño/Rafael: acceso GA4/Search Console, revisar etiqueta de Google («NO HAY DATOS»), cuál cuenta Aereostar de Ads es la real (548-530-8262 o 465-674-2227), repo a privado, APIKEY.txt, borrar script de Ads, confirmar DATA TRANSPORTE.
 

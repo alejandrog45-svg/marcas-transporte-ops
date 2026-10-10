@@ -330,3 +330,37 @@ def test_call_details_keep_duration_status_and_date_for_history():
     assert call[0]["durationSeconds"] == 34 and call[0]["status"] == "RECEIVED" and call[0]["date"] == "2026-10-09"
     assert call[1]["durationSeconds"] is None  # llamada sin duración informada: no se inventa 0
     assert "phoneNumber" not in call[0] and "callerNumber" not in call[0]  # no se guarda el número de nadie
+
+
+def _load(monkeypatch, brand=None):
+    if brand is None:
+        monkeypatch.delenv("ADS_BRAND", raising=False)
+    else:
+        monkeypatch.setenv("ADS_BRAND", brand)
+    spec = importlib.util.spec_from_file_location("sync_google_ads_" + str(brand), MODULE_PATH)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def test_default_brand_is_ubertransfer_and_unchanged(monkeypatch):
+    mod = _load(monkeypatch)
+    assert mod.BRAND_NAME == "UberTransfer" and mod.CUSTOMER_DEFAULT == "2035504421"
+    assert mod.OUT.name == "google_ads_ubertransfer.json"
+    assert mod.HISTORY_NAME == "google_ads_history_ubertransfer.json"
+
+
+def test_aereostar_brand_uses_only_its_own_account_and_files(monkeypatch):
+    monkeypatch.setenv("GOOGLE_ADS_CUSTOMER_ID", "2035504421")  # el de UberTransfer NO debe usarse
+    monkeypatch.delenv("GOOGLE_ADS_CUSTOMER_ID_AEREOSTAR", raising=False)
+    mod = _load(monkeypatch, "aereostar")
+    assert mod.BRAND_NAME == "Aereostar" and mod.CUSTOMER_ENV == "GOOGLE_ADS_CUSTOMER_ID_AEREOSTAR"
+    assert mod.customer_id(__import__("os").environ.get(mod.CUSTOMER_ENV, mod.CUSTOMER_DEFAULT)) == "5485308262"
+    assert mod.OUT.name == "google_ads_aereostar.json"
+    assert mod.HISTORY_NAME == "google_ads_history_aereostar.json"
+
+
+def test_unknown_brand_is_rejected(monkeypatch):
+    import pytest
+    with pytest.raises(SystemExit):
+        _load(monkeypatch, "otra")

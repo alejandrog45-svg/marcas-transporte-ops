@@ -1,4 +1,7 @@
-"""Descarga métricas de Google Ads para UberTransfer, solo lectura.
+"""Descarga métricas de Google Ads de una marca (UberTransfer por defecto, o Aereostar), solo lectura.
+
+La marca se elige con ADS_BRAND (ubertransfer | aereostar). Cada marca usa su propio ID de cliente,
+archivo de datos e historial: nunca comparten nada. Aereostar lee solo GOOGLE_ADS_CUSTOMER_ID_AEREOSTAR.
 
 No contiene llamadas de mutación. Usa acceso Cloud administrado; si existe un
 token de desarrollador heredado, lo envía por compatibilidad.
@@ -14,8 +17,15 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "data" / "google_ads_ubertransfer.json"
-CUSTOMER_DEFAULT = "2035504421"
+BRANDS = {  # marca -> (nombre visible, cliente por defecto, variable de entorno del cliente)
+    "ubertransfer": ("UberTransfer", "2035504421", "GOOGLE_ADS_CUSTOMER_ID"),
+    "aereostar": ("Aereostar", "5485308262", "GOOGLE_ADS_CUSTOMER_ID_AEREOSTAR"),
+}
+BRAND = os.environ.get("ADS_BRAND", "ubertransfer").strip().lower() or "ubertransfer"
+if BRAND not in BRANDS:
+    raise SystemExit(f"ADS_BRAND debe ser uno de {sorted(BRANDS)}")
+BRAND_NAME, CUSTOMER_DEFAULT, CUSTOMER_ENV = BRANDS[BRAND]
+OUT = ROOT / "data" / f"google_ads_{BRAND}.json"
 API_VERSION = "v25"
 
 METRIC_FIELDS = ("metrics.impressions, metrics.clicks, metrics.cost_micros, metrics.ctr, "
@@ -247,8 +257,8 @@ def normalize(rows: list[dict], date_from: str, date_to: str) -> dict:
             "firstSeen": old.get("firstSeen", date_from), "lastSeen": seen,
         }
     return {
-        "brand": "UberTransfer",
-        "customerId": customer_id(os.environ.get("GOOGLE_ADS_CUSTOMER_ID", CUSTOMER_DEFAULT)),
+        "brand": BRAND_NAME,
+        "customerId": customer_id(os.environ.get(CUSTOMER_ENV, CUSTOMER_DEFAULT)),
         "campaignIds": sorted({row["campaignId"] for row in campaigns if row["campaignId"]}) or sorted(previous.get("campaignIds") or []),
         "campaignNames": current_names,
         "campaignHistory": sorted(campaign_history.values(), key=lambda x: x["campaignId"]),
@@ -476,7 +486,7 @@ def apply_campaign_quality(result: dict) -> None:
                 metrics[key] = float(day_rows[0][key])
 
 
-HISTORY_NAME = "google_ads_history_ubertransfer.json"
+HISTORY_NAME = f"google_ads_history_{BRAND}.json"
 HISTORY_KEEP_DAYS = 90
 HISTORY_VALUES = ("impressions", "clicks", "costClp", "conversions")
 # Métricas que no son dimensiones: en el historial solo se conservan HISTORY_VALUES.
@@ -544,7 +554,7 @@ def update_report_history(reports: dict, previous_reports: dict | None, path: Pa
 def main() -> None:
     date_from, date_to = dates()
     token = access_token()
-    cid = customer_id(os.environ.get("GOOGLE_ADS_CUSTOMER_ID", CUSTOMER_DEFAULT))
+    cid = customer_id(os.environ.get(CUSTOMER_ENV, CUSTOMER_DEFAULT))
     headers = {"authorization": f"Bearer {token}", "content-type": "application/json"}
     if os.environ.get("GOOGLE_ADS_DEVELOPER_TOKEN", "").strip():
         headers["developer-token"] = os.environ["GOOGLE_ADS_DEVELOPER_TOKEN"].strip()

@@ -1,4 +1,4 @@
-{"brand": "UberTransfer", "keepDays": 90, "days": ["2026-10-08", "2026-10-09"], "updatedAt": "2026-10-10T03:38:56.067297Z","reports":{
+{"brand": "UberTransfer", "keepDays": 90, "days": ["2026-10-08", "2026-10-09"], "updatedAt": "2026-10-10T03:45:00.032121Z","reports":{
 "adGroups":[
 {"date":"2026-10-08","impressions":794,"clicks":52,"costClp":15068,"conversions":0.0,"campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"},
 {"date":"2026-10-09","impressions":1125,"clicks":65,"costClp":15810,"conversions":0.0,"campaignId":"24325669851","campaignName":"Campaign #1","adGroupId":"201907353538","adGroupName":"Grupo de anuncios 1"}

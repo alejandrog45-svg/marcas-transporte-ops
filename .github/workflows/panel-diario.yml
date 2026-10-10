@@ -61,9 +61,28 @@ jobs:
             python tools/panel/sync_suggestions_firestore.py
           fi
 
+      - name: Sugerencias de Aereostar (solo lectura)
+        continue-on-error: true   # su propio documento en Firestore; si falla, el resto del flujo sigue igual
+        env:
+          GOOGLE_ADS_BRAND: Aereostar
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: |
+          if [ -z "$FIREBASE_SERVICE_ACCOUNT" ]; then
+            echo "::warning::Falta FIREBASE_SERVICE_ACCOUNT: no se actualizan las sugerencias de Aereostar en Firestore."
+          else
+            python tools/panel/sync_suggestions_firestore.py
+          fi
+
       - name: Sugerencias con IA (Gemini, solo lectura)
         continue-on-error: true   # la IA es un extra: si falla, el panel se arma igual con las sugerencias de reglas
         env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python tools/panel/ai_enrich_suggestions.py
+
+      - name: Sugerencias con IA de Aereostar (Gemini, solo lectura)
+        continue-on-error: true
+        env:
+          GOOGLE_ADS_BRAND: Aereostar
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python tools/panel/ai_enrich_suggestions.py
 

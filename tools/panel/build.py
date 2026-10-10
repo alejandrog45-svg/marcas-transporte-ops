@@ -385,6 +385,7 @@ def brand_aereostar(page, ch=None):
     page = one(page, '<span class="material-symbols-outlined text-white">flight_takeoff</span>',
                '<img src="/aereostar/icons/logo-128.png" alt="Logo Aereostar" width="32" height="32" style="border-radius:50%;display:block">')
     assert "/aereostar/icons/favicon-32.png" in page and "/aereostar/manifest.webmanifest" in page, "aereostar: faltan el favicon o el manifiesto"
+    page = one(page, 'const SUGDOC="aiSuggestions"', 'const SUGDOC="aiSuggestions_aereostar"')   # sus recomendaciones, no las de UberTransfer
     page = one(page, 'const KP="";', 'const KP="ae_";')
     page = one(page, 'const MYB="ubertransfer";', 'const MYB="aereostar";')
     page = one(page, '.doc("estado")', '.doc("estado_aereostar")')
@@ -420,6 +421,7 @@ def main():
     google_ads = read_google_ads_status(DATA / "google_ads_ubertransfer.json", "UberTransfer")
     google_ads["aiSuggestions"] = read_ai_suggestions(DATA / "ai_suggestions_latest.json")
     aereostar_ads = read_google_ads_status(DATA / "google_ads_aereostar.json", "Aereostar", ("24331409273",))
+    aereostar_ads["aiSuggestions"] = read_ai_suggestions(DATA / "ai_suggestions_aereostar_latest.json")
     assert len(tr["indice_mensual"]) == 12, "Trends: faltan meses"
     meta = {
         "srcName": src_meta["srcName"], "srcSha": src_sha, "srcRows": src_meta["rows"],

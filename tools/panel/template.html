@@ -587,7 +587,7 @@ function checks(){const c=[];const add=(ok,l,dt)=>c.push({ok,l,dt});
  add(badv===0,"Volúmenes de búsqueda en los valores que entrega Google",badv+" fuera de rango");
  const dom=[...document.querySelectorAll("#topk .font-numeric-table")].map(x=>x.textContent.trim());
  const inSel=[...sel].filter(k=>DATA.some(d=>d.k===k)).length;
- if(META.plannerActive===false){const lh=(ADS.history||[]).slice(-1)[0]||{};add(dom[1]===realFmt(lh.impressions)&&dom[2]===realFmt(lh.clicks),"Las tarjetas superiores coinciden con la tabla","tarjetas "+(dom[1]||"?")+" impresiones / "+(dom[2]||"?")+" clics · historial de Google Ads "+realFmt(lh.impressions)+" / "+realFmt(lh.clicks))}else add(dom[0]===String(nG())&&dom[1]===String(inSel),"Las tarjetas superiores coinciden con la tabla","tarjetas "+(dom[0]||"?")+" / "+(dom[1]||"?")+" · datos "+nG()+" / "+inSel);
+ if(META.plannerActive===false||(ADS.history||[]).length){const lh=(ADS.history||[]).slice(-1)[0]||{};add(dom[1]===realFmt(lh.impressions)&&dom[2]===realFmt(lh.clicks),"Las tarjetas superiores coinciden con la tabla","tarjetas "+(dom[1]||"?")+" impresiones / "+(dom[2]||"?")+" clics · historial de Google Ads "+realFmt(lh.impressions)+" / "+realFmt(lh.clicks))}else add(dom[0]===String(nG())&&dom[1]===String(inSel),"Las tarjetas superiores coinciden con la tabla","tarjetas "+(dom[0]||"?")+" / "+(dom[1]||"?")+" · datos "+nG()+" / "+inSel);
  const s=simCalc(),ix=simIndep();
  add(!s.w&&!ix?true:(s.w&&ix&&s.cmin===ix.cmin&&s.cmax===ix.cmax),"Simulador: un segundo cálculo independiente da lo mismo",ix&&s.w?("clics/día "+s.cmin+"–"+s.cmax+" = "+ix.cmin+"–"+ix.cmax):"sin frases con puja marcadas");
  const stale=[...sel].filter(k=>!DATA.some(d=>d.k===k)).length;
@@ -605,7 +605,7 @@ function checks(){const c=[];const add=(ok,l,dt)=>c.push({ok,l,dt});
   const known=F.keywords.filter(k=>ORIG.some(d=>d.k===k)).length;
   add(known===F.keywords.length,"Las frases de la previsión existen en la tabla de datos",known+" de "+F.keywords.length+" encontradas")}
  if(HP)add(HP.status>=200&&HP.status<400,"Sitio del cliente: la auditoría (servidor) vio la página de inicio con HTTP 2xx/3xx","HTTP "+HP.status+" · "+fmtDT(AUD));
- {const cd=[...document.querySelectorAll("#topk .font-numeric-table")].map(x=>x.textContent.trim())[3],sx=simCalc();add(!sx.w||cd===rg(sx.cmin*sx.dias,sx.cmax*sx.dias),"Simulador: la tarjeta de clics al mes usa los mismos días que el cálculo","tarjeta "+(cd||"?")+" · días "+sx.dias)}
+ {const cd=[...document.querySelectorAll("#topk .font-numeric-table")].map(x=>x.textContent.trim())[3],sx=simCalc();add(!sx.w||(ADS.history||[]).length>0||cd===rg(sx.cmin*sx.dias,sx.cmax*sx.dias),"Simulador: la tarjeta de clics al mes usa los mismos días que el cálculo","tarjeta "+(cd||"?")+" · días "+sx.dias)}
  if(AS.ver)add(AS.ver.err?null:AS.ver.ok,"La versión que ves es la publicada (Firebase)",AS.ver.err?"no medible (abierto desde archivo o sin red)":(AS.ver.ok?"al día: mismos datos y misma versión ("+AS.ver.latest.dataSha.slice(0,12)+"…)":"HAY UNA VERSIÓN NUEVA publicada ("+fmtDT(new Date(AS.ver.latest.builtAt))+"): recarga la página"));
  return c}
 function adsExtraRender(){
@@ -658,7 +658,7 @@ let __lastProbe=0;function cooldown(){const r=30000-(Date.now()-__lastProbe);if(
 const probeBtn=$("probebtn");if(probeBtn)probeBtn.onclick=()=>{const w=cooldown();if(w){$("vsite").innerHTML='<div class="text-amber-300 text-[13px]">Espera '+w+' s antes de volver a verificar (así no cargamos el sitio del cliente).</div>';return}probe()};
 function stampTick(){const s=window.__vsum||{ok:0,fail:0,total:0};
  const st=s.fail?'<span class="text-red-300">⚠ '+s.fail+' verificaciones con problemas</span>':'<span class="text-emerald-300">✓ '+s.ok+'/'+s.total+' verificaciones de datos correctas'+(s.na?' <span class="text-outline">('+s.na+' sin medir)</span>':'')+'</span>';
- $("stamp").title="Comprobaciones de coherencia entre los datos del panel (filas, huella, pujas, cálculos, versión publicada). No garantizan resultados de una campaña. Detalle en Datos y verificación.";$("stamp").innerHTML='<span>Hora actual: <b class="text-on-surface-variant font-numeric-table">'+nowStr()+'</b></span>'+(META.plannerActive===false&&ADS.lastSync?'<span>Google Ads: '+fmtDT(new Date(ADS.lastSync))+' ('+ago(new Date(ADS.lastSync))+')</span>':'<span>Datos de Google: '+fmtDT(EXP)+' ('+ago(EXP)+')</span>')+(AUD?'<span>Auditoría del sitio: '+fmtDT(AUD)+' ('+ago(AUD)+')</span>':'')+st}
+ $("stamp").title="Comprobaciones de coherencia entre los datos del panel (filas, huella, pujas, cálculos, versión publicada). No garantizan resultados de una campaña. Detalle en Datos y verificación.";$("stamp").innerHTML='<span>Hora actual: <b class="text-on-surface-variant font-numeric-table">'+nowStr()+'</b></span>'+(ADS.lastSync?'<span>Google Ads: '+fmtDT(new Date(ADS.lastSync))+' ('+ago(new Date(ADS.lastSync))+')</span>':'<span>Datos de Google: '+fmtDT(EXP)+' ('+ago(EXP)+')</span>')+(AUD?'<span>Auditoría del sitio: '+fmtDT(AUD)+' ('+ago(AUD)+')</span>':'')+st}
 setInterval(stampTick,1000);
 
 const LK="ut_live_hist";let HIST=store.get(LK,[]);

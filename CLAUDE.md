@@ -68,6 +68,13 @@ Nada se da por hecho sin haberlo probado. Cero cifras inventadas. Una tarea a la
 
 ## Historial de sesiones
 
+### 2026-10-10 (nube, sesión 2, cont. 9) — Diseño de punta a punta: banner grande y franja de foto en cada menú
+- Pedido del dueño: banner más grande y con más contraste; fondos con fotos de furgones y diseño corporativo en TODOS los menús de ambos paneles; regla antirretroceso. `PANEL_VERSION` = 11.
+- Banner `#mbrand`: más alto (112 px celular / 148 px escritorio), logo 64/80 px, foto al 95 % con `contrast(1.18) saturate(1.12)` y degradado oscuro a la izquierda para que el texto se lea.
+- Cada menú (11: Resumen, Campañas, Rendimiento, Segmentos, Sugerencias, Historial, Palabras clave, Datos y verificación, Auditoría, Mejoras, Guía) empieza con una franja `main>#id::before` (solo CSS, sin tocar JS) con foto propia de la marca (`--sb1..--sb6` definidas en `UT_BG`/`AE_BG` de `build.py`), título blanco y línea de color de marca. Fotos nuevas en `site/bg/`: `ubertransfer-sec-4/5/6.jpg` (Sheraton, furgón con conductor, avión) y `aereostar-sec-5/6.jpg` (aeropuerto y el afiche del aeropuerto con el logo de UberTransfer BORRADO de la puerta y el de Aereostar puesto). Trampa vivida: faltaba un `;` entre variables CSS y `--sb1` quedaba inválida (hay prueba nueva).
+- Imágenes de foros (laozhang.ai: tokens, memoria, imagen→video) analizadas: NO se usan (marca ajena, texto, rutas de pago). Teléfono visto en el WhatsApp Business de Aereostar: +56 9 3705 7858 **por confirmar por el dueño**; no está en el panel.
+- Probado en copia local: 11 menús sin errores ni desbordes a 375/820/1366 en ambos paneles; verificaciones 17/19 y 12/14; 89 pruebas OK.
+
 ### 2026-10-10 (nube, sesión 2, cont. 8) — Celular: logo por marca, foto sutil, sugerencias por marca
 - Barra de marca `#mbrand` en celular (logo propio de cada panel; UberTransfer `/icons/logo-128.png`, Aereostar `/aereostar/icons/logo-128.png`), pestañas oscuras con degradado de marca, tarjetas redondeadas, foto de fondo fija en celular (opacidad ×0,3; cambio medido en la zona del título: máx. 27/255 Aereostar, 18/255 UberTransfer, promedio ≈10). `PANEL_VERSION` = 7.
 - ERROR REAL CORREGIDO: el panel de Aereostar leía el documento `panel/aiSuggestions` de UberTransfer. Ahora usa `panel/aiSuggestions_aereostar` (el workflow escribe ambos por marca y la IA tiene su archivo `ai_suggestions_aereostar_latest.json`). **Pendiente del dueño:** desplegar `firestore.rules` (`firebase deploy --only firestore:rules --project ubertransfer-ops --account alejandrog45@gmail.com`); hasta entonces Aereostar no lee su documento de reglas (la IA cifrada sí funciona).

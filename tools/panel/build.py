@@ -282,13 +282,13 @@ AE_CH = [
     "Verificar etiquetas de medición (GA4/GTM) propias de aereostar.cl y los eventos click_whatsapp, click_phone y lead_submit",
     "Marca: «Aereostar» no figura registrada en INAPI (consulta pública 30-09-2026); consultar a un abogado de propiedad industrial sobre registrarla en clase 39 (transporte)",
     "Coordinar con UberTransfer: una frase, un dueño (ver consultas/01_coordinacion_aereostar_ubertransfer/05_sintesis.md en el repositorio)",
-    "Conseguir el historial de la campaña de Búsqueda «Aereostar Octubre 2025» (términos de búsqueda, costo, clics, conversiones) para medir esta marca por separado",
+    "Medir las conversiones de la campaña «Campaign #1» de Aereostar (llamadas, WhatsApp, formulario): hoy figuran 0 y no se sabe qué clics terminan en servicio",
 ]
-AE_BIZ = ["Teléfono/WhatsApp, horario y tarifas de Aereostar: sin datos verificados (PENDIENTE Rafael)", "Historial de la campaña «Aereostar Octubre 2025» (clics, costo, conversiones): pedirlo a Rafael o a quien la administra", "Marca «Aereostar»: no figura registrada en INAPI (30-09-2026); falta la opinión de un abogado de propiedad industrial", "Flota real y capacidades: la página muestra «6 pasajeros, Van, 2020» para los cuatro vehículos (dudoso)", "Coordinación con UberTransfer (una frase, un dueño): falta la decisión de Rafael sobre quién lleva el aeropuerto", "Conversiones reales (WhatsApp, teléfono, correo): sin medir", "Search Console y GA4: sin datos reales conectados"]
+AE_BIZ = ["Teléfono/WhatsApp, horario y tarifas de Aereostar: sin datos verificados (PENDIENTE Rafael)", "Conversiones de la campaña «Campaign #1» (activa desde el 08-10): 0 registradas; falta medir llamadas, WhatsApp y servicios concretados", "Marca «Aereostar»: no figura registrada en INAPI (30-09-2026); falta la opinión de un abogado de propiedad industrial", "Flota real y capacidades: la página muestra «6 pasajeros, Van, 2020» para los cuatro vehículos (dudoso)", "Coordinación con UberTransfer (una frase, un dueño): falta la decisión de Rafael sobre quién lleva el aeropuerto", "Conversiones reales (WhatsApp, teléfono, correo): sin medir", "Search Console y GA4: sin datos reales conectados"]
 AE_GUIA = ('<div class="card warn"><h2>Este es el panel de Aereostar</h2><p>Está <b>separado del panel de UberTransfer</b> para no mezclar datos: '
-           'las frases marcadas, las palabras negativas, las frases propias y el historial de consultas de aquí son solo de Aereostar. '
-           'Las frases, la previsión y las tendencias de Google son del mercado de aeropuerto y se comparten como referencia. '
-           'Todavía no hay auditoría ni cifras propias de Aereostar: se muestran como «sin datos». <b>No se crea ninguna campaña ni se gasta nada.</b></p></div>')
+           'las cifras de Google Ads (cuenta 548-530-8262, campaña «Campaign #1»), las sugerencias, el historial y la auditoría de aquí son solo de Aereostar, '
+           'y las funciones son las mismas que en UberTransfer. La lectura de Google Ads es de solo lectura: '
+           '<b>este panel no crea ni cambia campañas, anuncios, pujas ni presupuestos.</b></p></div>')
 
 
 def ae_checklist(au):
@@ -344,6 +344,10 @@ def brand_aereostar(page, ch=None):
     page = page[:i] + "const BIZ=window.__BIZ=" + json.dumps(AE_BIZ, ensure_ascii=False) + ";" + page[j:]
     page = one(page, 'const KP="";', 'const KP="ae_";')
     page = one(page, 'const MYB="ubertransfer";', 'const MYB="aereostar";')
+    # Aereostar usa las mismas funciones que UberTransfer (modo Ads en vivo), pero sin app instalable
+    # y con SUS propias sugerencias en Firestore (nunca las de UberTransfer).
+    page = one(page, 'PWA_ON=META.plannerActive===false&&location.protocol!=="file:"', 'PWA_ON=false')
+    page = one(page, 'doc("aiSuggestions")', 'doc("aiSuggestions_aereostar")')
     page = one(page, '.doc("estado")', '.doc("estado_aereostar")')
     page = one(page, "el sitio tiene WhatsApp y teléfono: <b>+56 9 4996 9267</b>, dato verificado", "teléfono/WhatsApp de Aereostar: <b>PENDIENTE de confirmar</b>, sin verificar")
     page = page.replace("+56 9 4996 9267", "teléfono de Aereostar: PENDIENTE")
@@ -377,6 +381,7 @@ def main():
     google_ads = read_google_ads_status(DATA / "google_ads_ubertransfer.json", "UberTransfer")
     google_ads["aiSuggestions"] = read_ai_suggestions(DATA / "ai_suggestions_latest.json")
     aereostar_ads = read_google_ads_status(DATA / "google_ads_aereostar.json", "Aereostar", ("24331409273",))
+    aereostar_ads["aiSuggestions"] = read_ai_suggestions(DATA / "ai_suggestions_aereostar.json")  # solo datos de Aereostar
     assert len(tr["indice_mensual"]) == 12, "Trends: faltan meses"
     meta = {
         "srcName": src_meta["srcName"], "srcSha": src_sha, "srcRows": src_meta["rows"],
@@ -411,7 +416,7 @@ def main():
         {"name": "UberTransfer", "ias": "ias.html", "transform": lambda p: p, "enc": ENC_FILE, "meta": meta,
          "site": ROOT / "site", "docs": ROOT / "docs" / "panel_keywords.html"},
         {"name": "Aereostar", "ias": "ias_aereostar.html", "transform": ae_tf, "enc": DATA / "panel_data_aereostar.enc.json",
-         "meta": dict(meta, ampliacion=[], audit=ae_audit, forecast=forecast, trends=tr, plannerActive=True, googleAds=aereostar_ads), "site": ROOT / "site" / "aereostar",
+         "meta": dict(meta, ampliacion=[], audit=ae_audit, forecast=forecast, trends=tr, plannerActive=False, googleAds=aereostar_ads), "site": ROOT / "site" / "aereostar",
          "docs": ROOT / "docs" / "panel_aereostar.html"},
     ]
     resumen = []

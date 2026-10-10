@@ -80,3 +80,4 @@ Horario real, comunas y rutas atendidas, tarifas, flota, estado de Google Busine
 
 ## Decisión 2026-10-10 (nube)
 - Desde la nube solo se lee: publicar vía GitHub Actions y Supermetrics (si el dueño lo autoriza); nunca contraseñas ni cambios en Ads. Qué se puede/no se puede: `docs/TRASPASO_NUBE_A_PC_2026-10-10.md`. No revertir sin pedido del dueño.
+- Decisión 10-10: el panel de Aereostar replica las funciones de UberTransfer con datos 100 % propios (cuenta 548-530-8262; sugerencias, historial y archivos aparte). La auditoría de aereostar.cl sigue siendo manual (no diaria). No revertir sin pedido del dueño.

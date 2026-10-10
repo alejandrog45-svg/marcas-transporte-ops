@@ -1,6 +1,6 @@
 # Plan: panel de Aereostar con las mismas funciones que UberTransfer (datos 100 % propios)
 
-Estado: PLAN (10-10-2026, sesión de nube). Nada de esto está aplicado. Regla antirretroceso: UberTransfer no cambia; cada paso se prueba con el panel de UberTransfer idéntico antes/después. Una tarea a la vez, rama aparte, sin publicar hasta «sí, publica» del dueño. Solo lectura de Google Ads; sin tocar presupuesto, pujas ni anuncios.
+Estado (10-10-2026, sesión de nube): pasos 0–7 PREPARADOS EN LA RAMA `ccr-8b4f70ce-5obz3r` (PR #4), sin publicar ni fusionar; falta paso 8 en `main` y paso 9 (publicar) con «sí, publica». Regla antirretroceso: UberTransfer no cambia; cada paso se prueba con el panel de UberTransfer idéntico antes/después. Una tarea a la vez, rama aparte, sin publicar hasta «sí, publica» del dueño. Solo lectura de Google Ads; sin tocar presupuesto, pujas ni anuncios.
 
 ## Diagnóstico (verificado en el código)
 - Panel UberTransfer = modo «Ads en vivo» (`plannerActive:false`): lee `data/google_ads_ubertransfer.json` + historial 90 días + sugerencias (reglas e IA) + auditoría diaria + Auditoría/Mejoras/Guía.
@@ -29,3 +29,14 @@ Cada marca tiene su propio ID de cliente, archivo de datos, historial, sugerenci
 - **Rama y publicación:** una rama `aereostar-paridad` desde `main`, PR en borrador por paso; nada se publica sin aprobación.
 - **Qué falta del PC:** armar con la clave (paso 5) y reglas de Firestore (paso 4) si el dueño aprueba desplegarlas.
 - Pendientes ajenos al plan: teléfono, tarifas y horarios de Aereostar (Rafael), PWA de Aereostar (hoy solo UberTransfer; no se cambia).
+
+## Avance real (rama del PR #4; nada publicado)
+- **Paso 0 HECHO:** huella de paneles (`tools/panel/huella_paneles.py`, `tests/golden/`). **Resultado final: el panel de UberTransfer sale BYTE A BYTE igual** (huella = golden) tras todos los cambios; la plantilla NO se tocó: todo lo de Aereostar vive en `brand_aereostar()` de `build.py`.
+- **Paso 1 PREPARADO:** flujo manual `ads-acceso-aereostar.yml` (solo lectura, sin commit ni publicación; muestra solo «ACCESO OK» y recuentos). GitHub solo deja ejecutarlo cuando el archivo está en `main`: **tras fusionar, lanzarlo una vez**. Verificado ya por otra vía: el usuario `alejandrog45@gmail.com` lee la cuenta 548-530-8262 en Supermetrics; falta confirmar que el refresh token del repo también (por eso este flujo).
+- **Paso 2 HECHO:** `sync_google_ads.py` por marca (`ADS_BRAND`; Aereostar usa solo `GOOGLE_ADS_CUSTOMER_ID_AEREOSTAR`, nunca el ID de UberTransfer). Pruebas en `tests/test_google_ads_sync.py`.
+- **Paso 3 HECHO:** 3 pasos de Aereostar en `panel-diario.yml`, tras los de UberTransfer y con `continue-on-error`.
+- **Paso 4 HECHO (código):** sugerencias/IA por marca (`panel/aiSuggestions_aereostar`, `data/ai_suggestions_aereostar.json`) + regla de lectura en `firestore.rules`. **Falta desplegar las reglas** (`firebase deploy --only firestore:rules --project ubertransfer-ops --account alejandrog45@gmail.com`; lo hace el dueño en el PC) o las sugerencias de Aereostar no se verán en el panel. Pruebas en `tests/test_brand_isolation.py`.
+- **Paso 5–6 HECHO (preparado):** Aereostar arma en modo Ads en vivo con las MISMAS 11 secciones que UberTransfer (Resumen, Campañas y anuncios, Rendimiento, Segmentos, Sugerencias, Historial, Palabras clave, Datos y verificación, Auditoría, Mejoras, Guía), sin app instalable. Datos propios: `data/google_ads_aereostar.json` sembrado con la lectura real del 10-10 (08 y 09-10; 100 % de la cuenta 548-530-8262). El primer sync de la API lo reemplaza. Probado en navegador (Chromium, panel armado con clave de prueba en una copia aparte): 11 secciones, sin desbordes a 375 y 1366 px, sin errores de consola propios, tarjetas = historial. Desaparece de Aereostar la vista de 170 frases del Planificador (igual que en UberTransfer; los datos siguen en el repo).
+- **Paso 7:** la verificación «Auditoría con menos de 8 días» falla en Aereostar porque su auditoría es del 30-09 (real): ejecutar a mano `auditoria-aereostar.yml` (se decidió que NO sea diaria; no se programa).
+- **Textos de Aereostar actualizados** (guía, pendientes, mejoras): ya no dicen «sin campañas».
+- Pendiente del PC/dueño: arma con clave solo si se quiere reproducir local (CI usa el Secret `PANEL_DATA_KEY`; las ejecuciones diarias lo demuestran porque los datos cifrados de UberTransfer cambian cada día); desplegar reglas de Firestore; fusionar el PR #4 y publicar.

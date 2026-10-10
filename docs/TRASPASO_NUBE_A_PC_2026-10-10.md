@@ -1,0 +1,31 @@
+# Traspaso nube → PC (sesión de nube del 2026-10-10, tarde)
+
+Al abrir el PC, en la primera sesión de Claude Code local: «lee este archivo y ejecuta la sección *Al volver al PC*».
+
+## Qué se comprobó desde la nube (hechos del 10-10)
+- **Navegador del dueño (Chrome / Claude in Chrome):** NO disponible en la sesión de nube. Solo hay Chromium + Playwright sin sesiones (`/opt/pw-browsers`): sirve para probar los paneles sin login, no para entrar a Google Ads ni a cuentas. Nunca se escriben contraseñas ni 2FA.
+- **Google Ads (Supermetrics, conector del dueño):** fuente `AW` en estado NOT_AUTHENTICATED. Falta que el dueño abra el enlace de acceso (lo entrega `data_source_discovery(ds_id="AW")`; es personal, no se guarda en el repo) y autorice la cuenta de datos `203-550-4421`. Igual con Search Console (`GW`) y GA4 (`GAWA`): sin conectar. Hasta entonces la nube NO lee Ads directamente.
+- **GitHub:** la nube ve las 3 repos (`marcas-transporte-ops`, `Plataforma-anuncios`, `data-transporte`) con la cuenta `alejandrog45-svg`; rama de trabajo `ccr-8b4f70ce-5obz3r` en las tres.
+- **Red:** salen peticiones a `ubertransfer-ops.firebaseapp.com` (200) y `ubertransfer.cl` (200). `googleads.googleapis.com` responde (404 en la raíz = alcanzable), pero no hay credenciales de Ads en la nube.
+
+## Qué se puede hacer desde la nube sin el PC
+1. **Publicar el panel:** push a `main` + flujo manual `panel-diario.yml` (usa Secrets de GitHub: `FIREBASE_SERVICE_ACCOUNT`, `GEMINI_API_KEY` y las de Google Ads de solo lectura que ya usa `tools/panel/sync_google_ads.py`). Una corrida diaria programada ya lee Google Ads, sugiere con IA y publica.
+2. **Cambios de CSS/plantilla/texto** del panel (`python tools/panel/build.py`, solo Node). NO frases, previsión ni tendencias (exigen la clave cifrada del PC).
+3. **Auditorías y lecturas del sitio** por los flujos de GitHub (`inspeccion-sitio.yml`, `auditoria-aereostar.yml`): nunca sondeos directos.
+4. **Documentación, plan de medición, análisis de `data-transporte`** (datos agregados) y código de `Plataforma-anuncios` (pruebas con emulador local; sin Blaze ni producción).
+5. **Leer Google Ads, GA4 y Search Console** solo cuando el dueño autorice los conectores de Supermetrics (enlace anterior): lectura; sin cambios de presupuesto, pujas ni anuncios.
+
+## Qué NO se puede sin el PC
+Firebase CLI local y `E:\config`, clave del panel (frases/previsión/tendencias), bóveda `_boveda`, memoria local de Claude, Chrome del dueño con sesiones, cualquier contraseña/2FA.
+
+## Al volver al PC (ejecutar en este orden, una tarea a la vez)
+1. Herramientas de **W:** (`W:\PROYECTOS CUENTA ALEJANDROG45\herramientas-portables\`), no las de E:. `gh` con `GH_CONFIG_DIR` de la cuenta `alejandrog45-svg`.
+2. En cada carpeta local de las 3 repos (`marcas-transporte-ops`, `Plataforma-anuncios`, `data-transporte`):
+   `git status` (no tocar archivos locales sin seguimiento) → `git fetch origin` → revisar PR en borrador de la rama `ccr-8b4f70ce-5obz3r` → si el dueño lo aprobó y se fusionó: `git checkout main && git pull origin main`.
+3. `E:\ubertransfer-ops` es solo lectura (su git usa `oviedoem`): no ejecutar git ahí; la copia vigente es la de W: / `alejandrog45-svg`.
+4. `python -m pytest -q` en `marcas-transporte-ops`; si cambiaron `data/panel_data*.enc.json`, no sobrescribirlos (`git checkout`).
+5. Actualizar `conocimiento/` y `CLAUDE.md` (regla antirretroceso) con lo que haya pasado en el PC.
+6. **Revocar lo dado a la nube:** autorización de Supermetrics (Google Ads/GA4/GSC) si se concedió, accesos GitHub extra de la sesión, y cualquier token pegado en el chat. Rotar solo si el dueño lo pide.
+
+## Pendientes que siguen siendo del dueño / Rafael
+Autorizar Supermetrics (si quiere lectura desde la nube), paso A (teléfono) y paso C (GTM/GA4, Rafael) de `docs/pasos_medicion_rafael_y_dueno.md`, repo a privado, `APIKEY.txt`, script de Ads, confirmar `DATA TRANSPORTE`, cuál cuenta Aereostar de Ads es la real.

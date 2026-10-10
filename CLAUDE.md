@@ -67,6 +67,10 @@ Nada se da por hecho sin haberlo probado. Cero cifras inventadas. Una tarea a la
 
 ## Historial de sesiones
 
+### 2026-10-10 (tarde) — Sesión de nube: revisión de conexiones
+- Comprobado: Chrome del dueño NO disponible en la nube (solo Chromium sin sesiones); Supermetrics sin autenticar (Google Ads `AW`, GA4, Search Console): falta que el dueño abra el enlace de acceso. GitHub ve las 3 repos. Nada se modificó en cuentas ni campañas.
+- Instrucciones para actualizar carpetas locales y revocar accesos al volver al PC: `docs/TRASPASO_NUBE_A_PC_2026-10-10.md`.
+
 ### 2026-10-10 — Sesión de nube (celular)
 - PR #1 (docs, hallazgos GA4/GSC y etiqueta de Google sin datos) abierto en borrador desde `main-hxz81b`; no fusionado. 71 pruebas OK.
 - «Problema 2» de Auditoría resuelto: la leyenda decía «PENDIENTE = falta un dato externo» sin decir cuál; ahora explica y remite al bloque «Pendiente: necesita datos o decisiones…» (lista fija `BIZ` en `template.html`: horario, tarifas, promo, rutas, nombre «Uber», coordinación Aereostar, conversiones, GA4/GSC). No era un fallo del panel. Publicado con aprobación del dueño (push a `main` + `panel-diario.yml`).

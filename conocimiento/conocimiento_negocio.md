@@ -77,3 +77,6 @@ Horario real, comunas y rutas atendidas, tarifas, flota, estado de Google Busine
 ## Decisión 2026-10-10: leyenda de la Auditoría
 - PENDIENTE en la Auditoría = dato o decisión externa (lista fija `BIZ`), no un error del panel. La leyenda lo explica y remite al bloque de pendientes. No revertir sin pedido del dueño.
 - Medición (10-10): pasos A y C listos en `docs/pasos_medicion_rafael_y_dueno.md`; D (libro de contactos) y F (subir conversiones) requieren aprobación expresa del dueño. PENDIENTE se muestra en ámbar en la Auditoría.
+
+## Decisión 2026-10-10 (nube)
+- Desde la nube solo se lee: publicar vía GitHub Actions y Supermetrics (si el dueño lo autoriza); nunca contraseñas ni cambios en Ads. Qué se puede/no se puede: `docs/TRASPASO_NUBE_A_PC_2026-10-10.md`. No revertir sin pedido del dueño.

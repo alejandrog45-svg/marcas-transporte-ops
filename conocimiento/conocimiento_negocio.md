@@ -90,3 +90,4 @@ Horario real, comunas y rutas atendidas, tarifas, flota, estado de Google Busine
 ## Decisiones 2026-10-10 (cont. 8)
 - Cada panel muestra en celular SU logo y SU foto de fondo (nunca mezclados). La foto debe ser sutil: no estorbar el texto.
 - Las sugerencias de cada marca viven en su propio documento de Firestore (`aiSuggestions` / `aiSuggestions_aereostar`). No volver a compartirlo.
+- Fotos (dueño 10-10 «usa todo pero con el logo de cada uno»): cada marca rota solo sus fotos y su logo; nada con logo de UberTransfer en Aereostar; patentes siempre difuminadas (repo público).

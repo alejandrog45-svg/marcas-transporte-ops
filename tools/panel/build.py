@@ -326,9 +326,9 @@ UT_COLORS = (("#1d4ed8", "#b90f16"), ("#1a73e8", "#ed1c24"), ("#2563eb", "#ed1c2
 
 
 # Fondo fotográfico sutil de Aereostar: cubierta y cielo del aeropuerto (foto del dueño, sin logos ni textos)
-AE_BG = ':root{--bg-img:url("/bg/aereostar-fondo.jpg");--bg-op:.62}'
+AE_BG = ':root{--bg-img:url("/bg/aereostar-fondo.jpg");--bg-img2:url("/bg/aereostar-banner-2.jpg");--bg-img3:url("/bg/aereostar-banner-3.jpg");--bg-op:.62}'
 # Fondo fotográfico sutil de UberTransfer (foto del dueño, recortada y comprimida en site/bg/); Aereostar no lo lleva hasta tener sus fotos
-UT_BG = ':root{--bg-img:url("/bg/ubertransfer-fondo.jpg")}'
+UT_BG = ':root{--bg-img:url("/bg/ubertransfer-fondo.jpg");--bg-img2:url("/bg/ubertransfer-banner-2.jpg");--bg-img3:url("/bg/ubertransfer-banner-3.jpg")}'
 
 
 def ut_recolor(text):

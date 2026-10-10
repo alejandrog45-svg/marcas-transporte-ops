@@ -95,3 +95,15 @@ def test_barra_de_marca_en_celular_con_el_logo_de_cada_marca():
     assert "UberTransfer" not in page[page.index('id="mbrand"'):page.index('id="mbrand"') + 400]
     css = (ROOT / "tools" / "panel" / "extra.css").read_text(encoding="utf-8")
     assert "#mbrand{display:flex" in css and "min-width:1024px" in css  # banner también en escritorio
+
+
+def test_banner_rota_fotos_propias_de_cada_marca():
+    """El banner alterna 3 fotos por marca; Aereostar nunca referencia archivos de UberTransfer y viceversa."""
+    b = (ROOT / "tools/panel/build.py").read_text(encoding="utf-8")
+    ae = b[b.index("AE_BG ="):b.index("\n", b.index("AE_BG ="))]
+    ut = b[b.index("UT_BG ="):b.index("\n", b.index("UT_BG ="))]
+    assert ae.count("aereostar-") == 3 and "ubertransfer" not in ae
+    assert ut.count("ubertransfer-") == 3 and "aereostar" not in ut
+    for n in ("ubertransfer-banner-2", "ubertransfer-banner-3", "aereostar-banner-2", "aereostar-banner-3"):
+        assert (ROOT / f"site/bg/{n}.jpg").stat().st_size < 90_000
+    assert "@keyframes mbslide" in (ROOT / "tools/panel/extra.css").read_text(encoding="utf-8")

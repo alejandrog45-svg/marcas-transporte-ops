@@ -3,6 +3,15 @@ on:
   schedule:
     - cron: "30 5 * * *"   # 05:30 UTC = 02:30 hora de Chile en verano (01:30 en invierno). GitHub suele retrasar las ejecuciones programadas: puede arrancar entre las 02:30 y las 08:00
   workflow_dispatch:
+    inputs:
+      date_from:
+        description: "Solo Aereostar: leer desde esta fecha (AAAA-MM-DD) para rellenar su historial. Vacío = lo normal (ayer y hoy)"
+        required: false
+        default: ""
+      date_to:
+        description: "Solo Aereostar: hasta esta fecha (AAAA-MM-DD). Vacío = lo normal"
+        required: false
+        default: ""
 permissions:
   contents: write
 concurrency:
@@ -30,6 +39,15 @@ jobs:
           SITE_URL: ${{ vars.SITE_URL || 'https://ubertransfer.cl' }}
         run: PYTHONPATH=src python -m marcas_transporte_ops audit
 
+      - name: Auditar aereostar.cl (datos reales de hoy)
+        continue-on-error: true   # su propia auditoría y sus propios archivos; si falla, UberTransfer y el resto siguen igual
+        env:
+          SITE_URL: https://aereostar.cl
+          AUDIT_TAG: aereostar
+          AUDIT_DELAY: "3"
+          AUDIT_MAX_URLS: "25"
+        run: PYTHONPATH=src python -m marcas_transporte_ops audit
+
       - name: Sincronizar Google Ads UberTransfer (solo lectura)
         env:
           GOOGLE_ADS_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_ADS_OAUTH_CLIENT_ID }}
@@ -44,6 +62,8 @@ jobs:
         env:
           GOOGLE_ADS_BRAND: Aereostar
           GOOGLE_ADS_CUSTOMER_ID: "5485308262"
+          GOOGLE_ADS_DATE_FROM: ${{ inputs.date_from }}
+          GOOGLE_ADS_DATE_TO: ${{ inputs.date_to }}
           GOOGLE_ADS_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_ADS_OAUTH_CLIENT_ID }}
           GOOGLE_ADS_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_ADS_OAUTH_CLIENT_SECRET }}
           GOOGLE_ADS_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
@@ -96,6 +116,7 @@ jobs:
           git config user.name "ops-bot"
           git config user.email "ops-bot@users.noreply.github.com"
           git add data reports/audit_latest.md
+          [ -f reports/audit_aereostar_latest.md ] && git add reports/audit_aereostar_latest.md
           git diff --cached --quiet || git commit -m "data: auditoría diaria"
           git pull --rebase origin "${GITHUB_REF_NAME}" && git push
 

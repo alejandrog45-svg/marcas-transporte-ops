@@ -1,14 +1,14 @@
 {
   "source": "IA (gemini-3.6-flash) sobre datos reales de Google Ads · solo lectura",
-  "generatedAt": "2026-10-10T02:09:45.823279Z",
-  "adsLastSync": "2026-10-10T02:09:25.020245Z",
+  "generatedAt": "2026-10-10T03:39:19.540954Z",
+  "adsLastSync": "2026-10-10T03:38:47.787939Z",
   "accountId": "2035504421",
   "detailDays": 2,
   "suggestions": [
     {
-      "title": "Evaluar incremento del presupuesto diario para capturar más clics",
-      "action": "Se propone que el dueño evalúe aumentar el presupuesto diario de 15000 CLP.",
-      "reason": "La campaña registra una alta pérdida de impresiones por presupuesto (77.8% el 2026-10-08 y 66.3% el 2026-10-09). Dado que solo existen 2 días de historial (diasConDetalle: 2), la confianza sobre los datos es baja.",
+      "title": "Evaluar aumento de presupuesto diario para reducir impresiones perdidas",
+      "action": "Proponer al dueño evaluar un aumento en el presupuesto diario de la campaña (actualmente en 15000 CLP) para captar más tráfico.",
+      "reason": "Existe una pérdida de impresiones por presupuesto de 77.8% el 2026-10-08 y de 66.3% el 2026-10-09. Sin embargo, al contar con solo 2 días de detalle en la cobertura (desde 2026-10-08 hasta 2026-10-09) y 0.0 conversiones registradas, la confianza de la propuesta es baja.",
       "confidence": "Baja",
       "refs": [
         "cuota_y_presupuesto",
@@ -54,93 +54,9 @@
       }
     },
     {
-      "title": "Priorizar los términos de búsqueda que generan más tráfico",
-      "action": "Evaluar la optimización de pujas o concordancias para los términos con mayor número de clics.",
-      "reason": "El término 'transfer aeropuerto' acumuló 10 clics y 'transfer aeropuerto santiago' 4 clics, concentrando la mayor captación de tráfico en la campaña. Solo se dispone de 2 días de datos registrados.",
-      "confidence": "Baja",
-      "refs": [
-        "terminos_mas_clics",
-        "cobertura"
-      ],
-      "evidence": {
-        "terminos_mas_clics": {
-          "descripcion": "Términos de búsqueda con más clics, sumando todos los días del historial",
-          "filas": [
-            {
-              "termino": "transfer aeropuerto",
-              "clics": 10,
-              "costoClp": 2511,
-              "conversiones": 0.0
-            },
-            {
-              "termino": "transfer aeropuerto santiago",
-              "clics": 4,
-              "costoClp": 1197,
-              "conversiones": 0.0
-            },
-            {
-              "termino": "cabify aeropuerto",
-              "clics": 4,
-              "costoClp": 945,
-              "conversiones": 0.0
-            },
-            {
-              "termino": "transvip reserva",
-              "clics": 3,
-              "costoClp": 723,
-              "conversiones": 0.0
-            },
-            {
-              "termino": "uber transfer",
-              "clics": 3,
-              "costoClp": 648,
-              "conversiones": 0.0
-            },
-            {
-              "termino": "traslado aeropuerto",
-              "clics": 2,
-              "costoClp": 719,
-              "conversiones": 0.0
-            },
-            {
-              "termino": "transfer de viña al aeropuerto",
-              "clics": 2,
-              "costoClp": 430,
-              "conversiones": 0.0
-            },
-            {
-              "termino": "cabify aeropuerto teléfono",
-              "clics": 2,
-              "costoClp": 410,
-              "conversiones": 0.0
-            },
-            {
-              "termino": "teléfono de transvip",
-              "clics": 2,
-              "costoClp": 395,
-              "conversiones": 0.0
-            },
-            {
-              "termino": "viña a aeropuerto santiago",
-              "clics": 1,
-              "costoClp": 513,
-              "conversiones": 0.0
-            }
-          ]
-        },
-        "cobertura": {
-          "descripcion": "Cuántos días de historial detallado existen (pocos días = conclusiones débiles)",
-          "diasConDetalle": 2,
-          "desde": "2026-10-08",
-          "hasta": "2026-10-09",
-          "conversionesRegistradas": 0.0
-        }
-      }
-    },
-    {
-      "title": "Priorizar la visibilidad en dispositivos móviles",
-      "action": "Evaluar ajustes o preferencia hacia el dispositivo móvil.",
-      "reason": "El dispositivo 'mobile' concentró 54 clics y 960 impresiones frente a los 11 clics y 159 impresiones de 'desktop'. La muestra es de solo 2 días de historial.",
+      "title": "Concentrar la captación de tráfico en dispositivos móviles",
+      "action": "Evaluar optimizaciones enfocadas en el segmento mobile para maximizar el volumen total de clics.",
+      "reason": "El dispositivo 'mobile' concentra la mayor cantidad de tráfico con 54 clics, 960 impresiones y costoClp de 13313, superando a 'desktop' (11 clics, 159 impresiones, costoClp 2497) y 'tablet' (0 clics, 6 impresiones). La confianza es baja por existir solo 2 días con detalle.",
       "confidence": "Baja",
       "refs": [
         "dispositivos",
@@ -180,9 +96,9 @@
       }
     },
     {
-      "title": "Aprovechar las horas pico de tráfico",
-      "action": "Evaluar programación u optimización horaria para maximizar impresiones en los horarios con más clics.",
-      "reason": "La hora 19 generó el mayor volumen con 15 clics, seguida por la hora 9 con 12 clics. No obstante, esto se basa en únicamente 2 días de registro.",
+      "title": "Aprovechar las horas pico de tráfico como las 19:00",
+      "action": "Evaluar la programación horaria para asegurar la presencia de los anuncios en las horas de mayor generación de clics.",
+      "reason": "La hora 19 es la que suma más clics en el historial con 15 clics y costoClp 3204, seguida por la hora 9 con 12 clics y las horas 8, 11 y 12 con 11 clics cada una. Se requiere cautela dado el historial limitado de 2 días.",
       "confidence": "Baja",
       "refs": [
         "horas",
@@ -266,6 +182,90 @@
               "hora": 22,
               "clics": 4,
               "costoClp": 873
+            }
+          ]
+        },
+        "cobertura": {
+          "descripcion": "Cuántos días de historial detallado existen (pocos días = conclusiones débiles)",
+          "diasConDetalle": 2,
+          "desde": "2026-10-08",
+          "hasta": "2026-10-09",
+          "conversionesRegistradas": 0.0
+        }
+      }
+    },
+    {
+      "title": "Priorizar el término con mayor volumen de clics 'transfer aeropuerto'",
+      "action": "Evaluar reforzar la cobertura sobre la búsqueda 'transfer aeropuerto' para consolidar la entrada de tráfico.",
+      "reason": "El término 'transfer aeropuerto' generó 10 clics con un costoClp de 2511, siendo la búsqueda principal del historial, seguida por 'transfer aeropuerto santiago' (4 clics) y 'cabify aeropuerto' (4 clics). Debido a que hay 0.0 conversiones registradas y solo 2 días de detalle, se analiza exclusivamente el tráfico.",
+      "confidence": "Baja",
+      "refs": [
+        "terminos_mas_clics",
+        "cobertura"
+      ],
+      "evidence": {
+        "terminos_mas_clics": {
+          "descripcion": "Términos de búsqueda con más clics, sumando todos los días del historial",
+          "filas": [
+            {
+              "termino": "transfer aeropuerto",
+              "clics": 10,
+              "costoClp": 2511,
+              "conversiones": 0.0
+            },
+            {
+              "termino": "transfer aeropuerto santiago",
+              "clics": 4,
+              "costoClp": 1197,
+              "conversiones": 0.0
+            },
+            {
+              "termino": "cabify aeropuerto",
+              "clics": 4,
+              "costoClp": 945,
+              "conversiones": 0.0
+            },
+            {
+              "termino": "transvip reserva",
+              "clics": 3,
+              "costoClp": 723,
+              "conversiones": 0.0
+            },
+            {
+              "termino": "uber transfer",
+              "clics": 3,
+              "costoClp": 648,
+              "conversiones": 0.0
+            },
+            {
+              "termino": "traslado aeropuerto",
+              "clics": 2,
+              "costoClp": 719,
+              "conversiones": 0.0
+            },
+            {
+              "termino": "transfer de viña al aeropuerto",
+              "clics": 2,
+              "costoClp": 430,
+              "conversiones": 0.0
+            },
+            {
+              "termino": "cabify aeropuerto teléfono",
+              "clics": 2,
+              "costoClp": 410,
+              "conversiones": 0.0
+            },
+            {
+              "termino": "teléfono de transvip",
+              "clics": 2,
+              "costoClp": 395,
+              "conversiones": 0.0
+            },
+            {
+              "termino": "viña a aeropuerto santiago",
+              "clics": 1,
+              "costoClp": 513,
+              "conversiones": 0.0
             }
           ]
         },

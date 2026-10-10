@@ -86,3 +86,7 @@ Horario real, comunas y rutas atendidas, tarifas, flota, estado de Google Busine
 - Objetivo permanente: más clics sin subir costos, con datos reales; propuestas en `docs/mejoras_clics_sin_subir_costos.md`.
 - Fondo del panel de UberTransfer (10-10): foto sutil del furgón frente a una marquesina, `site/bg/ubertransfer-fondo.jpg`; Aereostar sin foto hasta que el dueño envíe las suyas. Repo público: no subir fotos con personas ni afiches sin decisión del dueño.
 - Fondo del panel de Aereostar (10-10): cubierta y cielo del aeropuerto, `site/bg/aereostar-fondo.jpg` (20 KB). Cada marca conserva SU logo original y su propia foto; nunca mezclar logos ni fotos entre paneles.
+
+## Decisiones 2026-10-10 (cont. 8)
+- Cada panel muestra en celular SU logo y SU foto de fondo (nunca mezclados). La foto debe ser sutil: no estorbar el texto.
+- Las sugerencias de cada marca viven en su propio documento de Firestore (`aiSuggestions` / `aiSuggestions_aereostar`). No volver a compartirlo.

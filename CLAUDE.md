@@ -68,6 +68,11 @@ Nada se da por hecho sin haberlo probado. Cero cifras inventadas. Una tarea a la
 
 ## Historial de sesiones
 
+### 2026-10-10 (nube, sesión 2, cont. 8) — Celular: logo por marca, foto sutil, sugerencias por marca
+- Barra de marca `#mbrand` en celular (logo propio de cada panel; UberTransfer `/icons/logo-128.png`, Aereostar `/aereostar/icons/logo-128.png`), pestañas oscuras con degradado de marca, tarjetas redondeadas, foto de fondo fija en celular (opacidad ×0,3; cambio medido en la zona del título: máx. 27/255 Aereostar, 18/255 UberTransfer, promedio ≈10). `PANEL_VERSION` = 7.
+- ERROR REAL CORREGIDO: el panel de Aereostar leía el documento `panel/aiSuggestions` de UberTransfer. Ahora usa `panel/aiSuggestions_aereostar` (el workflow escribe ambos por marca y la IA tiene su archivo `ai_suggestions_aereostar_latest.json`). **Pendiente del dueño:** desplegar `firestore.rules` (`firebase deploy --only firestore:rules --project ubertransfer-ops --account alejandrog45@gmail.com`); hasta entonces Aereostar no lee su documento de reglas (la IA cifrada sí funciona).
+- Pendientes: audios mp3 adeudados; probar «Instalar app» en celular real. Campañas: solo lectura.
+
 ### 2026-10-10 (nube, sesión 2) — CIERRE DEL BLOQUE: todo fusionado y publicado
 - **Estado final verificado:** PR #5–#9 fusionados en `main`; publicado con `panel-diario.yml` ejecución 39 (13/13 pasos; armado 05:59:59 UTC; paneles, íconos, manifiestos, service workers y fotos de fondo responden 200; cada marca con su logo, color y foto; 0 datos en claro). PR #4 (otra sesión) CERRADO por orden del dueño (rama conservada). Queda abierto solo el PR #1 (solo documentación, de otra sesión; no tocar).
 - **Autorización vigente del dueño (10-10):** «deja todo actualizado, no esperes mi aprobación, solo sigue la regla antirretroceso» → se puede fusionar y publicar sin pedir permiso cada vez, siempre con pruebas, verificación en la URL real y sin tocar campañas (solo lectura), pagos ni claves. Sigue valiendo: una tarea a la vez, nada inventado, repo público (no subir fotos con personas ni afiches).

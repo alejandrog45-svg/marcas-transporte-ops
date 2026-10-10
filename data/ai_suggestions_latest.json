@@ -1,14 +1,14 @@
 {
   "source": "IA (gemini-3.6-flash) sobre datos reales de Google Ads · solo lectura",
-  "generatedAt": "2026-10-10T16:24:19.165147Z",
-  "adsLastSync": "2026-10-10T16:23:38.019653Z",
+  "generatedAt": "2026-10-10T17:21:27.235358Z",
+  "adsLastSync": "2026-10-10T17:20:54.666017Z",
   "accountId": "2035504421",
   "detailDays": 3,
   "suggestions": [
     {
       "title": "Evaluar incremento del presupuesto diario",
-      "action": "Evaluar un aumento en el presupuesto diario actual de 15000 CLP para capturar impresiones y clics perdidos.",
-      "reason": "La pérdida de impresiones por presupuesto fue de 77.8% el 2026-10-08 y de 70.2% el 2026-10-09. Se debe considerar que el historial abarca solo 3 días y el día 2026-10-10 figura como parcial (incompleto).",
+      "action": "Evaluar aumentar el presupuesto diario de 15000 CLP para reducir la cuota de impresiones perdidas por presupuesto.",
+      "reason": "Existe una alta pérdida de impresiones por presupuesto (77.8% el 2026-10-08 y 70.2% el 2026-10-09). Dado que solo existen 3 días de historial y 0.0 conversiones registradas, el ajuste debe enfocarse exclusivamente en capturar más tráfico. La confianza es baja por el poco historial de datos y porque la fecha 2026-10-10 es un día parcial.",
       "confidence": "Baja",
       "refs": [
         "cuota_y_presupuesto",
@@ -46,7 +46,7 @@
               "fecha": "2026-10-10",
               "diaParcial": true,
               "interacciones": 22,
-              "clicsInvalidos": 2,
+              "clicsInvalidos": 5,
               "llamadas": 1
             }
           ]
@@ -61,9 +61,9 @@
       }
     },
     {
-      "title": "Priorizar la optimización del tráfico en dispositivos móviles",
-      "action": "Evaluar enfocar la estrategia de campaña hacia dispositivos móviles (mobile) para maximizar la cantidad de clics.",
-      "reason": "El dispositivo mobile generó 75 clics y 1263 impresiones, frente a desktop que obtuvo 12 clics y tablet con 0 clics. Al existir solo 3 días de historial acumulado, el nivel de certeza es acotado.",
+      "title": "Priorizar la captura de tráfico en dispositivos móviles",
+      "action": "Evaluar la asignación de mayor preferencia o ajuste de puja hacia dispositivos móviles (mobile).",
+      "reason": "El dispositivo mobile es la principal fuente de tráfico acumulando 75 clics y 1321 impresiones, frente a desktop que registra 12 clics y 186 impresiones, y tablet con 0 clics y 7 impresiones. Al contar con solo 3 días de historial detallado, se asigna una confianza baja.",
       "confidence": "Baja",
       "refs": [
         "dispositivos",
@@ -76,13 +76,13 @@
             {
               "dispositivo": "mobile",
               "clics": 75,
-              "impresiones": 1263,
-              "costoClp": 18899
+              "impresiones": 1321,
+              "costoClp": 18816
             },
             {
               "dispositivo": "desktop",
               "clics": 12,
-              "impresiones": 180,
+              "impresiones": 186,
               "costoClp": 2748
             },
             {
@@ -103,9 +103,9 @@
       }
     },
     {
-      "title": "Aprovechar los bloques horarios con mayor tráfico de clics",
-      "action": "Evaluar priorizar o ajustar el flujo de la campaña en las horas de mayor actividad para conseguir más clics.",
-      "reason": "Las horas con más clics registrados son la hora 12 (18 clics), hora 9 (16 clics), hora 11 (16 clics) y hora 19 (15 clics). Se cuenta con un detalle de solo 3 días en el historial.",
+      "title": "Ajustar la programación horaria hacia las horas de mayor tráfico",
+      "action": "Evaluar concentrar la inversión en los horarios con mayor volumen de clics acumulados.",
+      "reason": "Las horas con más clics registradas son la hora 9 (16 clics), hora 11 (16 clics), hora 12 (15 clics) y hora 19 (15 clics), superando a horas como la 17 (2 clics) o la 16 (3 clics). Debido a que solo se registran 3 días en el historial, esta tendencia requiere cautela.",
       "confidence": "Baja",
       "refs": [
         "horas",
@@ -137,13 +137,13 @@
             },
             {
               "hora": 12,
-              "clics": 18,
-              "costoClp": 4940
+              "clics": 15,
+              "costoClp": 4118
             },
             {
               "hora": 13,
-              "clics": 9,
-              "costoClp": 2145
+              "clics": 12,
+              "costoClp": 2884
             },
             {
               "hora": 14,
@@ -202,9 +202,9 @@
       }
     },
     {
-      "title": "Potenciar los términos de búsqueda con mayor atracción de clics",
-      "action": "Evaluar la asignación de recursos a los términos que generan más volumen de tráfico hacia la web.",
-      "reason": "El término 'transfer aeropuerto' obtuvo 11 clics y 'transfer aeropuerto santiago' obtuvo 5 clics, siendo los de mayor tráfico. Hay 0.0 conversiones registradas en 3 días de historial, por lo que el análisis se enfoca solo en tráfico.",
+      "title": "Reforzar términos de búsqueda con mayor volumen de clics",
+      "action": "Evaluar la optimización de anuncios para los términos de búsqueda que más tráfico atraen.",
+      "reason": "El término 'transfer aeropuerto' encabeza el volumen con 11 clics, seguido de 'transfer aeropuerto santiago' con 7 clics. Al no haber conversiones registradas (0.0), el foco continuo es maximizar el volumen de clics con solo 3 días de cobertura disponible.",
       "confidence": "Baja",
       "refs": [
         "terminos_mas_clics",
@@ -222,14 +222,8 @@
             },
             {
               "termino": "transfer aeropuerto santiago",
-              "clics": 5,
-              "costoClp": 1464,
-              "conversiones": 0.0
-            },
-            {
-              "termino": "transfer santiago valparaiso",
-              "clics": 4,
-              "costoClp": 1096,
+              "clics": 7,
+              "costoClp": 1926,
               "conversiones": 0.0
             },
             {
@@ -272,6 +266,12 @@
               "termino": "cabify aeropuerto teléfono",
               "clics": 2,
               "costoClp": 410,
+              "conversiones": 0.0
+            },
+            {
+              "termino": "teléfono de transvip",
+              "clics": 2,
+              "costoClp": 395,
               "conversiones": 0.0
             }
           ]

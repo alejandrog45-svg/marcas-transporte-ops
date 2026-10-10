@@ -27,7 +27,7 @@
   {
    "url": "https://aereostar.cl/portfolio/",
    "status": 200,
-   "seconds": 0.67,
+   "seconds": 0.7,
    "issues": [
     "title largo (89 car.)",
     "falta meta description",
@@ -50,7 +50,7 @@
   {
    "url": "https://aereostar.cl/compare/",
    "status": 200,
-   "seconds": 0.71,
+   "seconds": 0.6,
    "issues": [
     "title largo (79 car.)",
     "falta meta description"
@@ -72,7 +72,7 @@
   {
    "url": "https://aereostar.cl/trabaja-con-nosotros/",
    "status": 200,
-   "seconds": 0.64,
+   "seconds": 0.66,
    "issues": [
     "title largo (92 car.)",
     "falta meta description"
@@ -94,7 +94,7 @@
   {
    "url": "https://aereostar.cl/nuestra-flota/",
    "status": 200,
-   "seconds": 0.68,
+   "seconds": 0.74,
    "issues": [
     "title largo (85 car.)",
     "falta meta description"
@@ -116,7 +116,7 @@
   {
    "url": "https://aereostar.cl/reservar/",
    "status": 200,
-   "seconds": 0.65,
+   "seconds": 0.51,
    "issues": [
     "title largo (80 car.)",
     "falta meta description"
@@ -138,7 +138,7 @@
   {
    "url": "https://aereostar.cl/nosotros/",
    "status": 200,
-   "seconds": 0.52,
+   "seconds": 0.66,
    "issues": [
     "title largo (80 car.)",
     "falta meta description"
@@ -160,7 +160,7 @@
   {
    "url": "https://aereostar.cl/servicios/",
    "status": 200,
-   "seconds": 1.58,
+   "seconds": 0.78,
    "issues": [
     "title largo (81 car.)",
     "falta meta description"
@@ -182,7 +182,7 @@
   {
    "url": "https://aereostar.cl/tarifas/",
    "status": 200,
-   "seconds": 0.53,
+   "seconds": 0.69,
    "issues": [
     "title largo (87 car.)",
     "falta meta description"
@@ -226,7 +226,7 @@
   {
    "url": "https://aereostar.cl/woodmart_slider/layout-parallax-slider/",
    "status": 200,
-   "seconds": 0.5,
+   "seconds": 0.51,
    "issues": [
     "title largo (103 car.)",
     "falta meta description"
@@ -246,7 +246,7 @@
    }
   }
  ],
- "generated": "2026-10-10T05:21:49Z",
+ "generated": "2026-10-10T17:20:11Z",
  "discovery": {
   "robots": 200,
   "sitemaps": [

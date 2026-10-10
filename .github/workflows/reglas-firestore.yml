@@ -1,0 +1,28 @@
+name: Reglas de Firestore (manual)
+
+# Despliega SOLO firestore.rules (sin tocar hosting ni datos). Se lanza a mano.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reglas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Desplegar reglas
+        env:
+          FIREBASE_SA: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: |
+          if [ -z "$FIREBASE_SA" ]; then
+            echo "::error::Falta el secreto FIREBASE_SERVICE_ACCOUNT"; exit 1
+          fi
+          printf '%s' "$FIREBASE_SA" > "$RUNNER_TEMP/firebase-sa.json"
+          export GOOGLE_APPLICATION_CREDENTIALS="$RUNNER_TEMP/firebase-sa.json"
+          npx --yes firebase-tools@15.19.0 deploy --only firestore:rules --project ubertransfer-ops --non-interactive
+          rm -f "$RUNNER_TEMP/firebase-sa.json"

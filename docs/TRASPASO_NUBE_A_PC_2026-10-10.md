@@ -8,6 +8,11 @@ Al abrir el PC, en la primera sesión de Claude Code local: «lee este archivo y
 - **GitHub:** la nube ve las 3 repos (`marcas-transporte-ops`, `Plataforma-anuncios`, `data-transporte`) con la cuenta `alejandrog45-svg`; rama de trabajo `ccr-8b4f70ce-5obz3r` en las tres.
 - **Red:** salen peticiones a `ubertransfer-ops.firebaseapp.com` (200) y `ubertransfer.cl` (200). `googleads.googleapis.com` responde (404 en la raíz = alcanzable), pero no hay credenciales de Ads en la nube.
 
+## Actualización (10-10, tras autorizar Supermetrics; solo lectura)
+- **Google Ads (conectado):** cuentas visibles `926-538-5719` (propia, solo investigación), `203-550-4421` «ubertranfer» y `548-530-8262` «Aereostar». Datos reales 08 y 09-10 (CLP): UberTransfer 794 y 1.125 impresiones, 52 y 65 clics, costo 15.068 y 15.810, 0 conversiones; Aereostar 84 y 706 impresiones, 12 y 41 clics, costo 15.012 y 16.008, 0 conversiones. **Hallazgo:** la cuenta de Aereostar `548-530-8262` TIENE una campaña activa con gasto (los docs decían «sin campañas»): confirmar con Rafael quién la administra. La otra cuenta de Aereostar (`465-674-2227`) no aparece en esta conexión.
+- **Search Console:** conectado, pero `sc-domain:ubertransfer.cl` da USER_PERMISSION_DENIED (propiedad sin verificar; sigue pendiente Rafael).
+- **GA4:** solo ve la propiedad `cabrasgo` (otro proyecto, NO se leyó). La propiedad de ubertransfer (`G-26K0MDTFY1`) no es accesible hasta que Rafael dé acceso.
+
 ## Qué se puede hacer desde la nube sin el PC
 1. **Publicar el panel:** push a `main` + flujo manual `panel-diario.yml` (usa Secrets de GitHub: `FIREBASE_SERVICE_ACCOUNT`, `GEMINI_API_KEY` y las de Google Ads de solo lectura que ya usa `tools/panel/sync_google_ads.py`). Una corrida diaria programada ya lee Google Ads, sugiere con IA y publica.
 2. **Cambios de CSS/plantilla/texto** del panel (`python tools/panel/build.py`, solo Node). NO frases, previsión ni tendencias (exigen la clave cifrada del PC).

@@ -286,9 +286,9 @@ AE_CH = [
 ]
 AE_BIZ = ["Teléfono/WhatsApp, horario y tarifas de Aereostar: sin datos verificados (PENDIENTE Rafael)", "Historial de la campaña «Aereostar Octubre 2025» (clics, costo, conversiones): pedirlo a Rafael o a quien la administra", "Marca «Aereostar»: no figura registrada en INAPI (30-09-2026); falta la opinión de un abogado de propiedad industrial", "Flota real y capacidades: la página muestra «6 pasajeros, Van, 2020» para los cuatro vehículos (dudoso)", "Coordinación con UberTransfer (una frase, un dueño): falta la decisión de Rafael sobre quién lleva el aeropuerto", "Conversiones reales (WhatsApp, teléfono, correo): sin medir", "Search Console y GA4: sin datos reales conectados"]
 AE_GUIA = ('<div class="card warn"><h2>Este es el panel de Aereostar</h2><p>Está <b>separado del panel de UberTransfer</b> para no mezclar datos: '
-           'las frases marcadas, las palabras negativas, las frases propias y el historial de consultas de aquí son solo de Aereostar. '
-           'Las frases, la previsión y las tendencias de Google son del mercado de aeropuerto y se comparten como referencia. '
-           'Todavía no hay auditoría ni cifras propias de Aereostar: se muestran como «sin datos». <b>No se crea ninguna campaña ni se gasta nada.</b></p></div>')
+           'las marcas, notas y el historial de consultas de aquí son solo de Aereostar. Las cifras reales vienen de su propia cuenta de Google Ads '
+           '(548-530-8262), siempre <b>solo en lectura</b>: el panel no crea, pausa ni cambia campañas, presupuestos ni anuncios. '
+           'Las frases, la previsión y las tendencias de Google son del mercado de aeropuerto y se comparten como referencia.</p></div>')
 
 
 def ae_checklist(au):
@@ -321,6 +321,16 @@ def ae_checklist(au):
     return items + AE_CH[1:]
 
 
+AE_BLUES = (("#1d4ed8", "#b84a08"), ("#1a73e8", "#e96712"), ("#2563eb", "#e96712"), ("#3b82f6", "#f29812"), ("37,99,235", "233,103,18"), ("37 99 235", "233 103 18"))
+
+
+def ae_recolor(text):
+    """Pasa los azules de la plantilla al naranja del logo de Aereostar (solo se usa en el panel de Aereostar)."""
+    for o, n in AE_BLUES:
+        text = text.replace(o, n)
+    return text
+
+
 def brand_aereostar(page, ch=None):
     """Convierte la plantilla (hecha para UberTransfer) en la del panel de Aereostar."""
     # App instalable, badge y botones son solo de UberTransfer: se quitan y se restaura su favicon
@@ -342,6 +352,17 @@ def brand_aereostar(page, ch=None):
     page = one(page, ">Panel Aereostar →</a>", ">← Panel UberTransfer</a>")
     i = page.index("const BIZ=window.__BIZ=["); j = page.index("];", i) + 2
     page = page[:i] + "const BIZ=window.__BIZ=" + json.dumps(AE_BIZ, ensure_ascii=False) + ";" + page[j:]
+    page = ae_recolor(page)
+    # Identidad visual de Aereostar (logo y colores del logo: negro, naranja y amarillo)
+    for o, n in (("#ed1c24", "#e96712"), ("#b90f16", "#b84a08"), ("#58b947", "#f8e71d"), ("237,28,36", "233,103,18"),
+                 ("#f3a0a4", "#f8c9a0"), ("#f3c4c6", "#f8d3b0"), ("#fff4f4", "#fff4ea"), ("#111318", "#0b0b0b")):
+        assert o in page, ("aereostar: color no encontrado: " + o)
+        page = page.replace(o, n)
+    page = one(page, '<span class="material-symbols-outlined text-white">flight_takeoff</span>',
+               '<img src="/aereostar/icons/logo-128.png" alt="Logo Aereostar" width="32" height="32" style="border-radius:50%;display:block">')
+    page = re.sub(r'<link rel="icon" type="image/svg\+xml" href="data:image/svg\+xml,[^"]*"\s*/?>',
+                  '<link rel="icon" type="image/png" sizes="32x32" href="/aereostar/icons/favicon-32.png"><link rel="apple-touch-icon" href="/aereostar/icons/apple-touch-icon.png"><meta name="theme-color" content="#0b0b0b">', page, count=1)
+    assert "/aereostar/icons/favicon-32.png" in page, "aereostar: no se pudo poner el favicon"
     page = one(page, 'const KP="";', 'const KP="ae_";')
     page = one(page, 'const MYB="ubertransfer";', 'const MYB="aereostar";')
     page = one(page, '.doc("estado")', '.doc("estado_aereostar")')
@@ -411,7 +432,7 @@ def main():
         {"name": "UberTransfer", "ias": "ias.html", "transform": lambda p: p, "enc": ENC_FILE, "meta": meta,
          "site": ROOT / "site", "docs": ROOT / "docs" / "panel_keywords.html"},
         {"name": "Aereostar", "ias": "ias_aereostar.html", "transform": ae_tf, "enc": DATA / "panel_data_aereostar.enc.json",
-         "meta": dict(meta, ampliacion=[], audit=ae_audit, forecast=forecast, trends=tr, plannerActive=True, googleAds=aereostar_ads), "site": ROOT / "site" / "aereostar",
+         "meta": dict(meta, ampliacion=[], audit=ae_audit, forecast=forecast, trends=tr, plannerActive=True, fullMenu=True, googleAds=aereostar_ads), "site": ROOT / "site" / "aereostar",
          "docs": ROOT / "docs" / "panel_aereostar.html"},
     ]
     resumen = []
@@ -422,11 +443,12 @@ def main():
         secret_json = json.dumps({"data": rows, "meta": {k: m[k] for k in SECRET_KEYS}}, ensure_ascii=False, separators=(",", ":"))
         assert json.dumps(json.loads(secret_json)["data"], ensure_ascii=False, separators=(",", ":")) == data_json, \
             "el cifrado altera el orden/formato de las filas: la huella SHA-256 no coincidiría"
-        pub = {k: m[k] for k in ("builtAt", "audit", "seoStatus", "plannerActive")}
+        pub = {k: m[k] for k in ("builtAt", "audit", "seoStatus", "plannerActive", "fullMenu") if k in m}
         enc = make_enc(secret_json, env, V["enc"])
         pub_html, app_js, gate_js = split_encrypted(page_tpl, enc, pub)
-        final_plain = plain.replace("__CSS__", css)
-        final_pub = pub_html.replace("__CSS__", css)
+        vcss = ae_recolor(css) if V["name"] == "Aereostar" else css
+        final_plain = plain.replace("__CSS__", vcss)
+        final_pub = pub_html.replace("__CSS__", vcss)
         assert "__DATA__" not in final_plain and "__META__" not in final_plain and "__CSS__" not in final_plain
         assert "__CSS__" not in final_pub and "__DATA__" not in final_pub.replace("__SECRET", "")
         who = V["name"]

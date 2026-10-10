@@ -14,10 +14,14 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[2]
-ADS_FILE = ROOT / "data" / "google_ads_ubertransfer.json"
-HISTORY_FILE = ROOT / "data" / "google_ads_history_ubertransfer.json"
+BRAND = os.environ.get("ADS_BRAND", "ubertransfer").strip().lower() or "ubertransfer"
+if BRAND not in ("ubertransfer", "aereostar"):
+    raise SystemExit("ADS_BRAND debe ser ubertransfer o aereostar")
+BRAND_NAME = {"ubertransfer": "UberTransfer", "aereostar": "Aereostar"}[BRAND]
+ADS_FILE = ROOT / "data" / f"google_ads_{BRAND}.json"
+HISTORY_FILE = ROOT / "data" / f"google_ads_history_{BRAND}.json"
 PROJECT_ID = "ubertransfer-ops"
-DOCUMENT = "panel/aiSuggestions"
+DOCUMENT = "panel/aiSuggestions" if BRAND == "ubertransfer" else f"panel/aiSuggestions_{BRAND}"
 DATASTORE_SCOPE = "https://www.googleapis.com/auth/datastore"
 
 

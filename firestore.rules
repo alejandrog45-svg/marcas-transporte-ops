@@ -53,6 +53,12 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    // Igual que la anterior, pero de Aereostar (datos separados por marca). Lo escribe el flujo diario.
+    match /panel/aiSuggestions_aereostar {
+      allow read: if autorizado();
+      allow write: if false;
+    }
+
     match /{document=**} {
       allow read, write: if false;
     }

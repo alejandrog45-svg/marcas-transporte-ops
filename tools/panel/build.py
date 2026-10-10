@@ -326,9 +326,9 @@ UT_COLORS = (("#1d4ed8", "#b90f16"), ("#1a73e8", "#ed1c24"), ("#2563eb", "#ed1c2
 
 
 # Fondo fotográfico sutil de Aereostar: cubierta y cielo del aeropuerto (foto del dueño, sin logos ni textos)
-AE_BG = ':root{--bg-img:url("/bg/aereostar-fondo.jpg");--bg-img2:url("/bg/aereostar-banner-2.jpg");--bg-img3:url("/bg/aereostar-banner-3.jpg");--bg-img4:url("/bg/aereostar-banner-4.jpg");--bg-op:.62}'
+AE_BG = ':root{--bg-img:url("/bg/aereostar-fondo.jpg");--bg-img2:url("/bg/aereostar-banner-2.jpg");--bg-img3:url("/bg/aereostar-banner-3.jpg");--bg-img4:url("/bg/aereostar-banner-4.jpg");--bg-op:.62;--sb1:url("/bg/aereostar-fondo.jpg");--sb2:url("/bg/aereostar-banner-2.jpg");--sb3:url("/bg/aereostar-banner-3.jpg");--sb4:url("/bg/aereostar-banner-4.jpg");--sb5:url("/bg/aereostar-sec-5.jpg");--sb6:url("/bg/aereostar-sec-6.jpg");}'
 # Fondo fotográfico sutil de UberTransfer (foto del dueño, recortada y comprimida en site/bg/); Aereostar no lo lleva hasta tener sus fotos
-UT_BG = ':root{--bg-img:url("/bg/ubertransfer-fondo.jpg");--bg-img2:url("/bg/ubertransfer-banner-2.jpg");--bg-img3:url("/bg/ubertransfer-banner-3.jpg")}'
+UT_BG = ':root{--bg-img:url("/bg/ubertransfer-fondo.jpg");--bg-img2:url("/bg/ubertransfer-banner-2.jpg");--bg-img3:url("/bg/ubertransfer-banner-3.jpg");--sb1:url("/bg/ubertransfer-fondo.jpg");--sb2:url("/bg/ubertransfer-banner-2.jpg");--sb3:url("/bg/ubertransfer-banner-3.jpg");--sb4:url("/bg/ubertransfer-sec-4.jpg");--sb5:url("/bg/ubertransfer-sec-5.jpg");--sb6:url("/bg/ubertransfer-sec-6.jpg");}'
 
 
 def ut_recolor(text):
@@ -384,6 +384,9 @@ def brand_aereostar(page, ch=None):
     assert "#ed1c24" not in page and "#2563eb" not in page, "aereostar: quedaron colores de UberTransfer"
     page = one(page, '<span class="material-symbols-outlined text-white">flight_takeoff</span>',
                '<img src="/aereostar/icons/logo-128.png" alt="Logo Aereostar" width="32" height="32" style="border-radius:50%;display:block">')
+    # banner: el logo sin el disco negro (transparente), integrado en la franja; el nombre queda para lectores de pantalla
+    page, nsub = re.subn(r'<img class="mb-logo"[^>]*>', '<img class="mb-logo mb-wordmark" src="/aereostar/icons/logo-banner.png" alt="Logo Aereostar" width="150" height="57" decoding="async">', page, count=1)
+    assert nsub == 1, "aereostar: no se encontró el logo del banner"
     assert "/aereostar/icons/favicon-32.png" in page and "/aereostar/manifest.webmanifest" in page, "aereostar: faltan el favicon o el manifiesto"
     page = one(page, 'const SUGDOC="aiSuggestions"', 'const SUGDOC="aiSuggestions_aereostar"')   # sus recomendaciones, no las de UberTransfer
     page = one(page, 'const KP="";', 'const KP="ae_";')

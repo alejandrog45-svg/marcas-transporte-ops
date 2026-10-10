@@ -784,7 +784,7 @@ $("aud").onclick=e=>{const a=e.target.closest("[data-ap]");if(a){audPage(a.datas
 render();if(store.get("ui_version","")!=="2"){store.set("ui_version","2");store.set("tab","overview")}adsFilters();show(SEC.some(s=>s[0]===store.get("tab","overview"))?store.get("tab","overview"):"overview");
 
 /* ===== App instalable (PWA), badge de versión y botón de actualizar: UberTransfer y Aereostar ===== */
-const PANEL_VERSION="10",PWA_ON=(META.plannerActive===false||!!META.fullMenu)&&location.protocol!=="file:";
+const PANEL_VERSION="11",PWA_ON=(META.plannerActive===false||!!META.fullMenu)&&location.protocol!=="file:";
 let VB_NEW=null,IP=window.__ip||null;
 function vbBuilt(){return META.builtAt?fmtDT(new Date(META.builtAt)):"sin fecha"}
 function vbPaint(){document.querySelectorAll("[data-vbadge]").forEach(el=>{el.hidden=!PWA_ON;if(!PWA_ON)return;const nw=!!VB_NEW;el.innerHTML='<button type="button" class="vbadge'+(nw?" is-new":"")+'" title="'+esc("Creado por AG · versión "+PANEL_VERSION+" · armado "+vbBuilt()+(nw?" · hay una versión nueva: pulsa para actualizar":" · pulsa para buscar actualizaciones"))+'" aria-label="Versión '+PANEL_VERSION+", creado por AG. "+(nw?"Hay una actualización disponible.":"Pulsa para buscar actualizaciones.")+'"><span class="vb-ag">AG</span><span class="vb-v">v.'+PANEL_VERSION+'<i class="vb-dot"></i></span></button>';el.firstChild.onclick=()=>{if(VB_NEW)vbUpdate();else vbCheck(true)}})}

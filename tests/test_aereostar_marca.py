@@ -119,3 +119,16 @@ def test_variables_de_fondo_bien_separadas():
         assert not re.search(r"\)--|\d--", line), key
         for n in range(1, 7):
             assert f"--sb{n}:url(" in line, (key, n)
+
+
+def test_aereostar_tiene_las_mismas_funciones_que_ubertransfer():
+    """Mismo menú y mismo modo (Planificador archivado, solo datos reales de Ads); datos y auditoría propios de Aereostar."""
+    b = (ROOT / "tools/panel/build.py").read_text(encoding="utf-8")
+    ae = b[b.index('"meta": dict(meta, ampliacion=[], audit=ae_audit'):]
+    ae = ae[:ae.index("\n")]
+    assert "plannerActive=False" in ae and "plannerActive=True" not in ae and "fullMenu=True" in ae
+    w = (ROOT / ".github/workflows/panel-diario.yml").read_text(encoding="utf-8")
+    assert "AUDIT_TAG: aereostar" in w and "SITE_URL: https://aereostar.cl" in w     # auditoría diaria propia
+    assert "GOOGLE_ADS_DATE_FROM: ${{ inputs.date_from }}" in w                       # relleno del historial, solo Aereostar
+    i = w.index("name: Sincronizar Google Ads UberTransfer"); j = w.index("name: Sincronizar Google Ads Aereostar")
+    assert "date_from" not in w[i:j]                                                  # UberTransfer no se toca

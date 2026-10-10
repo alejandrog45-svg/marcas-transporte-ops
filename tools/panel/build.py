@@ -459,7 +459,7 @@ def main():
         {"name": "UberTransfer", "ias": "ias.html", "transform": ut_recolor, "enc": ENC_FILE, "meta": meta,
          "site": ROOT / "site", "docs": ROOT / "docs" / "panel_keywords.html"},
         {"name": "Aereostar", "ias": "ias_aereostar.html", "transform": ae_tf, "enc": DATA / "panel_data_aereostar.enc.json",
-         "meta": dict(meta, ampliacion=[], audit=ae_audit, forecast=forecast, trends=tr, plannerActive=True, fullMenu=True, googleAds=aereostar_ads), "site": ROOT / "site" / "aereostar",
+         "meta": dict(meta, ampliacion=[], audit=ae_audit, forecast=forecast, trends=tr, plannerActive=False, fullMenu=True, googleAds=aereostar_ads), "site": ROOT / "site" / "aereostar",
          "docs": ROOT / "docs" / "panel_aereostar.html"},
     ]
     resumen = []

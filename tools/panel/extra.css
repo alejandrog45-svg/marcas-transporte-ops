@@ -86,3 +86,42 @@ kbd{font:inherit;font-size:10px;padding:0 4px;border:1px solid rgba(255,255,255,
 @keyframes vbglow{0%,100%{box-shadow:0 0 0 1px rgba(245,158,11,.5),0 4px 12px -5px rgba(245,158,11,.7)}50%{box-shadow:0 0 0 3px rgba(245,158,11,.35),0 4px 16px -3px rgba(245,158,11,.9)}}
 @keyframes ubin{from{opacity:0;transform:translate(-50%,16px)}to{opacity:1;transform:translate(-50%,0)}}
 @media (prefers-reduced-motion:reduce){.vbadge::after,.vb-dot,.vbadge.is-new,#updbar{animation:none}}
+/* Celular: textos largos sin espacios (rutas) se parten y las tablas anchas se desplazan dentro de su tarjeta, sin ensanchar la página */
+label.ck span{min-width:0;overflow-wrap:anywhere}
+@media(max-width:767px){.real-table{display:block;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}}
+
+/* ===== Diseño moderno y movimiento =====
+   Los colores salen de variables (--b = color de marca): UberTransfer usa rojo y Aereostar naranja (build.py cambia los literales).
+   Solo CSS: no toca datos ni comprobaciones. «Reducir movimiento» del sistema lo apaga todo (final del bloque). */
+:root{--b:#ed1c24;--b-dark:#b90f16;--b-soft:rgba(237,28,36,.08);--b-glow:rgba(237,28,36,.30);--ease:cubic-bezier(.22,1,.36,1)}
+html{scroll-behavior:smooth}
+header{position:relative}
+header::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;z-index:1;background:linear-gradient(90deg,var(--b),var(--b-dark) 60%,var(--brand-green));background-size:200% 100%;animation:hdrFlow 9s linear infinite}
+@keyframes hdrFlow{0%{background-position:0 0}100%{background-position:200% 0}}
+section{animation:secIn .45s var(--ease) backwards}
+@keyframes secIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.real-card,.real-filters,.real-quality,.card{transition:box-shadow .25s var(--ease),border-color .25s var(--ease)}
+.real-card:hover,.real-quality:hover,.card:hover{border-color:rgba(237,28,36,.35);box-shadow:0 12px 30px -12px var(--b-glow),0 4px 14px rgba(30,50,80,.06)}
+.real-kpi,#topk>*{transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease)}
+.real-kpi:hover,#topk>*:hover{transform:translateY(-2px);border-color:rgba(237,28,36,.35);box-shadow:0 12px 26px -12px var(--b-glow)}
+#nav a{transition:transform .2s var(--ease),background-color .2s var(--ease),color .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease)}
+html #nav a[class*="border-primary-container"],html #mnav a[class*="border-primary-container"]{background:linear-gradient(135deg,var(--b),var(--b-dark))!important}
+#nav a:active,#mnav a:active{transform:scale(.97)}
+#livebtn,.btn,#gatebtn,.installapp{transition:transform .15s var(--ease),box-shadow .2s var(--ease),filter .2s var(--ease),background-color .2s var(--ease)}
+#livebtn{background-image:linear-gradient(135deg,var(--b),var(--b-dark))}
+#livebtn:hover,.btn:hover{box-shadow:0 8px 20px -6px var(--b-glow);filter:saturate(1.08)}
+#livebtn:active,.btn:active,#gatebtn:active{transform:scale(.97)}
+#livebtn:active .material-symbols-outlined{animation:spin .6s linear}
+@keyframes spin{to{transform:rotate(360deg)}}
+.real-table tbody tr,#tb tr{transition:background-color .15s ease}
+.real-table tbody tr:hover,#tb tr:hover{background:var(--b-soft)}
+:focus-visible{outline:2px solid var(--b);outline-offset:2px;border-radius:6px}
+#brandlogo img,.vb-logo img{transition:transform .5s var(--ease)}
+#brandlogo:hover img,.vb-logo:hover img{transform:rotate(-8deg) scale(1.08)}
+#updbar{animation:ubIn .5s var(--ease) backwards}
+@keyframes ubIn{from{opacity:0;transform:translate(-50%,16px)}to{opacity:1;transform:translateX(-50%)}}
+#vbtoast.show{animation:ubIn .35s var(--ease) backwards}
+/* Celular: textos largos sin espacios se parten y las tablas anchas se desplazan dentro de su tarjeta */
+.real-quality-item{min-width:0}.real-quality-item>*{min-width:0;overflow-wrap:anywhere}
+@media(max-width:480px){.real-quality-grid{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}

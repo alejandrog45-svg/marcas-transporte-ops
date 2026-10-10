@@ -30,3 +30,20 @@ def test_panel_aereostar_lleva_logo_y_menu_completo():
     assert "/aereostar/icons/logo-128.png" in page
     assert "#ed1c24" not in page and "#e96712" in page
     assert "META.fullMenu" in page
+
+
+def test_cada_panel_usa_solo_los_colores_de_su_marca():
+    b = _build()
+    assert "2563eb" not in b.ut_recolor("a{color:#2563eb}b{fill:rgb(37 99 235/var(--x))}").lower()
+    assert "#ed1c24" in b.ut_recolor("a{color:#2563eb}")        # UberTransfer: rojo del logo
+    assert "#e96712" in b.ae_recolor("a{color:#2563eb}")        # Aereostar: naranja del logo
+
+
+def test_movimiento_es_css_puro_y_respeta_reducir_movimiento():
+    css = (ROOT / "tools" / "panel" / "extra.css").read_text(encoding="utf-8")
+    assert "prefers-reduced-motion:reduce" in css
+    # fill-mode «backwards»: al terminar la animación la sección vuelve a su estilo normal (sin transform residual)
+    assert "section{animation:secIn .45s var(--ease) backwards}" in css
+    tpl = (ROOT / "tools" / "panel" / "template.html").read_text(encoding="utf-8")
+    assert "countUp" not in tpl and "requestAnimationFrame" not in tpl   # sin contadores animados: no alteran las cifras que comprueban las verificaciones
+

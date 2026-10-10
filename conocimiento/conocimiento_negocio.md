@@ -77,3 +77,10 @@ Horario real, comunas y rutas atendidas, tarifas, flota, estado de Google Busine
 ## Decisión 2026-10-10: leyenda de la Auditoría
 - PENDIENTE en la Auditoría = dato o decisión externa (lista fija `BIZ`), no un error del panel. La leyenda lo explica y remite al bloque de pendientes. No revertir sin pedido del dueño.
 - Medición (10-10): pasos A y C listos en `docs/pasos_medicion_rafael_y_dueno.md`; D (libro de contactos) y F (subir conversiones) requieren aprobación expresa del dueño. PENDIENTE se muestra en ámbar en la Auditoría.
+
+## Decisiones del 10-10-2026 (sesión de nube; no revertir sin pedido del dueño)
+- Campañas de Google Ads: SOLO SE LEEN. Nunca pausar, activar, editar ni crear (orden del dueño).
+- Aereostar: cuenta real de Ads 548-530-8262, campaña única «Campaign #1» (ID 24331409273), activa; sitio aereostar.cl ACTIVO. Panel propio, mismos 11 menús que UberTransfer.
+- Identidad visual: UberTransfer = rojo `#ed1c24` + negro + verde; Aereostar = negro `#0b0b0b` + naranja `#e96712`/`#f29812` + amarillo `#f8e71d` (tomado del logo y de aereostar.cl). Logo de Aereostar en `docs/archivo/logo/logoaereostar.png`.
+- Los dos paneles son PWA instalables, con insignia de versión «AG · v.N» y aviso de actualización; Aereostar bajo `/aereostar/`.
+- Objetivo permanente: más clics sin subir costos, con datos reales; propuestas en `docs/mejoras_clics_sin_subir_costos.md`.

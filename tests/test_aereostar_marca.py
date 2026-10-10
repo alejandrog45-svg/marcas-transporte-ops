@@ -47,3 +47,14 @@ def test_movimiento_es_css_puro_y_respeta_reducir_movimiento():
     tpl = (ROOT / "tools" / "panel" / "template.html").read_text(encoding="utf-8")
     assert "countUp" not in tpl and "requestAnimationFrame" not in tpl   # sin contadores animados: no alteran las cifras que comprueban las verificaciones
 
+
+
+def test_fondo_fotografico_solo_en_ubertransfer_y_liviano():
+    b = _build()
+    foto = ROOT / "site" / "bg" / "ubertransfer-fondo.jpg"
+    assert foto.exists() and foto.stat().st_size < 150_000          # liviano: no frena la carga del panel
+    css = (ROOT / "tools" / "panel" / "extra.css").read_text(encoding="utf-8")
+    assert "pointer-events:none" in css and "z-index:-1" in css       # no tapa ni recibe clics: queda detrás de todo
+    assert "var(--bg-img,none)" in css                                # sin variable no hay foto (Aereostar)
+    assert "ubertransfer-fondo.jpg" in b.UT_BG
+    assert "ubertransfer-fondo" not in b.ae_recolor(css)               # Aereostar no la hereda

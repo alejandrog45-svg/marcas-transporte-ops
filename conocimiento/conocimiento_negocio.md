@@ -84,3 +84,4 @@ Horario real, comunas y rutas atendidas, tarifas, flota, estado de Google Busine
 - Identidad visual: UberTransfer = rojo `#ed1c24` + negro + verde; Aereostar = negro `#0b0b0b` + naranja `#e96712`/`#f29812` + amarillo `#f8e71d` (tomado del logo y de aereostar.cl). Logo de Aereostar en `docs/archivo/logo/logoaereostar.png`.
 - Los dos paneles son PWA instalables, con insignia de versión «AG · v.N» y aviso de actualización; Aereostar bajo `/aereostar/`.
 - Objetivo permanente: más clics sin subir costos, con datos reales; propuestas en `docs/mejoras_clics_sin_subir_costos.md`.
+- Fondo del panel de UberTransfer (10-10): foto sutil del furgón frente a una marquesina, `site/bg/ubertransfer-fondo.jpg`; Aereostar sin foto hasta que el dueño envíe las suyas. Repo público: no subir fotos con personas ni afiches sin decisión del dueño.

@@ -68,6 +68,11 @@ Nada se da por hecho sin haberlo probado. Cero cifras inventadas. Una tarea a la
 
 ## Historial de sesiones
 
+### 2026-10-10 (nube, sesión 2, cont. 6) — Fondo fotográfico sutil en UberTransfer
+- Pedido del dueño: un fondo sutil, bien acomodado, de calidad y validado, sin entorpecer nada. De las 11 fotos que envió se usó UNA sin personas ni textos propios: el furgón plateado frente a la marquesina de cristal (`site/bg/ubertransfer-fondo.jpg`, recorte, aclarada y comprimida a ~92 KB). **El repositorio es PÚBLICO y `site/` es público por URL**: no subir fotos con personas ni afiches sin que el dueño lo decida.
+- Cómo funciona: `extra.css` dibuja la foto en `body::before` (franja superior derecha, `z-index:-1`, `pointer-events:none`, desenfoque de borde con máscara y opacidad .34 en escritorio / .12 en celular y tablet) SOLO si existe la variable `--bg-img`; `build.py` la define únicamente para UberTransfer (`UT_BG`). Aereostar no la lleva hasta que el dueño envíe fotos suyas.
+- Validado: la foto cambia como máximo 13/255 por canal en la zona del título (0–3 en tablet y celular), nada cambia bajo las tarjetas, no hay desbordes ni errores, 11 menús, verificaciones 12/14 y 17/19 sin fallas, PWA/instalabilidad sin errores, 80 pruebas (hay una nueva para el fondo). `PANEL_VERSION` = «4».
+
 ### 2026-10-10 (nube, sesión 2, cont. 5) — Diseño v3 (menú oscuro de marca, tarjetas con acento)
 - El dueño pidió activar Stitch o Canvas: **Stitch no está conectado en esta sesión** (no hay herramienta) y **Canva** está conectado pero sin kits de marca y no edita HTML; no se usaron. El rediseño se hizo con CSS sobre los tokens existentes (`docs/DESIGN_stitch.md`).
 - `extra.css` (solo CSS, sin tocar datos ni JS): menú lateral oscuro con brillo de marca y botones de menú translúcidos (activo = degradado de marca), cabecera translúcida con desenfoque, fondo con resplandor de marca, tarjetas KPI con franja de acento, títulos de tarjeta con barra de color, cabeceras de tabla y filas alternas. Los colores salen de `--b`, `--b-dark`, `--b-glow`, `--b-soft` (Aereostar los recibe en naranja por `ae_recolor`). La regla `prefers-reduced-motion` debe seguir al FINAL de `extra.css`.

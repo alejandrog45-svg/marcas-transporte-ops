@@ -325,6 +325,10 @@ UT_COLORS = (("#1d4ed8", "#b90f16"), ("#1a73e8", "#ed1c24"), ("#2563eb", "#ed1c2
              ("37,99,235", "237,28,36"), ("37 99 235", "237 28 36"))
 
 
+# Fondo fotográfico sutil de UberTransfer (foto del dueño, recortada y comprimida en site/bg/); Aereostar no lo lleva hasta tener sus fotos
+UT_BG = ':root{--bg-img:url("/bg/ubertransfer-fondo.jpg")}'
+
+
 def ut_recolor(text):
     """Pasa los azules de la plantilla al rojo del logo de UberTransfer (el panel usa solo los colores de su marca)."""
     for o, n in UT_COLORS:
@@ -462,7 +466,7 @@ def main():
         pub = {k: m[k] for k in ("builtAt", "audit", "seoStatus", "plannerActive", "fullMenu") if k in m}
         enc = make_enc(secret_json, env, V["enc"])
         pub_html, app_js, gate_js = split_encrypted(page_tpl, enc, pub)
-        vcss = ae_recolor(css) if V["name"] == "Aereostar" else ut_recolor(css)
+        vcss = ae_recolor(css) if V["name"] == "Aereostar" else ut_recolor(css) + UT_BG
         final_plain = plain.replace("__CSS__", vcss)
         final_pub = pub_html.replace("__CSS__", vcss)
         assert "__DATA__" not in final_plain and "__META__" not in final_plain and "__CSS__" not in final_plain

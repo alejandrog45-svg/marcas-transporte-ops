@@ -149,4 +149,9 @@ html aside .vbadge{box-shadow:0 0 0 1px rgba(255,255,255,.22)}
 .real-card>h2::before,.card>h2::before,.real-quality-head h2::before{content:"";flex:0 0 4px;height:1.05em;border-radius:3px;background:linear-gradient(var(--b),var(--b-dark))}
 .real-table thead th,table thead th{background:linear-gradient(#fbfcfe,#f1f4f9)}
 .real-table tbody tr:nth-child(even):not(:hover){background:rgba(23,32,51,.022)}
+/* Fondo fotográfico sutil: solo si la marca define --bg-img (build.py). Franja superior difuminada hacia el fondo, detrás de todo el contenido
+   (z-index negativo: no tapa ni desplaza nada, no recibe clics y las tarjetas blancas quedan encima). */
+html body{position:relative}
+html body::before{content:"";position:absolute;z-index:-1;right:0;top:0;width:min(78%,1150px);height:470px;pointer-events:none;background-image:var(--bg-img,none);background-size:cover;background-position:center 60%;background-repeat:no-repeat;opacity:.34;filter:grayscale(.45) contrast(1.06);-webkit-mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.6) 55%,transparent 100%),linear-gradient(to right,transparent 0%,transparent 34%,#000 74%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.6) 55%,transparent 100%),linear-gradient(to right,transparent 0%,transparent 34%,#000 74%);mask-composite:intersect}
+@media(max-width:1023px){html body::before{width:100%;height:300px;opacity:.12;-webkit-mask-image:linear-gradient(to bottom,#000 0%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0%,transparent 100%)}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
